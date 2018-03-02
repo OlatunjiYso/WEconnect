@@ -1,0 +1,183 @@
+<!-- Road Map Road Map Road Map
+     <Head>
+        __google fonts import
+        __materialize css linking
+        __my custom css linking
+    </Head>
+
+    <Body>
+        __NavBar
+        __First row    [Address and centre information bar]
+        __Second row   [Personal information and Events booked for]
+        __third row     [footer]
+        __javascript
+    </Body
+   -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Permit me bring in my own styles.css-->
+    <link type="text/css" rel="stylesheet" href="./public/css/styles.css" media="screen,projection" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./public/materialize/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobiledeep-orange-text text-lighten-2-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="pink lighten-5">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class=" Sofia brand-logo  logo pink-text">WEconnect</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
+                <li>
+                    <a href="#!" class="deep-orange-text text-lighten-2">Sign In</a>
+                </li>
+                <li>
+                    <a href="#!" class="deep-orange-text text-lighten-2 ">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- first row contains Business picture, Title, slogan, and Address of business -->
+    <div class="row dashboard head-font">
+        <div class="col l2 logo blue-grey-text text-darken-4 center-align">
+            <img class="responsive-img left" src="./public/images/cameras.jpg" />
+        </div>
+
+        <div class="col l8   center-align">
+            <h3>Cuttie Dresses </h3>
+            <h5> No.25 Helloworld Street off EcmaScript Road, Lagos Nigeria. </h5>
+            <h6 class="Sofia">
+                <p>
+                    <em> We offer you the very best to make you look nice!! </em>
+                </p>
+            </h6>
+        </div>
+        <div class=" col l2 ">
+            <h6 class="top-pad">
+                <i class="material-icons prefix">phone</i> 123456789 </h6>
+            <h6 class="">
+                <i class="material-icons prefix">mail</i>foobar@bars.com</h6>
+        </div>
+    </div>
+
+    <!-- Second row ## Business Information && Business offers-->
+    <div class="row slim-container top-pad body-font">
+        <div class="col s6 l4 offset-l1">
+            <h4> About Us</h4>
+            <p>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+        </div>
+        <div class="col s6 l4 offset-l1">
+            <h4> Meet the CEO</h4>
+            <p>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+        </div>
+    </div>
+    <!-- end of row -->
+
+    <!--Third row ##contains Details policy and description -->
+    <div class="row body-font">
+        <div class="col s6 l4 offset-l1">
+            <h4> What Our Clents are saying</h4>
+            <ul>
+                <li>
+                    <div class="row thin-border">
+                        <p class="col s12">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                        </p>
+                        <h6 class="left col s6  pink-text"> John Doe</h6>
+                        <h6 class="right col s6  pink-text"> 01-05-2018</h6>
+                    </div>
+                </li>
+                <li>
+                    <div class="row thin-border">
+                        <p class="col s12">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                        </p>
+                        <h6 class="left col s6 pink-text"> John Doe</h6>
+                        <h6 class="right col s6 pink-text"> 01-05-2018</h6>
+                    </div>
+                </li>
+            </ul>
+            Add Comment
+            <form>
+                <div class="all-borders">
+                    <div class="input-fields">
+                        <input id="icon_prefix" type="text" class="validate" placeholder="email (email wount be published)">
+                    </div>
+                    <div class="input-field">
+                        <input id="icon_telephone" type="tel" class="validate" placeholder="Your Phone (phone no wount be published)">
+                    </div>
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea" data-length="100" placeholder="Your message"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+                <a class="btn blue-grey darken-4 pink-text "> Submit </a>
+            </form>
+        </div>
+
+        <div class="col s6 l4 offset-l1">
+            <h4> Contact Us</h4>
+            <p>
+                Please enter your message in the space provided below.
+            </p>
+            <form>
+                <div class="input-field all-borders ">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1"></label>
+                </div>
+                <a class="btn blue-grey darken-4 pink-text "> Send </a>
+            </form>
+        </div>
+    </div>
+
+    <!-- fourth row. ##contains comments -->
+    <div class="row ">
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer blue-grey darken-4">
+        <div class="container ">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="pink-text logo Sofia">WEconnect</h5>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright pink-text text-lighten-1">
+            <div class="container">
+                © 2018 Andela, Lagos Nigeria
+                <a class="pink-text text-lighten-1 right" href="#!">Andela BootCamp Project Cycle XXX</a>
+            </div>
+        </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="./public/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="./public/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./public/js/init.js"></script>
+</body>
+
+</html>
