@@ -14,7 +14,7 @@ WEconnect is a business enterprise application that connects clients to business
 
 ## UI Templates
 To View online hosted templates, copy and paste the following link in your browser
-[More-Recipes] - https://OlatunjiYso.github.io/WEconnect/template/index.html 
+[WEconnect] - https://OlatunjiYso.github.io/WEconnect/template/index.html 
 
 
 ## Author
