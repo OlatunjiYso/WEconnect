@@ -8,7 +8,7 @@
     margin-bottom:4em;
 }
 .banner-text {
-    margin-top: 2em;
+    margin-top: 4em;
     background-color: #03030f;
     border-radius: 2rem
 }
@@ -36,7 +36,7 @@
     font-family: 'Abhaya Libre';
 }
 
-.nav-wrapper {
+.nav-wrapper, #nav-mobile {
     background-color: #050107;
 }
 
@@ -85,6 +85,9 @@
   .cushion {
       width: 90%
   }
+  .left-gap {
+      margin-left:6em;
+  }
   
   /* --------- colour schemes ------------- */
   .pink-background {
@@ -119,7 +122,6 @@
     font-weight: bold;
     width: 90%;
     margin: 0 auto;
-    font-size: 1.2em;
     color: #ffffff;
 }
 .card-img {
