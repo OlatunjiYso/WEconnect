@@ -38,30 +38,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body class="pink lighten-5">
+<body class="red lighten-4">
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class=" Sofia brand-logo deep-orange-text text-lighten-2 logo">WEconnect</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down main-lettering">
+            <a href="#" class=" Sofia brand-logo  logo pink-text">WEconnect</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
                 <li>
-                    <a href="#!" class="deep-orange-text text-lighten-2">Sign In</a>
+                    <a href="#!" class="pink-text">Sign In</a>
                 </li>
                 <li>
-                    <a href="#!" class="deep-orange-text text-lighten-2 ">Sign Up</a>
+                    <a href="#!" class="pink-text">Sign Up</a>
                 </li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li>
+                    <a href="#!" class="pink-text">Sign In</a>
+                </li>
+                <li>
+                    <a href="#!" class="pink-text">Sign Up</a>
+                </li>
+
             </ul>
         </div>
     </nav>
 
 
-    <!--   First row ##search parameters deep-orange lighten-4  -->
-    <div class="row pink lighten-5">
-        <div class="col l12 body-font center-align">
-            <h3 class="">Get the Best of Professionals for your next Project!! </h3>
+    <!--   First row ##search parameters  -->
+    <div class="row red lighten-4 black-text">
+        <div class="col s12 body-font center-align">
+            <h3 class="">Get the Best of Professionals from Us </h3>
             <h5 class="bottom-gap"> Define your search parameters to meet your specific needs</h5>
         </div>
-        <div class="row underlined bottom-pad">
-            <div class="col m6 l3 offset-l2">
+        <div class="row center-align underlined bottom-pad">
+            <div class="col s5 offset-s1 m3 offset-m1 l3 offset-l1">
                 <select>
                     <option value="" disabled selected>location</option>
                     <option value="1">Lagos</option>
@@ -71,9 +83,9 @@
                 </select>
                 <label>Materialize Select</label>
             </div>
-            <div class="col m6 l3 ">
+            <div class="col s5  m3 offset-m1 l3 offset-l1 ">
                 <select>
-                    <option value="" disabled selected>Capicity</option>
+                    <option value="" disabled selected>Category</option>
                     <option value="1">Leather Work</option>
                     <option value="2">Plumbing</option>
                     <option value="3">Photography</option>
@@ -81,8 +93,8 @@
                 </select>
                 <label>Category</label>
             </div>
-            <div class="col m4 l3  center">
-                <a class=" deep-orange-text text-lighten-2 blue-grey darken-4 btn">
+            <div class="col s8 offset-s2 m4  l3 offset-l1 center">
+                <a class=" pink-text blue-grey darken-4 btn">
                     <i class="left material-icons">search</i> Search </a>
             </div>
         </div>
@@ -92,183 +104,186 @@
     <!-- 2nd Row  ##contains Heading to catalogue of businesses -->
     <div class="row head-font">
         <div class="col s12">
-            <h2 class="sofia center-align  main-lettering">Our Collection Of Businesses and professionals for You! </h2>
+            <h2 class="sofia center-align green-text text-darken-2">Our Collection Of Businesses and professionals for You! </h2>
         </div>
     </div>
 
     <!-- 3rd row  ##contains business catalogue cards -->
-    <div class="row body-font cushion">
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/cloth.jpg" />
-            </div>
-            <div class="row card-title center">
-                Cutie dresses
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Ikorodu, Lagos</h6>
+    <div class="row body-font cushion center">
+        <div class="left-gap">
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/cloth.jpg" />
                 </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
+                <div class="row card-title center">
+                    Cutie dresses
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Ikorodu, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
                 </div>
             </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/camera.jpg" />
+                </div>
+                <div class="row card-title">
+                    Smarts Photos
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Anthony, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/suit.jpg" />
+                </div>
+                <div class="row card-title">
+                    Just Suits
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Anthony, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/hair.jpg" />
+                </div>
+                <div class="row card-title">
+                    Beauty Saloon
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Ikorodu, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/cloth.jpg" />
+                </div>
+                <div class="row card-title">
+                    Classy Botique
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Ikoyi, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/food.jpg" />
+                </div>
+                <div class="row card-title">
+                    Tasty
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Baba, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/capenter.jpg" />
+                </div>
+                <div class="row card-title">
+                    Jonny Carpentry
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Ojota, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/cameras.jpg" />
+                </div>
+                <div class="row card-title">
+                    Clicks
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Anthony, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
+            <div class="col l2 m3 s6 business-card">
+                <div class="row card-img ">
+                    <img class="responsive-img" src="./public/images/camera.jpg" />
+                </div>
+                <div class="row card-title">
+                    Smarts Photos
+                </div>
+                <div class="row">
+                    <div class="">
+                        <h6 class="card-location center">
+                            <i class="tiny material-icons">location_on</i>
+                            Oshodi, Lagos</h6>
+                    </div>
+                    <div class="card-button centre">
+                        <button> View Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end of coloumn -->
         </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/camera.jpg" />
-            </div>
-            <div class="row card-title">
-                Smarts Photos
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Anthony, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/suit.jpg" />
-            </div>
-            <div class="row card-title">
-                Just Suits
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Anthony, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/hair.jpg" />
-            </div>
-            <div class="row card-title">
-                Beauty Saloon
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Ikorodu, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/cloth.jpg" />
-            </div>
-            <div class="row card-title">
-                Classy Botique
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Ikoyi, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/food.jpg" />
-            </div>
-            <div class="row card-title">
-                Tasty
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Baba, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/capenter.jpg" />
-            </div>
-            <div class="row card-title">
-                Jonny Carpentry
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Ojota, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/cameras.jpg" />
-            </div>
-            <div class="row card-title">
-                Clicks
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Anthony, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
-        <div class="col l2 m3 s6 business-card">
-            <div class="row card-img ">
-                <img class="responsive-img" src="./public/images/camera.jpg" />
-            </div>
-            <div class="row card-title">
-                Smarts Photos
-            </div>
-            <div class="row">
-                <div class="">
-                    <h6 class="card-location center">
-                        <i class="tiny material-icons">location_on</i>
-                        Oshodi, Lagos</h6>
-                </div>
-                <div class="card-button centre">
-                    <button> View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- end of coloumn -->
+
 
     </div>
     <!-- end of Row -->
