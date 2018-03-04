@@ -54,11 +54,6 @@
                 "MethodDefinition": true,
                 "ClassDeclaration": true
             }
-        }],
-        "import/no-extraneous-dependencies": ["error",
-         {"devDependencies": true,
-         "optionalDependencies": false,
-         "peerDependencies": false
-         }]
+        }]
     }
 }
