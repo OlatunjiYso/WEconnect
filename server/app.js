@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(3000, () => {
-  console.log('I am running on port 3000')
+  console.log('I am running on port 3000');
 });
 
 export default app;
