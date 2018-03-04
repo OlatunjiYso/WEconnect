@@ -3,50 +3,91 @@ import Comments from '../tables/comments';
  * @class Business
  */
  class Business {
+   /**
+     * Create a Business profile.
+     * @param {number} id - The id of profile.
+     * @param {string} title - The title of business.
+     * @param {string} category - The category of business.
+     * @param {string} location - The location.
+     */
    constructor(id, title, category, location) {
-     this._id = id;
-     this._title = title;
-     this._category = category;
-     this._location = location;
+     this.Id = id;
+     this.Title = title;
+     this.Category = category;
+     this.Location = location;
    }
-   get id() {
-     return this._id;
+    /**
+     * Get the id of business.
+     * @return {number} The id of business.
+     */
+    get id() {
+     return this.Id;
    }
-   get title(){
-     return this._title;
+   /**
+     * Get the title of business.
+     * @return {string} The id title business.
+     */
+   get title() {
+     return this.Title;
    }
-   get category(){
-     return this._category;
+   /**
+     * Get the category of business.
+     * @return {string} The category business.
+     */
+   get category() {
+     return this.Category;
    }
-   get location(){
-     return this._location;
+   /**
+     * Get the location of business.
+     * @return {string} The location of business.
+     */
+   get location() {
+     return this.Location;
    }
-   set title(newTitle){
-      this.title = newTitle;
+   /**
+     * Set the title of business.
+     * @param{string} newTitle -The new title
+     */
+   set title(newTitle) {
+      this.Title = newTitle;
    }
-   set category (category) {
-      this.category = category;
+   /**
+     * Set the title of business.
+     * @param{string} category -The new category
+     */
+   set category(category) {
+      this.Category = category;
    }
-   set location(location){
-      this.location = location;
+   /**
+     * Set the title of business.
+     * @param{string} location -The new location
+     */
+   set location(location) {
+      this.Location = location;
    }
-
+/**
+     * Get the details of business.
+     * @return{object} details -The details
+     */
    get details() {
-     let message = {
-         'title': this.title,
-         'category': this.category,
-         'location': this.location,
-         'comments': this.comments
-     }
+     const message = {
+         title: this.Title,
+         category: this.Category,
+         location: this.Location,
+         comments: this.Comments
+     };
+     return message;
    }
-   get comments(){
-     let myComments = [];
-     let myId = this._id;
-     for(let i of commentsTable){
-       if(i.businessId === myId) {
-         myComments.push(i)
-       }
-     }
+   /**
+     * Get the comments of a business.
+     * @return{array} category -The array of comments
+     */
+   get comments() {
+     const myComments = [];
+     const myId = this.Id;
+    Comments.map((eachComment) => {
+      return eachComment.id === myId;
+    });
      return myComments;
    }
  }
