@@ -77,6 +77,24 @@ const modifyBusinessProfile = (req, res) => {
       Now: businesses[indexToBeModified]
     });
   };
-const businessController = { addBusiness, modifyBusinessProfile };
+
+  const deleteBusiness = (req, res) => {
+    const businessId = parseInt(req.params.id, 10);
+    const arrayOfId = businesses.map((business) => {
+      return business.id;
+    });
+    if (arrayOfId.indexOf(businessId) < 0) {
+      return res.status(404).json({
+        message: 'profile with specified id not found'
+      });
+    }
+    const indexToBePopped = arrayOfId.indexOf(businessId);
+    businesses.splice(indexToBePopped, 1);
+    return res.status(200).json({
+      message: 'profile successfully deleted'
+    });
+  };
+
+const businessController = { addBusiness, modifyBusinessProfile, deleteBusiness };
 
 export default businessController;
