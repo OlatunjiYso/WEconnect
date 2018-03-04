@@ -71,10 +71,10 @@ import Comments from '../tables/comments';
      */
    get details() {
      const message = {
-         title: this.Title,
-         category: this.Category,
-         location: this.Location,
-         comments: this.Comments
+         title: this.title,
+         category: this.category,
+         location: this.location,
+         comments: this.comments
      };
      return message;
    }
@@ -83,9 +83,8 @@ import Comments from '../tables/comments';
      * @return{array} category -The array of comments
      */
    get comments() {
-     const myComments = [];
-     const myId = this.Id;
-    Comments.map((eachComment) => {
+     const myId = this.id;
+     const myComments = Comments.filter((eachComment) => {
       return eachComment.id === myId;
     });
      return myComments;
