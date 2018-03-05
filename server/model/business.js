@@ -1,4 +1,4 @@
-import Comments from '../tables/comments';
+
 /**
  * @class Business
  */
@@ -77,17 +77,6 @@ import Comments from '../tables/comments';
          comments: this.comments
      };
      return message;
-   }
-   /**
-     * Get the comments of a business.
-     * @return{array} category -The array of comments
-     */
-   get comments() {
-     const myId = this.id;
-     const myComments = Comments.filter((eachComment) => {
-      return eachComment.id === myId;
-    });
-     return myComments;
    }
  }
 export default Business;
