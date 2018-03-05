@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.send('i am listening');
 });
 
-app.use('api/v1/businesses/:businessid/reviews', commentHandler);
+app.use('/api/v1/businesses/reviews/:businessId', commentHandler);
 app.use('/api/v1/businesses/', businessHandler);
 
 app.listen(3000, () => {
