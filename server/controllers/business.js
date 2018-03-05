@@ -39,7 +39,7 @@ const businessId = parseInt(req.body.id, 10);
     });
   }
   const id = parseInt(req.body.id, 10);
-  const newBusiness = new Business(id, req.body.name, req.body.capacity, req.body.location);
+  const newBusiness = new Business(id, req.body.title, req.body.category, req.body.location);
   businesses.push(newBusiness);
   res.status(201).json({
      message: 'business created successfully',
