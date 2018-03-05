@@ -1,6 +1,7 @@
 /**
  * Controller to handle :
-     Adding a new comments
+     Adding a new comments,
+     Getting all comments for a business
  */
 
 import Comment from '../model/comment';
@@ -39,9 +40,9 @@ const addComment = (req, res) => {
 };
 
 const getComments = (req, res) => {
-    const concerenedId = req.params.id;
+    const concerenedId = req.params.businessid;
     const myComments = comments.filter((eachComment) => {
-        return eachComment.id === concerenedId;
+        return eachComment.businessId === concerenedId;
     });
     if (myComments.length === 0) {
         return res.status(200).json({
