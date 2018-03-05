@@ -95,6 +95,22 @@ const modifyBusinessProfile = (req, res) => {
     });
   };
 
-const businessController = { addBusiness, modifyBusinessProfile, deleteBusiness };
+  const getBusinesses = (req, res) => {
+    if (businesses.length === 0) {
+      return res.status(200).json({
+        message: 'No Businesses yet'
+      });
+    }
+    return res.status(200).json({
+      businesses
+    });
+  };
+
+const businessController = {
+      addBusiness,
+      modifyBusinessProfile,
+      deleteBusiness,
+      getBusinesses
+ };
 
 export default businessController;
