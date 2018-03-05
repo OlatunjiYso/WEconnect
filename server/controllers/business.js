@@ -2,6 +2,9 @@
  * Controller to handle :
      Adding a new business,
      Modify business profile
+     Deleting a business,
+     Getting a business,
+     Getting all business
  */
 
 import Business from '../model/business';
@@ -9,9 +12,7 @@ import Business from '../model/business';
 import businesses from '../tables/businesses';
 
 const addBusiness = (req, res) => {
-  const arrayOfId = businesses.map((business) => {
-    return business.id;
-  });
+  const arrayOfId = businesses.map(business => business.id);
 const businessId = parseInt(req.body.id, 10);
   if (arrayOfId.indexOf(businessId) !== -1) {
      return res.status(400).json({
@@ -49,9 +50,7 @@ const businessId = parseInt(req.body.id, 10);
 
 const modifyBusinessProfile = (req, res) => {
     const businessId = parseInt(req.params.id, 10);
-    const arrayOfId = businesses.map((business) => {
-        return business.id;
-      });
+    const arrayOfId = businesses.map(business => business.id);
       if (arrayOfId.indexOf(businessId) < 0) {
         return res.status(404).json({
           message: 'no business exist with specified id',
@@ -80,9 +79,7 @@ const modifyBusinessProfile = (req, res) => {
 
   const deleteBusiness = (req, res) => {
     const businessId = parseInt(req.params.id, 10);
-    const arrayOfId = businesses.map((business) => {
-      return business.id;
-    });
+    const arrayOfId = businesses.map(business => business.id);
     if (arrayOfId.indexOf(businessId) < 0) {
       return res.status(404).json({
         message: 'profile with specified id not found'
@@ -106,11 +103,25 @@ const modifyBusinessProfile = (req, res) => {
     });
   };
 
+  const getBusiness = (req, res) => {
+    const businessId = parseInt(req.params.id, 10);
+    const arrayOfId = businesses.map(business => business.id);
+    if (arrayOfId.indexOf(businessId) < 0) {
+      return res.status(404).json({
+        message: 'profile with specified id not found'
+      });
+    }
+    const profile = businesses.filter(business => business.id === businessId);
+    return res.status(200).json({
+      profile
+    });
+  };
 const businessController = {
       addBusiness,
       modifyBusinessProfile,
       deleteBusiness,
-      getBusinesses
- };
+      getBusinesses,
+      getBusiness
+    };
 
-export default businessController;
+  export default businessController;
