@@ -31,7 +31,7 @@ const addComment = (req, res) => {
         });
     }
     const businessId = parseInt(req.body.businessId, 10);
-    const newComment = new Comment(businessId, req.body.date, req.body.commentor, req.body.messsage);
+    const newComment = new Comment(businessId, req.body.date, req.body.commentor, req.body.message);
     comments.push(newComment);
     return res.status(201).json({
         message: 'comment created successfully',
