@@ -94,7 +94,7 @@ describe(' All Tests for adding a new business', () => {
                 .post('/api/v1/businesses/')
                 .send(req.body)
                 .end((err, res) => {
-                    res.should.have.status(200);
+                    res.should.have.status(201);
                     res.body.should.be.an('object');
                     res.body.should.have.property('message');
                     res.body.message.should.be.equal('business created successfully');
