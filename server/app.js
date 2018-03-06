@@ -11,10 +11,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send('i am listening');
-});
-
 app.use('/api/v1/businesses/reviews/', commentHandler);
 app.use('/api/v1/businesses/', businessHandler);
 
