@@ -105,7 +105,18 @@ const modifyBusinessProfile = (req, res) => {
           Business: matches
         });
       }
-      
+      if (req.query.category) {
+        const desiredCategory = req.query.category;
+        const matches = businesses.filter(business => business.category === desiredCategory);
+        if (matches.length === 0) {
+          return res.status(200).json({
+            message: 'No matching business'
+          });
+        }
+        return res.status(200).json({
+          Business: matches
+        });
+      }
     if (businesses.length === 0) {
       return res.status(200).json({
         message: 'No Businesses yet'
