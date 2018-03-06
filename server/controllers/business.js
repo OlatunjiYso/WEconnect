@@ -93,12 +93,26 @@ const modifyBusinessProfile = (req, res) => {
   };
 
   const getBusinesses = (req, res) => {
+      if (req.query.location) {
+        const desiredLocation = req.query.location;
+        const matches = businesses.filter(business => business.location === desiredLocation);
+        if (matches.length === 0) {
+          return res.status(200).json({
+            message: 'No matching business'
+          });
+        }
+        return res.status(200).json({
+          Business: matches
+        });
+      }
+      
     if (businesses.length === 0) {
       return res.status(200).json({
         message: 'No Businesses yet'
       });
     }
     return res.status(200).json({
+      see: req.query.location,
       businesses
     });
   };
@@ -116,6 +130,7 @@ const modifyBusinessProfile = (req, res) => {
       profile
     });
   };
+
 const businessController = {
       addBusiness,
       modifyBusinessProfile,
