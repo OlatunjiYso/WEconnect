@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
-    "test": "mocha server/test/addBusiness --compilers js:babel-register"
+    "test": "mocha server/test/getBusiness --compilers js:babel-register"
   },
   "repository": {
     "type": "git",

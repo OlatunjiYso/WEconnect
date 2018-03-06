@@ -125,7 +125,6 @@ const modifyBusinessProfile = (req, res) => {
       });
     }
     return res.status(200).json({
-      see: req.query.location,
       businesses
     });
   };
