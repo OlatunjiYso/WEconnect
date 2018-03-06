@@ -1,10 +1,12 @@
 /**
- * Controller to handle :
-     Adding a new business,
-     Modify business profile
-     Deleting a business,
-     Getting a business,
-     Getting all business
+ * Controllers to handle :
+            Adding a new business,
+            Modifying business profile
+            Deleting a business,
+            Getting a business,
+            Getting all business
+            Getting business by category
+            Getting business by location
  */
 
 import Business from '../model/business';
