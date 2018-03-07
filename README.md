@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/OlatunjiYso/WEconnect.svg?branch=api-dummy-data)](https://travis-ci.org/OlatunjiYso/WEconnect)
+
 # WEconnect
 WEconnect is a business enterprise application that connects clients to businesses.
 
