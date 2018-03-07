@@ -30,7 +30,7 @@ const addComment = (req, res) => {
             message: 'date cannot be empty.'
         });
     }
-    const businessId = parseInt(req.body.businessId, 10);
+    const businessId = parseInt(req.params.businessId, 10);
     const newComment = new Comment(businessId, req.body.date, req.body.commentor, req.body.message);
     comments.push(newComment);
     return res.status(201).json({
@@ -44,7 +44,7 @@ const getComments = (req, res) => {
     const myComments = comments.filter(eachComment => eachComment.BusinessId === concernedId);
     if (myComments.length === 0) {
         return res.status(200).json({
-            message: 'You have no comments yet'
+            message: 'You have no comments yet',
         });
     }
     if (myComments.length > 0) {
