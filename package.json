@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
-    "test": "mocha --compilers js:babel-register --recursive ./server/test/"
+    "test": "nyc --reporter=html --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,13 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
-    "mocha": "^3.5.3",
+    "coveralls": "^3.0.0",
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.9.0"
+    "eslint-plugin-import": "^2.9.0",
+    "mocha": "^3.5.3",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^11.4.1"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
