@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
     "test": "nyc --reporter=html --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
