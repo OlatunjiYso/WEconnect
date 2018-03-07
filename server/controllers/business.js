@@ -23,7 +23,7 @@ const businessId = parseInt(req.body.id, 10);
   }
   if (!req.body.id || req.body.id.trim().length === 0) {
     return res.status(400).json({
-      message: 'businessId cannot be empty, please Input centre Id.'
+      message: 'businessId cannot be empty, please Input Id.'
     });
   }
   if (!req.body.title || req.body.title.trim().length === 0) {
