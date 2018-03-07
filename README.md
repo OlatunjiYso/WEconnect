@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/OlatunjiYso/WEconnect.svg?branch=api-dummy-data)](https://travis-ci.org/OlatunjiYso/WEconnect)
-[![Coverage Status](https://coveralls.io/repos/github/OlatunjYso/WEconnect/badge.svg?branch=api-dummy-data)](https://coveralls.io/github/OlatunjiYso/WEconnect?branch=api-dummy-data)
-
+[![Coverage Status](https://coveralls.io/repos/github/OlatunjiYso/WEconnect/badge.svg?branch=api-dummy-data)](https://coveralls.io/github/OlatunjiYso/WEconnect?branch=api-dummy-data)
 # WEconnect
 WEconnect is a business enterprise application that connects clients to businesses.
 
