@@ -5,11 +5,23 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 
 const expect = { chai };
-
 const should = chai.should();
+
 chai.use(chaiHttp);
 
 describe(' All Tests for posting a comment to a business', () => {
+    describe('Test to get a business reviews', () => {
+        it('Ensures comments of a business can be gotten', (done) => {
+            chai.request(app)
+                .get('/api/v1/businesses/2/reviews/')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.an('object');
+                    res.body.should.have.property('message');
+                    done();
+                });
+        });
+    });
     describe('Test to add an empty comment', () => {
         it('Ensures comments must not be empty', (done) => {
             const req = {
