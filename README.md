@@ -14,7 +14,13 @@ WEconnect is a business enterprise application that connects clients to business
 
 ## UI Templates
 To View online hosted templates, copy and paste the following link in your browser
-[WEconnect] - https://OlatunjiYso.github.io/WEconnect/template/index.html 
+* [Home] -  https://OlatunjiYso.github.io/WEconnect/template/index.html 
+* [SignUp] - https://OlatunjiYso.github.io/WEconnect/template/signup.html 
+* [SignIn] - https://OlatunjiYso.github.io/WEconnect/template/signin.html 
+* [User Profile] - https://OlatunjiYso.github.io/WEconnect/template/user_profile.html 
+* [Register Business] - https://OlatunjiYso.github.io/WEconnect/template/register_business.html 
+* [Business Profile] - https://OlatunjiYso.github.io/WEconnect/template/business_profile.html 
+* [All business Catalog]  - https://OlatunjiYso.github.io/WEconnect/template/all_businesses.html 
 
 
 ## Author
