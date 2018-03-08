@@ -24,6 +24,8 @@ To View online hosted templates, copy and paste the following link in your brows
 * [Business Profile] - https://OlatunjiYso.github.io/WEconnect/template/business_profile.html 
 * [All business Catalog]  - https://OlatunjiYso.github.io/WEconnect/template/all_businesses.html 
 
+## Project Management Tools
+* To view pivotal tracker roadmap check out this link => https://www.pivotaltracker.com/n/projects/2153356
 
 ## Author
 * **Olatunji Yusuf** -Aspiring Software Developer.
