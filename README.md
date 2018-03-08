@@ -2,15 +2,17 @@
 
 # WEconnect
 WEconnect is a business enterprise application that connects clients to businesses.
+On WEconnect, business of different categories would be presented to potential clients who will browse through and contact them accordingly.
 
 
 ## Features
-- User Signup and Signin
-- Create/Add, businesses
-- View business profiles
+As a user of WEconnect, I can:
+- Signup and Signin
+- Add a businesses
+- View my profile
 - View details of Business
-- Post reviews business profiles
-- Update business business profiles
+- Post reviews on other business profiles
+- Update my business profile
 
 ## UI Templates
 To View online hosted templates, copy and paste the following link in your browser
