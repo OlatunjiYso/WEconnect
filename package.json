@@ -2,6 +2,9 @@
   "name": "weconnect",
   "version": "1.0.0",
   "description": "Buiness enterprise app that connects businesse to clients",
+  "engines": {
+    "node": "8.9.1"
+  },
   "main": "app.js",
   "scripts": {
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
