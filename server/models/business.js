@@ -17,6 +17,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
   });
     Business.associate = (models) => {
       Business.belongsTo(models.User, { foreignKey: 'userId' });

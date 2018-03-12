@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Business',
+          model: 'Businesses',
           key: 'id'
         }
       },
@@ -33,5 +33,5 @@ module.exports = {
       }
     }),
   down: queryInterface =>
-   queryInterface.dropTable('Reviews')
+    queryInterface.dropTable('Reviews')
 };
