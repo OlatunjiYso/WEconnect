@@ -7,6 +7,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
     },
+    ownerId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      unique: true
+    },
     title: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -14,23 +19,71 @@ export default (sequelize, DataTypes) => {
     },
     slogan: {
       allowNull: false,
+      type: DataTypes.STRING
+    },
+    overview: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    email: {
+      allowNull: false,
       type: DataTypes.STRING,
       unique: true
     },
-    userId: {
+    website: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    phone1: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    phone2: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    facebook: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    tweeter: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    image1: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    image2: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    image3: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
+    },
+    image4: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: true
     },
   });
     Business.associate = (models) => {
-      Business.belongsTo(models.User, { foreignKey: 'userId' });
+      Business.belongsTo(models.User, { foreignKey: 'ownerId' });
+      Business.hasMany(models.Category, {
+        through: 'BusinessCategory',
+        foreignKey: 'businessId'
+      });
       Business.hasMany(models.Review, { foreignKey: 'businessId' });
-      Business.hasOne(models.BusinessPic, { foreignKey: 'businessId' });
       Business.hasOne(models.Address, { foreignKey: 'businessId' });
-      Business.hasOne(models.About, { foreignKey: 'businessId' });
-      Business.hasOne(models.Hotline, { foreignKey: 'businessId' });
-      Business.hasOne(models.Email, { foreignKey: 'businessId' });
-      Business.hasOne(models.AboutCeo, { foreignKey: 'businessId' });
     };
   return Business;
 };

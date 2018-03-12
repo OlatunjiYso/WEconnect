@@ -7,6 +7,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      ownerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
       title: {
         allowNull: false,
         type: Sequelize.STRING
@@ -15,13 +23,49 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER,
+      overview: {
         allowNull: false,
-        references: {
-          model: 'User',
-          key: 'id'
-        }
+        type: Sequelize.STRING
+      },
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      website: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      phone1: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      phone2: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      facebook: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      tweeter: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      image1: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      image2: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      image3: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      image4: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
