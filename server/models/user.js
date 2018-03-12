@@ -12,6 +12,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    image: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     email: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -22,19 +30,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    firstname: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    lastname: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
   });
 
  User.associate = (models) => {
-   User.hasMany(models.Business, { as: 'businesses', foreignKey: 'userId' });
-   User.hasOne(models.User_Pic, { as: 'picture', foreignKey: 'userId' });
+   User.hasMany(models.Business, { as: 'businesses', foreignKey: 'ownerId' });
+   User.hasOne(models.Address, { as: 'address', foreignKey: 'userId' });
  };
   return User;
 };

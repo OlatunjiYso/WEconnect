@@ -7,10 +7,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
     },
-    type: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
     businessId: {
       allowNull: false,
       type: DataTypes.INTEGER,

@@ -9,15 +9,17 @@ module.exports = {
       },
       businessId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: 'Businesses',
           key: 'id'
         }
       },
-      type: {
-        allowNull: false,
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       country: {
         allowNull: false,
