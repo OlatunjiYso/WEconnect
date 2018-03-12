@@ -7,14 +7,28 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
     },
+    type: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
     businessId: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    address: {
+    country: {
       allowNull: false,
       type: DataTypes.STRING
-    }
+    },
+    state: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    city: {
+      type: DataTypes.STRING
+    },
+    streetAddress: {
+      type: DataTypes.STRING
+    },
   });
   Address.associate = (models) => {
     Address.belongsTo(models.Business, { foreignKey: 'businessId' });

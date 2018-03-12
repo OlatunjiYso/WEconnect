@@ -15,7 +15,23 @@ module.exports = {
           key: 'id'
         }
       },
-      address: {
+      type: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      country: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      state: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      city: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      streetAddress: {
         allowNull: false,
         type: Sequelize.STRING
       },
