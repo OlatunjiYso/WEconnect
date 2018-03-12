@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      img_path: {
+      imgPath: {
         allowNull: false,
         type: Sequelize.STRING
       },
