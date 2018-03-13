@@ -1,19 +1,19 @@
 module.exports = {
   up: queryInterface =>
      queryInterface.bulkInsert(
-       'Users',
+       'Reviews',
       [
         {
           id: 500,
-          businessId: 'user',
+          businessId: 500,
          description: 'JohnDoe dggwgwgwfgww',
         reviewerId: 500,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          id: 500,
-          businessId: 'user',
+          id: 507,
+          businessId: 502,
          description: 'JohnDoe dggwgwgwfgww',
         reviewerId: 500,
           createdAt: new Date(),
@@ -23,6 +23,6 @@ module.exports = {
     ),
 
   down: queryInterface =>
-     queryInterface.bulkDelete('Users', null, {})
+     queryInterface.bulkDelete('Reviews', null, {})
 
   };
