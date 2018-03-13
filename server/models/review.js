@@ -14,9 +14,9 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
-    reviwerId: {
+    reviewerId: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
   });
   Review.associate = (models) => {
