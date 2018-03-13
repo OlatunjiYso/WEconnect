@@ -27,7 +27,10 @@ export default (sequelize, DataTypes) => {
     },
   });
   Address.associate = (models) => {
-    Address.belongsTo(models.Business, { foreignKey: 'businessId' });
+    Address.belongsTo(models.Business, {
+       foreignKey: 'businessId',
+       onDelete: 'CASCADE'
+       });
   };
   return Address;
 };

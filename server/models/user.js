@@ -7,6 +7,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
     },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'user'
+    },
     username: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -33,7 +37,10 @@ export default (sequelize, DataTypes) => {
   });
 
  User.associate = (models) => {
-   User.hasMany(models.Business, { as: 'businesses', foreignKey: 'ownerId' });
+   User.hasMany(models.Business, {
+      as: 'businesses',
+       foreignKey: 'ownerId'
+       });
    User.hasOne(models.Address, { as: 'address', foreignKey: 'userId' });
  };
   return User;

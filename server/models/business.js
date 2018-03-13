@@ -77,13 +77,20 @@ export default (sequelize, DataTypes) => {
     },
   });
     Business.associate = (models) => {
-      Business.belongsTo(models.User, { foreignKey: 'ownerId' });
+      Business.belongsTo(models.User, {
+         foreignKey: 'ownerId',
+         onDelete: 'CASCADE'
+         });
       Business.hasMany(models.Category, {
         through: 'BusinessCategory',
         foreignKey: 'businessId'
       });
-      Business.hasMany(models.Review, { foreignKey: 'businessId' });
-      Business.hasOne(models.Address, { foreignKey: 'businessId' });
+      Business.hasMany(models.Review, {
+         foreignKey: 'businessId'
+         });
+      Business.hasOne(models.Address, {
+         foreignKey: 'businessId'
+        });
     };
   return Business;
 };

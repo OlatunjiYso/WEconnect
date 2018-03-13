@@ -15,13 +15,17 @@ module.exports = {
           key: 'id'
         }
       },
-      message: {
+      description: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      reviwerName: {
+      reviwerId: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

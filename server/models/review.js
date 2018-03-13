@@ -10,18 +10,20 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    message: {
+    description: {
       allowNull: false,
       type: DataTypes.STRING
     },
-    reviwerName: {
+    reviwerId: {
       allowNull: false,
-      type: DataTypes.STRING,
-      unique: true
+      type: DataTypes.STRING
     },
   });
   Review.associate = (models) => {
-    Review.belongsTo(models.Business, { foreignKey: 'businessId' });
+    Review.belongsTo(models.Business, {
+      foreignKey: 'businessId',
+      onDelete: 'CASCADE'
+    });
   };
   return Review;
 };
