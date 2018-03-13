@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
         references: {
             model: 'Categories',
-            key: 'CategoryId'
+            key: 'categoryId'
         },
       },
       businessId: {
