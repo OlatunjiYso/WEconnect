@@ -19,9 +19,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      reviwerId: {
+      reviewerId: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id'

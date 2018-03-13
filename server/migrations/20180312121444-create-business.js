@@ -40,15 +40,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone2: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       facebook: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       tweeter: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       image1: {
@@ -56,15 +56,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       image2: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       image3: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       image4: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
