@@ -152,6 +152,23 @@ class Validations {
                     });
             });
     }
+
+    /**
+     * Checks if request params is valid.
+     * @param {String} value - url params
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkParamValid(value) {
+        return (req, res, next) => {
+            // check if parameter is a digit
+            if (!req.params[value].match(/^[0-9]+$/)) {
+                res.status(400).send({ message: 'parameter type is not supported! - use integer parameters' });
+            } else next();
+        };
+    }
 }
 
 export default Validations;
