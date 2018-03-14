@@ -99,7 +99,8 @@ class UserController {
                           );
                           res.status(200)
                               .send({
-                                  message: 'you are logged in!'
+                                  message: 'you are logged in!',
+                                  token
                               });
                        }
                    })
