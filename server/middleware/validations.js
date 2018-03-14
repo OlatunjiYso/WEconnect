@@ -90,6 +90,37 @@ class Validations {
                     });
             });
     }
+
+    /**
+     * Checks if email already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkEmailExistence(req, res, next) {
+        Users
+            .findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    res.status(400)
+                        .send({
+                            message: 'This email exist already'
+                        });
+                }
+                return next();
+            })
+            .catch((err) => {
+                res.status(500)
+                    .send({
+                        message: err.message
+                    });
+            });
+    }
 }
 
 export default Validations;
