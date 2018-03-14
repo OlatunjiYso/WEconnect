@@ -59,6 +59,37 @@ class Validations {
             next();
         }
     }
+
+    /**
+     * Checks if username already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkUsernameExistence(req, res, next) {
+        Users
+            .findOne({
+                where: {
+                    username: req.body.username
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    res.status(400)
+                        .send({
+                            message: 'This username exist already'
+                        });
+                }
+                return next();
+            })
+            .catch((err) => {
+                res.status(500)
+                    .send({
+                        message: err.message
+                    });
+            });
+    }
 }
 
 export default Validations;
