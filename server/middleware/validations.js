@@ -121,6 +121,37 @@ class Validations {
                     });
             });
     }
+
+    /**
+     * Checks if Business exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkBusinessExistence(req, res, next) {
+        Businesses
+            .findOne({
+                where: {
+                    id: req.params.businessId
+                }
+            })
+            .then((business) => {
+                if (!business) {
+                    res.status(400)
+                        .send({
+                            message: 'No such business exists'
+                        });
+                }
+                return next();
+            })
+            .catch((err) => {
+                res.status(500)
+                    .send({
+                        message: err.message
+                    });
+            });
+    }
 }
 
 export default Validations;
