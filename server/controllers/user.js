@@ -8,9 +8,12 @@ const { User } = db;
 
 /**
  * Usercontroller class
+ * Does:
+ * 1. creating a new user
+ * 2. logging in a registered user
+ * 3. Issuing of jsonwebtoken upon succesful signin
 */
 class UserController {
-
     /**
      * Creates a new user with a hashed password and issues a json web token
      * @param {Object} req -the api request
@@ -57,4 +60,58 @@ class UserController {
         }
     }
 
+    /**
+     * Logs in  a registered user
+     * @param {Object} req -the api request
+     * @param {Object} res -the api response
+     * @return {json} success message or error message
+     */
+    static login(req, res) {
+        // Handle validations in middleware
+           User
+             .findOne({
+                  where: { username: req.body.username },
+           })
+           .then((user) => {
+               if (!user) {
+                   res.status(401)
+                   .send({
+                       message: 'No such user exists'
+                   });
+               } else {
+                   // compare password
+                   bcrypt.compare(req.body.password, user.password)
+                   .then((validPassword) => {
+                       if (!validPassword) {
+                           res.status(401)
+                           .send({
+                               message: 'invalid password'
+                           });
+                       } else {
+                           // issue jsonwebtoken that lasts for 60 minutes
+                           const token = jwt.sign(
+                               {
+                               id: user.id,
+                               role: user.role
+                              },
+                              process.env.SECRET_KEY,
+                              { expiresIn: '60m' }
+                          );
+                          res.status(200)
+                              .send({
+                                  message: 'you are logged in!'
+                              });
+                       }
+                   })
+                   .catch((err) => {
+                       res.status(500)
+                          .send({
+                              message: err.message
+                          });
+                   });
+               }
+           });
+       }
 }
+
+export default UserController;
