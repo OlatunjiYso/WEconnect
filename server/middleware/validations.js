@@ -33,6 +33,32 @@ class Validations {
             next();
         }
     }
+    /**
+     * Checks if required input field is empty.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static reportEmptyFields(req, res, next) {
+        if (req.body) {
+            const fields = Object.keys(req.body);
+            fields.forEach((field) => {
+                if (req.body[field] === null ||
+                    req.body[field] === undefined ||
+                    req.body[field].length === 0
+                ) {
+                    res.status(400)
+                        .send({
+                            message: `${field} field is required!`
+                        });
+                }
+            });
+            next();
+        } else {
+            next();
+        }
+    }
 }
 
 export default Validations;
