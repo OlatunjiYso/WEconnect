@@ -19,55 +19,55 @@ class businessController {
      * @param {Object} res -the api response
      * @return {json} message key
      */
-    static createBusiness(req, res) {
-       Businesses
-        .create({
-          ownerId: req.user.id,
-          title: req.body.title,
-          slogan: req.body.slogan || null,
-          overview: req.body.overview || null,
-          email: req.body.email,
-          website: req.body.website || null,
-          phone1: req.body.phone1,
-          phone2: req.body.phone2 || null,
-          facebook: req.body.facebook || null,
-          tweeter: req.body.tweeter || null,
-          image1: req.body.image1 || null,
-          image2: null,
-          image3: null,
-          image4: null,
+  static createBusiness(req, res) {
+    Businesses
+      .create({
+        ownerId: req.user.id,
+        title: req.body.title,
+        slogan: req.body.slogan || null,
+        overview: req.body.overview || null,
+        email: req.body.email,
+        website: req.body.website || null,
+        phone1: req.body.phone1,
+        phone2: req.body.phone2 || null,
+        facebook: req.body.facebook || null,
+        tweeter: req.body.tweeter || null,
+        image1: req.body.image1 || null,
+        image2: null,
+        image3: null,
+        image4: null,
 
-        })
-        .then((business) => {
-          res.status(201)
-            .send({
-              message: 'business successfully created',
-              business
-            });
-        })
-        .catch((err) => {
-          res.status(400)
-            .send({
-              message: err.errors ? err.errors : err.message
-            });
-        });
-    }
+      })
+      .then((business) => {
+        res.status(201)
+          .send({
+            message: 'business successfully created',
+            business
+          });
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.errors ? err.errors : err.message
+          });
+      });
+  }
 
-    /**
-     * Gets a business
-     * @param {Object} req -the api request
-     * @param {Object} res -the api response
-     * @return {json} message key
-     */
-    static getBusiness(req, res) {
-      Businesses
+  /**
+   * Gets a business
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   * @return {json} message key
+   */
+  static getBusiness(req, res) {
+    Businesses
       .findOne({
         where: {
           id: req.params.businessId
         },
         include: [{
-        model: Reviews
-      }]
+          model: Reviews
+        }]
       })
       .then((business) => {
         res.status(200)
@@ -78,9 +78,44 @@ class businessController {
       })
       .catch((err) => {
         res.status(400)
-            .send({
-              message: err.errors ? err.errors : err.message
-            });
+          .send({
+            message: err.errors ? err.errors : err.message
+          });
       });
-    }
+  }
+
+  /**
+   * Gets all businesses
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   * @return {json} message key
+   */
+  static getAllBusinesses(req, res) {
+    Businesses
+      .findAll({
+        include: [{
+          model: Reviews
+        }]
+      })
+      .then((businesses) => {
+        if (businesses) {
+          res.status(200)
+          .send({
+            message: 'all businesses',
+            businesses
+          });
+        } else {
+          res.status(200)
+            .send({
+              message: 'no businesses yet'
+            });
+        }
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.errors ? err.errors : err.message
+          });
+      });
+  }
 }
