@@ -4,9 +4,9 @@ const { Businesses, Reviews } = db;
 
 /**
  * Business Controllers to handle :
-            Adding a new business,
+            Adding a new business
             Getting a business,
-            Getting all business
+            Getting all businesses
             Modifying business profile
             Deleting a business
             Getting business by category
@@ -168,6 +168,50 @@ class businessController {
             .send({
               message: 'no such business with specified id'
             })
+        }
+      })
+      .catch((err) => {
+        res.status(400)
+                .send({
+                  message: err.errors ? err.errors : err.message
+                });
+      });
+  }
+
+  /**
+   * Modifies a specified businesses
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   * @return {json} message key
+   */
+  static deleteBusiness(req, res) {
+    Businesses
+      .findOne({
+        where: {
+          id: req.params.businessId
+        }
+      })
+      .then((business) => {
+        if (business) {
+          business
+            .destroy()
+            .then(() => {
+              res.status(200)
+                .send({
+                  message: 'business deleted'
+                });
+            })
+            .catch((err) => {
+              res.status(400)
+                .send({
+                  message: err.errors ? err.errors : err.message
+                });
+            });
+        } else {
+          res.status(404)
+            .send({
+              message: 'no such business with specified id'
+            });
         }
       })
       .catch((err) => {
