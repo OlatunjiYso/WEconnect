@@ -100,10 +100,10 @@ class businessController {
       .then((businesses) => {
         if (businesses) {
           res.status(200)
-          .send({
-            message: 'all businesses',
-            businesses
-          });
+            .send({
+              message: 'all businesses',
+              businesses
+            });
         } else {
           res.status(200)
             .send({
@@ -116,6 +116,65 @@ class businessController {
           .send({
             message: err.errors ? err.errors : err.message
           });
+      });
+  }
+
+  /**
+   * Modifies a specified businesses
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   * @return {json} message key
+   */
+  static modifyBusiness(req, res) {
+    Businesses
+      .findOne({
+        where: {
+          id: req.params.businessId
+        }
+      })
+      .then((business) => {
+        if (business) {
+          business
+            .update({
+              title: req.body.title || business.title,
+              slogan: req.body.slogan || business.slogan,
+              overview: req.body.overview || business.slogan,
+              email: req.body.email || business.email,
+              website: req.body.website || business.website,
+              phone1: req.body.phone1 || business.phone1,
+              phone2: req.body.phone2 || business.phone2,
+              facebook: req.body.facebook || business.facebook,
+              tweeter: req.body.tweeter || business.tweeter,
+              image1: req.body.image1 || business.image1,
+              image2: req.body.image2 || business.image1,
+              image3: req.body.image3 || business.image1,
+              image4: req.body.image4 || business.image1
+            })
+            .then((updated) => {
+              res.status(200)
+                .send({
+                  message: 'business modified',
+                  updated
+                });
+            })
+            .catch((err) => {
+              res.status(400)
+                .send({
+                  message: err.errors ? err.errors : err.message
+                });
+            });
+        } else {
+          res.status(404)
+            .send({
+              message: 'no such business with specified id'
+            })
+        }
+      })
+      .catch((err) => {
+        res.status(400)
+                .send({
+                  message: err.errors ? err.errors : err.message
+                });
       });
   }
 }
