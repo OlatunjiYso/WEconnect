@@ -1,6 +1,6 @@
 import db from '../models';
 
-const { Business } = db;
+const { Businesses, Reviews } = db;
 
 /**
  * Business Controllers to handle :
@@ -20,7 +20,7 @@ class businessController {
      * @return {json} message key
      */
     static createBusiness(req, res) {
-       Business
+       Businesses
         .create({
           ownerId: req.user.id,
           title: req.body.title,
@@ -53,4 +53,34 @@ class businessController {
         });
     }
 
+    /**
+     * Gets a business
+     * @param {Object} req -the api request
+     * @param {Object} res -the api response
+     * @return {json} message key
+     */
+    static getBusiness(req, res) {
+      Businesses
+      .findOne({
+        where: {
+          id: req.params.businessId
+        },
+        include: [{
+        model: Reviews
+      }]
+      })
+      .then((business) => {
+        res.status(200)
+          .send({
+            message: 'business found',
+            business
+          });
+      })
+      .catch((err) => {
+        res.status(400)
+            .send({
+              message: err.errors ? err.errors : err.message
+            });
+      });
+    }
 }
