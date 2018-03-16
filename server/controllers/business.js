@@ -167,7 +167,7 @@ class businessController {
           res.status(404)
             .send({
               message: 'no such business with specified id'
-            })
+            });
         }
       })
       .catch((err) => {

@@ -7,11 +7,10 @@ import db from '../models';
 const { User } = db;
 
 /**
- * Usercontroller class
- * Does:
- * 1. creating a new user
- * 2. logging in a registered user
- * 3. Issuing of jsonwebtoken upon succesful signin
+ * Usercontroller class to handle:
+ *        Creating a new user
+ *        Logging in a registered user
+ *        Issuing of jsonwebtoken upon succesful signin
 */
 class UserController {
     /**
