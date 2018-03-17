@@ -4,8 +4,8 @@ const Businesses = [
     new Business(
         1,
         'Super dance',
-        'Entertainment',
-        'Lagos',
+        'entertainment',
+        'lagos',
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
         '080111111',
         'superdance@andela.com',
@@ -14,8 +14,8 @@ const Businesses = [
     new Business(
         2,
         'Just suits',
-        'Fashion',
-        'Abuja',
+        'fashion',
+        'abuja',
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
         '0802222222',
         'justsuits@andela.com',
@@ -24,8 +24,8 @@ const Businesses = [
     new Business(
         3,
         'Delicious',
-        'Catering',
-        'Ondo',
+        'catering',
+        'ondo',
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
         '080333333',
         'deli@andela.com',
@@ -34,8 +34,8 @@ const Businesses = [
     new Business(
         4,
         'Cloth Shop',
-        'Fashion',
-        'Kwara',
+        'fashion',
+        'kwara',
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
         '08044444444',
         'cloth@andela.com',
@@ -44,7 +44,8 @@ const Businesses = [
     new Business(
         5,
         'Jacket Shop',
-        'Fashion', 'Anthony',
+        'fashion',
+        'anthony',
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo',
         '080555555',
         'somebody@andela.com',
