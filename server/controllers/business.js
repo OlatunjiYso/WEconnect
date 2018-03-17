@@ -12,6 +12,7 @@
 import Business from '../model/business';
 
 import businesses from '../tables/businesses';
+import comments from '../tables/comments';
 
 /**
   * @description adds a new business
@@ -34,7 +35,7 @@ const addBusiness = (req, res) => {
     req.body.ownerid
   );
   businesses.push(newBusiness);
-  res.status(201).json({
+  return res.status(201).json({
     message: 'business created successfully',
     'Your Business': newBusiness
   });
@@ -169,7 +170,7 @@ const getBusinesses = (req, res) => {
 };
 
 /**
-  * @description adds a specified business
+  * @description -gets a specified business
   *
   * @param {object} req -api request
   * @param {object} res -api response
@@ -177,11 +178,13 @@ const getBusinesses = (req, res) => {
   * @return {object} -the business
   */
 const getBusiness = (req, res) => {
-  const businessId = parseInt(req.params.id, 10);
+  const businessId = parseInt(req.params.businessId, 10);
 
   const profile = businesses.filter(business => business.id === businessId);
+  const Mycomments = comments.filter(comment => comment.businessId === businessId);
+  profile[0].comments = Mycomments;
   return res.status(200).json({
-    profile
+   profile
   });
 };
 

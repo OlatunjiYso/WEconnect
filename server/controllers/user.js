@@ -9,9 +9,11 @@ import User from '../model/user';
 import users from '../tables/users';
 
 /**
- * Adds a new user
+ *@description Adds a new user
+ *
  * @param {Object} req - api request
  * @param {Object} res - api response
+ *
  * @return {Object} return - response onject
  */
 const addUser = (req, res) => {
@@ -28,19 +30,23 @@ const addUser = (req, res) => {
 
 /**
  * Signs in a registered user
+ *
  * @param {Object} req - api request
  * @param {Object} res - api response
+ *
  * @return {Object} return - response onject
  */
 const login = (req, res) => {
-   const queriedUser = users.filter(user => user.username === req.body.username);
-    if (queriedUser.lenght === 0) {
-          return res.status(404)
+    const usernames = users.map(user => user.username);
+    const userIndex = usernames.indexOf(req.body.username);
+
+    if (userIndex < 0) {
+        return res.status(404)
             .send({
                 message: 'no such user exists'
             });
     }
-    if (req.body.password !== queriedUser[0].password) {
+    if (req.body.password !== users[userIndex].password) {
         return res.status(404)
             .send({
                 message: 'Invalid Password'
