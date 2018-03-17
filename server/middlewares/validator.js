@@ -5,7 +5,7 @@ import users from '../tables/users';
 */
 class Validations {
     /**
-      * @description Trims spaces off values
+      * @description Ensures a valid user is added
       *
       * @param {object} req - api request
       * @param {object} res - api response
@@ -13,30 +13,13 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static trimBody(req, res, next) {
-        // Trims body values
-        const fields = Object.keys(req.body);
-        fields.forEach((field) => {
-            if (typeof req.body[field] === 'string' && req.body[field] !== undefined) {
-                req.body[field] = req.body[field].trim();
-            }
-            next();
-        });
-    }
-
-    /**
-    * Ensures  valid user is added
-     * @param {Object} req api request
-     * @param {Object} res api response
-     * @param {Object} next -calls on the next handler
-     * @return {Function} api response
-     */
     static validateSignup(req, res, next) {
         req.checkBody('username', 'Please input username').trim().notEmpty();
         req.checkBody('password', 'Please input password').notEmpty();
         req.checkBody('password', 'password must be a min length of 5').isLength({ min: 5 });
         req.checkBody('email', 'email is required').notEmpty();
         req.checkBody('email', 'Invalid email').isEmail();
+        req.checkBody('phone', 'Please input your phone number').trim().notEmpty();
         const errors = req.validationErrors();
         if (errors) {
             res.status(400)
