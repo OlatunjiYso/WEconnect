@@ -15,8 +15,8 @@ import users from '../tables/users';
  * @return {Object} return - response onject
  */
 const addUser = (req, res) => {
-    const userId = parseInt(req.params.userId, 10);
-    const newUser = new User(userId, req.body.username, req.body.password, req.body.phone);
+    const userId = users.length + 1;
+    const newUser = new User(userId, req.body.username, req.body.password, req.body.email);
     users.push(newUser);
     const safeUser = newUser;
     safeUser.password = '**************';

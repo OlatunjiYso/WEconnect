@@ -4,7 +4,8 @@ import chaiHttp from 'chai-http';
 
 import app from '../app';
 
-const expect = { chai };
+ const { expect } = chai; 
+
 
 const should = chai.should();
 chai.use(chaiHttp);

@@ -8,13 +8,13 @@ class User {
        * @param {number} userId - The id of user.
        * @param {string} username - The username of user.
        * @param {string} password - The password.
-       * @param {string} phone - The phone number.
+       * @param {string} email - The email.
        */
-      constructor(userId, username, password, phone) {
+      constructor(userId, username, password, email) {
         this.UserId = userId;
         this.Username = username;
         this.Password = password;
-        this.Phone = phone;
+        this.Email = email;
       }
    /**
        * Get the id of user.
@@ -35,11 +35,36 @@ class User {
       get password() {
         return this.Password;
       }
-      /** Get the phone of user.
+      /** Get the email of user.
        * @return {string} The phone number
        */
-      get phone() {
-        return this.Phone;
+      get email() {
+        return this.Email;
       }
+      /** Set the userId of comment.
+     * @param {string} id - the userId
+     */
+    set userId(id) {
+      this.User = id;
+   }
+   /** Set the username of user.
+     * @param {string} username - the username
+     */
+    set username(username) {
+      this.Username = username;
+   }
+   /** Set the password of user.
+     * @param {string} password - the password
+     */
+    set password(password) {
+      this.Password = password;
+   }
+
+   /** Set the email of user.
+     * @param {string} email - the email
+     */
+    set email(email) {
+      this.Email = email;
+   }
     }
    export default User;
