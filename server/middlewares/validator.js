@@ -22,10 +22,29 @@ class Validations {
         req.checkBody('password', 'password must be a min length of 5').isLength({ min: 5 });
         req.checkBody('email', 'email is required').notEmpty();
         req.checkBody('email', 'Invalid email').isEmail();
-        req.checkBody('phone', 'Please input your phone number').trim().notEmpty();
         const errors = req.validationErrors();
         if (errors) {
-            res.status(400)
+            return res.status(400)
+                .send({ errors: errors[0].msg });
+        }
+        next();
+    }
+
+    /**
+      * @description Ensures a valid user is added
+      *
+      * @param {object} req - api request
+      * @param {object} res - api response
+      * @param {function} next - calls on the next handler
+      *
+      * @return {undefined} api response
+      */
+     static validatelogin(req, res, next) {
+        req.checkBody('username', 'Please input username').trim().notEmpty();
+        req.checkBody('password', 'Please input password').trim().notEmpty();
+        const errors = req.validationErrors();
+        if (errors) {
+            return res.status(400)
                 .send({ errors: errors[0].msg });
         }
         next();
@@ -59,7 +78,7 @@ class Validations {
             .trim()
             .notEmpty();
         req.checkBody('ownerId', 'ownerId must be a number')
-            .isNumber();
+            .isInt();
         req.checkBody('email', 'email is required')
             .notEmpty();
         req.checkBody('email', 'Invalid email')
@@ -69,7 +88,7 @@ class Validations {
             .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
-            res.status(400)
+            return res.status(400)
                 .send({ errors: errors[0].msg });
         }
         next();
@@ -85,15 +104,14 @@ class Validations {
       */
     static checkUsernameExistence(req, res, next) {
         const allusernames = users.map(user => user.username);
-        allusernames.forEach((username) => {
-            if (username === req.body.username) {
-                return res.status(400)
-                    .send({
-                        message: 'This username exists',
-                    });
-            }
-        });
-        next();
+        const check = allusernames.indexOf(req.body.username);
+        if (check >= 0) {
+            return res.status(400)
+                .send({
+                    message: 'This username exists!'
+                });
+        }
+         next();
     }
 
     /**
@@ -107,11 +125,10 @@ class Validations {
       */
     static checkUserIdExistence(req, res, next) {
         const alluserId = users.map(user => user.id);
-        alluserId.forEach((id) => {
-            if (id === req.body.ownerId) {
-                next();
-            }
-        });
+        const check = alluserId.indexOf(req.body.ownerId);
+        if (check < 0) {
+            return next();
+        }
         return res.status(400)
             .send({
                 message: 'User with Specified Id doesnot exist',
@@ -129,14 +146,13 @@ class Validations {
       */
     static checkEmailExistence(req, res, next) {
         const emails = users.map(user => user.email);
-        emails.forEach((email) => {
-            if (email === req.body.email) {
-                return res.status(400)
+        const check = emails.indexOf(req.body.email);
+        if (check >= 0) {
+            return res.status(400)
                     .send({
                         message: 'This email exists',
                     });
-            }
-        });
+        }
         next();
     }
 
@@ -150,15 +166,16 @@ class Validations {
      * @return {undefined} api response
      */
     static checkBusinessExistence(req, res, next) {
+        const businessId = parseInt(req.params.businessId, 10);
         const allBusinessId = businesses.map(business => business.id);
-        allBusinessId.forEach((id) => {
-            if (id === req.param.businessId) {
-                next();
-            }
-        });
+        const check = allBusinessId.indexOf(businessId);
+        console.log(req.params.businessId);
+        if (check >= 0) {
+            return next();
+        }
         return res.status(400)
             .send({
-                message: 'The business with specified id doesnot exist'
+                message: 'The business with the specified id doesnot exist'
             });
     }
 
@@ -172,10 +189,11 @@ class Validations {
     * @return {undefined} api response
     */
     static verifyBusinessParamIsNumber(req, res, next) {
-        if (req.param.businessId) {
-            if (typeof req.params.businessId !== 'number') {
+        const businessId = parseInt(req.params.businessId, 10);
+        if (businessId) {
+            if (typeof businessId !== 'number') {
                 return res.status(400)
-                    .send({
+                    .json({
                         message: 'unsupported parameters'
                     });
             }
@@ -202,10 +220,31 @@ class Validations {
         if (req.query.category) {
             if (typeof req.query.category !== 'string') {
                 return res.status(400)
-                    .send({
+                    .json({
                         message: 'unsupported category query parameters!'
                     });
             }
+        }
+        next();
+    }
+
+    /**
+      * @description Ensures a valid comment is added
+      *
+      * @param {object} req - api request
+      * @param {object} res - api response
+      * @param {function} next - calls on the next handler
+      *
+      * @return {undefined} api response
+      */
+     static validateReview(req, res, next) {
+        req.checkBody('date', 'date is required!').trim().notEmpty();
+        req.checkBody('message', 'message required!').trim().notEmpty();
+        req.checkBody('commentor', 'your name is required!').trim().notEmpty();
+        const errors = req.validationErrors();
+        if (errors) {
+            res.status(400)
+                .json({ errors: errors[0].msg });
         }
         next();
     }
