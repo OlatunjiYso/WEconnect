@@ -15,7 +15,9 @@ userHandler.post(
 );
 userHandler.post(
     '/login',
+    validator.validatelogin,
     userController.login
 );
+
 
 export default userHandler;
