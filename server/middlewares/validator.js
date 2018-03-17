@@ -31,7 +31,7 @@ class Validations {
     }
 
     /**
-      * @description Ensures a valid user is added
+      * @description Ensures a user signin parameters are valid
       *
       * @param {object} req - api request
       * @param {object} res - api response
