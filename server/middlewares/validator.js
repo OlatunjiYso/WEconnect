@@ -27,7 +27,7 @@ class Validations {
             return res.status(400)
                 .send({ errors: errors[0].msg });
         }
-        next();
+        return next();
     }
 
     /**
@@ -39,7 +39,7 @@ class Validations {
       *
       * @return {undefined} api response
       */
-     static validatelogin(req, res, next) {
+    static validatelogin(req, res, next) {
         req.checkBody('username', 'Please input username').trim().notEmpty();
         req.checkBody('password', 'Please input password').trim().notEmpty();
         const errors = req.validationErrors();
@@ -47,7 +47,7 @@ class Validations {
             return res.status(400)
                 .send({ errors: errors[0].msg });
         }
-        next();
+        return next();
     }
 
     /**
@@ -91,7 +91,53 @@ class Validations {
             return res.status(400)
                 .send({ errors: errors[0].msg });
         }
-        next();
+        return next();
+    }
+    /**
+      * @description Ensures a valid business is added
+      *
+      * @param {object} req - api request
+      * @param {object} res - api response
+      * @param {function} next - calls on the next handler
+      *
+      * @return {undefined} api response
+      */
+    static validatebusinessUpdate(req, res, next) {
+        if (req.body.title) {
+            req.checkBody('category', 'Title cannot be blank')
+                .trim().notEmpty();
+        }
+        if (req.body.category) {
+            req.checkBody('category', 'Category cannot be blank')
+                .trim().notEmpty();
+        }
+        if (req.body.location) {
+            req.checkBody('location', 'Location cannot be blank')
+                .trim().notEmpty();
+        }
+        if (req.body.description) {
+            req.checkBody('description', 'Description cannot be blank')
+                .trim().notEmpty();
+            req.checkBody('description', 'description must be a minimum of 20 characters')
+                .isLength({ min: 20 });
+        }
+        if (req.body.email) {
+            req.checkBody('email', 'email is required')
+                .notEmpty();
+            req.checkBody('email', 'Invalid email')
+                .isEmail();
+        }
+        if (req.body.phone) {
+            req.checkBody('phone', 'Phone number cannot be blank')
+                .trim()
+                .notEmpty();
+        }
+        const errors = req.validationErrors();
+        if (errors) {
+            return res.status(400)
+                .send({ errors: errors[0].msg });
+        }
+        return next();
     }
     /**
       * @description Checks if username already exists
@@ -111,7 +157,7 @@ class Validations {
                     message: 'This username exists!'
                 });
         }
-         next();
+        return next();
     }
 
     /**
@@ -149,11 +195,11 @@ class Validations {
         const check = emails.indexOf(req.body.email);
         if (check >= 0) {
             return res.status(400)
-                    .send({
-                        message: 'This email exists',
-                    });
+                .send({
+                    message: 'This email exists',
+                });
         }
-        next();
+        return next();
     }
 
     /**
@@ -169,7 +215,6 @@ class Validations {
         const businessId = parseInt(req.params.businessId, 10);
         const allBusinessId = businesses.map(business => business.id);
         const check = allBusinessId.indexOf(businessId);
-        console.log(req.params.businessId);
         if (check >= 0) {
             return next();
         }
@@ -198,7 +243,7 @@ class Validations {
                     });
             }
         }
-        next();
+        return next();
     }
     /** @description validates query parameters
     *
@@ -225,7 +270,7 @@ class Validations {
                     });
             }
         }
-        next();
+        return next();
     }
 
     /**
@@ -237,16 +282,16 @@ class Validations {
       *
       * @return {undefined} api response
       */
-     static validateReview(req, res, next) {
+    static validateReview(req, res, next) {
         req.checkBody('date', 'date is required!').trim().notEmpty();
         req.checkBody('message', 'message required!').trim().notEmpty();
         req.checkBody('commentor', 'your name is required!').trim().notEmpty();
         const errors = req.validationErrors();
         if (errors) {
-            res.status(400)
+            return res.status(400)
                 .json({ errors: errors[0].msg });
         }
-        next();
+        return next();
     }
 }
 

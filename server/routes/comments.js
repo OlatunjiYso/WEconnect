@@ -12,6 +12,10 @@ commentHandler.post(
     validator.validateReview,
     commentController.addComment
 );
-commentHandler.get('/:businessId/reviews', commentController.getComments);
+commentHandler.get(
+    '/:businessId/reviews',
+    validator.checkBusinessExistence,
+    commentController.getComments
+);
 
 export default commentHandler;

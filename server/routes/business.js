@@ -21,14 +21,14 @@ businessHandler.post(
     businessController.addBusiness
 );
 businessHandler.put(
-    '/:id',
+    '/:businessId',
     validator.verifyBusinessParamIsNumber,
     validator.checkBusinessExistence,
-    validator.validatebusinessRegistration,
+    validator.validatebusinessUpdate,
     businessController.modifyBusinessProfile
 );
 businessHandler.delete(
-    '/:id',
+    '/:businessId',
     validator.verifyBusinessParamIsNumber,
     validator.checkBusinessExistence,
      businessController.deleteBusiness

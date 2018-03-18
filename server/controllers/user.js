@@ -47,7 +47,7 @@ const login = (req, res) => {
             });
     }
     if (req.body.password !== users[userIndex].password) {
-        return res.status(404)
+        return res.status(400)
             .send({
                 message: 'Invalid Password'
             });
