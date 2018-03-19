@@ -1,0 +1,162 @@
+<!-- Road Map Road Map Road Map
+     <Head>
+        __google fonts import
+        __materialize css linking
+        __my custom css linking
+    </Head>
+
+    <Body>
+        __NavBar
+        __First row    [WEconnect logo and message]
+        __Second row   [Business Registration form]
+        __third row     [footer]
+        __javascript
+    </Body
+   -->
+
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <!--Import Google Icon Font-->
+       <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <!--my own styles.css-->
+       <link type="text/css" rel="stylesheet" href="./public/CSS/styles.css" media="screen,projection" />
+       <!--Import materialize.css-->
+       <link type="text/css" rel="stylesheet" href="./public/materialize/css/materialize.min.css" media="screen,projection" />
+       <!--Let browser know website is optimized for mobiledeep-orange-text text-lighten-2-->
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
+   <body>
+       <nav>
+           <div class="nav-wrapper">
+               <a href="#" class=" Sofia brand-logo  logo pink-text">WEconnect</a>
+               <a href="#" data-activates="mobile-demo" class="button-collapse">
+                   <i class="material-icons"> more </i>
+               </a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
+                   <li>
+                       <a href="signin.html" class="pink-text">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text">Sign Up</a>
+                   </li>
+               </ul>
+               <ul class="side-nav" id="mobile-demo">
+                   <li>
+                       <a href="signin.html" class="pink-text">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text">Sign Up</a>
+                   </li>
+               </ul>
+           </div>
+       </nav>
+   
+       <!-- first row contains WEconnect logo and message -->
+       <div class="row dashboard head-font ">
+           <div class="col s8 offset-s2 m3 l2 logo center-align">
+               <img class="responsive-img left" src="./public/images/profession.jpg" />
+           </div>
+   
+           <div class="col s12 m9 l8  pink-text center-align">
+               <h3>Update your Business profile and make it live </h3>
+           </div>
+       </div>
+       <!-- second row contains Business Registration form -->
+       <div class="row head-font ">
+           <h4 class="center pink-text"> Business Registration Form. </h4>
+           <div class="row">
+               <div class="col l6 offset-l3 black bottom-gap ">
+                   <form class="col s12">
+                       <div class="row">
+                           <div class="input-field col white s12  ">
+                               <input placeholder="Title of business" id="first_name" type="text" class="validate">
+                           </div>
+                           <div class="input-field col white s12  ">
+                               <input placeholder="Business Slogan" id="first_name" type="text" class="validate">
+                           </div>
+                           <div class="input-field col s12 white s12  ">
+                               <input placeholder="Street address" id="first_name" type="text" class="validate">
+                           </div>
+   
+                           <div class="input-field col white s6  ">
+                               <input placeholder="Business hotline" id="first_name" type="text" class="validate">
+                           </div>
+                           <div class="input-field col white s6  ">
+                               <input placeholder="Business email" id="first_name" type="text" class="validate">
+                           </div>
+                           <div class="input-field col white s12  ">
+                               <select>
+                                   <option value="" disabled selected>Select State</option>
+                                   <option value="1">Lagos</option>
+                                   <option value="2">Kaduna</option>
+                                   <option value="3">Porthacourt</option>
+                                   <option value="1">Oyo</option>
+                                   <option value="2">Kwara</option>
+                                   <option value="3">Abuja</option>
+                               </select>
+                           </div>
+                           <div class="input-field col white s12  ">
+                               <select multiple>
+                                   <option value="" disabled selected>Select matching category</option>
+                                   <option value="1">Fashion</option>
+                                   <option value="2">Engineering</option>
+                                   <option value="3">Technology</option>
+                                   <option value="1">Events</option>
+                                   <option value="2">Household</option>
+                                   <option value="3">Construction</option>
+                               </select>
+                           </div>
+                           <div class="input-field col white s12  ">
+                               <textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
+                               <label for="textarea1">Tell us about your Business (be detailed)</label>
+                           </div>
+                           <div class="input-field col white s12  ">
+                               <textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
+                               <label for="textarea1">Tell us about the CEO </label>
+                           </div>
+                       </div>
+                       <form action="#">
+                           <div class="file-field input-field">
+                               <div class="btn small pink lighten-3">
+                                   <span>Upload Photo</span>
+                                   <input type="file">
+                               </div>
+                               <div class="file-path-wrapper">
+                                   <input class="file-path validate" type="text">
+                               </div>
+                           </div>
+                       </form>
+   
+                   </form>
+               </div>
+           </div>
+           <div class=" center-align">
+               <button class="pink lighten-2 btn"> Create Business</button>
+           </div>
+       </div>
+       <!-- Footer -->
+       <footer class="page-footer blue-grey darken-4 body-font">
+           <div class="container ">
+               <div class="row">
+                   <div class="col l6 s12">
+                       <h5 class="pink-text logo Sofia">WEconnect</h5>
+                   </div>
+               </div>
+           </div>
+           <div class="footer-copyright pink-text text-lighten-1">
+               <div class="container">
+                   © 2018 Andela, Lagos Nigeria
+                   <a class="pink-text text-lighten-1 right" href="#!">Andela BootCamp Project Cycle XXX</a>
+               </div>
+           </div>
+       </footer>
+       <!--Import jQuery before materialize.js-->
+       <script type="text/javascript" src="./public/jquery/jquery.min.js"></script>
+       <script type="text/javascript" src="./public/materialize/js/materialize.min.js"></script>
+       <script type="text/javascript" src="./public/js/init.js"></script>
+   </body>
+   </html>

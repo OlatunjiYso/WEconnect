@@ -68,6 +68,9 @@
 
 /* -----reuseable styles --------- */
 /* -----reuseable styles --------- */
+ #icon-text {
+    margin-top: 20px;
+ }
   .bottom-gap {
     margin-bottom: 3em;
   }
