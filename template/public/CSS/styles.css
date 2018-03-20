@@ -5,7 +5,7 @@
 }
 .banner-text {
     margin-top: 4em;
-    background-color: #03030f;
+    color: #ff609d;
     border-radius: 2rem
 }
 .banner-image {
@@ -29,7 +29,7 @@
     font-family: 'Abhaya Libre';
 }
 .nav-wrapper, #nav-mobile {
-    background-color: #050107;
+    /*background-color: #050107;*/
 }
 
 /**** category styles ****/
@@ -77,6 +77,9 @@
   .bottom-pad {
     padding-bottom: 3em;
   }
+  .bottom-pad-much {
+    padding-bottom: 5em;
+  }
   .underlined {
     border-bottom: 3px solid #03030f;
   }
@@ -93,11 +96,12 @@
 }
 .thin-border {
     border: 1px solid #ec2592;
-    background-color: #03030f;
-    color:#f5cddc
+}
+.thin-black-border {
+    border: 1px solid #220f1a;
 }
 .dashboard {
-    padding:1em 0 3em 0;
+    padding:1em 0 1em 0;
     border-bottom:2px solid #050107;
 }
   
@@ -106,9 +110,6 @@
   .purple-background {
     background-color: #190129
   }
-  .form {
-    background-color: #03030f;
-}
   
   /******* Card  *******/
   /******* Card  *******/
