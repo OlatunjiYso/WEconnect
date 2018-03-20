@@ -18,6 +18,7 @@ app.use(expressValidator());
 app.use('/api/v1/auth/', userHandler);
 app.use('/api/v1/businesses/', commentHandler);
 app.use('/api/v1/businesses/', businessHandler);
+app.use('/', userHandler);
 
 app.listen(3000, () => {
   console.log('I am running on port 3000');

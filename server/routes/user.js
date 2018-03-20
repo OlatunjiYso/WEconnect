@@ -13,6 +13,10 @@ userHandler.post(
     validator.validateSignup,
     userController.addUser
 );
+userHandler.get(
+    '*',
+    userController.handleError
+);
 userHandler.post(
     '/login',
     validator.validatelogin,

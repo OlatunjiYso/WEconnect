@@ -58,6 +58,11 @@ const login = (req, res) => {
         });
 };
 
-const userController = { addUser, login };
+const handleError = (req, res) => res.status(404)
+        .send({
+            message: 'You are welcome to WEconnect!'
+        });
+
+const userController = { addUser, login, handleError };
 
 export default userController;
