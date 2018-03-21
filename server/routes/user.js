@@ -14,13 +14,18 @@ userHandler.post(
     userController.addUser
 );
 userHandler.get(
-    '*',
+    '/',
     userController.handleError
 );
 userHandler.post(
     '/login',
     validator.validatelogin,
     userController.login
+);
+
+userHandler.get(
+    '/all',
+    userController.getUser
 );
 
 

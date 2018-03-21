@@ -9,6 +9,7 @@
   "scripts": {
     "postinstall": "babel server -d distServer --presets es2015,stage-2",
     "start": "node distServer/app.js",
+    "start:development": "node distServer/app.js",
     "start:dev": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
     "test": "nyc --reporter=lcov  --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
@@ -40,7 +41,7 @@
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
-    "mocha": "^3.5.3",
+    "mocha": "^3.5.3", 
     "nyc": "^11.4.1"
   },
   "dependencies": {
