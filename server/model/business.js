@@ -74,6 +74,13 @@
     return this.Location;
   }
   /**
+     * Get the location of business.
+     * @return {string} The location of business.
+     */
+    get ownerId() {
+      return this.OwnerId;
+    }
+  /**
      * Set the title of business.
      * @param{string} newTitle -The new title
      */
