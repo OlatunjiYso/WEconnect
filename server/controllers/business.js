@@ -23,7 +23,8 @@ import comments from '../tables/comments';
   * @return {object} -created business
   */
 const addBusiness = (req, res) => {
-  const id = businesses.length + 1;
+  const lastItem = businesses[businesses.length - 1];
+  const id = lastItem.id + 1;
   const newBusiness = new Business(
     id,
     req.body.title,
@@ -97,7 +98,7 @@ const modifyBusinessProfile = (req, res) => {
   * @return {object} -message
   */
 const deleteBusiness = (req, res) => {
-  const businessId = parseInt(req.params.id, 10);
+  const businessId = parseInt(req.params.businessId, 10);
   const arrayOfId = businesses.map(business => business.id);
 
   const indexToBePopped = arrayOfId.indexOf(businessId);
@@ -131,6 +132,11 @@ const getBusinesses = (req, res) => {
         message: 'No matching business in this search combination'
       });
     }
+    Finalmatches.forEach((business) => {
+      const businessId = business.id;
+      const Mycomments = comments.filter(comment => comment.businessId === businessId);
+      business.comments = Mycomments;
+    });
     return res.status(200).json({
       Business: Finalmatches
     });
@@ -143,6 +149,11 @@ const getBusinesses = (req, res) => {
         message: 'No matching business'
       });
     }
+    matches.forEach((business) => {
+      const businessId = business.id;
+      const Mycomments = comments.filter(comment => comment.businessId === businessId);
+      business.comments = Mycomments;
+    });
     return res.status(200).json({
       Business: matches
     });
@@ -155,6 +166,11 @@ const getBusinesses = (req, res) => {
         message: 'No matching business'
       });
     }
+    matches.forEach((business) => {
+      const businessId = business.id;
+      const Mycomments = comments.filter(comment => comment.businessId === businessId);
+      business.comments = Mycomments;
+    });
     return res.status(200).json({
       Business: matches
     });
@@ -164,6 +180,11 @@ const getBusinesses = (req, res) => {
       message: 'No Businesses yet'
     });
   }
+   businesses.forEach((business) => {
+    const businessId = business.id;
+    const Mycomments = comments.filter(comment => comment.businessId === businessId);
+    business.comments = Mycomments;
+  });
   return res.status(200).json({
     businesses
   });
