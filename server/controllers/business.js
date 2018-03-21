@@ -35,7 +35,6 @@ const addBusiness = (req, res) => {
     req.body.email,
     req.body.ownerId
   );
-  console.log(newBusiness);
   businesses.push(newBusiness);
   return res.status(201).json({
     message: 'business created successfully',
