@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "babel server -d distServer --presets es2015,stage-2",
     "start": "node distServer/app.js",
-    "start:development": "node distServer/app.js",
+    "start:development": "nodemon distServer/app.js",
     "start:dev": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
     "test": "nyc --reporter=lcov  --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",

@@ -21,15 +21,15 @@ const addUser = (req, res) => {
     const newUser = new User(userId, req.body.username, req.body.password, req.body.email);
     users.push(newUser);
     return res.status(201).json({
-        message: 'signup successful!'
+        message: 'signup successful!',
+        username: req.body.username,
+        email: req.body.email
     });
 };
 
-const getUser = (req, res) => {
-    return res.status(201).json({
+const getUser = (req, res) => res.status(201).json({
         message: users
     });
-};
 
 
 /**
@@ -58,7 +58,8 @@ const login = (req, res) => {
     }
     return res.status(200)
         .send({
-            message: 'You are signed in!'
+            message: 'You are signed in!',
+            username: req.body.username
         });
 };
 
@@ -67,6 +68,8 @@ const handleError = (req, res) => res.status(404)
             message: 'You are welcome to WEconnect!'
         });
 
-const userController = { addUser, login, handleError, getUser };
+const userController = {
+ addUser, login, handleError, getUser
+};
 
 export default userController;
