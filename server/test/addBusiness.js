@@ -29,6 +29,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Please input business title');
                     done();
                 });
         });
@@ -55,6 +56,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Please input business location');
                     done();
                 });
         });
@@ -82,6 +84,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Please input business category');
                     done();
                 });
         });
@@ -109,6 +112,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Please input business description');
                     done();
                 });
         });
@@ -120,7 +124,7 @@ describe(' All Tests for adding a new business', () => {
                 {
                     id: '14',
                     title: 'Jollf rice',
-                    category: null,
+                    category: 'power',
                     location: 'Lagos',
                     description: 'desript',
                     phone: '08111111111',
@@ -136,6 +140,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('description must be a minimum of 20 characters');
                     done();
                 });
         });
@@ -163,6 +168,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Please input business phone number');
                     done();
                 });
         });
@@ -174,7 +180,7 @@ describe(' All Tests for adding a new business', () => {
                 {
                     id: '14',
                     title: 'Jollf rice',
-                    category: null,
+                    category: 'notnull',
                     location: 'Lagos',
                     description: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
                     phone: '08111111111',
@@ -190,6 +196,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('email is required');
                     done();
                 });
         });
@@ -217,6 +224,7 @@ describe(' All Tests for adding a new business', () => {
                     res.should.have.status(400);
                     res.body.should.be.an('object');
                     res.body.should.have.property('errors');
+                    res.body.errors.should.be.equal('Invalid email');
                     done();
                 });
         });
