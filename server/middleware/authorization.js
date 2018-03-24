@@ -6,24 +6,18 @@ const { Business } = db;
 
 /**
  * Checks if a user that is about to perform an action on a business is the owner
+ *
  * @param {Object} req -api request
  * @param {Object} res -api response
  * @param {Object} next -pass on to next handler
+ *
  * @return {undefined}
  */
 export default function confirmOwnership(req, res, next) {
     const token = req.body.token || req.headers.token;
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         req.user = decoded;
-        next();
     });
-
-    if (req.user.role !== 'businessOwner') {
-        res.status(401)
-            .send({
-                message: 'You are not authorized to perform such action on this business'
-            });
-    } else {
         // find the actuall owner
         Business
             .findOne({
@@ -33,24 +27,21 @@ export default function confirmOwnership(req, res, next) {
             })
             .then((business) => {
                 if (!business) {
-                    res.status(400)
+                   return res.status(400)
                         .send({
                             message: 'no such business exists'
                         });
                 }
                 if (req.user.id !== business.ownerId) {
-                    res.status(401)
+                    return res.status(401)
                         .send({
                             message: 'You are not authorized to perform such action on this business'
                         });
                 }
                 return next();
             })
-            .catch((err) => {
-                res.status(500)
+            .catch(err => res.status(500)
                     .send({
                         messsage: err.message
-                    });
-            });
+                    }));
     }
-}

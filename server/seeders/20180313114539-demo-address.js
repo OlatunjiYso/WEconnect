@@ -6,33 +6,30 @@ module.exports = {
         {
           id: 500,
           businessId: '500',
-          country: 'Malasia',
           state: 'jonko',
-          city: 'maleey',
+          city: 'luiz',
           streetAddress: 'no 2, ffef, gkfk',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           id: 502,
-          businessId: '500',
-          country: 'giweey',
+          businessId: '502',
+          state: 'jonko',
+          city: 'luiz',
+          streetAddress: 'no 2, ffef, gkfk',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          id: 501,
+          businessId: '501',
           state: 'fads',
           city: 'luiz',
           streetAddress: 'aa, bbbb, ccc',
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          id: 503,
-          businessId: '502',
-          country: 'USA',
-          state: 'LOS',
-          city: 'Cali',
-          streetAddress: 'cali oooo',
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
+        }
       ], {}
     ),
 

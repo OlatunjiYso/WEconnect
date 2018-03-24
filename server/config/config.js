@@ -1,14 +1,25 @@
 
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 module.exports = {
   development: {
-    username: process.env.DB_USERNAME,
+    username: 'olatunji',
+    password: 5432,
+    database: 'weconnect',
+    host: '127.0.0.1',
+    port: 5432,
+    dialect: 'postgres'
+  },
+/* development: {
+    username: process.env.DB_USERNAME ,
     password: process.env.DB_PASSWORD,
     database: process.env.DEVELOPMENT_DB,
-    host: process.env.LOCAL_HOST,
-    dialect: process.env.DB_DIALECT
-  },
+    host: '127.0.0.1',
+    port: 5432,
+    dialect: 'postgres'
+  },*/
   test: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -24,3 +35,4 @@ production: {
     dialect: process.env.DB_DIALECT
   },
 };
+

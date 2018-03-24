@@ -1,12 +1,47 @@
 import express from 'express';
 
 import businessController from '../controllers/business';
+import validator from '../middleware/validations';
+import authenticate from '../middleware/authentication';
+import confirmOwnership from '../middleware/authorization';
 
 const businessHandler = express.Router();
 
-businessHandler.get('/:id', businessController.getBusiness);
-businessHandler.get('/', businessController.getBusinesses);
-businessHandler.post('/', businessController.addBusiness);
-businessHandler.put('/:id', businessController.modifyBusinessProfile);
-businessHandler.delete('/:id', businessController.deleteBusiness);
+businessHandler.get('/', businessController.getAllBusinesses);
+
+businessHandler.get(
+    '/mybusinesses',
+    authenticate,
+    businessController.getBusiness
+);
+
+businessHandler.get(
+    '/:businessId',
+    validator.checkBusinessExistence,
+    businessController.getBusiness
+);
+
+businessHandler.post(
+    '/',
+    authenticate,
+    validator.validatebusinessRegistration,
+    businessController.createBusiness
+);
+
+businessHandler.put(
+    '/:businessId',
+    authenticate,
+    confirmOwnership,
+    validator.validatebusinessUpdate,
+    businessController.modifyBusiness
+);
+
+businessHandler.delete(
+    '/:businessId',
+    authenticate,
+    confirmOwnership,
+    businessController.deleteBusiness
+);
+
+
 export default businessHandler;
