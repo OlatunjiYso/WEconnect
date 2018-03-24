@@ -1,6 +1,6 @@
 import db from '../models';
 
-const { Users, Businesses } = db;
+const { User, Business } = db;
 
 /**
  * Validations class
@@ -75,10 +75,16 @@ class Validations {
         req.checkBody('location', 'Please input business location')
             .trim()
             .notEmpty();
-        req.checkBody('description', 'Please input business description')
+        req.checkBody('address', 'Please input business address')
             .trim()
             .notEmpty();
-        req.checkBody('description', 'description must be a minimum of 20 characters')
+        req.checkBody('slogan', 'Please input business slogan')
+            .trim()
+            .notEmpty();
+        req.checkBody('overview', 'Please input business overview')
+            .trim()
+            .notEmpty();
+        req.checkBody('overview', 'overview must be a minimum of 20 characters')
             .isLength({ min: 20 });
         req.checkBody('email', 'email is required')
             .notEmpty();
@@ -103,7 +109,7 @@ class Validations {
      * @return {undefined}
      */
     static checkUsernameExistence(req, res, next) {
-        Users
+        User
             .findOne({
                 where: {
                     username: req.body.username
@@ -132,7 +138,7 @@ class Validations {
      * @return {undefined}
      */
     static checkEmailExistence(req, res, next) {
-        Users
+        User
             .findOne({
                 where: {
                     email: req.body.email
@@ -161,7 +167,8 @@ class Validations {
      * @return {undefined}
      */
     static checkBusinessExistence(req, res, next) {
-        Businesses
+        console.log(req.params.businessId);
+        Business
             .findOne({
                 where: {
                     id: req.params.businessId
@@ -193,7 +200,7 @@ class Validations {
       */
     static validatebusinessUpdate(req, res, next) {
         if (req.body.title) {
-            req.checkBody('category', 'Title cannot be blank')
+            req.checkBody('title', 'Title cannot be blank')
                 .trim().notEmpty();
         }
         if (req.body.category) {
@@ -202,6 +209,10 @@ class Validations {
         }
         if (req.body.location) {
             req.checkBody('location', 'Location cannot be blank')
+                .trim().notEmpty();
+        }
+        if (req.body.address) {
+            req.checkBody('address', 'Address cannot be blank')
                 .trim().notEmpty();
         }
         if (req.body.description) {
@@ -238,12 +249,14 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static validateReview(req, res, next) {
-        req.checkBody('description', 'message required!').trim().notEmpty();
+    static validatebusinessReview(req, res, next) {
+        req.checkBody('description', 'Please input your review')
+            .trim()
+            .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(400)
-                .json({ errors: errors[0].msg });
+                .send({ errors: errors[0].msg });
         }
         return next();
     }

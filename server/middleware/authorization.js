@@ -18,13 +18,6 @@ export default function confirmOwnership(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         req.user = decoded;
     });
-
-    if (req.user.role !== 'businessOwner') {
-        res.status(401)
-            .send({
-                message: 'You are not authorized to perform such action on this business'
-            });
-    } else {
         // find the actuall owner
         Business
             .findOne({
@@ -52,4 +45,3 @@ export default function confirmOwnership(req, res, next) {
                         messsage: err.message
                     }));
     }
-}
