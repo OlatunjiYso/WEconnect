@@ -15,7 +15,8 @@ services:
 
 before_script:
   - npm install
-  - npm install sequelize-cli@2.8.0 -g
+  - psql -c 'create database travis_test_db;' -U postgres
+  - npm install sequelize-cli -g
   - sequelize db:migrate
 
 cache:
