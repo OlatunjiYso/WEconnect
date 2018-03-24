@@ -20,9 +20,13 @@ development: {
     port: 5432,
     dialect: 'postgres'
   },
-production: {
-  use_env_variable: process.env.ELEPHANT_URL,
-  dialect: 'postgres'
-  },
+  production: {
+    username: process.env.PROD_USERNAME,
+    password: process.env.PROD_PASSWORD,
+    database: process.env.PROD_DATABASE,
+    host: process.env.PROD_HOST,
+    port: 5432,
+    dialect: 'postgres'
+  }
 };
 
