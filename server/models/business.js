@@ -25,22 +25,30 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+    category: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     email: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true
     },
-    website: {
+    location: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: true
     },
-    phone1: {
+    address: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    phone: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true
     },
-    phone2: {
+    whatsapp: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: true
@@ -50,27 +58,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    tweeter: {
+    twitter: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: true
     },
-    image1: {
-      allowNull: true,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    image2: {
-      allowNull: true,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    image3: {
-      allowNull: true,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    image4: {
+    image: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: true
@@ -81,16 +74,9 @@ export default (sequelize, DataTypes) => {
          foreignKey: 'ownerId',
          onDelete: 'CASCADE'
          });
-      Business.hasMany(models.Category, {
-        through: 'BusinessCategory',
-        foreignKey: 'businessId'
-      });
       Business.hasMany(models.Review, {
          foreignKey: 'businessId'
          });
-      Business.hasOne(models.Address, {
-         foreignKey: 'businessId'
-        });
     };
   return Business;
 };

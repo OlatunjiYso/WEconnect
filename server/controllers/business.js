@@ -1,42 +1,43 @@
-import db from '../models';
+import db from '../models/index';
 
-const { Businesses, Reviews } = db;
+const { Business, Review, } = db;
 
 /**
  * Business Controllers to handle :
-            Adding a new business
+            Adding a new business,
             Getting a business,
-            Getting all businesses
-            Modifying business profile
-            Deleting a business
-            Getting business by category
-            Getting business by location
+            Getting all businesses,
+            Modifying business profile,
+            Deleting a business,
+            Getting business by category,
+            Getting business by location,
+            Getting business by location and category.
  */
 class businessController {
   /**
-     * Creates a new business
+     * @description Creates a new business
+     *
      * @param {Object} req -the api request
      * @param {Object} res -the api response
+     *
      * @return {json} message key
      */
   static createBusiness(req, res) {
-    Businesses
+    Business
       .create({
         ownerId: req.user.id,
         title: req.body.title,
         slogan: req.body.slogan || null,
-        overview: req.body.overview || null,
+        overview: req.body.overview,
         email: req.body.email,
-        website: req.body.website || null,
-        phone1: req.body.phone1,
-        phone2: req.body.phone2 || null,
+        category: req.body.category,
+        location: req.body.location,
+        address: req.body.address,
+        phone: req.body.phone,
+        whatsapp: req.body.whatsapp || null,
         facebook: req.body.facebook || null,
-        tweeter: req.body.tweeter || null,
-        image1: req.body.image1 || null,
-        image2: null,
-        image3: null,
-        image4: null,
-
+        twitter: req.body.twitter || null,
+        image: req.body.image || null,
       })
       .then((business) => {
         res.status(201)
@@ -48,25 +49,27 @@ class businessController {
       .catch((err) => {
         res.status(400)
           .send({
-            message: err.errors ? err.errors : err.message
+            message: err.message
           });
       });
   }
 
   /**
-   * Gets a business
+   *@description -gets a specified business
+   *
    * @param {Object} req -the api request
    * @param {Object} res -the api response
-   * @return {json} message key
+   *
+   * @return {json} -message key
    */
   static getBusiness(req, res) {
-    Businesses
+    Business
       .findOne({
         where: {
           id: req.params.businessId
         },
         include: [{
-          model: Reviews
+          model: Review
         }]
       })
       .then((business) => {
@@ -79,35 +82,104 @@ class businessController {
       .catch((err) => {
         res.status(400)
           .send({
-            message: err.errors ? err.errors : err.message
+            message: err.message
           });
       });
   }
 
   /**
-   * Gets all businesses
+   * @description -gets all businesses
+   *
    * @param {Object} req -the api request
    * @param {Object} res -the api response
+   *
    * @return {json} message key
    */
   static getAllBusinesses(req, res) {
-    Businesses
+    const filter = {};
+    if (req.query.category) {
+      filter.category = req.query.category;
+    }
+    if (req.query.location) {
+      filter.location = req.query.location;
+    }
+    Business
       .findAll({
+        where: filter,
         include: [{
-          model: Reviews
+          model: Review
         }]
       })
       .then((businesses) => {
         if (businesses) {
-          res.status(200)
+          return res.status(200)
             .send({
               message: 'all businesses',
               businesses
             });
+        }
+       return res.status(200)
+          .send({
+            message: 'no businesses yet'
+          });
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.message
+          });
+      });
+  }
+
+  /**
+   * @description -modifies a specified businesses
+   *
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   *
+   * @return {json} - message
+   */
+  static modifyBusiness(req, res) {
+    Business
+      .findOne({
+        where: {
+          id: req.params.businessId
+        }
+      })
+      .then((business) => {
+        if (business) {
+          business
+            .update({
+              title: req.body.title || business.title,
+              slogan: req.body.slogan || business.slogan,
+              overview: req.body.overview || business.overview,
+              email: req.body.email || business.email,
+              phone: req.body.phone || business.phone,
+              category: req.body.category || business.category,
+              location: req.body.location || business.location,
+              website: req.body.website || business.website,
+              whatsapp: req.body.whatsapp || business.whatsapp,
+              facebook: req.body.facebook || business.facebook,
+              tweeter: req.body.twitter || business.twitter,
+              image: req.body.image || business.image,
+            })
+            .then((updated) => {
+              res.status(200)
+                .send({
+                  message: 'business modified',
+                  updated
+                });
+            })
+            .catch((err) => {
+              res.status(400)
+                .send({
+                  message: err.message
+                });
+            });
         } else {
-          res.status(200)
+          res.status(404)
             .send({
-              message: 'no businesses yet'
+              message: 'no such business with specified id'
             });
         }
       })
@@ -120,72 +192,15 @@ class businessController {
   }
 
   /**
-   * Modifies a specified businesses
+   * @description -deletes a specified businesses
+   *
    * @param {Object} req -the api request
    * @param {Object} res -the api response
-   * @return {json} message key
-   */
-  static modifyBusiness(req, res) {
-    Businesses
-      .findOne({
-        where: {
-          id: req.params.businessId
-        }
-      })
-      .then((business) => {
-        if (business) {
-          business
-            .update({
-              title: req.body.title || business.title,
-              slogan: req.body.slogan || business.slogan,
-              overview: req.body.overview || business.slogan,
-              email: req.body.email || business.email,
-              website: req.body.website || business.website,
-              phone1: req.body.phone1 || business.phone1,
-              phone2: req.body.phone2 || business.phone2,
-              facebook: req.body.facebook || business.facebook,
-              tweeter: req.body.tweeter || business.tweeter,
-              image1: req.body.image1 || business.image1,
-              image2: req.body.image2 || business.image1,
-              image3: req.body.image3 || business.image1,
-              image4: req.body.image4 || business.image1
-            })
-            .then((updated) => {
-              res.status(200)
-                .send({
-                  message: 'business modified',
-                  updated
-                });
-            })
-            .catch((err) => {
-              res.status(400)
-                .send({
-                  message: err.errors ? err.errors : err.message
-                });
-            });
-        } else {
-          res.status(404)
-            .send({
-              message: 'no such business with specified id'
-            });
-        }
-      })
-      .catch((err) => {
-        res.status(400)
-                .send({
-                  message: err.errors ? err.errors : err.message
-                });
-      });
-  }
-
-  /**
-   * Modifies a specified businesses
-   * @param {Object} req -the api request
-   * @param {Object} res -the api response
+   *
    * @return {json} message key
    */
   static deleteBusiness(req, res) {
-    Businesses
+    Business
       .findOne({
         where: {
           id: req.params.businessId
@@ -204,7 +219,7 @@ class businessController {
             .catch((err) => {
               res.status(400)
                 .send({
-                  message: err.errors ? err.errors : err.message
+                  message: err.message
                 });
             });
         } else {
@@ -216,9 +231,48 @@ class businessController {
       })
       .catch((err) => {
         res.status(400)
-                .send({
-                  message: err.errors ? err.errors : err.message
-                });
+          .send({
+            message: err.message
+          });
+      });
+  }
+
+ /**
+   * @description -gets all user's businesses
+   *
+   * @param {Object} req -the api request
+   * @param {Object} res -the api response
+   *
+   * @return {json} message key
+   */
+  static getMyBusinesses(req, res) {
+    Business
+      .findAll({
+        where: { ownerId: req.user.id },
+        include: [{
+          model: Review
+        }]
+      })
+      .then((businesses) => {
+        if (businesses) {
+          return res.status(200)
+            .send({
+              message: 'all Your businesses',
+              businesses
+            });
+        }
+        return res.status(200)
+          .send({
+            message: 'no businesses yet'
+          });
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.message
+          });
       });
   }
 }
+
+export default businessController;
