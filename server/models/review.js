@@ -7,7 +7,6 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     businessId: {
-      allowNull: false,
       type: DataTypes.INTEGER,
     },
     description: {
@@ -17,12 +16,12 @@ export default (sequelize, DataTypes) => {
     reviewerId: {
       allowNull: false,
       type: DataTypes.INTEGER
-    },
+    }
   });
   Review.associate = (models) => {
     Review.belongsTo(models.Business, {
       foreignKey: 'businessId',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     });
   };
   return Review;

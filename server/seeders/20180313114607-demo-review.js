@@ -10,14 +10,6 @@ module.exports = {
         reviewerId: 500,
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          id: 507,
-          businessId: 502,
-         description: 'JohnDoe dggwgwgwfgww',
-        reviewerId: 500,
-          createdAt: new Date(),
-          updatedAt: new Date()
         }
       ], {}
     ),
