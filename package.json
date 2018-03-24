@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
     "test": "nyc --reporter=lcov  --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
-    "testi": "mocha --timeout 500000 --compilers js:babel-register  ./server/test/businessModel",
+    "testi": "mocha --timeout 500000 --compilers js:babel-register  ./server/test/allModel",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
     "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info"
   },
