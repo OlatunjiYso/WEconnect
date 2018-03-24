@@ -27,19 +27,27 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      category: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       email: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      website: {
+      location: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      phone1: {
+      address: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      phone2: {
+      phone: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      whatsapp: {
         allowNull: true,
         type: Sequelize.STRING
       },
@@ -47,24 +55,12 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
-      tweeter: {
+      twitter: {
         allowNull: true,
         type: Sequelize.STRING
       },
-      image1: {
+      image: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      image2: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      image3: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      image4: {
-        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
