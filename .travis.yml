@@ -1,11 +1,24 @@
 language: node_js
 node_js:
-    - "6.11.0" 
+  - "6.11.0" 
+
+branches:
+  only:
+    - heroku-production
+    - heroku-deploy
+    - master
 env:
   CODECLIMATE_REPO_TOKEN: 11a896d0e9347e467013fa105f49273ab8da79840a60a363143e8da1ad91980e
 
+services:
+  - postgresql
+
 before_script:
   - npm install
+  - psql -c 'create database travisDb;' -U postgres
+  - npm install sequelize-cli -g
+  - npm run travis-migrate
+
 cache:
   directories:
     - "node_modules" 
