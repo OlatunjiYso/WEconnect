@@ -15,7 +15,7 @@ services:
 
 before_script:
   - npm install
-  - npm install pgsql -g
+  - npm install psql -g
   - psql -c 'create database travisDb;' -U postgres
   - npm install sequelize-cli -g
   - npm run travis-migrate
