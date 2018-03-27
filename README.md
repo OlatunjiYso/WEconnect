@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/OlatunjiYso/WEconnect.svg?branch=api-dummy-data)](https://travis-ci.org/OlatunjiYso/WEconnect)
-[![Coverage Status](https://coveralls.io/repos/github/OlatunjiYso/WEconnect/badge.svg?branch=api-dummy-data)](https://coveralls.io/github/OlatunjiYso/WEconnect?branch=api-dummy-data)
-[![Code Climate](https://codeclimate.com/github/OlatunjiYso/WEconnect/badges/gpa.svg)](https://codeclimate.com/github/OlatunjiYso/WEconnect)
+[![Coverage Status](https://coveralls.io/repos/github/OlatunjiYso/WEconnect/badge.svg?branch=heroku-production)](https://coveralls.io/github/OlatunjiYso/WEconnect?branch=heroku-production)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fcda4d1c366919745e67/maintainability)](https://codeclimate.com/github/OlatunjiYso/WEconnect/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/fcda4d1c366919745e67/test_coverage)](https://codeclimate.com/github/OlatunjiYso/WEconnect/test_coverage)
 
 # WEconnect
 WEconnect is a business enterprise application that connects clients to businesses.
