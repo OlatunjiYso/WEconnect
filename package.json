@@ -11,7 +11,7 @@
     "travis-migrate": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test",
     "start": "node distServer/app.js",
     "start:dev": "nodemon server/app.js --exec babel-node --presets es2015,stage-2",
-    "test": "set NODE_ENV=test nyc --reporter=lcov  --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
+    "test": "nyc --reporter=lcov  --reporter=text  mocha --timeout 500000 --compilers js:babel-register --recursive ./server/test/",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
     "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info"
   },
