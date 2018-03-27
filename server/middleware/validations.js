@@ -260,6 +260,31 @@ class Validations {
         }
         return next();
     }
+
+    /**
+   * @description Ensures a valid comment is added
+   *
+   * @param {object} req - api request
+   * @param {object} res - api response
+   * @param {function} next - calls on the next handler
+   *
+   * @return {undefined} api response
+   */
+    static validatePasswordUpdate(req, res, next) {
+        req.checkBody('currentPassword', 'Please input your current password')
+            .trim()
+            .notEmpty();
+        req.checkBody('newPassword', 'Please input your new password')
+            .trim()
+            .notEmpty();
+        req.checkBody('newPassword', 'password must be a min length of 5').isLength({ min: 5 });
+        const errors = req.validationErrors();
+        if (errors) {
+            return res.status(400)
+                .send({ errors: errors[0].msg });
+        }
+        return next();
+    }
 }
 
 export default Validations;

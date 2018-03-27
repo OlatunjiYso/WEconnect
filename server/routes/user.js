@@ -26,4 +26,11 @@ userHandler.get(
     userController.getMyBusinesses
 );
 
+userHandler.post(
+    '/passwords',
+    authenticate,
+    validator.validatePasswordUpdate,
+    userController.changePassword
+);
+
 export default userHandler;
