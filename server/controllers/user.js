@@ -76,7 +76,7 @@ class UserController {
                                     message: 'invalid password'
                                 });
                         } else {
-                            const password = bcrypt.hashSync(req.body.newpassword, 10);
+                            const password = bcrypt.hashSync(req.body.newPassword, 10);
                             User
                                 .findOne({
                                     where: {

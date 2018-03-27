@@ -29,6 +29,7 @@ userHandler.get(
 userHandler.post(
     '/passwords',
     authenticate,
+    validator.validatePasswordUpdate,
     userController.changePassword
 );
 
