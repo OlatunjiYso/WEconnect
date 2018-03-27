@@ -13,12 +13,9 @@ development: {
     dialect: 'postgres'
   },
   test: {
-    username: 'postgres',
-    password: '',
-    database: 'travisDb',
-    host: '127.0.0.1',
-    port: 5432,
-    dialect: 'postgres'
+    use_env_variable: 'PROD_DATABASE',
+    dialect: 'postgres',
+    logging: false
   },
   production: {
     use_env_variable: 'DATABASE_URL',
