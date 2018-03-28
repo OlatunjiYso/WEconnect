@@ -160,6 +160,36 @@ class Validations {
     }
 
     /**
+     * Checks if business email already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkBusinessEmailExistence(req, res, next) {
+        Business
+            .findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((business) => {
+                if (business) {
+                    return res.status(400)
+                        .send({
+                            message: 'This business email exist already'
+                        });
+                }
+                return next();
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+    }
+
+
+    /**
      * Checks if Business exists.
      * @param {Object} req - request body
      * @param {Object} res - response body
@@ -190,6 +220,35 @@ class Validations {
     }
 
     /**
+     * Checks if Business name already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkBusinessNameExistence(req, res, next) {
+        Business
+            .findOne({
+                where: {
+                    title: req.body.title
+                }
+            })
+            .then((business) => {
+                if (business) {
+                    return res.status(400)
+                        .send({
+                            message: 'This business name exists already'
+                        });
+                }
+                return next();
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+    }
+
+    /**
       * @description Ensures a valid business update is done
       *
       * @param {object} req - api request
@@ -199,6 +258,50 @@ class Validations {
       * @return {undefined} api response
       */
     static validatebusinessUpdate(req, res, next) {
+        if (req.body.title) {
+            Business
+            .findOne({
+                where: {
+                    title: req.body.title
+                }
+            })
+            .then((business) => {
+                if (business) {
+                    if (req.user.id !== business.ownerId) {
+                        return res.status(400)
+                        .send({
+                            message: 'This business name is in use'
+                        });
+                    }
+                }
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+        }
+        if (req.body.email) {
+            Business
+            .findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((business) => {
+                if (business) {
+                    if (req.user.id !== business.ownerId) {
+                        return res.status(400)
+                        .send({
+                            message: 'This business email is in use'
+                        });
+                    }
+                }
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+        }
         if (req.body.title) {
             req.checkBody('title', 'Title cannot be blank')
                 .trim().notEmpty();
@@ -241,7 +344,7 @@ class Validations {
     }
 
     /**
-      * @description Ensures a valid comment is added
+      * @description Ensures a valid review is added
       *
       * @param {object} req - api request
       * @param {object} res - api response
@@ -262,7 +365,7 @@ class Validations {
     }
 
     /**
-   * @description Ensures a valid comment is added
+   * @description Ensures a valid password is added
    *
    * @param {object} req - api request
    * @param {object} res - api response

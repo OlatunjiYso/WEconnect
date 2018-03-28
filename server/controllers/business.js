@@ -49,7 +49,8 @@ class businessController {
       .catch((err) => {
         res.status(400)
           .send({
-            message: err.message
+            message: err.message,
+            messaging: err
           });
       });
   }

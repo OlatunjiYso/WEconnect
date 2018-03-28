@@ -25,6 +25,8 @@ businessHandler.post(
     '/',
     authenticate,
     validator.validatebusinessRegistration,
+    validator.checkBusinessNameExistence,
+    validator.checkBusinessEmailExistence,
     businessController.createBusiness
 );
 

@@ -73,7 +73,7 @@ class UserController {
                         if (!validPassword) {
                             res.status(401)
                                 .send({
-                                    message: 'invalid password'
+                                    message: 'Please enter the correct current password to proceed'
                                 });
                         } else {
                             const password = bcrypt.hashSync(req.body.newPassword, 10);
