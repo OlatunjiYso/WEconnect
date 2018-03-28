@@ -54,10 +54,111 @@ class reviewController {
         }
       })
       .then((review) => {
-        res.status(200)
+        if (review) {
+          return res.status(200)
+            .send({
+              review
+            });
+        }
+        return res.status(404)
           .send({
-            review
+            message: 'no such review found'
           });
+      })
+      .catch(err => res.status(400)
+          .send({
+            message: err.message
+          }));
+  }
+
+  /**
+ *@description -updates a specified business review
+ *
+ * @param {Object} req -the api request
+ * @param {Object} res -the api response
+ *
+ * @return {json} -message key
+ */
+  static updateReview(req, res) {
+    Review
+      .findOne({
+        where: {
+          id: req.params.reviewId
+        }
+      })
+      .then((review) => {
+        if (review) {
+          if (review.reviewerId !== req.user.id) {
+            return res.status(401)
+              .send({
+                message: 'You cannot update others review'
+              });
+          }
+          review
+            .update({
+              description: req.body.description || review.description
+            }).then(() => res.status(200)
+                .send({
+                  message: 'review successfully modified',
+                }))
+            .catch(err => res.status(400)
+                .send({
+                  message: err.message
+                }));
+        } else {
+          res.status(404)
+          .send({
+            message: 'no such review found'
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.message
+          });
+      });
+  }
+
+  /**
+ *@description -deletes a specified business review
+ *
+ * @param {Object} req -the api request
+ * @param {Object} res -the api response
+ *
+ * @return {json} -message key
+ */
+  static deleteReview(req, res) {
+    Review
+      .findOne({
+        where: {
+          id: req.params.reviewId
+        }
+      })
+      .then((review) => {
+        if (review) {
+          if (review.reviewerId !== req.user.id) {
+            return res.status(401)
+              .send({
+                message: 'You are cannot delete others review'
+              });
+          }
+          review
+            .destroy()
+            .then(() => res.status(200)
+                .send({
+                  message: 'review successfully deleted'
+                }))
+            .catch(err => res.status(400)
+                .send({
+                  message: err.message
+                }));
+        } else {
+          return res.status(404)
+          .send({
+            message: 'no such review found'
+          });
+        }
       })
       .catch((err) => {
         res.status(400)

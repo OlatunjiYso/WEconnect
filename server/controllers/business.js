@@ -187,7 +187,7 @@ class businessController {
       .catch((err) => {
         res.status(400)
           .send({
-            message: err.errors ? err.errors : err.message
+            message: err.message
           });
       });
   }

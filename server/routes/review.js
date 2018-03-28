@@ -11,13 +11,28 @@ reviewHandler.post(
     authenticate,
     validator.checkBusinessExistence,
     validator.validatebusinessReview,
-     reviewController.createReview
-    );
+    reviewController.createReview
+);
+
+reviewHandler.put(
+    '/:businessId/reviews/:reviewId',
+    authenticate,
+    validator.checkBusinessExistence,
+    validator.validateBusinessReviewUpdate,
+    reviewController.updateReview
+);
+
+reviewHandler.delete(
+    '/:businessId/reviews/:reviewId',
+    authenticate,
+    validator.checkBusinessExistence,
+    reviewController.deleteReview
+);
 
 reviewHandler.get(
     '/:businessId/reviews',
     validator.checkBusinessExistence,
-     reviewController.getReview
-    );
+    reviewController.getReview
+);
 
 export default reviewHandler;
