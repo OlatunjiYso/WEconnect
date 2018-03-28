@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
     ownerId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      unique: true
+      unique: false
     },
     title: {
       allowNull: false,
@@ -37,7 +37,7 @@ export default (sequelize, DataTypes) => {
     location: {
       allowNull: true,
       type: DataTypes.STRING,
-      unique: true
+      unique: false
     },
     address: {
       allowNull: false,
@@ -46,22 +46,18 @@ export default (sequelize, DataTypes) => {
     phone: {
       allowNull: false,
       type: DataTypes.STRING,
-      unique: true
     },
     whatsapp: {
       allowNull: true,
       type: DataTypes.STRING,
-      unique: true
     },
     facebook: {
       allowNull: true,
       type: DataTypes.STRING,
-      unique: true
     },
     twitter: {
       allowNull: true,
       type: DataTypes.STRING,
-      unique: true
     },
     image: {
       allowNull: true,
