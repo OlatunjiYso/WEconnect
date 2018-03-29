@@ -7,7 +7,8 @@
 WEconnect is a business enterprise application that connects clients to businesses.
 
 ###### Application Features
-WeConnet offers so much to the enterprenuers, business owners customers and potential client. WEconnect makes the task of getting clients paired to business so seamless
+WeConnet offers so much to the enterprenuers, business owners customers and potential client. WEconnect makes the task of getting clients paired to businesses so seamless. On WEconnect, users can:
+
 - Create a Business
 - Update their own business
 - Post a review about a business
@@ -72,9 +73,9 @@ To View online hosted templates, copy and paste the following link in your brows
 * [Delete Business] - DELETE https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId
 * [Fetch All Businesses] - GET https://weconnect-main.herokuapp.com/api/v1/businesses
 * [Post Business Review] - POST https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
-* [Get Business Reviews] - GET  http://localhost:3000/api/v1/businesses/:businessId/reviews
-* [Update Business Reviews] - PUT  http://localhost:3000/api/v1/businesses/:businessId/reviews
-* [Delete Business Reviews] -DELETE  http://localhost:3000/api/v1/businesses/:businessId/reviews
+* [Get Business Reviews] - GET  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
+* [Update Business Reviews] - PUT  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
+* [Delete Business Reviews] -DELETE  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
 * [Fetch Businesses by Location] - POST https://weconnect-main.herokuapp.com/api/v1/businesses?location
 * [Fetch Businesses by Category] - POST https://weconnect-main.herokuapp.com/api/v1/businesses?category
 
