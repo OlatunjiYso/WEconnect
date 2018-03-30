@@ -167,42 +167,50 @@ class UserController {
             });
     }
 
-    /**
-  * @description -gets all user's businesses
-  *
-  * @param {Object} req -the api request
-  * @param {Object} res -the api response
-  *
-  * @return {json} message key
-  */
-    static getMyBusinesses(req, res) {
-        Business
-            .findAll({
-                where: { ownerId: req.user.id },
-                include: [{
-                    model: Review
-                }]
-            })
-            .then((businesses) => {
-                if (businesses) {
-                    return res.status(200)
-                        .send({
-                            message: 'all Your businesses',
-                            businesses
-                        });
-                }
-                return res.status(200)
-                    .send({
-                        message: 'no businesses yet'
-                    });
-            })
-            .catch((err) => {
-                res.status(400)
-                    .send({
-                        message: err.message
-                    });
+   /**
+    * @description -gets all user's businesses
+    *
+    * @param {Object} req -the api request
+    * @param {Object} res -the api response
+    *
+    * @return {json} message key
+    */
+   static getMyBusinesses(req, res) {
+    Business
+      .findAll({
+        where: { ownerId: req.user.id },
+        include: [{
+          model: Review
+        }]
+      })
+      .then((businesses) => {
+        if (businesses) {
+          if (businesses.length > 0) {
+            return res.status(200)
+              .send({
+                success: true,
+                message: 'all your businesses',
+                businesses
+              });
+          }
+          return res.status(200)
+            .send({
+              success: true,
+              message: 'You have no business registered yet',
             });
-    }
+        }
+        return res.status(200)
+          .send({
+            message: 'no businesses yet'
+          });
+      })
+      .catch((err) => {
+        res.status(400)
+          .send({
+            message: err.message
+          });
+      });
+  }
 }
 
 export default UserController;
