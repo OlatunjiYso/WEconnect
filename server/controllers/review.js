@@ -48,7 +48,7 @@ class reviewController {
    */
   static getReview(req, res) {
     Review
-      .findOne({
+      .findAll({
         where: {
           businessId: req.params.businessId
         }
