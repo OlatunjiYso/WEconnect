@@ -18,7 +18,7 @@ export default function confirmOwnership(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         req.user = decoded;
     });
-        // find the actuall owner
+        // find the actual owner
         Business
             .findOne({
                 where: {
@@ -29,13 +29,14 @@ export default function confirmOwnership(req, res, next) {
                 if (!business) {
                    return res.status(400)
                         .send({
+                            success: false,
                             message: 'no such business exists'
                         });
                 }
                 if (req.user.id !== business.ownerId) {
-                    return res.status(401)
+                    return res.status(403)
                         .send({
-                            message: 'You are not authorized to perform such action on this business'
+                            message: 'You are not authorized to edit or delete this business'
                         });
                 }
                 return next();

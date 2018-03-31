@@ -89,7 +89,7 @@ class reviewController {
       .then((review) => {
         if (review) {
           if (review.reviewerId !== req.user.id) {
-            return res.status(401)
+            return res.status(403)
               .send({
                 message: 'You cannot update others review'
               });
@@ -138,7 +138,7 @@ class reviewController {
       .then((review) => {
         if (review) {
           if (review.reviewerId !== req.user.id) {
-            return res.status(401)
+            return res.status(403)
               .send({
                 message: 'You are cannot delete others review'
               });
