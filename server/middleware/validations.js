@@ -30,8 +30,9 @@ class Validations {
         req.checkBody('email', 'Invalid email').isEmail();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -50,8 +51,9 @@ class Validations {
         req.checkBody('password', 'Please input password').trim().notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -133,8 +135,9 @@ class Validations {
         req.checkBody('newPassword', 'password must be a min length of 5').isLength({ min: 5 });
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -178,8 +181,9 @@ class Validations {
             .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -362,8 +366,9 @@ class Validations {
         }
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -383,8 +388,9 @@ class Validations {
             .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -406,8 +412,9 @@ class Validations {
         }
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
