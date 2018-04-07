@@ -10,12 +10,6 @@ const businessHandler = express.Router();
 businessHandler.get('/', businessController.getAllBusinesses);
 
 businessHandler.get(
-    '/mybusinesses',
-    authenticate,
-    businessController.getBusiness
-);
-
-businessHandler.get(
     '/:businessId',
     validator.checkBusinessExistence,
     businessController.getBusiness
@@ -34,7 +28,9 @@ businessHandler.put(
     '/:businessId',
     authenticate,
     confirmOwnership,
-    validator.validatebusinessUpdate,
+    validator.checkBusinessNameExistence,
+    validator.checkBusinessEmailExistence,
+    validator.validateBusinessUpdate,
     businessController.modifyBusiness
 );
 

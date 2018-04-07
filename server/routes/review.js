@@ -10,7 +10,7 @@ reviewHandler.post(
     '/:businessId/reviews',
     authenticate,
     validator.checkBusinessExistence,
-    validator.validatebusinessReview,
+    validator.validateBusinessReview,
     reviewController.createReview
 );
 

@@ -25,21 +25,22 @@ class reviewController {
       })
       .then((review) => {
         res.status(201)
-          .send({
+          .json({
+            success: true,
             message: 'review successfully created',
             review
           });
       })
       .catch((err) => {
-        res.status(400)
-          .send({
-            message: err.message
+        res.status(500)
+          .json({
+            error: err.message
           });
       });
   }
 
   /**
-   *@description -gets a specified business review
+   *@description -gets all reviews for a specified business
    *
    * @param {Object} req -the api request
    * @param {Object} res -the api response
@@ -53,31 +54,34 @@ class reviewController {
           businessId: req.params.businessId
         }
       })
-      .then((review) => {
-        if (review) {
+      .then((reviews) => {
+        if (reviews.length > 0) {
           return res.status(200)
-            .send({
-              review
+            .json({
+              success: true,
+              message: 'business reviews',
+              reviews
             });
         }
         return res.status(404)
-          .send({
-            message: 'no such review found'
+          .json({
+            success: true,
+              message: 'no business reviews yet',
           });
       })
-      .catch(err => res.status(400)
-          .send({
-            message: err.message
+      .catch(err => res.status(500)
+          .json({
+           error: err.message
           }));
   }
 
-  /**
- *@description -updates a specified business review
+/**
+ *@description -updates a specific business review
  *
  * @param {Object} req -the api request
  * @param {Object} res -the api response
  *
- * @return {json} -message key
+ * @return {json} -message
  */
   static updateReview(req, res) {
     Review
@@ -90,37 +94,38 @@ class reviewController {
         if (review) {
           if (review.reviewerId !== req.user.id) {
             return res.status(403)
-              .send({
+              .json({
                 message: 'You cannot update others review'
               });
           }
           review
             .update({
               description: req.body.description || review.description
-            }).then(() => res.status(200)
-                .send({
+            })
+            .then(() => res.status(200)
+                .json({
                   message: 'review successfully modified',
                 }))
-            .catch(err => res.status(400)
-                .send({
-                  message: err.message
+            .catch(err => res.status(500)
+                .json({
+                  error: err.message
                 }));
         } else {
           res.status(404)
-          .send({
+          .json({
             message: 'no such review found'
           });
         }
       })
       .catch((err) => {
-        res.status(400)
-          .send({
-            message: err.message
+        res.status(500)
+          .json({
+            error: err.message
           });
       });
   }
 
-  /**
+/**
  *@description -deletes a specified business review
  *
  * @param {Object} req -the api request
@@ -139,31 +144,33 @@ class reviewController {
         if (review) {
           if (review.reviewerId !== req.user.id) {
             return res.status(403)
-              .send({
-                message: 'You are cannot delete others review'
+              .json({
+                message: 'You cannot delete others review'
               });
           }
           review
             .destroy()
             .then(() => res.status(200)
-                .send({
+                .json({
+                  success: true,
                   message: 'review successfully deleted'
                 }))
-            .catch(err => res.status(400)
-                .send({
-                  message: err.message
+            .catch(err => res.status(500)
+                .json({
+                  error: err.message
                 }));
         } else {
           return res.status(404)
-          .send({
+          .json({
+            success: false,
             message: 'no such review found'
           });
         }
       })
       .catch((err) => {
-        res.status(400)
-          .send({
-            message: err.message
+        res.status(500)
+          .json({
+            error: err.message
           });
       });
   }

@@ -74,7 +74,7 @@ class Validations {
             })
             .then((user) => {
                 if (user) {
-                    return res.status(400)
+                    return res.status(409)
                         .send({
                             message: 'This email exist already'
                         });
@@ -103,7 +103,7 @@ class Validations {
             })
             .then((user) => {
                 if (user) {
-                    return res.status(400)
+                    return res.status(409)
                         .send({
                             message: 'This username exist already'
                         });
@@ -204,16 +204,26 @@ class Validations {
             })
             .then((business) => {
                 if (business) {
-                    return res.status(400)
-                        .send({
+                    if (!req.params.businessId) {
+                        return res.status(409)
+                        .json({
+                            success: false,
                             message: 'This business email exist already'
                         });
+                    }
+                        if (business.id !== parseInt(req.params.businessId, 10)) {
+                            return res.status(409)
+                                .json({
+                                    success: false,
+                                    message: 'This business email is in use'
+                                });
+                        }
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                .send({
-                    message: err.message
+                .json({
+                    error: err.message
                 }));
     }
 
@@ -235,16 +245,17 @@ class Validations {
             })
             .then((business) => {
                 if (!business) {
-                    return res.status(400)
-                        .send({
+                    return res.status(404)
+                        .json({
+                            success: false,
                             message: 'No such business exists'
                         });
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                .send({
-                    message: err.message
+                .json({
+                    error: err.message
                 }));
     }
 
@@ -264,16 +275,26 @@ class Validations {
             })
             .then((business) => {
                 if (business) {
-                    return res.status(400)
-                        .send({
-                            message: 'This business name exists already'
-                        });
+                    if (!req.params.businessId) {
+                        return res.status(409)
+                            .json({
+                                success: false,
+                                message: 'This business name is already in use'
+                            });
+                    }
+                    if (business.id !== parseInt(req.params.businessId, 10)) {
+                        return res.status(409)
+                            .json({
+                                success: false,
+                                message: 'This business name is already in use'
+                            });
+                    }
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                .send({
-                    message: err.message
+                .json({
+                    error: err.message
                 }));
     }
 
@@ -286,54 +307,16 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static validatebusinessUpdate(req, res, next) {
-        if (req.body.title) {
-            Business
-                .findOne({
-                    where: {
-                        title: req.body.title
-                    }
-                })
-                .then((business) => {
-                    if (business) {
-                        if (req.user.id !== business.ownerId) {
-                            return res.status(400)
-                                .send({
-                                    message: 'This business name is in use'
-                                });
-                        }
-                    }
-                })
-                .catch(err => res.status(500)
-                    .send({
-                        message: err.message
-                    }));
-        }
-        if (req.body.email) {
-            Business
-                .findOne({
-                    where: {
-                        email: req.body.email
-                    }
-                })
-                .then((business) => {
-                    if (business) {
-                        if (req.user.id !== business.ownerId) {
-                            return res.status(400)
-                                .send({
-                                    message: 'This business email is in use'
-                                });
-                        }
-                    }
-                })
-                .catch(err => res.status(500)
-                    .send({
-                        message: err.message
-                    }));
-        }
+    static validateBusinessUpdate(req, res, next) {
         if (req.body.title) {
             req.checkBody('title', 'Title cannot be blank')
                 .trim().notEmpty();
+        }
+        if (req.body.email) {
+            req.checkBody('email', 'email is required')
+                .notEmpty();
+            req.checkBody('email', 'Invalid email')
+                .isEmail();
         }
         if (req.body.category) {
             req.checkBody('category', 'Category cannot be blank')
@@ -353,12 +336,6 @@ class Validations {
             req.checkBody('description', 'description must be a minimum of 20 characters')
                 .isLength({ min: 20 });
         }
-        if (req.body.email) {
-            req.checkBody('email', 'email is required')
-                .notEmpty();
-            req.checkBody('email', 'Invalid email')
-                .isEmail();
-        }
         if (req.body.phone) {
             req.checkBody('phone', 'Phone number cannot be blank')
                 .trim()
@@ -368,7 +345,7 @@ class Validations {
         if (errors) {
             const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errorList });
+                .json({ errors: errorList });
         }
         return next();
     }
@@ -382,7 +359,7 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static validatebusinessReview(req, res, next) {
+    static validateBusinessReview(req, res, next) {
         req.checkBody('description', 'Please input your review')
             .trim()
             .notEmpty();
@@ -390,13 +367,13 @@ class Validations {
         if (errors) {
             const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errorList });
+                .json({ errors: errorList });
         }
         return next();
     }
 
     /**
-      * @description Ensures a valid review is added as update
+      * @description Ensures a valid review update is done
       *
       * @param {object} req - api request
       * @param {object} res - api response
@@ -414,7 +391,7 @@ class Validations {
         if (errors) {
             const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errorList });
+                .json({ errors: errorList });
         }
         return next();
     }

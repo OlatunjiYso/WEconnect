@@ -20,7 +20,7 @@ class businessController {
      * @param {Object} req -the api request
      * @param {Object} res -the api response
      *
-     * @return {json} message key
+     * @return {json} message
      */
   static createBusiness(req, res) {
     Business
@@ -41,7 +41,7 @@ class businessController {
       })
       .then((business) => {
         res.status(201)
-          .send({
+          .json({
             success: true,
             message: 'business successfully created',
             business
@@ -51,7 +51,7 @@ class businessController {
         res.status(400)
           .send({
             success: false,
-            message: err.message,
+            error: err.message,
           });
       });
   }
@@ -62,7 +62,7 @@ class businessController {
    * @param {Object} req -the api request
    * @param {Object} res -the api response
    *
-   * @return {json} -message key
+   * @return {json} -message
    */
   static getBusiness(req, res) {
     Business
@@ -76,17 +76,17 @@ class businessController {
       })
       .then((business) => {
         res.status(200)
-          .send({
+          .json({
             success: true,
             message: 'business found',
             business
           });
       })
       .catch((err) => {
-        res.status(400)
-          .send({
+        res.status(500)
+          .json({
             success: false,
-            message: err.message
+            error: err.message
           });
       });
   }
@@ -97,7 +97,7 @@ class businessController {
    * @param {Object} req -the api request
    * @param {Object} res -the api response
    *
-   * @return {json} message key
+   * @return {json} message
    */
   static getAllBusinesses(req, res) {
     const filter = {};
@@ -116,35 +116,34 @@ class businessController {
       })
       .then((businesses) => {
         if (businesses) {
+          const theLocation = (req.query.location) ? `in ${req.query.location}` : '';
+          const theCategory = (req.query.category) ? req.query.category : '';
           if (businesses.length > 0) {
             return res.status(200)
-              .send({
+              .json({
                 success: true,
-                message: 'all businesses',
+                message: `${theCategory} businesses ${theLocation}`,
                 businesses
               });
           }
           return res.status(200)
-            .send({
+            .json({
               success: true,
-              message: 'no business yet',
+              message: `no ${theCategory} business ${theLocation} yet`,
             });
         }
-        return res.status(200)
-          .send({
-            message: 'no businesses yet'
-          });
       })
       .catch((err) => {
         res.status(400)
-          .send({
+          .json({
+            success: false,
             message: err.message
           });
       });
   }
 
   /**
-   * @description -modifies a specified businesses
+   * @description -modifies a specified business
    *
    * @param {Object} req -the api request
    * @param {Object} res -the api response
@@ -160,6 +159,10 @@ class businessController {
       })
       .then((business) => {
         if (business) {
+          const initialBusiness = {};
+          Object.assign(initialBusiness, business);
+          const initialParameters = Object.keys(initialBusiness.dataValues)
+            .map(key => initialBusiness.dataValues[key]);
           business
             .update({
               title: req.body.title || business.title,
@@ -172,34 +175,52 @@ class businessController {
               website: req.body.website || business.website,
               whatsapp: req.body.whatsapp || business.whatsapp,
               facebook: req.body.facebook || business.facebook,
-              tweeter: req.body.twitter || business.twitter,
+              twitter: req.body.twitter || business.twitter,
               image: req.body.image || business.image,
             })
             .then((updated) => {
-              res.status(200)
-                .send({
+              const updatedParameters = Object.keys(updated.dataValues)
+                .map(key => updated.dataValues[key]);
+              let changes = 0;
+              let i = 0;
+              updatedParameters.forEach(() => {
+                if (updatedParameters[i] !== initialParameters[i]) {
+                  changes += 1;
+                }
+                i += 1;
+              });
+              if (changes === 0) {
+                return res.status(200)
+                  .json({
+                    success: true,
+                    message: 'No changes, business details remains intact',
+                    'your business': updated,
+                  });
+              }
+              return res.status(200)
+                .json({
                   success: true,
-                  message: 'business modified',
+                  message: `business modified successfully, ${changes - 1} field(s) modified!`,
                   updated
                 });
             })
             .catch((err) => {
-              res.status(400)
-                .send({
-                  message: err.message
+              res.status(500)
+                .json({
+                  error: err.message
                 });
             });
         } else {
           res.status(404)
-            .send({
+            .json({
               message: 'no such business with specified id'
             });
         }
       })
       .catch((err) => {
         res.status(400)
-          .send({
-            message: err.message
+          .json({
+            error: err.message
           });
       });
   }
@@ -225,28 +246,28 @@ class businessController {
             .destroy()
             .then(() => {
               res.status(200)
-                .send({
+                .json({
                   success: true,
                   message: 'business deleted'
                 });
             })
             .catch((err) => {
-              res.status(400)
-                .send({
+              res.status(500)
+                .json({
                   success: false,
                   message: err.message
                 });
             });
         } else {
           res.status(404)
-            .send({
+            .json({
               message: 'no such business with specified id'
             });
         }
       })
       .catch((err) => {
-        res.status(400)
-          .send({
+        res.status(500)
+          .json({
             message: err.message
           });
       });
