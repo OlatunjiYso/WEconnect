@@ -13,7 +13,7 @@ export default function authenticate(req, res, next) {
     const token = req.body.token || req.headers.token;
     if (!token) {
         return res.status(401)
-            .send({
+            .json({
                 message: 'no token!'
             });
     }
@@ -21,12 +21,11 @@ export default function authenticate(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
             return res.status(401)
-                .send({
+                .json({
                     message: 'token Invalid'
                 });
         }
         req.user = decoded;
-        console.log(req.user);
         return next();
     });
 }

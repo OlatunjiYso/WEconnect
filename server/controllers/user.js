@@ -30,36 +30,32 @@ class UserController {
                 username: req.body.username,
                 password,
                 email: req.body.email,
-                role: 'user',
                 phone: req.body.phone
             })
             .then((user) => {
-                const anonymousUser = user;
-                anonymousUser.password = 'Your Password';
-
                 res.status(201)
-                    .send({
+                    .json({
                         message: 'You are signed up!',
                         username: user.username,
                         email: user.email
                     });
             })
             .catch((err) => {
-                res.status(400)
-                    .send({
-                        message: err.message
+                res.status(500)
+                    .json({
+                        error: err.message
                     });
             });
     }
 
     /**
-         * @description -changes the password of a user.
-         *
-         * @param {Object} req -the api request
-         * @param {Object} res -the api response
-         *
-         * @return {json} message
-         */
+      * @description -changes the password of a user.
+      *
+      * @param {Object} req -the api request
+      * @param {Object} res -the api response
+      *
+      * @return {json} message
+      */
     static changePassword(req, res) {
         User
             .findOne({
@@ -72,53 +68,45 @@ class UserController {
                     .then((validPassword) => {
                         if (!validPassword) {
                             res.status(401)
-                                .send({
-                                    message: 'invalid password'
+                                .json({
+                                    message: 'Please enter the correct current password to proceed'
                                 });
                         } else {
+                            if (req.body.currentPassword === req.body.newPassword) {
+                                return res.json({
+                                    message: 'Your password remains unchanged'
+                                });
+                            }
                             const password = bcrypt.hashSync(req.body.newPassword, 10);
-                            User
-                                .findOne({
-                                    where: {
-                                        id: req.user.id
-                                    }
-                                })
-                                .then((foundUser) => {
-                                    foundUser.update({
-                                        password
-                                    });
-                                })
+                            user.update({
+                                password
+                            })
                                 .then(() => {
                                     res.status(200)
-                                        .send({
-                                            message: 'You have successfully changed your password!',
-                                        });
-                                })
-                                .catch((err) => {
-                                    res.status(400)
-                                        .send({
-                                            message: err.message
+                                        .json({
+                                            success: true,
+                                            message: 'You have successfully changed your password',
                                         });
                                 });
                         }
                     })
                     .catch((err) => {
                         res.status(500)
-                            .send({
-                                message: err.message
+                            .json({
+                                error: err.message
                             });
                     });
             });
     }
 
-   /**
-     * @description -logs in a registered user
-     *
-     * @param {Object} req -the api request
-     * @param {Object} res -the api response
-     *
-     * @return {json} success message or error message
-     */
+    /**
+      * @description -logs in a registered user
+      *
+      * @param {Object} req -the api request
+      * @param {Object} res -the api response
+      *
+      * @return {json} message
+      */
     static login(req, res) {
         // Handle validations in middleware
         User
@@ -127,8 +115,9 @@ class UserController {
             })
             .then((user) => {
                 if (!user) {
-                    res.status(401)
-                        .send({
+                    res.status(404)
+                        .json({
+                            success: false,
                             message: 'No such user exists'
                         });
                 } else {
@@ -137,21 +126,21 @@ class UserController {
                         .then((validPassword) => {
                             if (!validPassword) {
                                 res.status(401)
-                                    .send({
+                                    .json({
+                                        success: false,
                                         message: 'invalid password'
                                     });
                             } else {
                                 // issue jsonwebtoken that lasts for 60 minutes
                                 const token = jwt.sign(
                                     {
-                                        id: user.id,
-                                        role: user.role
+                                        id: user.id
                                     },
                                     process.env.SECRET_KEY,
                                     { expiresIn: '60m' }
                                 );
                                 res.status(200)
-                                    .send({
+                                    .json({
                                         message: 'you are logged in!',
                                         token
                                     });
@@ -159,8 +148,8 @@ class UserController {
                         })
                         .catch((err) => {
                             res.status(500)
-                                .send({
-                                    message: err.message
+                                .json({
+                                    error: err.message
                                 });
                         });
                 }
@@ -168,13 +157,13 @@ class UserController {
     }
 
     /**
-  * @description -gets all user's businesses
-  *
-  * @param {Object} req -the api request
-  * @param {Object} res -the api response
-  *
-  * @return {json} message key
-  */
+     * @description -gets all user's businesses
+     *
+     * @param {Object} req -the api request
+     * @param {Object} res -the api response
+     *
+     * @return {json} message
+     */
     static getMyBusinesses(req, res) {
         Business
             .findAll({
@@ -185,21 +174,25 @@ class UserController {
             })
             .then((businesses) => {
                 if (businesses) {
+                    if (businesses.length > 0) {
+                        return res.status(200)
+                            .json({
+                                success: true,
+                                message: 'all your businesses',
+                                businesses
+                            });
+                    }
                     return res.status(200)
-                        .send({
-                            message: 'all Your businesses',
-                            businesses
+                        .json({
+                            success: true,
+                            message: 'You have no business registered yet',
                         });
                 }
-                return res.status(200)
-                    .send({
-                        message: 'no businesses yet'
-                    });
             })
             .catch((err) => {
-                res.status(400)
-                    .send({
-                        message: err.message
+                res.status(500)
+                    .json({
+                        error: err.message
                     });
             });
     }

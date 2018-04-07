@@ -5,16 +5,16 @@ const { User, Business } = db;
 /**
  * Validations class
  * This class handles the following validations
- * -- Ensures that empty spaces are trimmed off
- * -- Checks if required input field is empty.
- * -- Checks if username already exists.
- * -- Check if email already exists
+ * -- Ensures only valid user information is added
+ * -- Ensures signin parameters are valid
+ * -- Checks if username or email already exists.
  * -- Checks if a business exists
- * -- Checks if request parameters are integers
+ * -- Checks if business name and email exists
+ * -- Ensures a valid review is added
  */
 class Validations {
     /**
-      * @description Ensures a valid user is added
+      * @description Ensures a valid user information is added
       *
       * @param {object} req - api request
       * @param {object} res - api response
@@ -30,8 +30,9 @@ class Validations {
         req.checkBody('email', 'Invalid email').isEmail();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -50,8 +51,93 @@ class Validations {
         req.checkBody('password', 'Please input password').trim().notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
+        }
+        return next();
+    }
+
+    /**
+     * Checks if email user already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkEmailExistence(req, res, next) {
+        User
+            .findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    return res.status(409)
+                        .send({
+                            message: 'This email exist already'
+                        });
+                }
+                return next();
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+    }
+
+    /**
+     * Checks if username already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkUsernameExistence(req, res, next) {
+        User
+            .findOne({
+                where: {
+                    username: req.body.username
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    return res.status(409)
+                        .send({
+                            message: 'This username exist already'
+                        });
+                }
+                return next();
+            })
+            .catch(err => res.status(500)
+                .send({
+                    message: err.message
+                }));
+    }
+
+    /**
+ * @description Ensures a valid password is added
+ *
+ * @param {object} req - api request
+ * @param {object} res - api response
+ * @param {function} next - calls on the next handler
+ *
+ * @return {undefined} api response
+ */
+    static validatePasswordUpdate(req, res, next) {
+        req.checkBody('currentPassword', 'Please input your current password')
+            .trim()
+            .notEmpty();
+        req.checkBody('newPassword', 'Please input your new password')
+            .trim()
+            .notEmpty();
+        req.checkBody('newPassword', 'password must be a min length of 5').isLength({ min: 5 });
+        const errors = req.validationErrors();
+        if (errors) {
+            const errorList = errors.map(error => error.msg);
+            return res.status(400)
+                .send({ errors: errorList });
         }
         return next();
     }
@@ -95,69 +181,52 @@ class Validations {
             .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .send({ errors: errorList });
         }
         return next();
     }
 
     /**
-     * Checks if username already exists.
+     * Checks if business email already exists.
      * @param {Object} req - request body
      * @param {Object} res - response body
      * @param {Function} next - calls on the next handler
      * @return {undefined}
      */
-    static checkUsernameExistence(req, res, next) {
-        User
-            .findOne({
-                where: {
-                    username: req.body.username
-                }
-            })
-            .then((user) => {
-                if (user) {
-                    return res.status(400)
-                        .send({
-                            message: 'This username exist already'
-                        });
-                }
-                return next();
-            })
-            .catch(err => res.status(500)
-                .send({
-                    message: err.message
-                }));
-    }
-
-    /**
-     * Checks if email already exists.
-     * @param {Object} req - request body
-     * @param {Object} res - response body
-     * @param {Function} next - calls on the next handler
-     * @return {undefined}
-     */
-    static checkEmailExistence(req, res, next) {
-        User
+    static checkBusinessEmailExistence(req, res, next) {
+        Business
             .findOne({
                 where: {
                     email: req.body.email
                 }
             })
-            .then((user) => {
-                if (user) {
-                    return res.status(400)
-                        .send({
-                            message: 'This email exist already'
+            .then((business) => {
+                if (business) {
+                    if (!req.params.businessId) {
+                        return res.status(409)
+                        .json({
+                            success: false,
+                            message: 'This business email exist already'
                         });
+                    }
+                        if (business.id !== parseInt(req.params.businessId, 10)) {
+                            return res.status(409)
+                                .json({
+                                    success: false,
+                                    message: 'This business email is in use'
+                                });
+                        }
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                .send({
-                    message: err.message
+                .json({
+                    error: err.message
                 }));
     }
+
 
     /**
      * Checks if Business exists.
@@ -176,16 +245,56 @@ class Validations {
             })
             .then((business) => {
                 if (!business) {
-                    return res.status(400)
-                        .send({
+                    return res.status(404)
+                        .json({
+                            success: false,
                             message: 'No such business exists'
                         });
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                .send({
-                    message: err.message
+                .json({
+                    error: err.message
+                }));
+    }
+
+    /**
+     * Checks if Business name already exists.
+     * @param {Object} req - request body
+     * @param {Object} res - response body
+     * @param {Function} next - calls on the next handler
+     * @return {undefined}
+     */
+    static checkBusinessNameExistence(req, res, next) {
+        Business
+            .findOne({
+                where: {
+                    title: req.body.title
+                }
+            })
+            .then((business) => {
+                if (business) {
+                    if (!req.params.businessId) {
+                        return res.status(409)
+                            .json({
+                                success: false,
+                                message: 'This business name is already in use'
+                            });
+                    }
+                    if (business.id !== parseInt(req.params.businessId, 10)) {
+                        return res.status(409)
+                            .json({
+                                success: false,
+                                message: 'This business name is already in use'
+                            });
+                    }
+                }
+                return next();
+            })
+            .catch(err => res.status(500)
+                .json({
+                    error: err.message
                 }));
     }
 
@@ -198,10 +307,16 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static validatebusinessUpdate(req, res, next) {
+    static validateBusinessUpdate(req, res, next) {
         if (req.body.title) {
             req.checkBody('title', 'Title cannot be blank')
                 .trim().notEmpty();
+        }
+        if (req.body.email) {
+            req.checkBody('email', 'email is required')
+                .notEmpty();
+            req.checkBody('email', 'Invalid email')
+                .isEmail();
         }
         if (req.body.category) {
             req.checkBody('category', 'Category cannot be blank')
@@ -221,12 +336,6 @@ class Validations {
             req.checkBody('description', 'description must be a minimum of 20 characters')
                 .isLength({ min: 20 });
         }
-        if (req.body.email) {
-            req.checkBody('email', 'email is required')
-                .notEmpty();
-            req.checkBody('email', 'Invalid email')
-                .isEmail();
-        }
         if (req.body.phone) {
             req.checkBody('phone', 'Phone number cannot be blank')
                 .trim()
@@ -234,14 +343,15 @@ class Validations {
         }
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .json({ errors: errorList });
         }
         return next();
     }
 
     /**
-      * @description Ensures a valid comment is added
+      * @description Ensures a valid review is added
       *
       * @param {object} req - api request
       * @param {object} res - api response
@@ -249,39 +359,39 @@ class Validations {
       *
       * @return {undefined} api response
       */
-    static validatebusinessReview(req, res, next) {
+    static validateBusinessReview(req, res, next) {
         req.checkBody('description', 'Please input your review')
             .trim()
             .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .json({ errors: errorList });
         }
         return next();
     }
 
     /**
-   * @description Ensures a valid comment is added
-   *
-   * @param {object} req - api request
-   * @param {object} res - api response
-   * @param {function} next - calls on the next handler
-   *
-   * @return {undefined} api response
-   */
-    static validatePasswordUpdate(req, res, next) {
-        req.checkBody('currentPassword', 'Please input your current password')
-            .trim()
-            .notEmpty();
-        req.checkBody('newPassword', 'Please input your new password')
-            .trim()
-            .notEmpty();
-        req.checkBody('newPassword', 'password must be a min length of 5').isLength({ min: 5 });
+      * @description Ensures a valid review update is done
+      *
+      * @param {object} req - api request
+      * @param {object} res - api response
+      * @param {function} next - calls on the next handler
+      *
+      * @return {undefined} api response
+      */
+    static validateBusinessReviewUpdate(req, res, next) {
+        if (req.body.description) {
+            req.checkBody('description', 'Please input your review')
+                .trim()
+                .notEmpty();
+        }
         const errors = req.validationErrors();
         if (errors) {
+            const errorList = errors.map(error => error.msg);
             return res.status(400)
-                .send({ errors: errors[0].msg });
+                .json({ errors: errorList });
         }
         return next();
     }

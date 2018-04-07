@@ -1,0 +1,379 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: WEconnect API docs
+  description: A detailed OpenAPI Specification for weconnect. An Andela developer challenge. Weconnect is a business enterprise solution that bring clients and businesses together
+
+schemes:
+  - https
+  - http
+host: localhost:3000
+basePath: /api/v1
+
+paths:
+  /businesses:
+    get:
+      summary: Gets all businesses
+      description: Returns a list containing all businesses.The list supports listing by category and location.
+      parameters:
+       - name: location
+         in: query
+         description: location to find business
+         type: string
+       - name: category
+         in: query
+         description: Category of interest
+         type: string
+      responses:
+        200:
+          description: A list of businesses
+          schema:
+            $ref: "#/definitions/Businesses"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+    post:
+      summary: Creates a business
+      description: Adds a new business to the business list.
+      parameters:
+        - name: businessParameters
+          in: body
+          description: The business to create.
+          schema:
+            $ref: "#/definitions/Business"
+      responses:
+        201:
+          description: Businesss succesfully created.
+        400:
+          description: Businesss wasn't created.
+        401:
+          description: no token or expired token.
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+                  
+  /businesses/{businessId}:
+    parameters:
+        - $ref: "#/parameters/businessId"
+    get:
+      summary: Gets a specified business
+      description: Returns a single business for its business id
+      responses:
+        200:
+          description: A Business object
+          schema:
+             $ref: "#/definitions/Business"
+        404:
+          $ref: "#/responses/BusinessDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+    delete:
+      summary: Deletes a specified business
+      description: Delete a single business identified via its businessid
+      responses:
+        200:
+          description: Business successfully deleted.
+        401:
+          description: no token or expired token.
+        404:
+          $ref: "#/responses/BusinessDoesNotExistResponse"
+        403:
+          $ref: "#/responses/PriviledgeViolationResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+    put:
+      summary: Updates a specified business
+      description: Update a single business identified via its businessid
+      parameters:
+        - name: updateParameters
+          in: body
+          description: The fields to be updated.
+          schema:
+            $ref: "#/definitions/BusinessUpdate"
+      responses:
+        200:
+          description: Business successfully updated.
+        401:
+          description: no token or expired token.
+        404:
+          $ref: "#/responses/BusinessDoesNotExistResponse"
+        403:
+          $ref: "#/responses/PriviledgeViolationResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+          
+  /businesses/{businessId}/reviews:
+    parameters:
+        - $ref: "#/parameters/businessId"
+    get:
+      summary: Gets all the reviews for a business
+      description: Returns all the reviews for a business using the business id
+      responses:
+        200:
+          description: A Reviews array
+          schema:
+             $ref: "#/definitions/Reviews"
+        404:
+          $ref: "#/responses/BusinessDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+    post:
+      summary: Creates a review
+      description: Creates a new review for a particular business
+      parameters:
+        - name: reviewParameters
+          in: body
+          description: The review to create.
+          schema:
+            $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: Review successfully created
+        401:
+          description: no token or expired token.
+        400:
+          description: Review wasn't created
+        404:
+          $ref: "#/responses/BusinessDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+          
+  /businesses/{businessId}/reviews/{reviewId}:
+    parameters:
+        - $ref: "#/parameters/businessId"
+        - $ref: "#/parameters/reviewId"
+    get:
+      summary: Gets a particular review
+      description: Returns a paticular review using the business id and review id
+      responses:
+        200:
+          description: A Review object
+          schema:
+             $ref: "#/definitions/Review"
+        404:
+          $ref: "#/responses/ReviewDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+    put:
+      summary: Updates a particular review
+      description: Updates a paticular review using the business id and review id
+      responses:
+        200:
+          description: A Review object
+          schema:
+             $ref: "#/definitions/Review"
+        401:
+          description: no token or expired token.
+        403:
+          $ref: "#/responses/PriviledgeViolationResponse"
+        404:
+          $ref: "#/responses/ReviewDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+    delete:
+      summary: Deletes a particular review
+      description: Deletes a paticular review using the business id and review id
+      responses:
+        200:
+          description: Review successfully deleted
+        401:
+          description: no token or expired token.
+        403:
+          $ref: "#/responses/PriviledgeViolationResponse"  
+        404:
+          $ref: "#/responses/ReviewDoesNotExistResponse"
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+  /auth/signup:
+    post:
+      summary: Creates a new User
+      description: Adds a new user to the users list.
+      parameters:
+        - name: signupParameters
+          in: body
+          description: The user to be created.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        201:
+          description: You are signed up.
+        409:
+          description: Username or email already exist.
+        400:
+          description: Validation errors.
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+          
+  /auth/login:
+    post:
+      summary: Logs in User
+      description: Logs in a registered User and issues token.
+      parameters:
+        - name: loginParameters
+          in: body
+          description: The userinformation.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        200:
+          description: You are signed in.
+        400:
+          description: Bad request.
+        401:
+          description: Failed authentication.
+        500:
+          $ref: "#/responses/Standard500ErrorResponse"
+      
+
+          
+          
+definitions:
+  Business:
+    required:
+      - name
+      - email
+      - phone
+      - location
+      - address
+      - slogan
+      - category
+      - overview
+      
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      location:
+        type: string
+      address:
+        type: string
+      slogan:
+        type: string
+      category:
+        type: string
+      whatsapp:
+        type: string
+      twitter:
+        type: string
+      facebook:
+        type: string  
+      image: 
+        type: string
+        
+  BusinessUpdate:
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      location:
+        type: string
+      address:
+        type: string
+      slogan:
+        type: string
+      category:
+        type: string
+      whatsapp:
+        type: string
+      twitter:
+        type: string
+      facebook:
+        type: string  
+      image: 
+        type: string
+        
+  Businesses:
+    type: array
+    items:
+      $ref: "#/definitions/Business"
+        
+  Review:
+    required:
+      - review
+      
+    properties:
+      review:
+        type: string
+    
+  Reviews:
+    type: array
+    items:
+      $ref: "#/definitions/Review"
+      
+  User:
+    required:
+      - username
+      - email
+      - password
+      
+    properties:
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      image: 
+        type: string
+    
+      
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+        
+responses:
+  Standard500ErrorResponse:
+    description: An unexpected error occured.
+    schema:
+      $ref: "#/definitions/Error"
+  BusinessDoesNotExistResponse:
+    description: Business does not exist.
+    schema:
+      $ref: "#/definitions/Error"
+  ReviewDoesNotExistResponse:
+    description: Review does not exist.
+    schema:
+      $ref: "#/definitions/Error"
+  PriviledgeViolationResponse:
+    description: User not priviledged to update or delete.
+    schema:
+      $ref: "#/definitions/Error"
+      
+parameters:
+  businessId:
+    name: businessId
+    in: path
+    required: true
+    description: The business' id
+    type: integer
+  
+  reviewId:
+    name: reviewId
+    in: path
+    required: true
+    description: The review's id
+    type: integer
+
+   
+  

@@ -6,10 +6,17 @@ import dotenv from 'dotenv';
 
 import expressValidator from 'express-validator';
 
+import swaggerUi from 'swagger-ui-express';
+
+import YAML from 'yamljs';
+
+
 import businessHandler from './routes/business';
 import reviewHandler from './routes/review';
 import userHandler from './routes/user';
 import home from './routes/home';
+
+const swaggerDocument = YAML.load('./swagger.yaml');
 // Load config files
 dotenv.config();
 const app = express();
@@ -19,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/businesses/', reviewHandler);
 app.use('/api/v1/businesses/', businessHandler);
 app.use('/api/v1/auth/', userHandler);

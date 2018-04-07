@@ -25,10 +25,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    phone: {
-      type: DataTypes.STRING,
-      unique: true
-    },
   });
 
  User.associate = (models) => {

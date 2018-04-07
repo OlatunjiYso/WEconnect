@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-
 import db from '../models';
 
 const { Business } = db;
@@ -14,11 +12,7 @@ const { Business } = db;
  * @return {undefined}
  */
 export default function confirmOwnership(req, res, next) {
-    const token = req.body.token || req.headers.token;
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-        req.user = decoded;
-    });
-        // find the actuall owner
+     // find the actual owner
         Business
             .findOne({
                 where: {
@@ -27,21 +21,23 @@ export default function confirmOwnership(req, res, next) {
             })
             .then((business) => {
                 if (!business) {
-                   return res.status(400)
-                        .send({
+                   return res.status(404)
+                        .json({
+                            success: false,
                             message: 'no such business exists'
                         });
                 }
                 if (req.user.id !== business.ownerId) {
-                    return res.status(401)
-                        .send({
-                            message: 'You are not authorized to perform such action on this business'
+                    return res.status(403)
+                        .json({
+                            success: false,
+                            message: 'You are not authorized to edit or delete this business'
                         });
                 }
                 return next();
             })
             .catch(err => res.status(500)
-                    .send({
-                        messsage: err.message
+                    .json({
+                        error: err.message
                     }));
     }

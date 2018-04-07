@@ -31,7 +31,7 @@ describe('All test for Models', () => {
                     });
                     expect(business.title).to.equal('Just Suits');
                     expect(business.category).to.equal('fashion');
-                    expect(business.location).to.equal('Lagos');
+                    expect(business.location).to.equal('lagos');
                     done();
                 });
         });
@@ -49,7 +49,7 @@ describe('All test for Models', () => {
                     });
                     expect(business.title).to.equal('Just Suitss');
                     expect(business.category).to.equal('fashions');
-                    expect(business.location).to.equal('Lagoss');
+                    expect(business.location).to.equal('lagoss');
                     done();
                 });
         });
