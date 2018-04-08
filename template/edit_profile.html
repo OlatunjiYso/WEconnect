@@ -1,0 +1,229 @@
+<!-- Road Map Road Map Road Map
+     <Head>
+        __google fonts import
+        __materialize css linking
+        __my custom css linking
+    </Head>
+
+    <Body>
+        __NavBar
+        __First row    [WEconnect logo and message]
+        __Second row   [Business Registration form]
+        __third row     [footer]
+        __javascript
+    </Body
+   -->
+
+   <!DOCTYPE html>
+   <html>
+   
+   <head>
+       <!--Import Google Icon Font-->
+       <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <!--my own styles.css-->
+       <link type="text/css" rel="stylesheet" href="./public/CSS/styles.css" media="screen,projection" />
+       <!--Import materialize.css-->
+       <link type="text/css" rel="stylesheet" href="./public/materialize/css/materialize.min.css" media="screen,projection" />
+       <!--Let browser know website is optimized for mobiledeep-orange-text text-lighten-2-->
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
+   
+   <body>
+       <nav>
+           <div class="nav-wrapper blue-grey darken-4 text-lighten-3">
+               <a href="index.html" class=" Sofia brand-logo  logo pink-text text-lighten-4">WEconnect</a>
+               <a href="#" data-activates="mobile-demo" class="button-collapse">
+                   <i class="material-icons"> more </i>
+               </a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
+                   <li>
+                       <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                   </li>
+                   <li>
+                       <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                   </li>
+                   <li>
+                       <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                   </li>
+               </ul>
+               <ul class="side-nav" id="mobile-demo">
+                   <li>
+                       <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                   </li>
+                   <li>
+                       <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                   </li>
+                   <li>
+                       <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                   </li>
+               </ul>
+           </div>
+       </nav>
+   
+       <main>
+           <!-- first row contains WEconnect logo and message -->
+           <div class="row dashboard head-font ">
+               <div class="col s8 offset-s2 m3 l2 logo center-align">
+                   <img class="responsive-img left" src="./public/images/profession.jpg" />
+               </div>
+   
+               <div class="col s12 m9 l8  pink-text center-align">
+                   <h3>Update your Business and make it live! </h3>
+               </div>
+           </div>
+           <!-- second row contains Business Registration form -->
+           <div class="row head-font ">
+               <h4 class="center pink-text"> Business Update Form. </h4>
+               <div class="row">
+                   <h5 class="center">Kindly update your business details as appropriate</h5>
+                   <form class="col s10 offset-s1 m8 offset-m2 business-form">
+                       <div class="row">
+                           <div class="input-field col s12 top-gap">
+                               <input placeholder="Business name" id="title" type="text" class="validate" value="Leather Shoes">
+                               <label for="business_name">Business Name</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s6">
+                               <select>
+                                   <option value="" disabled selected>Choose business location</option>
+                                   <option value="lagos">Lagos</option>
+                                   <option value="abuja">Abuja</option>
+                                   <option value="ibadan">Ibadan</option>
+                                   <option value="calabar">Calabar</option>
+                                   <option value="ogun">Ogun</option>
+                               </select>
+                               <label>Location</label>
+                           </div>
+                           <div class="input-field col s6">
+                               <select>
+                                   <option value="" disabled selected>Choose business category</option>
+                                   <option value="fashion">Fashion</option>
+                                   <option value="technology">Medical</option>
+                                   <option value="food">Food</option>
+                                   <option value="education">Education</option>
+                                   <option value="entertainment">Entertainment</option>
+                               </select>
+                               <label>Category</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <input placeholder="What is your business slogan?" id="slogan" type="text" class="validate" value="Shoes shoes everyday">
+                               <label for="slogan">Slogan</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <textarea id="address" class="materialize-textarea" length="140"></textarea>
+                               <label for="address">Please provide your business address</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s6">
+                               <input placeholder="080-xxx-xxx-xxx" id="phone" type="text" class="validate">
+                               <label for="phone">Business phone</label>
+                           </div>
+                           <div class="input-field col s6">
+                               <input placeholder="business@myweb.com" id="business_email" type="text" class="validate">
+                               <label for="business_email">Business email</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s6">
+                               <input placeholder="whatsapp" id="whatsapp" type="text" class="validate">
+                               <label for="whatsapp">Business whatsapp number</label>
+                           </div>
+                           <div class="input-field col s6">
+                               <input placeholder="@businessHandle" id="twitter" type="text" class="validate">
+                               <label for="twitterl">Business twitter handle</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s6">
+                               <input placeholder="facebook" id="facebook" type="text" class="validate">
+                               <label for="facebook">Business facebook page</label>
+                           </div>
+                           <div class="input-field col s6">
+                               <input placeholder="linkedIn" id="linkedIn" type="text" class="validate">
+                               <label for="linkedIn">Business linkedIn</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <input placeholder="Provide your first section header. Your page will have three sections and this is the top section of your business page"
+                                   id="heading1" type="text" class="validate">
+                               <label for="heading1">Heading 1</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <textarea id="body1" class="materialize-textarea" length="1000"></textarea>
+                               <label for="body1">Give a write-up that complements the first section of your page</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <input placeholder="Provide another section heading. This is the middle section of your business page" id="heading2" type="text"
+                                   class="validate">
+                               <label for="heading2">Heading 2</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <textarea id="body1" class="materialize-textarea" length="1000"></textarea>
+                               <label for="body1">Give a write-up that complements the second section</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <input placeholder="Provide the last section heading. This is the bottom section of your business page." id="heading3" type="text"
+                                   class="validate">
+                               <label for="heading3">Heading 3</label>
+                           </div>
+                       </div>
+                       <div class="row">
+                           <div class="input-field col s12">
+                               <textarea id="body3" class="materialize-textarea" length="1000"></textarea>
+                               <label for="body3">Give a write-up that complements the third section</label>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+               <div class=" center-align">
+                   <button class="pink lighten-2 btn"> Update Business</button>
+               </div>
+           </div>
+       </main>
+       <!-- Footer -->
+       <footer class="page-footer blue-grey darken-4 body-font">
+           <div class="contasiner">
+               <div class="row">
+                   <div class="col m3 s12">
+                       <h5 class="pink-text text-lighten-4 Sofia">WEconnect</h5>
+                   </div>
+                   <div class="col m4 s12">
+                       <a class=" pink-text text-lighten-4 right">© 2018 Andela, Lagos Nigeria</a>
+                   </div>
+                   <div class="col m4 s12">
+                       <a class="pink-text text-lighten-4 right">Andela Bootcamp project cycle xxx</a>
+                   </div>
+               </div>
+           </div>
+       </footer>
+       <!--Import jQuery before materialize.js-->
+       <script type="text/javascript" src="./public/jquery/jquery.min.js"></script>
+       <script type="text/javascript" src="./public/materialize/js/materialize.min.js"></script>
+       <script type="text/javascript" src="./public/js/init.js"></script>
+   </body>
+   
+   </html>

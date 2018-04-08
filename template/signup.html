@@ -1,0 +1,138 @@
+<!-- Road Map Road Map Road Map
+     <Head>
+        __google fonts import
+        __my custom css linking
+        __materialize css linking
+    </Head>
+
+    <Body>
+        __NavBar
+        __First row    [Sign Up banner]
+        __Second row   [Sign up form]
+        __third row     [footer]
+        __javascript
+    </Body
+   -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font -->
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./public/materialize/css/materialize.min.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobiledeep-orange-text text-lighten-2-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--my custom styles.css-->
+    <link type="text/css" rel="stylesheet" href="./public/CSS/styles.css" media="screen,projection" />
+</head>
+
+<body class="">
+    <nav>
+        <div class="nav-wrapper blue-grey darken-4 text-lighten-3">
+            <a href="index.html" class=" Sofia brand-logo  logo pink-text text-lighten-4">WEconnect</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse">
+                <i class="material-icons"> more </i>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
+                <li>
+                    <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                </li>
+                <li>
+                    <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                </li>
+                <li>
+                    <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                </li>
+                <li>
+                    <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                </li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li>
+                    <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                </li>
+                <li>
+                    <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                </li>
+                <li>
+                    <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                </li>
+                <li>
+                    <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- first row Sign In label -->
+        <div class="row head-font">
+            <div class="col s4 offset-s4 center-align">
+                <h2 class="center head-font pink-text"> Sign Up </h2>
+            </div>
+        </div>
+
+        <!-- Second row ## Sign Up form-->
+        <div class="row top-pad body-font">
+            <div class="row">
+                <div class="col s8 offset-s2 m6 offset-m4 l4 offset-l4">
+                    <form class="pink lighten-5 thin-black-border" id="short-forms">
+                        <div class="input-field col s12">
+                            <input id="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="row white-text">
+                            <div class="input-field col s12">
+                                <input id="email" type="text" class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row white-text">
+                            <div class="input-field col s12">
+                                <input id="password" type="password" class="validate">
+                                <label for="password"> Password</label>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="center-align">
+                        <a class="waves-effect waves-light blue-grey darken-4 pink-text text-lighten-4  btn top-gap">Sign up</a>
+                    </div>
+                    <p class="black-text">
+                        <em> Registered already? Click
+                            <a href="signin.html" class="pink-text">here </a> to sign in right away</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+        <!-- end of row -->
+
+        <!-- Footer -->
+        <footer class="page-footer blue-grey darken-4 body-font">
+            <div class="contasiner">
+                <div class="row">
+                    <div class="col m3 s12">
+                        <h5 class="pink-text text-lighten-4 Sofia">WEconnect</h5>
+                    </div>
+                    <div class="col m4 s12">
+                        <a class=" pink-text text-lighten-4 right">© 2018 Andela, Lagos Nigeria</a>
+                    </div>
+                    <div class="col m4 s12">
+                        <a class="pink-text text-lighten-4 right">Andela Bootcamp project cycle xxx</a>
+                    </div>
+                </div>
+            </div>
+    </footer>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="./public/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="./public/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./public/js/init.js"></script>
+</body>
+
+</html>
