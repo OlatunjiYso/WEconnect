@@ -71,6 +71,11 @@
      padding: 2em;
      border: 1px solid #e6448f;
  }
+ .form-body {
+    padding: 1em 3em;
+    border: 2px solid #441b2e;
+    border-radius: 15px;
+}
  .reg-body {
     padding: 5px 20px;
     border: 1px solid #332f31;
@@ -148,7 +153,7 @@
   }
   .card-title {
     font-weight: bold;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     color: #ffffff;
 }
