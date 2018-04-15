@@ -1,7 +1,7 @@
 const fakeAllBusinesses = [
     {
         id: 1,
-        name: 'Leather Shoes',
+        name: 'Leather Shoes and bags',
         slogan: 'There to make you look nice and pretty',
         location: 'lagos',
         category: 'fashion',
