@@ -24,147 +24,136 @@ class Home extends Component {
     render() {
         return (
             <div>
-                
+                <Navbar />
                 <main>
                     <div className="center banner">
-                        <div className="row hide-on-med-and-up">
-                            <div className="col s8 offset-s2 banner-image">
+                        <div className="row">  
+                        <div className="col s12 m10 offset-m1 banner-image">
                                 <div className="row">
-                                    <h1> WEconnect!</h1>
+                                    <h1 class= "green-text text-darken-4"> 
+                                    WEco
+                                    <span class= "yellow-text text-darken-4">n</span>
+                                    nect
+                                    </h1>
                                 </div>
                                 <img className="responsive-img" src={hero} alt='Professionals'/>
                             </div>
-                            <div className="col s8 offset-s2 m4  offset-m1  banner-text blue-grey darken-4">
-                                <h2 className="pink-text text-lighten-4"> Make Your Business known and get Connected today!</h2>
+                            <div className="col s12 m10 offset-m1  banner-text  blue-grey lighten-5 ">
+                                <h3 className="green-text text-darken-4"> Make Your Business known and get Connected today!</h3>
                                 <p>
-                                    <span className="pink-text text-lighten-4">WEconnect brings clients and businesses together!</span>
+                                    <span className="green-text text-darken-4 hide-on-med-and-down">WEconnect brings clients and businesses together</span>
                                 </p>
-                                <button className="btn btn-large pink white-text "> Sign Up</button>
-                            </div>
-                        </div>
-                        <div className="row hide-on-small-only">  
-                            <div className="col m4 offset-m1 banner-text blue-grey darken-4">
-                                <h2 className="pink-text text-lighten-4"> Make Your Business known and get Connected today!</h2>
-                                <p>
-                                    <span className="pink-text text-lighten-4">WEconnect brings clients and businesses together!</span>
-                                </p>
-                                <button className="btn btn-large pink white-text "> Sign Up</button>
-                            </div>
-                            <div className="col m6 offset-l1 banner-image">
-                                <div className="row">
-                                    <h1> WEconnect!</h1>
-                                </div>
-                                <img className="responsive-img" src={hero} alt='Professionals'/>
+                                <button className="btn btn-large yellow darken-4 white-text"> Start Here</button>
                             </div>
                         </div>
                     </div>
                     <div className="container ">
                         <div className="section row s12">
-                            <h4 className="center category-header"> Checkout our Categories of businesses</h4>
-                            <div className="category-tag col s4 l2">
+                            <h4 className="center category-header green-text text-darken-4"> Checkout our Categories of businesses</h4>
+                            <div className="category-tag center col s4 l3">
                                 <h6> Commerce</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Fashion</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Music</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Catering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Entertainment</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Technology</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Photography</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Graphics</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Engineering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Commerce</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Fashion</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Music</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Catering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Entertainment</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Technology</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Photography</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Graphics</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Engineering</h6>
 
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Fashion</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Music</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Catering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Entertainment</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Technology</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Photography</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Graphics</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Engineering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Commerce</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Fashion</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Music</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Catering</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Entertainment</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Technology</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Photography</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Graphics</h6>
                             </div>
-                            <div className="category-tag col s4 l2">
+                            <div className="category-tag center col s4 l3">
                                 <h6> Engineering</h6>
                             </div>
                         </div>
