@@ -31,8 +31,8 @@ class App extends Component {
         render() {
                 return (
                         <div>
-                                <Route exact= {true} path="/" component = { Signup } /> 
-                                <Route path="/login" component = { Login } />  
+                                <Route exact = {true} path="/" component = { Home} /> 
+                                <Route exact = {true} path="/login" component = { Login } />  
                                 <Route path="/signup" component = { Signup } />
                                 <Route path="/user/profile" component = { UserProfile } />
                                 <Route path="/business/profile" component = { BusinessProfile } />
