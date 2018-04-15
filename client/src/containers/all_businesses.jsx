@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { NavItem, Dropdown, Button } from 'react-materialize';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
+import BusinessCard from '../components/business_card';
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
+import profilePicture from '../assets/images/cameras.jpg';
+import businesses from '../dummy/all_businesses';
 
 /**
  * @class AllBusinessComponent
@@ -13,6 +17,10 @@ import hero from '../assets/images/profession.jpg';
  * @extends {React.Component}
  */
 class AllBusinesses extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {businesses};
+      }
     /** 
     *
     * @returns {JSX} JSX
@@ -20,70 +28,69 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     render() {
+        const FoundBusinesses = this.state.businesses.map((eachBusiness, index) => {
+            return(
+                <BusinessCard key={index} business= {eachBusiness} businesssPic= {profilePicture}/>
+            ) 
+        })
         return (
             <div>
                 <Navbar />
                 <main>
                     <div className="row black-text">
-                        <div className="col s12 body-font center-align">
-                            <h3>Get the Best of Professionals from Us </h3>
-                            <h5>Define your search parameters to meet your specific needs</h5>
+                        <div className="col s12 body-font center-align grey-text text-darken-2">
+                            <h4>Our Collection Of Businesses and Professionals for You</h4>
                         </div>
-                        <div className="row center-align underlined bottom-pads">
-                            <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1">
-                                <select>
-                                    <option value="" disabled selected>location</option>
-                                    <option value="1">Lagos</option>
-                                    <option value="2">Abuja</option>
-                                    <option value="3">Rivers</option>
-                                    <option value="3">Somewhere</option>
-                                </select>
-                                <label>Materialize Select</label>
+                        <div className="row center-align underlined bottom-pad">
+                            <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
+                                <Dropdown trigger={
+                                    <h6> 
+                                    <span className= "card-button">
+                                    <i className="tiny material-icons top-pad pink-text">place</i>
+                                    <span className= "green-text "> Filter By Location </span>
+                                    </span>
+                                    </h6>
+                                }>
+                                    <NavItem>one</NavItem>
+                                    <NavItem>two</NavItem>
+                                    <NavItem divider />
+                                    <NavItem>three</NavItem>
+                                </Dropdown>
                             </div>
-                            <div className="col s5 m3 offset-m1 l2 offset-l1">
-                                <select>
-                                    <option value="" disabled selected>Category</option>
-                                    <option value="1">Leather Work</option>
-                                    <option value="2">Plumbing</option>
-                                    <option value="3">Photography</option>
-                                    <option value="3">Medicals</option>
-                                </select>
-                                <label>Category</label>
+                            <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
+                                <Dropdown trigger={
+                                    <h6>
+                                        <span className= "card-button">
+                                        <i className="tiny material-icons top-pad pink-text">card_travel</i>
+                                        <span className= "green-text"> Filter By category </span>
+                                        </span>
+                                    </h6>
+                                }>
+                                    <NavItem>one</NavItem>
+                                    <NavItem>two</NavItem>
+                                    <NavItem divider />
+                                    <NavItem>three</NavItem>
+                                </Dropdown>
                             </div>
-                            <div className="col s8 offset-s2 m4 l3 offset-l3 center">
-                                <a className=" pink-text text-lighten-4 blue-grey darken-4 btn">
-                                    <i className="left material-icons">search</i> Search </a>
+                            <div className="col s8 offset-s2 m4 l2 offset-l1 right-align push-down">
+                                <Link className=" green-text text-darken-4 btn grey lighten-4" to="#!">
+                                 Get businesses 
+                                 </Link>
                             </div>
                         </div>
                     </div>
                     <div className="row head-font">
                         <div className="col s12">
-                            <h2 className="sofia center-align  pink-text">Our Collection Of Businesses and professionals for You! </h2>
+                            <h5 className="center-align pink-text">
+                            Fashion Businesses in Lagos
+                            </h5>
                         </div>
                     </div>
-                    <div className="row body-font cushion center">
-                        <div className="left-gap">
-                            <div className="col l2 m3 s6 business-card blue-grey darken-4">
-                                <div className="row card-img ">
-                                    <img className="responsive-img" src="./public/images/cameras.jpg" />
-                                </div>
-                                <div className="row card-title">
-                                    Clicks
-                                </div>
-                                <div className="row">
-                                    <div className="">
-                                        <h6 className="card-location center">
-                                            <i className="tiny material-icons">location_on</i>
-                                            Anthony, Lagos</h6>
-                                    </div>
-                                    <div className="card-button centre">
-                                        <button> View Profile</button>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="row cushion center">
+                        <div className="">
+                        { FoundBusinesses } 
                         </div>
                     </div>
-
                     <div className="row">
                         <ul className="pagination center-align ">
                             <li className="disabled ">
