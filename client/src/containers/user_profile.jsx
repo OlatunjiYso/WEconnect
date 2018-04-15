@@ -38,6 +38,7 @@ class UserProfile extends Component {
         })
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row head-font dashboard">
                         <div className="col s9 m6 l4 logo pink-text center-align">
@@ -51,19 +52,19 @@ class UserProfile extends Component {
                     <div className="row slim-container top-pad">
                         <div className="row">
                             <div className="col s6 left">
-                                <Link to="register_business.html" className="green lighten-2 black-text btn" type="button"> Add new Business
-                    </Link>
+                                <Link to="register_business.html" className="green lighten-5 black-text btn" type="button"> Add new Business
+                                </Link>
                             </div>
                             <div className="col s6">
-                                <Link to="#!" className="right green lighten-2 black-text btn" type="button"> Update Profile
-                    </Link>
+                                <Link to="#!" className="right green lighten-5 black-text btn" type="button"> Update Profile
+                                </Link>
                             </div>
                         </div>
                         <div className="col s12  l10 offset-l1">
                             <div className="row">
                                 <div className="col s12">
-                                    <h4 className="head-font center">
-                                        Feel free to manage your business outfits!
+                                    <h4 className="head-font center grey-text text-darken-1 bottom-pad-small">
+                                        Feel free to manage your business outfits
                                     </h4>
                                 </div>
                                 <div className="row ">
