@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
-
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
@@ -14,6 +13,52 @@ import hero from '../assets/images/profession.jpg';
  * @extends {React.Component}
  */
 class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userDetail: {
+                username: '',
+                password: '',
+            },
+            submitted: false
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    
+    componentDidMount() {
+
+    }
+
+    /** 
+    *
+    *
+    * @returns {func} funtion
+    * 
+    * @memberof ReviewFormComponent
+    */
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value
+        this.setState({
+            ...this.state,
+            userDetail: { [name]: value},
+            submitted: true
+        });
+    }
+
+    /** 
+    *
+    *
+    * @returns {func} funtion
+    * 
+    * @memberof Login Component
+    */
+    handleSubmit(event) {
+        alert('A new login has been made: ' + this.state.userDetail.username);
+        event.preventDefault();
+    }
+
     /** 
     *
     *
@@ -21,46 +66,21 @@ class Login extends Component {
     * 
     * @memberof LoginComponent
     */
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div>
                 <Navbar />
                 <main>
-                    <div className="row head-font">
-                        <div className="col s4 offset-s4 center-align">
-                            <h2 className="center head-font pink-text"> Sign In </h2>
-                        </div>
-                    </div>
-                    <div className="row top-pad body-font">
-                        <div className="row">
-                            <div className="col s8 offset-s2 m6 offset-m4 l4 offset-l4">
-                                <form className="pink lighten-5 form-body" id="short-forms">
-                                    <div className="row black-text">
-                                        <label className="input-field col s12">
-                                            <span className="blue-grey-text text-darken-4">Username:</span>
-                                            <input type="text" name="username" />
-                                        </label>
-                                    </div>
-                                    <div className="row black-text">
-                                        <label className="input-field col s12">
-                                            <span className="blue-grey-text text-darken-4">Password:</span>
-                                            <input type="password" name="password" />
-                                        </label>
-                                    </div>
-                                </form>
-                                <div className="center-align">
-                                    <Link to="all_businesses.html"
-                                        className="waves-effect waves-light pink-text text-lighten-4 blue-grey darken-4  btn top-gap">Sign in</Link>
-                                </div>
-                                <p className="black-text bottom-pad">
-                                    <em> Not yet Registered? Click
-                        <Link to="signup.html" className="pink-text"> here </Link> to sign up right away</em>
-                                </p>
-                            </div>
+                    <div className="row head-font top-pad-much no-bottom-gap">
+                        <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
+                            <h4 className="center head-font form-heading"> Sign In </h4>
+                            <form onSubmit={this.handleSubmit}>
+                                <label className="form-label">Username: </label>
+                                <input type="text" value={this.state.userDetail.username} onChange={this.handleChange} name= "username" className="form-input white" />
+                                <label className="form-label"> Password: </label>
+                                <input type="password" value={this.state.userDetail.password} onChange={this.handleChange} name= "password"className="form-input white" />
+                                <input type="submit" value="Submit" className="form-btn"/>
+                            </form>
                         </div>
                     </div>
                 </main>
