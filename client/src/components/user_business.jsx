@@ -21,16 +21,20 @@ class UserBusiness extends Component {
         const userBusiness = this.props.userBusiness;
         return (
             <div>
-                <div className="col s8 offset-s2 offset-m1 m4 l3 business-card blue-grey darken-4 container">
-                    <div className="row card-img ">
-                        <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
-                    </div>
-                    <div className="row card-title center">
-                        <Link className="pink-text text-lighten-4" to="#!">{userBusiness.name} </Link>
-                    </div>
+                <div className="col s8 offset-s2 offset-m1 m4 l3 container">
                     <div className="row">
-                        <div className="center-align">
-                            <Link to="manage_business.html" className="btn green lighten-2" type="button"> Manage</Link>
+                        <div className="col s12">
+                            <div className="card small bottom-pad grey lighten-4">
+                                <div className="card-image">
+                                    <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
+                                </div>
+                                <div className="card-content">
+                                    <h6 className="center green-text text-darken-4"> {userBusiness.name} </h6>
+                                </div>
+                                <h6 className="card-button cursor white">
+                                    <div className="center grey-text text-darken-2">Manage</div>
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>

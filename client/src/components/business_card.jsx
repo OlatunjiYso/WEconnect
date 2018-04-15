@@ -9,28 +9,38 @@ import PropTypes from 'prop-types';
  * 
  * @extends {React.Component}
  */
-class UserBusiness extends Component {
+class BusinessCard extends Component {
     /** 
     *
     *
     * @returns {JSX} JSX
     * 
-    * @memberof UserBusinessComponent
+    * @memberof BusinessCardComponent
     */
     render() {
-        const userBusiness = this.props.userBusiness;
+        const business = this.props.business;
         return (
             <div>
-                <div className="col s8 offset-s2 offset-m1 m4 l3 business-card blue-grey darken-4 container">
-                    <div className="row card-img ">
-                        <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
-                    </div>
-                    <div className="row card-title center">
-                        <Link className="pink-text text-lighten-4" to="#!">{userBusiness.name} </Link>
-                    </div>
+                <div className="col s8 offset-s2 offset-m1 m4 l3 container">
                     <div className="row">
-                        <div className="center-align">
-                            <Link to="manage_business.html" className="btn green lighten-2" type="button"> Manage</Link>
+                        <div className="col s12">
+                            <div className="card smal bottom-pad grey lighten-4">
+                                <div className="card-image">
+                                    <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
+                                </div>
+                                <div className="card-content">
+                                    <h6 className="center green-text text-darken-4 bold-font"> {business.name} </h6>
+                                    <div>
+                                        <h6 className="center grey-text text-darken-1">
+                                            <i className=" material-icons top-pad pink-text">place</i>
+                                            { business.category }, { business.location } state.
+                                     </h6>
+                                    </div>
+                                </div>
+                                <h6 className="card-button cursor white">
+                                    <div className="center grey-text text-darken-2">Visit</div>
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,8 +48,8 @@ class UserBusiness extends Component {
         )
     }
 }
-UserBusiness.propTypes = {
-    userBusiness: PropTypes.object.isRequired
+BusinessCard.propTypes = {
+    business: PropTypes.object.isRequired
 }
 
-export default UserBusiness;
+export default BusinessCard;

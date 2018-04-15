@@ -16,18 +16,16 @@ class Footer extends Component {
     render() {
         return (
             <div>
-                <footer className="page-footer blue-grey darken-4 body-font">
-                    <div>
-                        <div className="row">
-                            <div className="col m3 s12">
-                                <h5 className="pink-text text-lighten-4 Sofia">WEconnect</h5>
-                            </div>
-                            <div className="col m4 s12">
-                                <a className=" pink-text text-lighten-4 right">© 2018 Andela, Lagos Nigeria</a>
-                            </div>
-                            <div className="col m4 s12">
-                                <a className="pink-text text-lighten-4 right">Andela Bootcamp project cycle xxx</a>
-                            </div>
+                <footer className="page-footer green lighten-3 body-font">
+                    <div className="row">
+                        <div className="col m3 s12">
+                            <h5 className="black-text  Sofia">WEconnect</h5>
+                        </div>
+                        <div className="col m4 s12">
+                            <a className=" black-text right">© 2018 Andela, Lagos Nigeria</a>
+                        </div>
+                        <div className="col m4 s12">
+                            <a className="black-text right">Andela Bootcamp project cycle xxx</a>
                         </div>
                     </div>
                 </footer>
