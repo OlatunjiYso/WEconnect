@@ -9,10 +9,10 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
-    entry: path.join(paths.SRC, 'app.js'),
+    entry: path.join(paths.SRC, 'index.js'),
     output: {
         path: paths.DIST,
-        filename: 'app.bundle.js'
+        filename: 'index.bundle.js'
     },
     // Tell webpack to use html plugin to inject bundled app into index.html.
     plugins: [
