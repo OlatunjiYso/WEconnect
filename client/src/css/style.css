@@ -4,25 +4,28 @@
     margin-bottom:4em;
 }
 .banner-text {
-    margin-top: 4em;
-    color: #ff609d;
-    border-radius: 2rem
+    margin-top: -1em;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 0 0 #8ad106;
 }
 .banner-image {
-    margin-top: 2em;
+    margin-top: 0;
     color:#dd0a5b;
 }
-.banner h2 {
-    padding-top: 1em;
-    padding-bottom: 3em;
+.banner h1 {
+    padding-top: 0;
+    padding-bottom: 1rem;
+    margin: 1em 0 0 0;
     color:#dd0a5b;
-    font-family: 'Abhaya Libre';
+}
+.banner button:hover {
+    color: #fdfffd !important;
+    background-color:#045a12 !important;
 }
 .banner button {
     margin-bottom: 3em;
     color: #03031d;
     background-color: #aeaece;
-    font-family: 'Abhaya Libre';
 }
 .nav-wrapper, #nav-mobile {
     /*background-color: #050107;*/
@@ -31,18 +34,19 @@
 /**** category styles ****/
 /**** category styles ****/
 .category-tag h6{
-    border: 1px solid #f811a0;
-    padding: 4px;
+    border: 1px solid #80d60f;
+    padding: 4px 0;
     border-radius: 5px;
-    font-weight: bold;
+    box-shadow: 1px 4px #bdbbb7;
+    cursor: pointer;
 }
 
 .category-tag h6:hover{
-    background-color: #190129;
-    color: #aeaece
+    background-color: #045a12;
+    color: #ffffff;
+    border-radius: 0px;
 }
 .category-header {
-    color:#e64c87;
     border-bottom: 2px solid #190129;
     padding: 1em;
     margin-bottom: 1em;
@@ -64,16 +68,33 @@
 
 /* -----reuseable styles --------- */
 /* -----reuseable styles --------- */
+.bold-font {
+    font-weight: bold;
+}
+.card-button {
+    width: 40%;
+    margin: 0 auto;
+    border: 1px solid #2bb460;
+    border-radius: 4px;
+    padding: 5px 3px;
+}
+.card-padding {
+    padding: 0 5rem;
+}
+.cursor{
+    cursor: pointer;
+}
  #icon-text {
     margin-top: 20px;
  }
  .padded-body {
      padding: 2em;
-     border: 1px solid #e6448f;
+     border: 1px solid #13532e;
+     line-height: 2em;
  }
  .form-body {
     padding: 1em 3em;
-    border: 2px solid #441b2e;
+    border: 1px solid #13532e;
     border-radius: 15px;
 }
  .reg-body {
@@ -81,28 +102,35 @@
     border: 1px solid #332f31;
     border-radius: 1em
 }
- .form-label {
-    font-weight: bolder;
-    color:#353535e7;
-    font-size: 1.2em;
-}
   .bottom-gap {
     margin-bottom: 3em;
+  }
+  .no-bottom-gap {
+    margin-bottom: 0;
   }
   .top-gap {
     margin-top: 1em;
   }
+  .push-down {
+    margin-top: 2rem;
+  }
   .bottom-pad {
     padding-bottom: 3em;
   }
+  .bottom-pad-small {
+    padding-bottom: 1em;
+  }
   .top-pad {
-    padding-bottom: 3em;
+    padding-top: 2rem;
   }
   .bottom-pad-much {
     padding-bottom: 5em;
   }
+  .top-pad-much {
+    padding-top: 5em;
+  }
   .underlined {
-    border-bottom: 3px solid #03030f;
+    border-bottom: 3px solid #6c6c72;
   }
   .cushion {
       width: 90%
@@ -116,20 +144,19 @@
     margin-bottom: 0.5em;
 }
 .thin-border {
-    border: 1px solid #ec2592;
+    border: 1px solid #1aa807;
 }
 .business-form {
-    border: 1px solid #ec2592;
-    margin-top: 3em;
-    padding: 0 4em;
-    border-radius: 10px;
+    border: 3px solid #20da4e;
+    margin-top: 2em;
+    border-radius: 1rem;
 }
 .thin-black-border {
     border: 1px solid #220f1a;
 }
 .dashboard {
     padding:1em 0 1em 0;
-    border-bottom:2px solid #050107;
+    border-bottom:2px solid #0acc44;
 }
   
 /* --------- colour schemes ------------- */
@@ -141,30 +168,27 @@
   /******* Card  *******/
   /******* Card  *******/
   .business-card {
-     border: 3px solid #960756;
-     background-color: #050107;
+     border: 2px solid #49e96b;
+     
      /*border-radius:2em;*/
      margin: 0.5em;
    }
   .card-location {
-      border-bottom: 1px solid #f1f1f1;
-      padding-bottom: 0.5em;
-      color: #ff0e6a;
+      padding-bottom: 0.5em;   
   }
+
   .card-title {
-    font-weight: bold;
+    font-weight: bolder;
     width: 100%;
     margin: 0 auto;
-    color: #ffffff;
+    border-bottom: 1px solid #2ad624;
+    
 }
 .card-img {
     font-weight: bolder;
     padding: 1em;    
 }
-.card-button {
-    width: 80%;
-    margin: 0 auto;
-}
+
 main {
     min-height: 100vh;
 }
@@ -173,13 +197,43 @@ main {
     height: 3em !important;
     font-size: 14px !important; 
     }
+    .form-label {
+        color:  hsl(120, 15%, 14%);
+        font-size: 1.2rem;
+    }
+    .form-heading {
+        color:  hsl(120, 15%, 14%)
+    }
+    .form-input {
+    border-radius: 4px !important;
+    padding : 0 0 0 2rem  !important;
+}
+.form-jacket {
+    padding : 1rem 4em !important;
+    background-color: hsl(120, 80%, 94%) !important;
+    border-radius: 1rem !important;
+    box-shadow: 2px 2px hsl(123, 26%, 32%);
+}
+.form-btn {
+    display: block;
+    width: 40%!important; ;
+    color:  hsl(120, 80%, 94%) !important;
+    margin: 2rem auto 0 auto !important;
+    padding : 1rem 2em !important;
+    background-color: hsl(120, 31%, 30%) !important;
+    border-radius: 1rem !important;
+}
+label {
+    color: #000 !important;
+    font-size: 1.2rem !important;
+}
 
 /** Changing the color of placeholder ***/
-/** Changing the color of placeholder ***/
-input::-webkit-input-placeholder {
+/* input::-webkit-input-placeholder {
     color: rgb(0, 0, 0) !important;
     }
-    
+*/
+  
 
 
 
