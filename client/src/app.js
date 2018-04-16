@@ -2,7 +2,7 @@ import React, {Component } from 'react';
 
 import ReactDOM from 'react-dom';
 
-import { Switch, Router, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Home from './containers/home';
 import Login from './containers/login';
@@ -26,7 +26,7 @@ class App extends Component {
             *
             * @returns {JSX} JSX
             * 
-            * @memberof SignupComponent
+            * @memberof App Component
             */
         render() {
                 return (
