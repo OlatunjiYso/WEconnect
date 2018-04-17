@@ -55,7 +55,7 @@ class Login extends Component {
     * @memberof Login Component
     */
     handleSubmit(event) {
-        alert('A new login has been made: ' + this.state.userDetail.username);
+        alert('A new login has password : ' + this.state.userDetail.password);
         event.preventDefault();
     }
 

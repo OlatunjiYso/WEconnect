@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
+
+const rootUrl = 'http://localhost:3000/api/v1';
 
 /**
  * @class SignupComponent
@@ -14,6 +18,13 @@ import hero from '../assets/images/profession.jpg';
  * @extends {React.Component}
  */
 class Signup extends Component {
+    /**
+     * Creates an instance of SignUpComponent.
+     * 
+     * @param {string} props 
+     * 
+     * @memberof SignUpComponent
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +33,8 @@ class Signup extends Component {
                 password: '',
                 email: '',
                 firstname: '',
-                lastname: ''
+                lastname: '',
+                confirmPassword: '',
             },
             submitted: false
         };
@@ -30,38 +42,51 @@ class Signup extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    /**
+     * 
+    * @memberof SignUpComponent
+    * 
+    * @returns {void} void
+    */
     componentDidMount() {
-
+        console.log('I mounted galantly!')
     }
 
     /** 
+    *@param {event} event
     *
+    *@returns {func} funtion
+    *@memberof SignupForm Component
     *
-    * @returns {func} funtion
-    * 
-    * @memberof SignupForm Component
     */
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value
         this.setState({
             ...this.state,
-            userDetail: { [name]: value },
-            submitted: true
+            userDetail: { [name]: value }
         });
     }
 
     /** 
+    *@param {event} event
     *
-    *
-    * @returns {func} funtion
+    *@returns {func} funtion
     * 
-    * @memberof Signup Component
+    *@memberof Signup Component
     */
     handleSubmit(event) {
-        alert('A new signup has been made: ' + this.state.userDetail.firstname);
+        const newUser = this.state.userDetail;
+        axios.post('https://weconnect-main.herokuapp.com/', newUser )
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
         event.preventDefault();
-    }
+    } 
 
     /** 
     *
@@ -89,6 +114,8 @@ class Signup extends Component {
                                 <input type="text" value={this.state.userDetail.username} onChange={this.handleChange} name="username" className="form-input white" />
                                 <label className="form-label"> Password: </label>
                                 <input type="password" value={this.state.userDetail.password} onChange={this.handleChange} name="password" className="form-input white" />
+                                <label className="form-label"> Confirm Password: </label>
+                                <input type="password" value={this.state.userDetail.confirmpassword} onChange={this.handleChange} name="confirmpassword" className="form-input white" />
                                 <input type="submit" value="Submit" className="form-btn" />
                             </form>
                         </div>

@@ -30,11 +30,13 @@ class Home extends Component {
                         <div className="row">  
                         <div className="col s12 m10 offset-m1 banner-image">
                                 <div className="row">
+                                <Link to= "/login">
                                     <h1 class= "green-text text-darken-4"> 
                                     WEco
                                     <span class= "yellow-text text-darken-4">n</span>
                                     nect
                                     </h1>
+                                </Link>
                                 </div>
                                 <img className="responsive-img" src={hero} alt='Professionals'/>
                             </div>
