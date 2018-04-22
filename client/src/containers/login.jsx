@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-import Footer from '../components/footer';
+import history from '../history';
+import authAction from '../actions/auth';
 import Navbar from '../components/navbar';
+import LoginForm from '../components/loginForm';
+import Footer from '../components/footer';
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
@@ -16,7 +20,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userDetail: {
+            user: {
                 username: '',
                 password: '',
             },
@@ -25,44 +29,54 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-    componentDidMount() {
 
+    componentDidMount() {
+        console.log('mounted')
     }
 
     /** 
-    *
+    *@description handles change in input field
     *
     * @returns {func} funtion
     * 
-    * @memberof ReviewFormComponent
+    * @memberof Login Component
     */
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value
         this.setState({
             ...this.state,
-            userDetail: { [name]: value},
-            submitted: true
+            user: { ...this.state.user, [name]: value },
         });
     }
 
     /** 
-    *
+    *@description sends data to server
     *
     * @returns {func} funtion
     * 
     * @memberof Login Component
     */
     handleSubmit(event) {
-        alert('A new login has been made: ' + this.state.userDetail.username);
+        const user = this.state.user;
+        const { dispatch } = this.props;
         event.preventDefault();
+        dispatch(authAction.signinAttempt());
+        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/login', (user))
+            .then((response) => {
+                dispatch(authAction.signinSuccess())
+                history.push('/', { user: 'newUser' })
+            })
+            .catch((error) => {
+                console.log(error.response.data.message);
+                dispatch(authAction.signinFailed(error.response.data.message));
+            });
     }
 
     /** 
+    *@description - renders the form component
     *
-    *
-    * @returns {JSX} JSX
+    * @returns {JSX} - JSX
     * 
     * @memberof LoginComponent
     */
@@ -70,24 +84,25 @@ class Login extends Component {
         return (
             <div>
                 <Navbar />
-                <main>
-                    <div className="row head-font top-pad-much no-bottom-gap">
-                        <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
-                            <h4 className="center head-font form-heading"> Sign In </h4>
-                            <form onSubmit={this.handleSubmit}>
-                                <label className="form-label">Username: </label>
-                                <input type="text" value={this.state.userDetail.username} onChange={this.handleChange} name= "username" className="form-input white" />
-                                <label className="form-label"> Password: </label>
-                                <input type="password" value={this.state.userDetail.password} onChange={this.handleChange} name= "password"className="form-input white" />
-                                <input type="submit" value="Submit" className="form-btn"/>
-                            </form>
-                        </div>
-                    </div>
-                </main>
+                <LoginForm
+                    user={this.state.user}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    isFetching={this.props.data.awaitingResponse}
+                    errors={this.props.data.errors}
+                />
                 <Footer />
             </div >
         )
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    const data = state.authReducers;
+    console.log(data);
+    return {
+        data
+    }
+}
+
+export default connect(mapStateToProps)(Login);

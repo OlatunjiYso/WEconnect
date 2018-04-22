@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Navbar, NavItem } from 'react-materialize'
+import { Button, SideNav, Navbar, NavItem } from 'react-materialize'
 
 /**
- * @class NavbarComponent
+ * @className NavbarComponent
  * 
  * @extends {React.Component}
  */
@@ -20,12 +20,50 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <Navbar brand='WEconnect' right className="green darken-3">
-                    <NavItem className="black-text" href="signin.html">Sign In</NavItem>
-                    <NavItem href="signup.html" className="grey-text text-darken-5">Join</NavItem>
-                    <NavItem href="user_profile.html" className="blue-grey-text text-lighten-5">My Profile</NavItem>
-                    <NavItem href= "all_businesses.html" className="blue-grey-text text-lighten-5">All</NavItem>
-                </Navbar>
+                <nav>
+                    <div className="nav-wrapper green darken-4 text-lighten-3">
+                        <Link to="/" className=" Sofia brand-logo  logo white-text">WEconnect</Link>
+                        <ul className="right hide-on-med-and-down head-font">
+                            <li>
+                                <Link to="/login" className="white-text">Sign In</Link>
+                            </li>
+                            <li>
+                                <Link to="/signup" className="white-text">Sign Up</Link>
+                            </li>
+                            <li>
+                                <Link to="/user/profile" className="white-text">My Profile</Link>
+                            </li>
+                            <li>
+                                <Link to="/businesses" className="white-text">All</Link>
+                            </li>
+                        </ul>
+                        <SideNav
+                           trigger={
+                            <a href="" className="button-collapse">
+                              <i className="material-icons">menu</i>
+                            </a>
+                          }
+                          options={{ closeOnClick: true }}
+                        >
+                            <ul className="side-nav" id="mobile-demo">
+
+                                <li>
+                                    <Link to="/login" className="white-text">Sign In</Link>
+                                </li>
+                                <li>
+                                    <Link to="/signup" className="white-text">Sign Up</Link>
+                                </li>
+                                <li>
+                                    <Link to="/user/profile" className="white-text">My Profile</Link>
+                                </li>
+                                <li>
+                                    <Link to="/businesses" className="white-text">All</Link>
+                                </li>
+                            </ul>
+                        </SideNav>
+
+                    </div>
+                </nav>
             </div>
         )
     }

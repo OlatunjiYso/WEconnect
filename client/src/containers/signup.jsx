@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
-import { Link } from 'react-router-dom';
-
+import history from '../history';
+import authAction from '../actions/auth';
 import Footer from '../components/footer';
+import SignupForm from '../components/signup_form';
 import Navbar from '../components/navbar';
 
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
+
+const rootUrl = 'http://localhost:3000/api/v1';
 
 /**
  * @class SignupComponent
@@ -14,6 +20,13 @@ import hero from '../assets/images/profession.jpg';
  * @extends {React.Component}
  */
 class Signup extends Component {
+    /**
+     * Creates an instance of SignUpComponent.
+     * 
+     * @param {string} props 
+     * 
+     * @memberof SignUpComponent
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -22,45 +35,84 @@ class Signup extends Component {
                 password: '',
                 email: '',
                 firstname: '',
-                lastname: ''
-            },
-            submitted: false
+                lastname: '',
+                confirmPassword: '',
+            }
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+     
+    /**
+     * 
+    * @memberof SignUpComponent
+    * 
+    * @returns {void} void
+    */
     componentDidMount() {
-
+        console.log('I mounted galantly!')
+        console.log(history.location)
     }
 
-    /** 
+    /**
+    * @description - redirects newly registered users to on-boarding page
     *
-    *
-    * @returns {func} funtion
+    * @return {void} no return or void
     * 
-    * @memberof SignupForm Component
+    */
+    /*componentWillMount() {
+        if (this.props.userActions.authenticated) {
+            this.props.history.push('/welcome');
+        }
+    }*/
+
+    /** 
+    *@param {event} event
+    *
+    *@returns {func} funtion
+    *@memberof SignupForm Component
+    *
     */
     handleChange(event) {
         const name = event.target.name;
-        const value = event.target.value
+        const value = event.target.value;
         this.setState({
             ...this.state,
-            userDetail: { [name]: value },
-            submitted: true
+            userDetail: { ...this.state.userDetail, [name]: value }
         });
     }
 
     /** 
+    *@param {event} event
     *
-    *
-    * @returns {func} funtion
+    *@returns {func} funtion
     * 
-    * @memberof Signup Component
+    *@memberof Signup Component
     */
     handleSubmit(event) {
-        alert('A new signup has been made: ' + this.state.userDetail.firstname);
         event.preventDefault();
+        const { dispatch } = this.props;
+        const newUser = this.state.userDetail;
+        if (newUser.confirmPassword !== newUser.password) {
+            dispatch(authAction.passwordMismatch())
+            return
+        }
+        dispatch(authAction.signupAttempt())
+        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/signup', newUser)
+          .then((response) => {
+            dispatch(authAction.signupSuccess(newUser))
+              history.push('/welcome', { user: 'user' })
+            return
+          })
+          .catch((error) => {
+              console.log(error)
+            if (error && error.response.status === 400) {
+                dispatch(authAction.signupBadRequest(error.response.data.errors))
+            }
+            if (error && error.response.status === 409) {
+            dispatch(authAction.signupConflict(error.response.data.message))
+            }
+          });
     }
 
     /** 
@@ -74,30 +126,29 @@ class Signup extends Component {
         return (
             <div>
                 <Navbar />
-                <main>
-                    <div className="row head-font top-pad-much no-bottom-gap">
-                        <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
-                            <h4 className="center head-font form-heading"> Join WEconnect </h4>
-                            <form onSubmit={this.handleSubmit}>
-                                <label className="form-label">Firstname: </label>
-                                <input type="text" value={this.state.userDetail.firstname} onChange={this.handleChange} name="firstname" className="form-input white" />
-                                <label className="form-label">Lastname: </label>
-                                <input type="text" value={this.state.userDetail.lastname} onChange={this.handleChange} name="lastname" className="form-input white" />
-                                <label className="form-label">Email: </label>
-                                <input type="email" value={this.state.userDetail.email} onChange={this.handleChange} name="email" className="form-input white" />
-                                <label className="form-label">Username: </label>
-                                <input type="text" value={this.state.userDetail.username} onChange={this.handleChange} name="username" className="form-input white" />
-                                <label className="form-label"> Password: </label>
-                                <input type="password" value={this.state.userDetail.password} onChange={this.handleChange} name="password" className="form-input white" />
-                                <input type="submit" value="Submit" className="form-btn" />
-                            </form>
-                        </div>
-                    </div>
-                </main>
+                <SignupForm
+                    handleChange = {this.handleChange}
+                    handleSubmit = {this.handleSubmit}
+                    userDetail = {this.state.userDetail}
+                    formErrors = {this.props.data.errors}
+                    isFetching = {this.props.data.awaitingResponse}
+                />
                 <Footer />
             </div >
         )
     }
 }
 
-export default Signup;
+const mapStateToProps = (state) =>{
+    console.log(state)
+    const data = state.authReducers;
+    return {
+        data
+    }
+}
+
+/**const mapDispatchToProps = dispatch => {
+   
+  }**/
+
+export default connect(mapStateToProps)(Signup);

@@ -1,13 +1,9 @@
 import { combineReducers } from 'redux';
 
-import businessReducer from './businessReducer';
-import reviewReducer from './reviewReducer';
-import userReducer from './userReducer';
+import authReducers from './authReducer';
 
 const allReducers = {
-    businessReducer,
-    reviewReducer,
-    userReducer
+    authReducers
 };
 
 const rootReducer = combineReducers(allReducers);
