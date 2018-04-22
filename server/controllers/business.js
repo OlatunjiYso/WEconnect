@@ -26,17 +26,24 @@ class businessController {
     Business
       .create({
         ownerId: req.user.id,
-        title: req.body.title,
-        slogan: req.body.slogan || null,
-        overview: req.body.overview,
+        name: req.body.name,
+        slogan: req.body.slogan,
         email: req.body.email,
         category: req.body.category,
-        location: req.body.location,
+        city: req.body.city,
+        state: req.body.state,
         address: req.body.address,
         phone: req.body.phone,
+        heading1: req.body.heading1,
+        heading2: req.body.heading2 || null,
+        heading3: req.body.heading3 || null,
+        body1: req.body.body1,
+        body2: req.body.body2 || null,
+        body3: req.body.body3 || null,
         whatsapp: req.body.whatsapp || null,
         facebook: req.body.facebook || null,
         twitter: req.body.twitter || null,
+        instagram: req.body.instagram || null,
         image: req.body.image || null,
       })
       .then((business) => {
@@ -105,7 +112,7 @@ class businessController {
       filter.category = req.query.category;
     }
     if (req.query.location) {
-      filter.location = req.query.location;
+      filter.state = req.query.location;
     }
     Business
       .findAll({
@@ -116,20 +123,21 @@ class businessController {
       })
       .then((businesses) => {
         if (businesses) {
-          const theLocation = (req.query.location) ? `in ${req.query.location}` : '';
-          const theCategory = (req.query.category) ? req.query.category : '';
           if (businesses.length > 0) {
             return res.status(200)
               .json({
                 success: true,
-                message: `${theCategory} businesses ${theLocation}`,
-                businesses
+                businesses,
+                location: req.query.location,
+                category: req.query.category,
               });
           }
-          return res.status(200)
+          return res.status(404)
             .json({
-              success: true,
-              message: `no ${theCategory} business ${theLocation} yet`,
+              success: false,
+              location: req.query.location,
+              category: req.query.category,
+              message: 'not found',
             });
         }
       })
@@ -165,17 +173,24 @@ class businessController {
             .map(key => initialBusiness.dataValues[key]);
           business
             .update({
-              title: req.body.title || business.title,
+              name: req.body.name || business.name,
               slogan: req.body.slogan || business.slogan,
               overview: req.body.overview || business.overview,
               email: req.body.email || business.email,
               phone: req.body.phone || business.phone,
               category: req.body.category || business.category,
-              location: req.body.location || business.location,
-              website: req.body.website || business.website,
+              city: req.body.city || business.city,
+              state: req.body.state || business.state,
+              heading1: req.body.heading1 || business.heading1,
+              heading2: req.body.heading2 || business.heading2,
+              heading3: req.body.heading3 || business.heading3,
+              body1: req.body.body1 || business.body1,
+              body2: req.body.body2 || business.body2,
+              body3: req.body.body3 || business.body3,
               whatsapp: req.body.whatsapp || business.whatsapp,
               facebook: req.body.facebook || business.facebook,
               twitter: req.body.twitter || business.twitter,
+              instagram: req.body.instagram || business.instagram,
               image: req.body.image || business.image,
             })
             .then((updated) => {
@@ -193,15 +208,17 @@ class businessController {
                 return res.status(200)
                   .json({
                     success: true,
-                    message: 'No changes, business details remains intact',
-                    'your business': updated,
+                    modified: false,
+                    message: 'No changes made, your business details remains intact',
+                    business: updated,
                   });
               }
               return res.status(200)
                 .json({
                   success: true,
-                  message: `business modified successfully, ${changes - 1} field(s) modified!`,
-                  updated
+                  modified: true,
+                  message: 'business successfully modified',
+                  business: updated
                 });
             })
             .catch((err) => {
