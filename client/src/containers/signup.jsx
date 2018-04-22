@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
-import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import history from '../history';
+import authAction from '../actions/auth';
 import Footer from '../components/footer';
+import SignupForm from '../components/signup_form';
 import Navbar from '../components/navbar';
 
 import customStyles from '../css/style.css';
@@ -35,13 +37,12 @@ class Signup extends Component {
                 firstname: '',
                 lastname: '',
                 confirmPassword: '',
-            },
-            submitted: false
+            }
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+     
     /**
      * 
     * @memberof SignUpComponent
@@ -50,7 +51,20 @@ class Signup extends Component {
     */
     componentDidMount() {
         console.log('I mounted galantly!')
+        console.log(history.location)
     }
+
+    /**
+    * @description - redirects newly registered users to on-boarding page
+    *
+    * @return {void} no return or void
+    * 
+    */
+    /*componentWillMount() {
+        if (this.props.userActions.authenticated) {
+            this.props.history.push('/welcome');
+        }
+    }*/
 
     /** 
     *@param {event} event
@@ -61,10 +75,10 @@ class Signup extends Component {
     */
     handleChange(event) {
         const name = event.target.name;
-        const value = event.target.value
+        const value = event.target.value;
         this.setState({
             ...this.state,
-            userDetail: { [name]: value }
+            userDetail: { ...this.state.userDetail, [name]: value }
         });
     }
 
@@ -76,17 +90,30 @@ class Signup extends Component {
     *@memberof Signup Component
     */
     handleSubmit(event) {
-        const newUser = this.state.userDetail;
-        axios.post('https://weconnect-main.herokuapp.com/', newUser )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-
         event.preventDefault();
-    } 
+        const { dispatch } = this.props;
+        const newUser = this.state.userDetail;
+        if (newUser.confirmPassword !== newUser.password) {
+            dispatch(authAction.passwordMismatch())
+            return
+        }
+        dispatch(authAction.signupAttempt())
+        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/signup', newUser)
+          .then((response) => {
+            dispatch(authAction.signupSuccess(newUser))
+              history.push('/welcome', { user: 'user' })
+            return
+          })
+          .catch((error) => {
+              console.log(error)
+            if (error && error.response.status === 400) {
+                dispatch(authAction.signupBadRequest(error.response.data.errors))
+            }
+            if (error && error.response.status === 409) {
+            dispatch(authAction.signupConflict(error.response.data.message))
+            }
+          });
+    }
 
     /** 
     *
@@ -99,32 +126,29 @@ class Signup extends Component {
         return (
             <div>
                 <Navbar />
-                <main>
-                    <div className="row head-font top-pad-much no-bottom-gap">
-                        <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
-                            <h4 className="center head-font form-heading"> Join WEconnect </h4>
-                            <form onSubmit={this.handleSubmit}>
-                                <label className="form-label">Firstname: </label>
-                                <input type="text" value={this.state.userDetail.firstname} onChange={this.handleChange} name="firstname" className="form-input white" />
-                                <label className="form-label">Lastname: </label>
-                                <input type="text" value={this.state.userDetail.lastname} onChange={this.handleChange} name="lastname" className="form-input white" />
-                                <label className="form-label">Email: </label>
-                                <input type="email" value={this.state.userDetail.email} onChange={this.handleChange} name="email" className="form-input white" />
-                                <label className="form-label">Username: </label>
-                                <input type="text" value={this.state.userDetail.username} onChange={this.handleChange} name="username" className="form-input white" />
-                                <label className="form-label"> Password: </label>
-                                <input type="password" value={this.state.userDetail.password} onChange={this.handleChange} name="password" className="form-input white" />
-                                <label className="form-label"> Confirm Password: </label>
-                                <input type="password" value={this.state.userDetail.confirmpassword} onChange={this.handleChange} name="confirmpassword" className="form-input white" />
-                                <input type="submit" value="Submit" className="form-btn" />
-                            </form>
-                        </div>
-                    </div>
-                </main>
+                <SignupForm
+                    handleChange = {this.handleChange}
+                    handleSubmit = {this.handleSubmit}
+                    userDetail = {this.state.userDetail}
+                    formErrors = {this.props.data.errors}
+                    isFetching = {this.props.data.awaitingResponse}
+                />
                 <Footer />
             </div >
         )
     }
 }
 
-export default Signup;
+const mapStateToProps = (state) =>{
+    console.log(state)
+    const data = state.authReducers;
+    return {
+        data
+    }
+}
+
+/**const mapDispatchToProps = dispatch => {
+   
+  }**/
+
+export default connect(mapStateToProps)(Signup);

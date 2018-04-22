@@ -136,7 +136,7 @@
       width: 90%
   }
   .left-gap {
-      margin-left:6em;
+      margin-left:6rem;
   }
   .all-borders {
     border: 1px solid #050107;
@@ -145,6 +145,13 @@
 }
 .thin-border {
     border: 1px solid #1aa807;
+}
+.green-border {
+    color:hsl(120, 34%, 34%);
+    background-color:hsl(0, 0%, 98%);;
+    border-radius: 4px;
+    padding: 4px 8px;
+    box-shadow: 2px 1px 6px hsl(120, 21%, 20%)
 }
 .business-form {
     border: 3px solid #20da4e;
@@ -213,20 +220,52 @@ main {
     background-color: hsl(120, 80%, 94%) !important;
     border-radius: 1rem !important;
     box-shadow: 2px 2px hsl(123, 26%, 32%);
+    margin-bottom: 3rem;
 }
 .form-btn {
-    display: block;
-    width: 40%!important; ;
-    color:  hsl(120, 80%, 94%) !important;
-    margin: 2rem auto 0 auto !important;
-    padding : 1rem 2em !important;
+    color:hsl(120, 80%, 94%) !important;;
     background-color: hsl(120, 31%, 30%) !important;
-    border-radius: 1rem !important;
 }
 label {
     color: #000 !important;
     font-size: 1.2rem !important;
 }
+.error-box {
+    background-color: hsl(109, 65%, 97%);
+    color: hsl(108, 34%, 15%);
+    padding: 2rem; 
+    border: 1px solid rgb(255, 157, 157); 
+    border-radius: 1rem; 
+}
+.form-response {
+    color: rgb(114, 11, 11);
+    padding-left: 10%;
+}
+
+.newuser {
+    color: hsl(120, 41%, 22%);
+}
+
+.welcome {
+    border: 3px solid hsl(120, 41%, 22%);
+    background-color: #ffffff;
+    color:#9a9b9a;
+    padding: 2rem 4rem;
+    line-height: 3rem;
+    border-radius: 3rem;
+}
+
+.welcome-btn {
+    margin-top: 3rem;
+    color: hsl(120, 100%, 97%) !important;
+    background-color: hsl(120, 41%, 22%) !important;
+    padding: 1rem 2rem !important;
+    font-size: 3rem !important;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 
 /** Changing the color of placeholder ***/
 /* input::-webkit-input-placeholder {

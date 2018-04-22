@@ -27,25 +27,29 @@ class Home extends Component {
                 <Navbar />
                 <main>
                     <div className="center banner">
-                        <div className="row">  
-                        <div className="col s12 m10 offset-m1 banner-image">
+                        <div className="row">
+                            <div className="col s12 m10 offset-m1 banner-image">
                                 <div className="row">
-                                <Link to= "/login">
-                                    <h1 class= "green-text text-darken-4"> 
-                                    WEco
-                                    <span class= "yellow-text text-darken-4">n</span>
-                                    nect
+                                    <Link to="/login">
+                                        <h1 className="green-text text-darken-4">
+                                            WEco
+                                    <span className="yellow-text text-darken-4">n</span>
+                                            nect
                                     </h1>
-                                </Link>
+                                    </Link>
                                 </div>
-                                <img className="responsive-img" src={hero} alt='Professionals'/>
+                                <img className="responsive-img" src={hero} alt='Professionals' />
                             </div>
                             <div className="col s12 m10 offset-m1  banner-text  blue-grey lighten-5 ">
                                 <h3 className="green-text text-darken-4"> Make Your Business known and get Connected today!</h3>
                                 <p>
                                     <span className="green-text text-darken-4 hide-on-med-and-down">WEconnect brings clients and businesses together</span>
                                 </p>
-                                <button className="btn btn-large yellow darken-4 white-text"> Start Here</button>
+                                <button className="btn btn-large yellow darken-4 white-text">
+                                  <Link to="/signup" className="white-text">
+                                        Start Here
+                                  </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -160,8 +164,8 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-    </main>
-            <Footer />
+                </main>
+                <Footer />
             </div >
         )
     }
