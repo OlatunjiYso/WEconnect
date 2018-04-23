@@ -152,13 +152,16 @@ class Validations {
       * @return {undefined} api response
       */
     static validatebusinessRegistration(req, res, next) {
-        req.checkBody('title', 'Please input business title')
+        req.checkBody('name', 'Please input business name')
             .trim()
             .notEmpty();
         req.checkBody('category', 'Please input business category')
             .trim()
             .notEmpty();
-        req.checkBody('location', 'Please input business location')
+        req.checkBody('state', 'Please input state')
+            .trim()
+            .notEmpty();
+        req.checkBody('city', 'Please input city')
             .trim()
             .notEmpty();
         req.checkBody('address', 'Please input business address')
@@ -167,10 +170,13 @@ class Validations {
         req.checkBody('slogan', 'Please input business slogan')
             .trim()
             .notEmpty();
-        req.checkBody('overview', 'Please input business overview')
+        req.checkBody('heading1', 'Please input business first section heading')
             .trim()
             .notEmpty();
-        req.checkBody('overview', 'overview must be a minimum of 20 characters')
+        req.checkBody('body1', 'Please input content for the first section')
+            .trim()
+            .notEmpty();
+        req.checkBody('body1', 'first section must be a minimum of 20 characters')
             .isLength({ min: 20 });
         req.checkBody('email', 'email is required')
             .notEmpty();
@@ -206,18 +212,18 @@ class Validations {
                 if (business) {
                     if (!req.params.businessId) {
                         return res.status(409)
-                        .json({
-                            success: false,
-                            message: 'This business email exist already'
-                        });
+                            .json({
+                                success: false,
+                                message: 'This business email exist already'
+                            });
                     }
-                        if (business.id !== parseInt(req.params.businessId, 10)) {
-                            return res.status(409)
-                                .json({
-                                    success: false,
-                                    message: 'This business email is in use'
-                                });
-                        }
+                    if (business.id !== parseInt(req.params.businessId, 10)) {
+                        return res.status(409)
+                            .json({
+                                success: false,
+                                message: 'This business email is in use'
+                            });
+                    }
                 }
                 return next();
             })
@@ -270,7 +276,7 @@ class Validations {
         Business
             .findOne({
                 where: {
-                    title: req.body.title
+                    name: req.body.name
                 }
             })
             .then((business) => {
@@ -308,8 +314,8 @@ class Validations {
       * @return {undefined} api response
       */
     static validateBusinessUpdate(req, res, next) {
-        if (req.body.title) {
-            req.checkBody('title', 'Title cannot be blank')
+        if (req.body.name) {
+            req.checkBody('name', 'Name cannot be blank')
                 .trim().notEmpty();
         }
         if (req.body.email) {
@@ -322,18 +328,26 @@ class Validations {
             req.checkBody('category', 'Category cannot be blank')
                 .trim().notEmpty();
         }
-        if (req.body.location) {
-            req.checkBody('location', 'Location cannot be blank')
+        if (req.body.state) {
+            req.checkBody('state', 'State cannot be blank')
+                .trim().notEmpty();
+        }
+        if (req.body.city) {
+            req.checkBody('city', 'City cannot be blank')
                 .trim().notEmpty();
         }
         if (req.body.address) {
             req.checkBody('address', 'Address cannot be blank')
                 .trim().notEmpty();
         }
-        if (req.body.description) {
-            req.checkBody('description', 'Description cannot be blank')
+        if (req.body.heading1) {
+            req.checkBody('heading1', 'First section title cannot be blank')
                 .trim().notEmpty();
-            req.checkBody('description', 'description must be a minimum of 20 characters')
+        }
+        if (req.body.body1) {
+            req.checkBody('body1', 'First section cannot be blank')
+                .trim().notEmpty();
+            req.checkBody('body1', 'First section must be a minimum of 20 characters')
                 .isLength({ min: 20 });
         }
         if (req.body.phone) {

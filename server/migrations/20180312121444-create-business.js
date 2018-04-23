@@ -15,7 +15,7 @@ module.exports = {
           key: 'id'
         }
       },
-      title: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -23,19 +23,43 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      overview: {
+      heading1: {
         allowNull: false,
         type: Sequelize.STRING
+      },
+      heading2: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      heading3: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      body1: {
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
+      body2: {
+        allowNull: true,
+        type: Sequelize.TEXT
+      },
+      body3: {
+        allowNull: true,
+        type: Sequelize.TEXT
       },
       category: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
+      city: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      location: {
+      state: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      email: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -56,6 +80,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       twitter: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      instagram: {
         allowNull: true,
         type: Sequelize.STRING
       },

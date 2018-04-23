@@ -6,24 +6,28 @@ class BusinessActions {
     /**
      * @description - action responsible for getting all businesses
      *
+     * @param {array} businesses - array of businesses
+     * 
      * @return {obj} -actionable object containing type and payload
      */
-    static getAllBusinesses() {
+    static getAllBusinesses(businesses) {
         return {
-            type: '',
-            payload: {}
+            type: 'FETCHED_BUSINESSES',
+            allBusinesses: businesses
         };
     }
 
      /**
      * @description - action responsible for getting a particular business
      *
+     *@param {obj} business - a business object
+     * 
      * @return {obj} -actionable object containing type and payload
      */
-    static getBusiness() {
+    static getBusiness(business) {
         return {
-            type: '',
-            payload: {}
+            type: 'FETCHED_BUSINESSES',
+            singleBusinesses: business
         };
     }
 

@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       unique: false
     },
-    title: {
+    name: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true
@@ -21,9 +21,29 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
-    overview: {
+    heading1: {
       allowNull: false,
       type: DataTypes.STRING
+    },
+    heading2: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    heading3: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    body1: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
+    body2: {
+      allowNull: true,
+      type: DataTypes.TEXT
+    },
+    body3: {
+      allowNull: true,
+      type: DataTypes.TEXT
     },
     category: {
       allowNull: false,
@@ -34,7 +54,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    location: {
+    state: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      unique: false
+    },
+    city: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: false
@@ -59,12 +84,17 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.STRING,
     },
+    instagram: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
     image: {
       allowNull: true,
       type: DataTypes.STRING,
       unique: true
     },
   });
+
     Business.associate = (models) => {
       Business.belongsTo(models.User, {
          foreignKey: 'ownerId',

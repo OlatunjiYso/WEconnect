@@ -33,7 +33,7 @@ class BusinessCard extends Component {
                                     <div>
                                         <h6 className="center grey-text text-darken-1">
                                             <i className=" material-icons top-pad pink-text">place</i>
-                                            { business.category }, { business.location } state.
+                                            { business.city }, { business.state } state.
                                      </h6>
                                     </div>
                                 </div>
