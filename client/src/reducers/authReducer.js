@@ -3,10 +3,11 @@ const initialState = {
         conflict: null,
         validationErrors: false,
         passwordMismatch: null,
-        login: null
+        login: null,
     },
     awaitingResponse: false,
-    user: null
+    user: null,
+    authenticated: false,
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -51,15 +52,17 @@ const authReducer = (state = initialState, action) => {
                     },
                 user: action.userDetails
             };
-            case 'ON_BOARDING_SUCCESS':
+        case 'ON_BOARDING_SUCCESS':
             return {
                 ...state,
-                awaitingResponse: action.awaiting
+                awaitingResponse: action.awaiting,
+                authenticated: action.authenticated,
             };
         case 'SIGNIN_SUCCESS':
             return {
                 ...state,
                 awaitingResponse: action.awaiting,
+                authenticated: action.authenticated,
                 errors:
                     {
                         ...state.errors,
@@ -67,7 +70,7 @@ const authReducer = (state = initialState, action) => {
                         conflict: action.error,
                         passwordMismatch: action.error,
                         login: action.error
-                    },
+                    }
             };
         case 'FAILED_SIGNIN':
             return {
@@ -75,6 +78,7 @@ const authReducer = (state = initialState, action) => {
                 errors:
                     { ...state.errors, login: action.error },
                 awaitingResponse: action.awaiting,
+                authenticated: action.authenticated,
             };
         case 'PASSWORD_MISMATCH':
             return {
@@ -82,6 +86,16 @@ const authReducer = (state = initialState, action) => {
                 errors:
                     { ...state.errors, passwordMismatch: action.misMatch },
                 awaitingResponse: action.awaiting,
+            };
+        case 'AUTHENTICATED':
+            return {
+                ...state,
+                authenticated: action.authenticated,
+            };
+        case 'UNAUTHENTICATED':
+            return {
+                ...state,
+                authenticated: action.authenticated,
             };
         default:
             return state;

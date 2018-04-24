@@ -33,6 +33,37 @@ class BusinessActions {
     }
 
     /**
+     * @description - action for getting a user's business
+     *
+     *@param {obj} businesses - an array of user's businesses
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static gotMyBusiness(businesses) {
+        return {
+            type: 'FOUND_MY_BUSINESSES',
+            businesses,
+            gotBusinesses: true
+        };
+    }
+
+    /**
+     * @description - action for getting a user's business
+     *
+     *@param {obj} businesses - an array of user's businesses
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static gotNoBusiness() {
+        return {
+            type: 'GOT_NO_BUSINESSES',
+            gotBusinesses: false
+        };
+    }
+
+    /**
      * @description - action for sending business not found message
      *
      * @return {obj} -actionable object containing type and payload

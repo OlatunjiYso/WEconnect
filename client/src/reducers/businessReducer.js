@@ -7,28 +7,43 @@ const initialState = {
         state: 'Lagos'
     },
     business: {},
-    notFound: false
+    notFound: false,
+    myReviews: [],
+    myBusinesses: [],
+    gotBusiness: false,
+
+
 };
 
 const businessReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'FETCHED_BUSINESSES':
+        case 'FETCHED_BUSINESSES': // Fetching general business
             return {
                 ...state,
                 businesses: action.allBusinesses
             };
-        case 'FETCHED_BUSINESS':
+        case 'FETCHED_BUSINESS': // Fetching a particular business
             return {
                 ...state,
                 business: action.business,
                 myReviews: action.reviews
             };
-        case 'NOT_FOUND':
+        case 'NOT_FOUND': // Not getting a particulat business
             return {
                 ...state,
                 notFound: action.notFound
             };
-
+        case 'FOUND_MY_BUSINESSES': // Fetching my own business
+            return {
+                ...state,
+                myBusinesses: action.businesses,
+                gotBusiness: true,
+            };
+        case 'GOT_NO_BUSINESSES': // Fetching my business, but I have got none
+            return {
+                ...state,
+                gotBusiness: false,
+            };
 
         default:
             return state;
