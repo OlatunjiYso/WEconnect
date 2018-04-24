@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import setToken from '../helpers/authorization';
 import history from '../history';
 import authAction from '../actions/auth';
 import Navbar from '../components/navbar';
@@ -65,7 +66,11 @@ class Login extends Component {
         axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/login', (user))
             .then((response) => {
                 dispatch(authAction.signinSuccess())
-                history.push('/', { user: 'newUser' })
+                setToken(response.data.token)
+                localStorage.setItem('id', response.data.id);
+                localStorage.setItem('username', 'olatunji');
+                console.log(localStorage);
+                history.push('/');
             })
             .catch((error) => {
                 console.log(error.response.data.message);
