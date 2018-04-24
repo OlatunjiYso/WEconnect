@@ -10,7 +10,7 @@ const initialState = {
     notFound: false,
     myReviews: [],
     myBusinesses: [],
-    gotBusiness: false,
+    gotBusinesses: false,
 
 
 };
@@ -37,12 +37,12 @@ const businessReducer = (state = initialState, action) => {
             return {
                 ...state,
                 myBusinesses: action.businesses,
-                gotBusiness: true,
+                gotBusinesses: action.gotBusinesses,
             };
         case 'GOT_NO_BUSINESSES': // Fetching my business, but I have got none
             return {
                 ...state,
-                gotBusiness: false,
+                gotBusinesses: action.gotBusinesses,
             };
 
         default:

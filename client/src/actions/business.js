@@ -40,7 +40,7 @@ class BusinessActions {
      *
      * @return {obj} -actionable object containing type and payload
      */
-    static gotMyBusiness(businesses) {
+    static gotMyBusinesses(businesses) {
         return {
             type: 'FOUND_MY_BUSINESSES',
             businesses,

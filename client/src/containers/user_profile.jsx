@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import setToken from '../helpers/authorization';
 import history from '../history';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
@@ -12,7 +13,6 @@ import businessActions from '../actions/business';
 import customStyles from '../css/style.css';
 import profilePicture from '../assets/images/cameras.jpg';
 
-const username = 'Olatunji';
 
 /**
  * @class UserProfileComponent
@@ -41,22 +41,22 @@ class UserProfile extends Component {
             console.log('you aint logged in');
         }
         const { dispatch } = this.props;
+        setToken(localStorage.token);
         axios.get('https://weconnect-main.herokuapp.com/api/v1/auth/myBusiness')
             .then((response) => {
-                const businesses = response.data.businesses
-                dispatch(businessActions.gotMyBusinesses(businesses));
-                console.log('found some businesse for you');
+                if (response.data.message === 'You have no business registered yet') {
+                    dispatch(businessActions.gotNoBusiness());
+                }
+                if (response.data.message === 'all your businesses') {
+                    const businesses = response.data.businesses
+                    dispatch(businessActions.gotMyBusinesses(businesses));
+                }  
             })
             .catch((error) => {
                 if (error.response.status === 401) {
-                    history.push('/Login'); // Flash a message telling user to signin
-                    console.log('unauthorized bouncing');
+                    history.push('/Login'); // Flash a message telling user to login
                 }
-                if (error.response.status === 404) {
-                    dispatch(businessActions.gotNoBusiness());
-                    console.log('no business for the user');
-                }
-                console.log(error.response);
+                console.log(error.response)
             });
     }
     /** 
@@ -67,11 +67,21 @@ class UserProfile extends Component {
     */
     render() {
         const username = localStorage.username
-        const myBusinesses = this.state.businesses.map((business, index) => {
+        const data =  this.props.data;
+
+        // Generate an array of businesses if the user has any.
+        const myBusinesses = (data.gotBusinesses) ? 
+        data.myBusinesses.map((business, index) => {
             return (
                 <UserBusiness key={index} userBusiness={business} businesssPic={profilePicture} />
             )
-        })
+        }) : null;
+        
+        // Generate a suitable header if or not, user has businesses
+        const sectionHeading = (data.gotBusinesses) ? 
+        <span> Feel free to manage your business outfits </span> : 
+        <span> You are yet to add a business </span> ;
+
         return (
             <div>
                 <main>
@@ -87,7 +97,7 @@ class UserProfile extends Component {
                     <div className="row slim-container top-pad">
                         <div className="row">
                             <div className="col s6 left">
-                                <Link to="register_business.html" className="green lighten-5 black-text btn" type="button"> Add new Business
+                                <Link to="/business/registration" className="green lighten-5 black-text btn" type="button"> Add new Business
                                 </Link>
                             </div>
                             <div className="col s6">
@@ -99,7 +109,7 @@ class UserProfile extends Component {
                             <div className="row">
                                 <div className="col s12">
                                     <h4 className="head-font center grey-text text-darken-1 bottom-pad-small">
-                                        Feel free to manage your business outfits
+                                        {sectionHeading}
                                     </h4>
                                 </div>
                                 <div className="row ">

@@ -66,9 +66,11 @@ class Login extends Component {
         axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/login', (user))
             .then((response) => {
                 dispatch(authAction.signinSuccess())
+               // localStorage.clear();
                 setToken(response.data.token)
+                localStorage.setItem('token', response.data.token);
                 localStorage.setItem('id', response.data.id);
-                localStorage.setItem('username', 'olatunji');
+                localStorage.setItem('username', response.data.username);
                 console.log(localStorage);
                 history.push('/');
             })
