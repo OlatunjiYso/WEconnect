@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -17,8 +17,9 @@ class BusinessCard extends Component {
     * 
     * @memberof BusinessCardComponent
     */
-    render() {
+    render(match) {
         const business = this.props.business;
+        const { id } = business;
         return (
             <div>
                 <div className="col s8 offset-s2 offset-m1 m4 l3 container">
@@ -29,17 +30,19 @@ class BusinessCard extends Component {
                                     <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
                                 </div>
                                 <div className="card-content">
-                                    <h6 className="center green-text text-darken-4 bold-font"> {business.name} </h6>
+                                    <h6 className="center green-text text-darken-4 bold-font"> {business.name}
+                                    </h6>
                                     <div>
                                         <h6 className="center grey-text text-darken-1">
                                             <i className=" material-icons top-pad pink-text">place</i>
-                                            { business.city }, { business.state } state.
+                                            {business.city}, {business.state} state.
                                      </h6>
                                     </div>
                                 </div>
-                                <h6 className="card-button cursor white">
-                                    <div className="center grey-text text-darken-2">Visit</div>
-                                </h6>
+                                <button className="card-button cursor white">
+                                    <Link to= {`/businesses/${business.id}`} className="center grey-text text-darken-2">visit
+                                    </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +52,7 @@ class BusinessCard extends Component {
     }
 }
 BusinessCard.propTypes = {
-    business: PropTypes.object.isRequired
+    business: PropTypes.object.isRequired,
 }
 
 export default BusinessCard;

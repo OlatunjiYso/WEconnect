@@ -16,27 +16,40 @@ class BusinessBody extends Component {
     * @memberof BusinessBodyComponent
     */
     render() {
-        const business = this.props.businessObject;
+        const { heading1, heading2, heading3 } = this.props.businessObject
+        const { body1, body2, body3 } = this.props.businessObject
+        const allSections = [];
+        if (heading1 !== null) {
+            const section = {};
+            section.heading = heading1;
+            section.body = body1;
+            allSections.push(section)
+        }
+        if (heading2 !== null) {
+            const section = {};
+            section.heading = heading2;
+            section.body = body2;
+            allSections.push(section)
+        }
+        if (heading3 !== null) {
+            const section = {};
+            section.heading = heading3;
+            section.body = body3;
+            allSections.push(section)
+        }
+        const presentation = allSections.map((each, index) => {
+            return (
+                <div key= {index} className="col s10 offset-s1">
+                    <h4 className="center green-text text-darken-3">{each.heading}</h4>
+                    <p className="padded-body  grey lighten-5">
+                        {each.body}
+                    </p>
+                </div>
+            );
+        })
         return (
             <div className="row top-pad">
-                <div className="col s10 offset-s1">
-                    <h4 className="center green-text text-darken-3">{business.heading1}</h4>
-                    <p className="padded-body  grey lighten-5">
-                        {business.body1}
-                    </p>
-                </div>
-                <div className="col s10 offset-s1 ">
-                    <h4 className="center green-text text-darken-3">{business.heading2}</h4>
-                    <p className="padded-body grey lighten-5">
-                        {business.body2}
-                    </p>
-                </div>
-                <div className="col s10 offset-s1">
-                    <h4 className="center green-text text-darken-3">{business.heading3}</h4>
-                    <p className=" padded-body  grey lighten-5">
-                        {business.body3}
-                    </p>
-                </div>
+                { presentation }
             </div>
         )
     }

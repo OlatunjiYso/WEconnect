@@ -23,6 +23,7 @@ class AllBusinesses extends Component {
     constructor(props) {
         super(props);
     }
+
     /** 
     *
     * @returns {JSX} JSX
@@ -40,21 +41,39 @@ class AllBusinesses extends Component {
                 console.log(error);
             });
     }
+
+    /** 
+    *@param {event} event
+    *
+    *@returns {func} funtion
+    *@memberof SignupForm Component
+    *
+    */
+    
+    /** 
+    *
+    * @returns {JSX} JSX
+    * 
+    * @memberof AllBusinessesComponent
+    */
     render() {
         const fakeBusiness = biz;
         const realBusiness = this.props.data.businesses
         const FoundBusinesses = realBusiness.map((eachBusiness, index) => {
             return (
-                <BusinessCard key={index} business={eachBusiness} businesssPic={profilePicture} />
+                <BusinessCard key={index}
+                    business={eachBusiness}
+                    businesssPic={profilePicture}
+                />
             )
         })
         return (
             <div>
                 <Navbar />
                 <main>
-                <BusinessCatalogTop filter= {this.props.data.filter} />
-                    <div className="row cushion center">   
-                        { FoundBusinesses }
+                    <BusinessCatalogTop filter={this.props.data.filter} />
+                    <div className="row cushion center">
+                        {FoundBusinesses}
                     </div>
                 </main>
                 <Footer />
