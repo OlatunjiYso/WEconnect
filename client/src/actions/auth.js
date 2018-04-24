@@ -29,7 +29,7 @@ class authActions {
             type: 'SIGNUP_SUCCESS',
             awaiting: false,
             error: null,
-            userDetails: user
+            userDetails: user,
         };
     }
 
@@ -103,7 +103,8 @@ class authActions {
             type: 'FAILED_SIGNIN',
             awaiting: false,
             outcome: 0,
-            error: message
+            error: message,
+            authenticated: false,
         };
     }
 
@@ -117,22 +118,50 @@ class authActions {
         return {
             type: 'SIGNIN_SUCCESS',
             awaiting: false,
-            error: null
+            error: null,
+            authenticated: true,
         };
     }
 
-        /**
+     /**
      * @description - method responsible for stopping the spinner on success
      *
-     * 
      * @return { obj } - actionable object containing payload and type
      */
     static onBoardingSuccess() {
         return {
             type: 'ON_BOARDING_SUCCESS',
             awaiting: false,
-            userDetails: null
+            userDetails: null,
+            authenticated: true,
         };
     }
+
+     /**
+     * @description - method responsible for logging out users
+     *
+     * @return { obj } - actionable object containing payload and type
+     */
+    static loggedOut() {
+        localStorage.clear();
+        return {
+            type: 'UNAUTHENTICATED',
+            authenticated: false,
+          };
+    }
+
+    /**
+     * @description - method responsible for logging out users
+     *
+     * @return { obj } - actionable object containing payload and type
+     */
+    static loggedIn() {
+        return {
+            type: 'AUTHENTICATED',
+            authenticated: true,
+          };
+    }
 }
+
 export default authActions;
+
