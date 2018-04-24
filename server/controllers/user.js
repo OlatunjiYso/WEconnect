@@ -37,7 +37,8 @@ class UserController {
                     .json({
                         message: 'You are signed up!',
                         username: user.username,
-                        email: user.email
+                        email: user.email,
+                        id: user.id
                     });
             })
             .catch((err) => {
@@ -142,7 +143,9 @@ class UserController {
                                 res.status(200)
                                     .json({
                                         message: 'you are logged in!',
-                                        token
+                                        token,
+                                        id: user.id,
+                                        username: user.username,
                                     });
                             }
                         })
