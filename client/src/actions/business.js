@@ -18,7 +18,7 @@ class BusinessActions {
     }
 
      /**
-     * @description - action responsible for getting a particular business
+     * @description - action for storing a particular business
      *
      *@param {obj} business - a business object
      * 
@@ -26,8 +26,21 @@ class BusinessActions {
      */
     static getBusiness(business) {
         return {
-            type: 'FETCHED_BUSINESSES',
-            singleBusinesses: business
+            type: 'FETCHED_BUSINESS',
+            business,
+            reviews: business.Reviews
+        };
+    }
+
+    /**
+     * @description - action for sending business not found message
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static notFound() {
+        return {
+            type: 'NOT_FOUND',
+            notFound: true
         };
     }
 

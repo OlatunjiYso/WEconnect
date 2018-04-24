@@ -39,13 +39,13 @@ class BusinessBanner extends Component {
                         <div className="col s6">
                             <h6 className="right">
                                 <i className="material-icons prefix small green-text text-darken-4" id="icon-text">phone</i>
-                                <span class="black-text text-darken-4 body-font">{business.phone} </span>
+                                <span className="black-text text-darken-4 body-font">{business.phone} </span>
                             </h6>
                         </div>
                         <div className="col s6">
                             <h6 className="left">
                                 <i className="material-icons prefix small  green-text text-darken-4" id="icon-text">mail</i>
-                                <span class="body-font">{business.email}</span>
+                                <span className="body-font">{business.email}</span>
                             </h6>
                         </div>
                     </div>

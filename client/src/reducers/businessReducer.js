@@ -1,12 +1,15 @@
-import business from '../dummy/all_businesses';
+import fakebusiness from '../dummy/all_businesses';
 
 const initialState = {
-    businesses: business,
+    businesses: fakebusiness,
     filter: {
         category: 'All',
         state: 'Lagos'
-    }
+    },
+    business: {},
+    notFound: false
 };
+
 const businessReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCHED_BUSINESSES':
@@ -14,10 +17,22 @@ const businessReducer = (state = initialState, action) => {
                 ...state,
                 businesses: action.allBusinesses
             };
+        case 'FETCHED_BUSINESS':
+            return {
+                ...state,
+                business: action.business,
+                myReviews: action.reviews
+            };
+        case 'NOT_FOUND':
+            return {
+                ...state,
+                notFound: action.notFound
+            };
+
 
         default:
             return state;
     }
-    };
+};
 
 export default businessReducer;

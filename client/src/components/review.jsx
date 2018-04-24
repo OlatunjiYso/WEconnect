@@ -23,10 +23,10 @@ class Review extends Component {
             <div>
                 <div className="row grey-text text-darken-4 grey lighten-5">
                     <p className="col s12">
-                        {review.message}
+                        {review.description}
                     </p>
-                    <h6 className="col s6 left-align pink-text text-darken-4"> { review.reviewer }</h6>
-                    <h6 className="col s6 right-align pink-text text-darken-4"> { review.date }</h6>
+                    <h6 className="col s6 left-align pink-text text-darken-4"> { review.reviewerId }</h6>
+                    <h6 className="col s6 right-align pink-text text-darken-4"> { review.createdAt }</h6>
                 </div>
             </div>
         )

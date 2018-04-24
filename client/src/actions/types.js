@@ -10,4 +10,4 @@ const actionTypes = {
     }
 }
 
-export default actionTypes;
+export default actionTypes; <div className="center grey-text text-darken-2">Visit</div>

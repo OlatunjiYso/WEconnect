@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, { Component } from 'react';
 
 import ReactDOM from 'react-dom';
 
@@ -31,19 +31,19 @@ class App extends Component {
             */
         render() {
                 return (
-                        <div>
-                                <Route exact = {true} path="/" component = { Home} /> 
-                                <Route path="/login" component = { Login } /> 
-                                <Route path="/welcome" component = { Welcome } /> 
-                                <Route path="/signup" component = { Signup } />
-                                <Route path="/user/profile" component = { UserProfile } />
-                                <Route path="/business/profile" component = { BusinessProfile } />
-                                <Route path="/businesses" component = { AllBusinesses } />
-                                <Route path="/business/registration" component = { BusinessRegForm } />
-                                <Route path="/business/update" component = { BusinessUpdateForm } />
-                                <Route path="/business/manage" component = { ManageBusiness } />
-                                
-                        </div>
+                        <Switch>
+                                <Route exact={true} path="/" component={Home} />
+                                <Route path="/login" component={Login} />
+                                <Route path="/welcome" component={Welcome} />
+                                <Route path="/signup" component={Signup} />
+                                <Route path="/user/profile" component={UserProfile} />
+                                <Route path="/businesses/:businessId" component={BusinessProfile} />
+                                <Route path="/businesses" component={AllBusinesses} />
+                                <Route path="/business/registration" component={BusinessRegForm} />
+                                <Route path="/business/update" component={BusinessUpdateForm} />
+                                <Route path="/business/manage" component={ManageBusiness} />
+
+                        </Switch>
                 )
 
         }
