@@ -164,7 +164,7 @@ class BusinessForm extends Component {
                     </div>
                 </div>
                 <div className="row center-align">
-                    <input type="submit" value="Done" />
+                    <input type="submit" value="Preview" className="btn green darken-2"/>
                 </div>
             </form>
         )

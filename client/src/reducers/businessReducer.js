@@ -7,12 +7,12 @@ const initialState = {
         state: 'Lagos'
     },
     business: {},
+    trialBusiness: {},
+    confirmedBusiness: {},
     notFound: false,
     myReviews: [],
     myBusinesses: [],
     gotBusinesses: false,
-
-
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -44,7 +44,11 @@ const businessReducer = (state = initialState, action) => {
                 ...state,
                 gotBusinesses: action.gotBusinesses,
             };
-
+        case 'PREVIEW': // Wish to preview my business before creating
+            return {
+                ...state,
+                trialBusiness: action.business,
+            };
         default:
             return state;
     }

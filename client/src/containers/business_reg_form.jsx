@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { NavItem, Dropdown, Button } from 'react-materialize';
+import { connect } from 'react-redux';
+
+import history from '../history';
+import businessActions from '../actions/business';
 import Footer from '../components/footer';
 import BusinessForm from '../components/business_form';
 import Navbar from '../components/navbar'
@@ -22,12 +24,10 @@ class BusinessRegForm extends Component {
         this.state = {
             business: {
                 businessName: '', category: '', slogan: '', address: '',
-                location: '', phone: '', email: '', whatsapp: '', twitter: '',
+                city: '', state: '',phone: '', email: '', whatsapp: '', twitter: '',
                 facebook: '', instagram: '', heading1: '', body1: '', heading2: '',
                 body2: '', heading3: '', body3: ''
             },
-            submitted: false
-
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,13 +40,15 @@ class BusinessRegForm extends Component {
         this.setState({
             ...state,
             business: { ...this.state.business, [name]: value },
-            submitted: true
         })
     };
 
     handleSubmit(event) {
-        alert('An entry has been received: ' + this.state.business.location);
         event.preventDefault();
+        const {dispatch} = this.props
+        const business = this.state.business;
+        dispatch(businessActions.previewBusiness(business))
+        history.push('/preview');  
     }
     /** 
     *
@@ -57,7 +59,7 @@ class BusinessRegForm extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                
                 <main>
                     <div className="row dashboard head-font ">
                         <div className="col s8 offset-s2 m3 l2 logo center-align">
@@ -85,4 +87,12 @@ class BusinessRegForm extends Component {
     }
 }
 
-export default BusinessRegForm;
+const mapStateToProps = (state) => {
+    const data = state.businessReducer;
+    console.log(data);
+    return {
+        data
+    }
+}
+
+export default connect(mapStateToProps)(BusinessRegForm);

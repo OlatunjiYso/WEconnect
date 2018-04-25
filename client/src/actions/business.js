@@ -76,6 +76,20 @@ class BusinessActions {
     }
 
      /**
+     * @description - action for sending business information to be previewed
+     *
+     *@param {obj} business - business object to be previewed
+
+     * @return {obj} -actionable object containing type and business information
+     */
+    static previewBusiness(business) {
+        return {
+            type: 'PREVIEW',
+            business
+        };
+    }
+
+     /**
      * @description - action responsible for creating a business
      *
      * @return {obj} -actionable object containing type and payload
