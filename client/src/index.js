@@ -8,6 +8,11 @@ import store from './store';
 import App from './App';
 
 
+const user = localStorage.getItem('user');
+if(user) {
+  store.dispatch({ type: 'SIGNIN_SUCCESS' });
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>

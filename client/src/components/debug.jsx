@@ -1,48 +1,18 @@
-class EssayForm extends React.Component {
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>
-            Essay:
-            <textarea value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-          </div>
-        </form>
-      );
-    }
-  }
+return (
+  <div>
+    <div>
+      <div>
+        <h3> Products</h3>
+        <ul> {linkList} </ul>
+      </div>
+    </div>
+    <Route path={`${match.url}/:productId`}
+      render={(props) => <Product data={productsData} {...props} />} />
+    <Route exact path={match.url}
+      render={() => (
+        <div>Please select a product.</div>
+      )}
+    />
+  </div>
+)
 
-  class EssayForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: 'Please write an essay about your favorite DOM element.'
-      };
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('An essay was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Essay:
-            <textarea value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      );
-    }
-  }

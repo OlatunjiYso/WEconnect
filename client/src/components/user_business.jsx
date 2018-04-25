@@ -29,11 +29,15 @@ class UserBusiness extends Component {
                                     <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
                                 </div>
                                 <div className="card-content">
+                                <Link to = { `/businesses/${userBusiness.id}` }>
                                     <h6 className="center green-text text-darken-4"> {userBusiness.name} </h6>
+                                </Link>
                                 </div>
-                                <h6 className="card-button cursor white">
-                                    <div className="center grey-text text-darken-2">Manage</div>
-                                </h6>
+                                <Link to="/business/manage"> 
+                                    <h6 className="card-button cursor white">
+                                         <div className="center grey-text text-darken-2">Manage</div>
+                                    </h6>
+                                </Link>
                             </div>
                         </div>
                     </div>
