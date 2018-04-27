@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { NavItem, Dropdown, Button } from 'react-materialize';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
+import setToken from '../helpers/authorization';
 import history from '../history';
 import businessActions from '../actions/business';
 import Footer from '../components/footer';
@@ -23,12 +25,13 @@ class BusinessRegForm extends Component {
         super(props);
         this.state = {
             business: {
-                businessName: '', category: '', slogan: '', address: '',
-                city: '', state: '',phone: '', email: '', whatsapp: '', twitter: '',
+                name: '', category: '', slogan: '', address: '',
+                city: '', state: '', phone: '', email: '', whatsapp: '', twitter: '',
                 facebook: '', instagram: '', heading1: '', body1: '', heading2: '',
                 body2: '', heading3: '', body3: ''
             },
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -45,10 +48,30 @@ class BusinessRegForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {dispatch} = this.props
-        const business = this.state.business;
-        dispatch(businessActions.previewBusiness(business))
-        history.push('/preview');  
+        const { dispatch } = this.props;
+        const business = this.state.business; 
+        console.log(business);
+        setToken(localStorage.token);
+        dispatch(businessActions.createAttempt());
+        axios.post('https://weconnect-main.herokuapp.com/api/v1/businesses', (business))
+            .then((response) => {
+                dispatch(businessActions.createSuccess())
+                history.push('/userProfile');
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error && error.response.status === 401) {
+                    history.push('/login');
+                    dispatch(businessActions.unknownError())
+                }
+                if (error && error.response.status === 400) {
+                    dispatch(businessActions.badRequest(error.response.data.errors))
+                }
+                if (error && error.response.status === 409) {
+                    dispatch(businessActions.conflict(error.response.data.message))
+                }
+            });
+
     }
     /** 
     *
@@ -59,7 +82,7 @@ class BusinessRegForm extends Component {
     render() {
         return (
             <div>
-                
+
                 <main>
                     <div className="row dashboard head-font ">
                         <div className="col s8 offset-s2 m3 l2 logo center-align">
@@ -74,9 +97,11 @@ class BusinessRegForm extends Component {
                         <div className="row">
                             <h5 className="center">Kindly fill in your business details as appropriate</h5>
                             <BusinessForm
-                                businessObject= { this.state.business }
-                                handleChange= { this.handleChange }
-                                handleSubmit= { this.handleSubmit }
+                                businessObject={this.state.business}
+                                handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit}
+                                formErrors = {this.props.data.errors}
+                                isFetching = {this.props.data.awaiting}
                             />
                         </div>
                     </div>
@@ -89,7 +114,7 @@ class BusinessRegForm extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data);
+    console.log(data)
     return {
         data
     }

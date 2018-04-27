@@ -38,13 +38,13 @@ class App extends Component {
                                 <Route path="/login" component={ Login } />
                                 <Route path="/welcome" component={ Welcome } />
                                 <Route path="/signup" component={ Signup } />
-                                <Route path="/user/profile" component={ UserProfile } />
+                                <Route path="/userProfile" component={ UserProfile } />
                                 <Route path="/businesses/:businessId" component={ BusinessProfile } />
                                 <Route path="/businesses" component={ AllBusinesses } />
-                                <Route path="/business/registration" component={ BusinessRegForm } />
-                                <Route path="/business/update" component={ BusinessUpdateForm } />
-                                <Route path="/business/manage" component={ ManageBusiness } />
-                                <Route path="/registration/guide" component={ RegistrationGuide } />
+                                <Route path="/businessRegistration" component={ BusinessRegForm } />
+                                <Route path="/businessUpdate" component={ BusinessUpdateForm } />
+                                <Route path="/manageBusiness" component={ ManageBusiness } />
+                                <Route path="/registrationGuide" component={ RegistrationGuide } />
                                 <Route path="/preview" component={ BusinessPreview } />
                         </Switch>
                 )

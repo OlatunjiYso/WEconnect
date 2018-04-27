@@ -64,7 +64,7 @@ class RegistrationGuide extends Component {
                             <h6 className="instruction no-top-gap">
                                 Oh yes! You can edit the headers and sections as much as you would
                             </h6>
-                            <Link to = "/business/registration">
+                            <Link to = "/businessRegistration">
                                     <h5 className="center green-text text-darken-4 top-pad-much"> Proceed to Registration Form </h5>
                             </Link>
                         </div>

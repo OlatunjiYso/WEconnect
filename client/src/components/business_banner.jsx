@@ -28,7 +28,7 @@ class BusinessBanner extends Component {
                     <img className="responsive-img left" src={profilePicture} alt="profilepic" />
                 </div>
                 <div className="col s12 m8 center-align">
-                    <h3 className="green-text text-darken-4">{business.name}</h3>
+                    <h3 className="green-text text-darken-4">{business.businessName}</h3>
                     <h5 className="green-text text-darken-1"> {business.address}</h5>
                     <h6 className="Sofia pink-text text-darken-2">
                         <p>

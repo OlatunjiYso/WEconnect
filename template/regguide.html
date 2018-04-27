@@ -1,0 +1,133 @@
+<!-- Road Map Road Map Road Map
+     <Head>
+        __google fonts import
+        __materialize css linking
+        __my custom css linking
+    </Head>
+
+    <Body>
+        __NavBar
+        __First row    Sign In
+        __Second row   [Sign In form]
+        __third row     [footer]
+        __javascript
+    </Body
+   -->
+
+   <!DOCTYPE html>
+   <html>
+   
+   <head>
+       <!--Import Google Icon Font-->
+       <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <!--Import materialize.css-->
+       <link type="text/css" rel="stylesheet" href="./public/materialize/css/materialize.min.css" media="screen,projection" />
+       <!--Link up custom styles.css-->
+       <link type="text/css" rel="stylesheet" href="./public/CSS/styles.css" media="screen,projection" />
+       <!--Let browser know website is optimized for mobiledeep-orange-text text-lighten-2-->
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
+   
+   <body>
+       <nav>
+           <div class="nav-wrapper blue-grey darken-4 text-lighten-3">
+               <a href="index.html" class=" Sofia brand-logo  logo pink-text text-lighten-4">WEconnect</a>
+               <a href="#" data-activates="mobile-demo" class="button-collapse">
+                   <i class="material-icons"> more </i>
+               </a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down head-font">
+                   <li>
+                       <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                   </li>
+                   <li>
+                       <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                   </li>
+                   <li>
+                       <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                   </li>
+               </ul>
+               <ul class="side-nav" id="mobile-demo">
+                   <li>
+                       <a href="signin.html" class="pink-text text-lighten-4">Sign In</a>
+                   </li>
+                   <li>
+                       <a href="signup.html" class="pink-text text-lighten-4">Sign Up</a>
+                   </li>
+                   <li>
+                       <a href="user_profile.html" class="pink-text text-lighten-4">My Profile</a>
+                   </li>
+                   <li>
+                       <a href="all_businesses.html" class="pink-text text-lighten-4">All</a>
+                   </li>
+               </ul>
+           </div>
+       </nav>
+   
+       <main>
+   
+       <!-- Second row ## Sign In form-->
+       <div class="row top-pad body-font">
+           <div class="row">
+            <div class="top-pad col s12 m8 offset-m2">
+                <h3 class =" center">
+                   Few things about the form you are about to fill
+                </h3>
+                <h5>
+                    Our business registration form is in 2 major sections, which are as follows
+                </h5>
+                <ul>
+                    <li>
+                        <h6> Section 1 ( Core Business details)</h6>
+                    </li>
+                    <li>
+                        <h6>Section 2 ( Business content) </h6>
+                    </li>
+                </ul>
+                <h5> Section 1 of form</h5>
+                <p>
+                    Here, you will be required to provide your core business information which includes the name, email, address, slogan, city, just to mention a few. 
+                </p>
+                <h5> Section 2 of form</h5>
+                <p>
+                    Here, you can customize your business layout as you would be given the opportunity to freely choose a suitable heading or topic for each section of your business page.
+                    <h5> Illustration</h5>
+                    You may choose to supply <span> What We Do</span> as a header, and in the input box provided under the header, you can write extensively about <span>What You Do</span>
+                    <h5>Can the headers be changed?</h5>
+                    Oh yes! You can edit the headers and sections as much as you would
+                </p>
+                
+            </div>
+
+           </div>
+       </div>
+       <!-- end of row -->
+   </main>
+       <!-- Footer -->
+       <footer class="page-footer blue-grey darken-4 body-font">
+           <div class="contasiner">
+               <div class="row">
+                   <div class="col m3 s12">
+                       <h5 class="pink-text text-lighten-4 Sofia">WEconnect</h5>
+                   </div>
+                   <div class="col m4 s12">
+                       <a class=" pink-text text-lighten-4 right">© 2018 Andela, Lagos Nigeria</a>
+                   </div>
+                   <div class="col m4 s12">
+                       <a class="pink-text text-lighten-4 right">Andela Bootcamp project cycle xxx</a>
+                   </div>
+               </div>
+           </div>
+       </footer>
+       <!--Import jQuery before materialize.js-->
+       <script type="text/javascript" src="./public/jquery/jquery.min.js"></script>
+       <script type="text/javascript" src="./public/materialize/js/materialize.min.js"></script>
+       <script type="text/javascript" src="./public/js/init.js"></script>
+   </body>
+   
+   </html>

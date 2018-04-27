@@ -90,17 +90,75 @@ class BusinessActions {
     }
 
      /**
-     * @description - action responsible for creating a business
+     * @description - action responsible for flagging conflicts
+     *
+     *@param {obj} error - the conflict error message
      *
      * @return {obj} -actionable object containing type and payload
      */
-    static CreateBusiness() {
+    static conflict(error) {
         return {
-            type: '',
-            payload: {}
+            type: 'CONFLICT',
+            awaiting: false,
+            error
         };
     }
 
+    /**
+     * @description - action responsible for flagging badrequest
+     *
+     *@param {obj} errors - an array of validation errors
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static badRequest(errors) {
+        return {
+            type: 'BAD_REQUEST',
+            awaiting: false,
+            error: errors
+        };
+    }
+    /**
+     * @description - action responsible for redirecting to user profile after success
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static unknownError() {
+        return {
+            type: 'UNKNOWN_ERROR',
+            awaiting: false,
+        };
+    }
+
+    /**
+     * @description - action responsible for flagging badrequest
+     *
+     *@param {obj} errors - an array of validation errors
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static createAttempt() {
+        return {
+            type: 'ATTEMPT',
+            awaiting: true,
+            error: null
+        };
+    }
+
+    /**
+     * @description - action responsible for redirecting to user profile after success
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static createSuccess() {
+        return {
+            type: 'SUCCESS',
+            awaiting: false,
+            error: null
+        };
+    }
      /**
      * @description - action responsible for updating a business
      *

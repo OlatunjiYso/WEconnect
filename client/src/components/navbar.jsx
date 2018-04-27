@@ -31,7 +31,7 @@ class NavBar extends Component {
                                 <Link to="/signup" className="white-text">Sign Up</Link>
                             </li>
                             <li>
-                                <Link to="/user/profile" className="white-text">My Profile</Link>
+                                <Link to="/userProfile" className="white-text">My Profile</Link>
                             </li>
                             <li>
                                 <Link to="/businesses" className="white-text">All</Link>

@@ -29,17 +29,67 @@ class BusinessPreview extends Component {
         super(props);
         this.state = {
         };
+        this.backToForm = this.backToForm.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /** 
     *
     * @returns {JSX} JSX
     * 
-    * @memberof AllBusinessesComponent
+    * @memberof BusinessPreviewComponent
     */
    componentDidMount() {
     const { dispatch, match } = this.props;
 }
+
+    /** 
+    *@description takes user back to form
+    *
+    * @returns {func} funtion
+    * 
+    * @memberof BusinessPreviewComponent
+    */
+    backToForm(event) {
+    event.preventDefault();
+    const { dispatch } = this.props;
+    const trialBusiness = this.props.data.trialBusiness;
+    console.log(trialBusiness);
+    history.push('/businessRegistration');
+    dispatch(businessActions.previewBusiness(trialBusiness))
+    
+
+    }
+
+    /** 
+    *@description submits business deatail for creation.
+    *
+    * @returns {undefined} undefined
+    * 
+    * @memberof BusinessPreviewComponent
+    */
+    handleSubmit(event) {
+    event.preventDefault();
+    const { dispatch } = this.props;
+    const trialBusiness = this.props.data.trialBusiness;
+    dispatch(businessActions.createAttempt());
+    axios.post('https://weconnect-main.herokuapp.com/api/v1/businesses', (trialBusiness))
+            .then((response) => {
+                dispatch(businessActions.createSuccess())
+                history.push('/userProfile');
+            })
+            .catch((error) => {
+                console.log(error.response);
+                if (error && error.response.status === 400) {
+                    dispatch(businessActions.badRequest(error.response.data.errors))
+                }
+                if (error && error.response.status === 409) {
+                dispatch(businessActions.conflict(error.response.data.message))
+                }
+            });
+
+    }
+
 
     /** 
     *
@@ -83,6 +133,23 @@ class BusinessPreview extends Component {
                             </div>
                         </div>
                     </div>
+                    <div id= "decision" className= "container all-borders bottom-gap">
+                        <h5 className="bottom-gap brown-text">
+                          The above is how your business page would eventually look when published. You can go back to the form to make changes. Click the actions buttons as appropriate to proceed.
+                        </h5>
+                        <div className= "row bottom-gap">
+                            <div className="col m6 left-align">
+                               <button className= "green darken-2 btn" onClick= {this.backToForm}>
+                                       Back to Form
+                               </button>
+                            </div>
+                            <div className= "col m6 right-align">
+                               <button className= "green darken-2 btn" onClick= {this.handleSubmit}>
+                                    Create My business
+                                </button>
+                            </div>
+                        </div> 
+                   </div>
                 </main>
                 <Footer />
             </div >
@@ -92,7 +159,6 @@ class BusinessPreview extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data);
     return {
         data
     }
