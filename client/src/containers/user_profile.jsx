@@ -97,7 +97,7 @@ class UserProfile extends Component {
                     <div className="row slim-container top-pad">
                         <div className="row">
                             <div className="col s6 left">
-                                <Link to="/businessRegistration" className="green lighten-5 black-text btn" type="button"> Add new Business
+                                <Link to="/registrationGuide" className="green lighten-5 black-text btn" type="button"> Add new Business
                                 </Link>
                             </div>
                             <div className="col s6">
