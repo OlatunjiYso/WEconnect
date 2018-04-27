@@ -108,6 +108,9 @@
   .no-bottom-gap {
     margin-bottom: 0;
   }
+  .no-top-gap {
+    margin-top: 0;
+  }
   .top-gap {
     margin-top: 1em;
   }
@@ -265,13 +268,16 @@ label {
     cursor: pointer;
 }
 
+.instruction {
+    line-height: 1.5rem;
+    color: hsl(120, 1%, 25%)
+}
 
 
 /** Changing the color of placeholder ***/
-/* input::-webkit-input-placeholder {
-    color: rgb(0, 0, 0) !important;
+ input::-webkit-input-placeholder {
+    color: hsl(120, 0%, 70%) !important;
     }
-*/
   
 
 

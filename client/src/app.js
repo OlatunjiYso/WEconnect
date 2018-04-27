@@ -14,6 +14,8 @@ import BusinessRegForm from './containers/business_reg_form';
 import BusinessUpdateForm from './containers/business_update_form';
 import ManageBusiness from './containers/manage_business';
 import Welcome from './containers/welcome';
+import RegistrationGuide from './containers/registration_guide';
+import BusinessPreview from './containers/preview_business';
 
 /**
  * @class App
@@ -32,17 +34,18 @@ class App extends Component {
         render() {
                 return (
                         <Switch>
-                                <Route exact={true} path="/" component={Home} />
-                                <Route path="/login" component={Login} />
-                                <Route path="/welcome" component={Welcome} />
-                                <Route path="/signup" component={Signup} />
-                                <Route path="/user/profile" component={UserProfile} />
-                                <Route path="/businesses/:businessId" component={BusinessProfile} />
-                                <Route path="/businesses" component={AllBusinesses} />
-                                <Route path="/business/registration" component={BusinessRegForm} />
-                                <Route path="/business/update" component={BusinessUpdateForm} />
-                                <Route path="/business/manage" component={ManageBusiness} />
-
+                                <Route exact={true} path="/" component={ Home } />
+                                <Route path="/login" component={ Login } />
+                                <Route path="/welcome" component={ Welcome } />
+                                <Route path="/signup" component={ Signup } />
+                                <Route path="/userProfile" component={ UserProfile } />
+                                <Route path="/businesses/:businessId" component={ BusinessProfile } />
+                                <Route path="/businesses" component={ AllBusinesses } />
+                                <Route path="/businessRegistration" component={ BusinessRegForm } />
+                                <Route path="/businessUpdate" component={ BusinessUpdateForm } />
+                                <Route path="/manageBusiness" component={ ManageBusiness } />
+                                <Route path="/registrationGuide" component={ RegistrationGuide } />
+                                <Route path="/preview" component={ BusinessPreview } />
                         </Switch>
                 )
 

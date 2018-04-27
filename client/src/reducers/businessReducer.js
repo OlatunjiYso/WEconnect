@@ -7,12 +7,16 @@ const initialState = {
         state: 'Lagos'
     },
     business: {},
-    notFound: false,
     myReviews: [],
     myBusinesses: [],
+    errors: {
+        validationErrors: null,
+        conflict: null,
+        others: null
+    },
+    awaiting: false,
+    notFound: false,
     gotBusinesses: false,
-
-
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -44,7 +48,45 @@ const businessReducer = (state = initialState, action) => {
                 ...state,
                 gotBusinesses: action.gotBusinesses,
             };
-
+        case 'PREVIEW': // Wish to preview my business before creating
+            return {
+                ...state,
+                trialBusiness: action.business,
+            };
+        case 'ATTEMPT': // Wish to register my business
+            return {
+                ...state,
+                awaiting: action.awaiting,
+                errors: { ...state.errors,
+                    validationErrors: action.error,
+                    conflict: action.error,
+                    others: action.error
+                }
+            };
+        case 'BAD_REQUEST': // Business registration  wasnt successful
+            return {
+                ...state,
+                awaiting: action.awaiting,
+                errors: { ...state.errors, validationErrors: action.error }
+            };
+        case 'CONFLICT': // Business registration  wasnt successful
+        return {
+            ...state,
+            awaiting: action.awaiting,
+            errors: { ...state.errors, validationErrors: action.error }
+        };
+        case 'UNKNOWN_ERROR': // Unknown error occured
+        return {
+            ...state,
+            awaiting: action.awaiting,
+            errors: { ...state.errors, others: action.error }
+        };
+        case 'SUCCESS': // Wish to preview my business before creating
+        return {
+            ...state,
+            awaiting: action.awaiting,
+            errors: { ...state.errors, validationErrors: action.error }
+        };
         default:
             return state;
     }
