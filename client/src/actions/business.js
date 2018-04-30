@@ -114,7 +114,7 @@ class BusinessActions {
      */
     static forbiddenRequest(error) {
         return {
-            type: 'BAD_REQUEST',
+            type: 'FORBIDDEN',
             awaiting: false,
             error
         };
