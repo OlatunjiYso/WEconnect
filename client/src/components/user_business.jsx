@@ -33,7 +33,7 @@ class UserBusiness extends Component {
                                     <h6 className="center green-text text-darken-4"> {userBusiness.name} </h6>
                                 </Link>
                                 </div>
-                                <Link to="/business/manage"> 
+                                <Link to = { `/manageBusiness/${userBusiness.id}` }> 
                                     <h6 className="card-button cursor white">
                                          <div className="center grey-text text-darken-2">Manage</div>
                                     </h6>

@@ -12,7 +12,8 @@ const initialState = {
     errors: {
         validationErrors: null,
         conflict: null,
-        others: null
+        others: null,
+        forbidden: null
     },
     awaiting: false,
     notFound: false,
@@ -32,7 +33,7 @@ const businessReducer = (state = initialState, action) => {
                 business: action.business,
                 myReviews: action.reviews
             };
-        case 'NOT_FOUND': // Not getting a particulat business
+        case 'NOT_FOUND': // Not getting a particular business
             return {
                 ...state,
                 notFound: action.notFound
@@ -48,32 +49,38 @@ const businessReducer = (state = initialState, action) => {
                 ...state,
                 gotBusinesses: action.gotBusinesses,
             };
-        case 'PREVIEW': // Wish to preview my business before creating
-            return {
-                ...state,
-                trialBusiness: action.business,
-            };
-        case 'ATTEMPT': // Wish to register my business
+
+
+    // Reducers for Registering, Updating and Deleting businesses
+        case 'ATTEMPT': // Wish to register || update || delete my business
             return {
                 ...state,
                 awaiting: action.awaiting,
-                errors: { ...state.errors,
+                errors: {
+                     ...state.errors,
                     validationErrors: action.error,
                     conflict: action.error,
-                    others: action.error
+                    others: action.error,
+                    forbidden: action.error
                 }
             };
-        case 'BAD_REQUEST': // Business registration  wasnt successful
+        case 'BAD_REQUEST': // Business registration || update  was not successful
             return {
                 ...state,
                 awaiting: action.awaiting,
                 errors: { ...state.errors, validationErrors: action.error }
             };
-        case 'CONFLICT': // Business registration  wasnt successful
+        case 'CONFLICT': // Business registration || update was conflicting
         return {
             ...state,
             awaiting: action.awaiting,
-            errors: { ...state.errors, validationErrors: action.error }
+            errors: { ...state.errors, conflict: action.error }
+        };
+        case 'FORBIDDEN': // Business update || delete by authorized persons
+        return {
+            ...state,
+            awaiting: action.awaiting,
+            errors: { ...state.errors, forbidden: action.error }
         };
         case 'UNKNOWN_ERROR': // Unknown error occured
         return {
@@ -81,11 +88,17 @@ const businessReducer = (state = initialState, action) => {
             awaiting: action.awaiting,
             errors: { ...state.errors, others: action.error }
         };
-        case 'SUCCESS': // Wish to preview my business before creating
+        case 'SUCCESS': // Business Registration || Update ||delete was successful
         return {
             ...state,
             awaiting: action.awaiting,
-            errors: { ...state.errors, validationErrors: action.error }
+            errors: {
+                ...state.errors,
+               validationErrors: action.error,
+               conflict: action.error,
+               others: action.error,
+               forbidden: action.error
+           }
         };
         default:
             return state;

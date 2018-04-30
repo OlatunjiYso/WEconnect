@@ -11,7 +11,7 @@ import UserProfile from './containers/user_profile';
 import BusinessProfile from './containers/business_profile';
 import AllBusinesses from './containers/all_businesses';
 import BusinessRegForm from './containers/business_reg_form';
-import BusinessUpdateForm from './containers/business_update_form';
+import BusinessUpdate from './containers/business_update';
 import ManageBusiness from './containers/manage_business';
 import Welcome from './containers/welcome';
 import RegistrationGuide from './containers/registration_guide';
@@ -42,8 +42,8 @@ class App extends Component {
                                 <Route path="/businesses/:businessId" component={ BusinessProfile } />
                                 <Route path="/businesses" component={ AllBusinesses } />
                                 <Route path="/businessRegistration" component={ BusinessRegForm } />
-                                <Route path="/businessUpdate" component={ BusinessUpdateForm } />
-                                <Route path="/manageBusiness" component={ ManageBusiness } />
+                                <Route path="/businessUpdate/:businessId" component={ BusinessUpdate } />
+                                <Route path="/manageBusiness/:businessId" component={ ManageBusiness } />
                                 <Route path="/registrationGuide" component={ RegistrationGuide } />
                                 <Route path="/preview" component={ BusinessPreview } />
                         </Switch>

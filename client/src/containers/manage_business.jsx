@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
-import { NavItem, Dropdown, Button } from 'react-materialize';
+import businessActions from '../actions/business';
+import history from '../history';
 import Navbar from '../components/navbar';
 import BusinessBanner from '../components/business_banner';
 import BusinessMetrics from '../components/business_metrics';
-import ReviewForm from '../components/review_form';
-import Review from '../components/review';
 import Footer from '../components/footer';
 import customStyles from '../css/style.css';
-import facebook from '../assets/images/facebook.png';
-import twitter from '../assets/images/twitter.png';
-import whatsapp from '../assets/images/whatsapp.png';
-import instagram from '../assets/images/instagram.png';
 import profilePicture from '../assets/images/cameras.jpg';
-import business from '../dummy/one_business';
-import businessReviews from '../dummy/reviews';
+
 
 /**
  * @class ManageBusiness
@@ -27,9 +22,30 @@ class ManageBusiness extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            business
+        
         };
+        
     }
+
+    /** 
+    *
+    * @returns {JSX} JSX
+    * 
+    * @memberof AllBusinessesComponent
+    */
+   componentWillMount() {
+    const { dispatch, match } = this.props;
+    axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
+        .then((response) => {
+            const business = response.data.business
+            dispatch(businessActions.getBusiness(business));
+        })
+        .catch((error) => {
+            if (error.response.status === 404) {
+            dispatch(businessActions.notFound());
+            }
+        });
+}
 
     /** 
     *
@@ -38,13 +54,7 @@ class ManageBusiness extends Component {
     * @memberof ManageBusiness Component
     */
     render() {
-        const business = this.state.business;
-
-        const myReviews = businessReviews.map((PresentReview, index) => {
-            return (
-                <Review key={index} review={PresentReview} />
-            )
-        })
+        const business = this.props.data.business;
         return (
             <div>
                 <Navbar />
@@ -57,21 +67,22 @@ class ManageBusiness extends Component {
                             <div className="col s10 offset-s1">
                                 <h4 className="left-align green-text text-darken-4"> What Your Clients are saying</h4>
                                 <div className="row black-text ">
-                                    {myReviews}
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col s6">
-                                <Link to="#!" class="btn red right">
+                                <Link to= {`/businessDelete/${business.id}`} class="btn red right">
                                     Delete Business
                                  </Link>
                             </div>
                             <div class="col s6">
-                                <Link to="#!" class="btn green darken-4 left">
+                               <button class="btn green darken-4 left">
+                                <Link to= {`/businessUpdate/${business.id}`}  >
                                     Update Business
                                  </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -82,4 +93,12 @@ class ManageBusiness extends Component {
     }
 }
 
-export default ManageBusiness;
+
+const mapStateToProps = (state) => {
+    const data = state.businessReducer;
+    return {
+        data
+    }
+}
+
+export default connect(mapStateToProps)(ManageBusiness);;
