@@ -18,6 +18,7 @@ const initialState = {
     awaiting: false,
     notFound: false,
     gotBusinesses: false,
+    passwordMismatch: null,
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -88,6 +89,12 @@ const businessReducer = (state = initialState, action) => {
             awaiting: action.awaiting,
             errors: { ...state.errors, others: action.error }
         };
+        case 'PASSWORD_MISMATCH': // Unknown error occured
+        return {
+            ...state,
+            awaiting: action.awaiting,
+            passwordMismatch: action.error
+        };
         case 'SUCCESS': // Business Registration || Update ||delete was successful
         return {
             ...state,
@@ -98,7 +105,14 @@ const businessReducer = (state = initialState, action) => {
                conflict: action.error,
                others: action.error,
                forbidden: action.error
-           }
+           },
+           passwordMismatch: action.error
+        };
+
+        case 'STOP_SPINNER': // STOP SPINNER
+        return {
+            ...state,
+            awaiting: action.awaiting,
         };
         default:
             return state;
