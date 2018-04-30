@@ -18,7 +18,7 @@ class BusinessActions {
     }
 
      /**
-     * @description - action for storing a particular business
+     * @description - action for getting a particular business
      *
      *@param {obj} business - a business object
      * 
@@ -76,20 +76,6 @@ class BusinessActions {
     }
 
      /**
-     * @description - action for sending business information to be previewed
-     *
-     *@param {obj} business - business object to be previewed
-
-     * @return {obj} -actionable object containing type and business information
-     */
-    static previewBusiness(business) {
-        return {
-            type: 'PREVIEW',
-            business
-        };
-    }
-
-     /**
      * @description - action responsible for flagging conflicts
      *
      *@param {obj} error - the conflict error message
@@ -118,8 +104,24 @@ class BusinessActions {
             error: errors
         };
     }
+
     /**
-     * @description - action responsible for redirecting to user profile after success
+     * @description - action responsible for flagging Forbidden case error
+     *
+     *@param {obj} error - forbidden error message
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static forbiddenRequest(error) {
+        return {
+            type: 'BAD_REQUEST',
+            awaiting: false,
+            error
+        };
+    }
+
+    /**
+     * @description - action responsible for flagging some non statndard errors
      *
      *
      * @return {obj} -actionable object containing type and payload
@@ -132,54 +134,29 @@ class BusinessActions {
     }
 
     /**
-     * @description - action responsible for flagging badrequest
+     * @description - loads spinner for in attempt to register || update || delete business
      *
-     *@param {obj} errors - an array of validation errors
      *
      * @return {obj} -actionable object containing type and payload
      */
-    static createAttempt() {
+    static attempt() {
         return {
             type: 'ATTEMPT',
             awaiting: true,
-            error: null
         };
     }
 
     /**
-     * @description - action responsible for redirecting to user profile after success
+     * @description - loads spinner after successful attempt to register || update || delete business
      *
      *
      * @return {obj} -actionable object containing type and payload
      */
-    static createSuccess() {
+    static success() {
         return {
             type: 'SUCCESS',
             awaiting: false,
             error: null
-        };
-    }
-     /**
-     * @description - action responsible for updating a business
-     *
-     * @return {obj} -actionable object containing type and payload
-     */
-    static UpdateBusiness() {
-        return {
-            type: '',
-            payload: {}
-        };
-    }
-
-     /**
-     * @description - action responsible for deleting a business
-     *
-     * @return {obj} -actionable object containing type and payload
-     */
-    static deleteBusiness() {
-        return {
-            type: '',
-            payload: {}
         };
     }
 }
