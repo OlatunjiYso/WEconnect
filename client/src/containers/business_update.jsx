@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import setToken from '../helpers/authorization';
 import history from '../history';
 import businessActions from '../actions/business';
 import Footer from '../components/footer';
@@ -63,6 +64,7 @@ class BusinessUpdate extends Component {
         const business = this.state;
         const { dispatch, match } = this.props;
         event.preventDefault(event);
+        setToken(localStorage.token);
         dispatch(businessActions.attempt());
         axios.put(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`, (business))
             .then((response) => {
@@ -71,10 +73,13 @@ class BusinessUpdate extends Component {
                 history.push(`/businesses/${match.params.businessId}`);
             })
             .catch((error) => {
-                console.log(error);
-                dispatch(businessActions.updateFailed(error.response.data.message));
+                console.log(error.response);
                 if (error && error.response.status === 400) {
-                    dispatch(authAction.BadRequest(error.response.data.errors))
+                    dispatch(businessActions.badRequest(error.response.data.errors))
+                }
+                if (error && error.response.status === 401) {
+                    history.push('/login');
+                    dispatch(businessActions.unknownError())
                 }
                 if (error && error.response.status === 409) {
                     dispatch(businessActions.conflict(error.response.data.message))
