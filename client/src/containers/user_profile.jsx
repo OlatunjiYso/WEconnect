@@ -8,7 +8,6 @@ import history from '../history';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import UserBusiness from '../components/user_business';
-import businesses from '../dummy/user_businesses';
 import businessActions from '../actions/business';
 import customStyles from '../css/style.css';
 import profilePicture from '../assets/images/cameras.jpg';
@@ -22,7 +21,6 @@ import profilePicture from '../assets/images/cameras.jpg';
 class UserProfile extends Component {
     constructor(props) {
         super(props);
-        this.state = { businesses };
     }
 
     /** 
@@ -33,7 +31,7 @@ class UserProfile extends Component {
     * 
     * @memberof UserProfileComponent
     */
-    componentWillMount() {
+    componentDidMount() {
         if (localStorage.token) {
             console.log(localStorage.token)
           }
