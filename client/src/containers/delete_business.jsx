@@ -26,10 +26,10 @@ class DeleteBusiness extends Component {
     }
 
     componentWillMount() {
-        if (!this.props.match.params.businessId) {
+        if (!this.props.data.business.name) {
             history.push('/userProfile');
         }
-        console.log(this.props.match.params.businessId)
+        console.log(this.props.data.business.name)
     }
     /** 
     *@description handles change in input field
@@ -48,14 +48,13 @@ class DeleteBusiness extends Component {
     }
 
     handleSubmit(event) {
-        const password = this.state.password;
+        const payload = this.state
         const { dispatch, match } = this.props;
         event.preventDefault();
         setToken(localStorage.token)
-        console.log(match.params.businessId)
 
         dispatch(businessActions.attempt());
-        axios.delete(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`, (password))
+        axios.delete(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`, { data: payload })
             .then((response) => {
                 dispatch(businessActions.success())
                 history.push('/userProfile');
@@ -92,7 +91,7 @@ class DeleteBusiness extends Component {
         const wrongPassword = this.props.data.passwordMismatch ?
             <div className="col s8 offset-s2 m8 center-align error-box">
                 <h6>
-                    <i className="material-icons red-text tiny">clear</i> In correct password!
+                    <i className="material-icons red-text tiny">clear</i> Incorrect password!
                 </h6>
             </div> : null
 
@@ -111,15 +110,15 @@ class DeleteBusiness extends Component {
                     <div className="row">
                         <div className="top-pad col s12 m8 offset-m2">
                             <h4 className="left-align red-text text-darken-2">
-                                Before you delete this business ...
+                                Before you delete " {this.props.data.business.name} "
                             </h4>
-                            <h5 className = "green-text"> Please take note of the following </h5>
+                            <h5 className = "green-text"> Please take note of the following: </h5>
                             <ol className="delete-note no-top-gap">
                                 <li>
                                     <span className="delete-note"> This action is irreversible </span>
                                 </li>
                                 <li>
-                                    <span  className="delete-note">ALL business information would be lost </span>
+                                    <span  className="delete-note">All business information would be lost </span>
                                 </li>
                                 <li>
                                     <span  className="delete-note">All business reviews would be lost </span>

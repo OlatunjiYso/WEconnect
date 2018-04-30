@@ -5,7 +5,7 @@ import db from '../models';
 const { Business, User } = db;
 
 /**
- * Checks if a user that is about to perform an action on a business is the owner
+ * Checks if a user that is about to delete a business is the owner
  *
  * @param {Object} req -api request
  * @param {Object} res -api response
@@ -13,7 +13,7 @@ const { Business, User } = db;
  *
  * @return {undefined}
  */
-export default function confirmOwnership(req, res, next) {
+export default function checkPassword(req, res, next) {
     // find the actual owner
     Business
         .findOne({
