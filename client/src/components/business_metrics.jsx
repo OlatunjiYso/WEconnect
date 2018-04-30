@@ -20,45 +20,45 @@ class BusinessMetrics extends Component {
         return (
             <div className="row top-pad">
            <div className="col s10 offset-s1  ">
-               <h3 className="center green-text text-darken-4">Your Business Metrics</h3>
-               <p className=''>
-                   <h5 className="center-align green-text">See how many times your business has been viewed over time!</h5>
-               </p>
+               <h3 className="center green-text">Your Business Metrics</h3>
+               <div className=''>
+                   <h5 className="center-align grey-text ">See how many times your business has been viewed over time!</h5>
+               </div>
            </div>
            <div className="row container">
                <div className="col s12 m4 l3 offset-l1 center-align">
-                   <h4> Today </h4>
-                   <div className="thin-border">
-                       <h3 className="pink-text text-darken-4">12</h3>
-                       <h4> Views </h4>
+                   <h4  className="grey-text text-darken-3"> today </h4>
+                   <div className="views-box">
+                       <h4 className="green-text text-darken-1">12</h4>
+                       <h4 className="grey-text text-darken-3"> views </h4>
                    </div>
                </div>
                <div className="col s12 m4 l3 offset-l1 center-align">
-                   <h4> This week </h4>
-                   <div className="thin-border">
-                       <h3 className="pink-text text-darken-4">98</h3>
-                       <h4> Views </h4>
+                   <h4  className="grey-text text-darken-3"> this week </h4>
+                   <div className="views-box">
+                       <h4 className="green-text text-darken-1"> 98 </h4>
+                       <h4  className="grey-text text-darken-3"> views </h4>
                    </div>
                </div>
                <div className="col s12 m4 l3 offset-l1 center-align">
-                   <h4> This month </h4>
-                   <div className="thin-border">
-                       <h3 className="pink-text text-darken-4">320</h3>
-                       <h4> Views </h4>
+                   <h4 className="grey-text text-darken-3"> this month </h4>
+                   <div className="views-box">
+                       <h4 className="green-text text-darken-1"> 320 </h4>
+                       <h4 className="grey-text text-darken-3"> views </h4>
                    </div>
                </div>
                <div className="col s12 m4 l3 offset-l1 center-align">
-                   <h4> This year </h4>
-                   <div className="thin-border">
-                       <h3 className="pink-text text-darken-4">1200</h3>
-                       <h4> Views </h4>
+                   <h4 className="grey-text text-darken-3"> this year </h4>
+                   <div className="views-box">
+                       <h4 className="green-text text-darken-1"> 1200 </h4>
+                       <h4 className="grey-text text-darken-3"> views </h4>
                    </div>
                </div>
                <div className="col s12 m4 l3 offset-l1 center-align">
-                   <h4> All time </h4>
-                   <div className="thin-border">
-                       <h3 className="pink-text text-darken-4">9800</h3>
-                       <h4> Views </h4>
+                   <h4 className="grey-text text-darken-3"> all time </h4>
+                   <div className="views-box">
+                       <h4 className="green-text text-darken-1"> 9800 </h4>
+                       <h4 className="grey-text text-darken-3"> views </h4>
                    </div>
                </div>
            </div>

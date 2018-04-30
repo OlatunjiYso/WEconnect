@@ -4,6 +4,7 @@ import businessController from '../controllers/business';
 import validator from '../middleware/validations';
 import authenticate from '../middleware/authentication';
 import confirmOwnership from '../middleware/authorization';
+import passwordCheck from '../middleware/passwordCheck';
 
 const businessHandler = express.Router();
 
@@ -38,6 +39,7 @@ businessHandler.delete(
     '/:businessId',
     authenticate,
     confirmOwnership,
+    passwordCheck,
     businessController.deleteBusiness
 );
 

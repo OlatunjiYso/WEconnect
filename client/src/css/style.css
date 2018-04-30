@@ -229,6 +229,12 @@ main {
     color:hsl(120, 80%, 94%) !important;;
     background-color: hsl(120, 31%, 30%) !important;
 }
+
+.delete-form-btn {
+    color:hsl(120, 80%, 94%) !important;;
+    background-color: hsl(355, 83%, 43%) !important;
+}
+
 label {
     color: #000 !important;
     font-size: 1.2rem !important;
@@ -273,6 +279,18 @@ label {
     color: hsl(120, 1%, 25%)
 }
 
+.views-box {
+    border: 1px solid #2a8626;
+    border-radius: 10px;
+    box-shadow: 1px 1px #424e42;
+    background-color: hsl(120, 7%, 98%);
+    padding: 4px;
+}
+
+.delete-note {
+    color: hsl(120, 4%, 57%);
+    font-size: 18px;
+}
 
 /** Changing the color of placeholder ***/
  input::-webkit-input-placeholder {

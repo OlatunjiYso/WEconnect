@@ -147,6 +147,20 @@ class BusinessActions {
     }
 
     /**
+     * @description - displays password mismatch in attempt to delete a business
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static passwordMismatch() {
+        return {
+            type: 'PASSWORD_MISMATCH',
+            awaiting: false,
+            error: true
+        };
+    }
+
+    /**
      * @description - loads spinner after successful attempt to register || update || delete business
      *
      *
@@ -157,6 +171,18 @@ class BusinessActions {
             type: 'SUCCESS',
             awaiting: false,
             error: null
+        };
+    }
+        /**
+     * @description - stops spinner after  attempt to register || update || delete business
+     *
+     *
+     * @return {obj} -actionable object containing type and payload
+     */
+    static stopSpinner() {
+        return {
+            type: 'STOP_SPINNER',
+            awaiting: false
         };
     }
 }
