@@ -39,20 +39,20 @@ class BusinessProfile extends Component {
     * 
     * @memberof AllBusinessesComponent
     */
-   componentDidMount() {
-    const { dispatch, match } = this.props;
-    axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
-        .then((response) => {
-            const business = response.data.business
-            dispatch(businessActions.getBusiness(business));
-        })
-        .catch((error) => {
-            if (error.response.status === 404) {
-            dispatch(businessActions.notFound());
-            history.push('/businesses')
-            }
-        });
-}
+    componentDidMount() {
+        const { dispatch, match } = this.props;
+        axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
+            .then((response) => {
+                const business = response.data.business
+                dispatch(businessActions.getBusiness(business));
+            })
+            .catch((error) => {
+                if (error.response.status === 404) {
+                    dispatch(businessActions.notFound());
+                    history.push('/businesses')
+                }
+            });
+    }
 
     /** 
     *
@@ -61,15 +61,17 @@ class BusinessProfile extends Component {
     * @memberof BusinessProfileComponent
     */
     render() {
+        const { match } = this.props;
+        const id = match.params.businessId;
         const business = this.props.data.business;
-        const {myReviews} = this.props.data
+        const { myReviews } = this.props.data
         return (
             <div>
                 <main>
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessBody businessObject={business} />
                     <div className="row body-font container">
-                    <ReviewForm review= {myReviews}/>
+                        <ReviewForm review={myReviews} businessId= {id}/>
                         <div className="col s10 offset-s1 m10 offset-m1 ">
                             <h5 className="grey-text text-darken-3 bottom-pad-small"> Contact Us</h5>
                             <div className="row">

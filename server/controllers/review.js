@@ -21,6 +21,7 @@ class reviewController {
       .create({
         businessId: req.params.businessId,
         description: req.body.description,
+        reviewerName: req.body.username,
         reviewerId: req.user.id
       })
       .then((review) => {
