@@ -13,6 +13,10 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+    reviewerName: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
     reviewerId: {
       allowNull: false,
       type: DataTypes.INTEGER

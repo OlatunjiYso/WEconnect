@@ -19,6 +19,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      reviewerName: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       reviewerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -29,11 +33,11 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       }
     }),
   down: queryInterface =>

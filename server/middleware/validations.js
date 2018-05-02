@@ -377,6 +377,9 @@ class Validations {
         req.checkBody('description', 'Please input your review')
             .trim()
             .notEmpty();
+        req.checkBody('username', 'Reviwer name cannot be null')
+            .trim()
+            .notEmpty();
         const errors = req.validationErrors();
         if (errors) {
             const errorList = errors.map(error => error.msg);
