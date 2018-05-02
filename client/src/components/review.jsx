@@ -33,7 +33,7 @@ class Review extends Component {
                     <p className="col s12">
                         {review.description}
                     </p>
-                    <h6 className="col s6 left-align pink-text text-darken-4"> {review.reviewerId}</h6>
+                    <h6 className="col s6 left-align pink-text text-darken-4"> {review.reviewerName}</h6>
                     <h6 className="col s6 right-align pink-text text-darken-4"> {review.createdAt}</h6>
                     {reviewControls}
                 </div>

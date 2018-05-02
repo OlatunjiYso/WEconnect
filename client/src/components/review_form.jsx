@@ -26,11 +26,13 @@ class ReviewForm extends Component {
         const businessId = this.props.businessId;
         const review = {}
         review.description = this.state.message;
+        review.username = localStorage.username;
         const { dispatch, match } = this.props;
         setToken(localStorage.token)
         axios.post(`https://weconnect-main.herokuapp.com/api/v1/businesses/${businessId}/reviews`, (review))
             .then((response) => {
                 console.log(response.data)
+                history.push(`/businessProfile/${businessId}`);
             })
             .catch((error) => {
                 console.log(error.response);
