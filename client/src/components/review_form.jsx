@@ -19,8 +19,16 @@ class ReviewForm extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteReview = this.deleteReview.bind(this);
     }
 
+    /** 
+    *
+    *
+    * @returns {func} funtion
+    * 
+    * @memberof ReviewFormComponent
+    */
     handleSubmit(event) {
         event.preventDefault();
         const businessId = this.props.businessId;
@@ -38,6 +46,19 @@ class ReviewForm extends Component {
                 console.log(error.response);
             });
     }
+    /** 
+    *
+    *
+    * @returns {func} funtion
+    * 
+    * @memberof ReviewFormComponent
+    */
+   deleteReview(event) {
+       event.preventDefault();
+       const businessId = this.props.businessId;
+       alert('review deleted!')
+
+   }
 
     /** 
     *
@@ -68,7 +89,12 @@ class ReviewForm extends Component {
         const myReviews = (allReviews.length > 0) ?
          allReviews.map((PresentReview, index) => {
             return (
-                <Review key = { index } review = { PresentReview } />
+                <Review 
+                key = { index }
+                 review = { PresentReview } 
+                 delete = {this.deleteReview}
+                 businessId = {this.props.businessId}
+                 />
             )
         }) : <h6 className="grey-text"> Be the first to give us a review </h6>;
         return (
