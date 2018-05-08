@@ -8,7 +8,7 @@ import history from '../history';
 import businessActions from '../actions/business';
 import Footer from '../components/footer';
 import BusinessUpdateForm from '../components/business_update_form';
-import Navbar from '../components/navbar'
+import Navbar from './nav'
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
@@ -99,6 +99,7 @@ class BusinessUpdate extends Component {
     render() {
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row dashboard head-font ">
                         <div className="col s8 offset-s2 m3 l2 logo center-align">

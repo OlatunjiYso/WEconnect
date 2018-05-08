@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import businessActions from '../actions/business';
 import history from '../history';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import BusinessBanner from '../components/business_banner';
 import BusinessMetrics from '../components/business_metrics';
 import Footer from '../components/footer';
@@ -57,7 +57,7 @@ class ManageBusiness extends Component {
         const business = this.props.data.business;
         return (
             <div>
-                
+                <Navbar />
                 <main>
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessMetrics businessObject={business} />

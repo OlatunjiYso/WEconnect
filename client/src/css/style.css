@@ -291,6 +291,9 @@ label {
     color: hsl(120, 4%, 57%);
     font-size: 18px;
 }
+.nav-color {
+    background-color: hsl(120, 17%, 63%)!important;
+}
 
 /** Changing the color of placeholder ***/
  input::-webkit-input-placeholder {

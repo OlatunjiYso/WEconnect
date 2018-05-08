@@ -85,6 +85,7 @@ class ReviewForm extends Component {
         const message = this.state.message;
         const handleChange = this.handleChange;
         const allReviews = this.props.review
+        const reviewLabel = (localStorage.token) ? 'Give a review' : 'login to give a review';
         // generate array of reviews or null if no review present
         const myReviews = (allReviews.length > 0) ?
          allReviews.map((PresentReview, index) => {
@@ -107,7 +108,7 @@ class ReviewForm extends Component {
                                 <div className="input-field col s12">
                                     <textarea value={message} onChange={handleChange} name="message" className="materialize-textarea" length="80"></textarea>
                                     <label>
-                                        <span className="grey-text body-font">Give a review </span>
+                                        <span className="grey-text body-font"> { reviewLabel } </span>
                                     </label>
                                 </div>
                             </div>

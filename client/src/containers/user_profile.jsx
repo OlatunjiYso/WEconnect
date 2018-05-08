@@ -6,7 +6,7 @@ import axios from 'axios';
 import setToken from '../helpers/authorization';
 import history from '../history';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import Nav from './nav';
 import UserBusiness from '../components/user_business';
 import businessActions from '../actions/business';
 import customStyles from '../css/style.css';
@@ -82,6 +82,7 @@ class UserProfile extends Component {
 
         return (
             <div>
+                <Nav />
                 <main>
                     <div className="row head-font dashboard">
                         <div className="col s9 m6 l4 logo pink-text center-align">
@@ -99,7 +100,7 @@ class UserProfile extends Component {
                                 </Link>
                             </div>
                             <div className="col s6">
-                                <Link to="#!" className="right green lighten-5 black-text btn" type="button"> Update Profile
+                                <Link to="/updateProfile" className="right green lighten-5 black-text btn" type="button"> Update Profile
                                 </Link>
                             </div>
                         </div>

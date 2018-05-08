@@ -7,7 +7,7 @@ import setToken from '../helpers/authorization';
 import history from '../history';
 import businessActions from '../actions/business';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar'
+import Navbar from './nav'
 import customStyles from '../css/style.css';
 
 /**
@@ -105,8 +105,8 @@ class DeleteBusiness extends Component {
 
         return (
             <div>
+                <Navbar />
                 <main>
-                    <Navbar />
                     <div className="row">
                         <div className="top-pad col s12 m8 offset-m2">
                             <h4 className="left-align red-text text-darken-2">

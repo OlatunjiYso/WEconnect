@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Button, SideNav, Navbar, NavItem } from 'react-materialize'
+import { Button, SideNav, Navbar, NavItem, SideNavItem } from 'react-materialize'
+import PropTypes from 'prop-types';
 
 /**
  * @className NavbarComponent
@@ -18,35 +19,48 @@ class NavBar extends Component {
     * @memberof NavBarComponent
     */
     render() {
+        const signInOrLogout = (this.props.loggedIn) ?
+            <li>
+                <Link to="#!" onClick={this.props.logout} className="white-text">Logout</Link>
+            </li> :
+            <li>
+                <Link to="/login" className="white-text">Sign In</Link>
+            </li>
+
+        const signupOrNull = (this.props.loggedIn) ? null :
+            <li>
+                <Link to="/signup" className="white-text">Sign Up</Link>
+            </li>
+
+        const myProfileOrNull = (this.props.loggedIn) ?
+            <li>
+                <Link to="/userProfile" className="white-text">My Profile</Link>
+            </li> : null
+
+
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper green darken-4 text-lighten-3">
+                    <div className="nav-wrapper nav-color">
                         <Link to="/" className=" Sofia brand-logo  logo white-text">WEconnect</Link>
                         <ul className="right hide-on-med-and-down head-font">
-                            <li>
-                                <Link to="/login" className="white-text">Sign In</Link>
-                            </li>
-                            <li>
-                                <Link to="/signup" className="white-text">Sign Up</Link>
-                            </li>
-                            <li>
-                                <Link to="/userProfile" className="white-text">My Profile</Link>
-                            </li>
+                            {signInOrLogout}
+                            {signupOrNull}
+                            {myProfileOrNull}
                             <li>
                                 <Link to="/businesses" className="white-text">All</Link>
                             </li>
                         </ul>
                         <SideNav
-                           trigger={
-                            <a href="" className="button-collapse">
-                              <i className="material-icons">menu</i>
-                            </a>
-                          }
-                          options={{ closeOnClick: true }}
+                            trigger={
+                                <a href="" className="button-collapse">
+                                    <i className="material-icons">menu</i>
+                                </a>
+                            }
+                            options={{ closeOnClick: true }}
+                            className="hide-on-large-only"
                         >
-                            <ul className="side-nav" id="mobile-demo">
-
+                            <ul className="side-nav head-font" id="mobile-demo">
                                 <li>
                                     <Link to="/login" className="white-text">Sign In</Link>
                                 </li>
@@ -54,19 +68,22 @@ class NavBar extends Component {
                                     <Link to="/signup" className="white-text">Sign Up</Link>
                                 </li>
                                 <li>
-                                    <Link to="/user/profile" className="white-text">My Profile</Link>
+                                    <Link to="/userProfile" className="white-text">My Profile</Link>
                                 </li>
                                 <li>
                                     <Link to="/businesses" className="white-text">All</Link>
                                 </li>
                             </ul>
                         </SideNav>
-
                     </div>
                 </nav>
             </div>
         )
     }
+}
+Navbar.propTypes = {
+    loggedIn: PropTypes.string.isRequired,
+    logout: PropTypes.func.isRequired,
 }
 
 export default NavBar;

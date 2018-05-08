@@ -33,4 +33,13 @@ userHandler.post(
     userController.changePassword
 );
 
+userHandler.put(
+    '/profile/:userId',
+    authenticate,
+    validator.validateUserUpdate,
+    validator.checkUsernameExistence,
+    validator.checkEmailExistence,
+    userController.updateUser
+);
+
 export default userHandler;

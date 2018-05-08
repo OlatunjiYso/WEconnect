@@ -7,7 +7,7 @@ import history from '../history';
 import authAction from '../actions/auth';
 import Footer from '../components/footer';
 import SignupForm from '../components/signup_form';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
