@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 import history from '../history';
-import authAction from '../actions/auth';
+import { signup } from '../actions/auth';
 import Footer from '../components/footer';
 import SignupForm from '../components/signup_form';
 import Navbar from '../components/navbar';
@@ -91,28 +91,8 @@ class Signup extends Component {
     */
     handleSubmit(event) {
         event.preventDefault();
-        const { dispatch } = this.props;
         const newUser = this.state.userDetail;
-        if (newUser.confirmPassword !== newUser.password) {
-            dispatch(authAction.passwordMismatch())
-            return
-        }
-        dispatch(authAction.signupAttempt())
-        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/signup', newUser)
-          .then((response) => {
-            dispatch(authAction.signupSuccess(newUser))
-              history.push('/welcome', { user: 'user' })
-            return
-          })
-          .catch((error) => {
-              console.log(error)
-            if (error && error.response.status === 400) {
-                dispatch(authAction.signupBadRequest(error.response.data.errors))
-            }
-            if (error && error.response.status === 409) {
-            dispatch(authAction.signupConflict(error.response.data.message))
-            }
-          });
+        this.props.signup(newUser)
     }
 
     /** 
@@ -147,4 +127,8 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps)(Signup);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ signup }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

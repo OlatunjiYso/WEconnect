@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
+import businessApi from '../service/businessApi';
 import setToken from '../helpers/authorization';
 import history from '../history';
-import businessActions from '../actions/business';
+import { updateBusiness } from '../actions/business';
 import Footer from '../components/footer';
 import BusinessUpdateForm from '../components/business_update_form';
-import Navbar from '../components/navbar'
+import Navbar from './nav'
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
@@ -25,30 +26,20 @@ class BusinessUpdate extends Component {
         this.state = {};
     }
     componentWillMount() {
-        const { dispatch, match } = this.props;
-        axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
+        const businessId = this.props.match.params.businessId;
+        businessApi.getThisBusiness(businessId)
             .then((response) => {
                 const business = response.data.business;
                 this.setState({
                     ...business
                 })
-                console.log('at manuall fetching')
-                console.log(business);
-                console.log(this.state);
             })
             .catch((error) => {
-                /* if (error.response.status === 404) {
+                 if (error.response.status === 404) {
                      dispatch(businessActions.notFound());
-                 } */
-                console.log(error)
+                 } 
             });
-
-
     };
-
-    componentDidMount() {
-
-    }
 
     handleChange(event) {
         const name = event.target.name;
@@ -61,34 +52,10 @@ class BusinessUpdate extends Component {
     };
 
     handleSubmit(event) {
-        const business = this.state;
-        const { dispatch, match } = this.props;
         event.preventDefault(event);
-        setToken(localStorage.token);
-        dispatch(businessActions.attempt());
-        axios.put(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`, (business))
-            .then((response) => {
-                dispatch(businessActions.success());
-                // redirect to business page
-                history.push(`/businesses/${match.params.businessId}`);
-            })
-            .catch((error) => {
-                console.log(error.response);
-                if (error && error.response.status === 400) {
-                    dispatch(businessActions.badRequest(error.response.data.errors))
-                }
-                if (error && error.response.status === 401) {
-                    history.push('/login');
-                    dispatch(businessActions.unknownError())
-                }
-                if (error && error.response.status === 409) {
-                    dispatch(businessActions.conflict(error.response.data.message))
-                }
-                if (error && error.response.status === 403) {
-                    dispatch(businessActions.forbiddenRequest(error.response.data.message))
-                }
-            });
-
+        const business = this.state;
+        const businessId = this.props.match.params.businessId;
+        this.props.updateBusiness(businessId, business);
     }
     /** 
     *
@@ -99,6 +66,7 @@ class BusinessUpdate extends Component {
     render() {
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row dashboard head-font ">
                         <div className="col s8 offset-s2 m3 l2 logo center-align">
@@ -136,4 +104,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(BusinessUpdate);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ updateBusiness }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessUpdate);

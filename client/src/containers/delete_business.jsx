@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
+import { deleteBusiness } from '../actions/business';
 import setToken from '../helpers/authorization';
 import history from '../history';
 import businessActions from '../actions/business';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar'
+import Navbar from './nav'
 import customStyles from '../css/style.css';
 
 /**
@@ -48,30 +49,10 @@ class DeleteBusiness extends Component {
     }
 
     handleSubmit(event) {
-        const payload = this.state
-        const { dispatch, match } = this.props;
         event.preventDefault();
-        setToken(localStorage.token)
-
-        dispatch(businessActions.attempt());
-        axios.delete(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`, { data: payload })
-            .then((response) => {
-                dispatch(businessActions.success())
-                history.push('/userProfile');
-            })
-            .catch((error) => {
-                console.log(error.response)
-                if (error && error.response.status === 401) {
-                    dispatch(businessActions.stopSpinner())
-                    history.push("/login")
-                }
-                if (error && error.response.status === 403) {
-                    dispatch(businessActions.forbiddenRequest(error.response.data.message))
-                }
-                if (error && error.response.status === 422) {
-                    dispatch(businessActions.passwordMismatch())
-                }
-            });
+        const pass = this.state
+        const businessId = this.props.match.params.businessId;
+        this.props.deleteBusiness(pass, businessId)
     }
     /** 
     *
@@ -105,8 +86,8 @@ class DeleteBusiness extends Component {
 
         return (
             <div>
+                <Navbar />
                 <main>
-                    <Navbar />
                     <div className="row">
                         <div className="top-pad col s12 m8 offset-m2">
                             <h4 className="left-align red-text text-darken-2">
@@ -163,4 +144,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DeleteBusiness);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ deleteBusiness }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteBusiness);

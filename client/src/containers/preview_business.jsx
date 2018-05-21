@@ -6,7 +6,7 @@ import { NavItem, Dropdown, Button } from 'react-materialize';
 
 import businessActions from '../actions/business';
 import history from '../history';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import BusinessBanner from '../components/business_banner';
 import BusinessBody from '../components/business_body';
 import ReviewForm from '../components/review_form';

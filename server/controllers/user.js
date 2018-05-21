@@ -101,6 +101,65 @@ class UserController {
     }
 
     /**
+    * @description -updates the details of a user.
+    *
+    * @param {Object} req -the api request
+    * @param {Object} res -the api response
+    *
+    * @return {json} message
+    */
+    static updateUser(req, res) {
+        User
+            .findOne({
+                where: {
+                    id: req.user.id
+                }
+            })
+            .then((user) => {
+                const initialUser = { ...user };
+                const initialParameters = Object.keys(initialUser.dataValues)
+                    .map(key => initialUser.dataValues[key]);
+                user
+                    .update({
+                        username: req.body.username || user.username,
+                        email: req.body.email || user.email,
+                    })
+                    .then((updated) => {
+                        const updatedParameters = Object.keys(updated.dataValues)
+                            .map(key => updated.dataValues[key]);
+                        let changes = 0;
+                        let i = 0;
+                        updatedParameters.forEach(() => {
+                            if (updatedParameters[i] !== initialParameters[i]) {
+                                changes += 1;
+                            }
+                            i += 1;
+                        });
+                        if (changes === 0) {
+                            return res.status(200)
+                                .json({
+                                    success: true,
+                                    modified: false,
+                                    message: 'No changes made, your details remains intact',
+                                });
+                        }
+                        return res.status(200)
+                            .json({
+                                success: true,
+                                modified: true,
+                                message: 'details successfully modified',
+                            });
+                    })
+            })
+            .catch((err) => {
+                res.status(500)
+                    .json({
+                        error: err.message
+                    });
+            });
+    }
+
+    /**
       * @description -logs in a registered user
       *
       * @param {Object} req -the api request

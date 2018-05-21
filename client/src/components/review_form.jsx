@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Input } from 'react-materialize';
 import axios from 'axios';
 
+import reviewApi from '../service/reviewApi';
+import history from '../history';
 import setToken from '../helpers/authorization';
 import Review from './review';
 /**
@@ -19,7 +21,6 @@ class ReviewForm extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.deleteReview = this.deleteReview.bind(this);
     }
 
     /** 
@@ -35,30 +36,15 @@ class ReviewForm extends Component {
         const review = {}
         review.description = this.state.message;
         review.username = localStorage.username;
-        const { dispatch, match } = this.props;
-        setToken(localStorage.token)
-        axios.post(`https://weconnect-main.herokuapp.com/api/v1/businesses/${businessId}/reviews`, (review))
-            .then((response) => {
-                console.log(response.data)
-                history.push(`/businessProfile/${businessId}`);
-            })
-            .catch((error) => {
-                console.log(error.response);
-            });
+        setToken(localStorage.token);
+        reviewApi.postReview(businessId, review)
+        .then(() => {
+            setTimeout(() => window.location.reload(), 2000);
+        })
+        .catch((error) => {
+            console.log(error.response);
+        });
     }
-    /** 
-    *
-    *
-    * @returns {func} funtion
-    * 
-    * @memberof ReviewFormComponent
-    */
-   deleteReview(event) {
-       event.preventDefault();
-       const businessId = this.props.businessId;
-       alert('review deleted!')
-
-   }
 
     /** 
     *
@@ -85,6 +71,7 @@ class ReviewForm extends Component {
         const message = this.state.message;
         const handleChange = this.handleChange;
         const allReviews = this.props.review
+        const reviewLabel = (localStorage.token) ? 'Give a review' : 'login to give a review';
         // generate array of reviews or null if no review present
         const myReviews = (allReviews.length > 0) ?
          allReviews.map((PresentReview, index) => {
@@ -92,7 +79,6 @@ class ReviewForm extends Component {
                 <Review 
                 key = { index }
                  review = { PresentReview } 
-                 delete = {this.deleteReview}
                  businessId = {this.props.businessId}
                  />
             )
@@ -107,7 +93,7 @@ class ReviewForm extends Component {
                                 <div className="input-field col s12">
                                     <textarea value={message} onChange={handleChange} name="message" className="materialize-textarea" length="80"></textarea>
                                     <label>
-                                        <span className="grey-text body-font">Give a review </span>
+                                        <span className="grey-text body-font"> { reviewLabel } </span>
                                     </label>
                                 </div>
                             </div>

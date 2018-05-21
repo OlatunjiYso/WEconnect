@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import setToken from '../helpers/authorization';
 import history from '../history';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import Nav from './nav';
 import UserBusiness from '../components/user_business';
-import businessActions from '../actions/business';
+import { fetchMyBusinesses } from '../actions/user';
 import customStyles from '../css/style.css';
 import profilePicture from '../assets/images/cameras.jpg';
 
@@ -25,37 +25,14 @@ class UserProfile extends Component {
 
     /** 
     * 
-    *@description Does authentication
+    *@description runs call that fetches nusr business
     *
     *@returns {JSX} JSX
     * 
     * @memberof UserProfileComponent
     */
     componentDidMount() {
-        if (localStorage.token) {
-            console.log(localStorage.token)
-          }
-        else {
-            console.log('you aint logged in');
-        }
-        const { dispatch } = this.props;
-        setToken(localStorage.token);
-        axios.get('https://weconnect-main.herokuapp.com/api/v1/auth/myBusiness')
-            .then((response) => {
-                if (response.data.message === 'You have no business registered yet') {
-                    dispatch(businessActions.gotNoBusiness());
-                }
-                if (response.data.message === 'all your businesses') {
-                    const businesses = response.data.businesses
-                    dispatch(businessActions.gotMyBusinesses(businesses));
-                }  
-            })
-            .catch((error) => {
-                if (error.response.status === 401) {
-                    history.push('/Login'); // Flash a message telling user to login
-                }
-                console.log(error.response)
-            });
+       this.props.fetchMyBusinesses();      
     }
     /** 
     *
@@ -82,6 +59,7 @@ class UserProfile extends Component {
 
         return (
             <div>
+                <Nav />
                 <main>
                     <div className="row head-font dashboard">
                         <div className="col s9 m6 l4 logo pink-text center-align">
@@ -99,7 +77,7 @@ class UserProfile extends Component {
                                 </Link>
                             </div>
                             <div className="col s6">
-                                <Link to="#!" className="right green lighten-5 black-text btn" type="button"> Update Profile
+                                <Link to="/updateProfile" className="right green lighten-5 black-text btn" type="button"> Update Profile
                                 </Link>
                             </div>
                         </div>
@@ -131,4 +109,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(UserProfile);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchMyBusinesses }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

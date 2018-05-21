@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { NavItem, Dropdown, Button } from 'react-materialize';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
-import setToken from '../helpers/authorization';
 import history from '../history';
-import businessActions from '../actions/business';
+import { registerBusiness } from '../actions/business';
 import Footer from '../components/footer';
 import BusinessForm from '../components/business_form';
 import Navbar from '../components/navbar'
@@ -48,30 +47,8 @@ class BusinessRegForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { dispatch } = this.props;
         const business = this.state.business; 
-        console.log(business);
-        setToken(localStorage.token);
-        dispatch(businessActions.createAttempt());
-        axios.post('https://weconnect-main.herokuapp.com/api/v1/businesses', (business))
-            .then((response) => {
-                dispatch(businessActions.createSuccess())
-                history.push('/userProfile');
-            })
-            .catch((error) => {
-                console.log(error);
-                if (error && error.response.status === 401) {
-                    history.push('/login');
-                    dispatch(businessActions.unknownError())
-                }
-                if (error && error.response.status === 400) {
-                    dispatch(businessActions.badRequest(error.response.data.errors))
-                }
-                if (error && error.response.status === 409) {
-                    dispatch(businessActions.conflict(error.response.data.message))
-                }
-            });
-
+        this.props.registerBusiness(business);
     }
     /** 
     *
@@ -120,4 +97,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(BusinessRegForm);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ registerBusiness }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessRegForm);

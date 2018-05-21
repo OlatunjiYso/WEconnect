@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import Nav from './nav';
 
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
@@ -24,7 +24,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Nav />
                 <main>
                     <div className="center banner">
                         <div className="row">

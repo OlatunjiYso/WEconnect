@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import setToken from '../helpers/authorization';
 import history from '../history';
-import authAction from '../actions/auth';
+import { login } from '../actions/auth';
 import Navbar from '../components/navbar';
 import LoginForm from '../components/loginForm';
 import Footer from '../components/footer';
@@ -32,7 +33,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted')
+        console.log('mounted galantly')
     }
 
     /** 
@@ -59,24 +60,9 @@ class Login extends Component {
     * @memberof Login Component
     */
     handleSubmit(event) {
-        const user = this.state.user;
-        const { dispatch } = this.props;
         event.preventDefault();
-        dispatch(authAction.signinAttempt());
-        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/login', (user))
-            .then((response) => {
-                dispatch(authAction.signinSuccess())
-               // localStorage.clear();
-                setToken(response.data.token)
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('id', response.data.id);
-                localStorage.setItem('username', response.data.username);
-                history.push('/');
-            })
-            .catch((error) => {
-                console.log(error.response.data.message);
-                dispatch(authAction.signinFailed(error.response.data.message));
-            });
+        const user = this.state.user;
+        this.props.login(user)
     }
 
     /** 
@@ -98,10 +84,11 @@ class Login extends Component {
                     errors={this.props.data.errors}
                 />
                 <Footer />
-            </div >
+            </div>
         )
     }
 }
+
 
 const mapStateToProps = (state) => {
     const data = state.authReducers;
@@ -111,4 +98,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Login);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ login }, dispatch);
+  }
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

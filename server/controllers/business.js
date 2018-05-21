@@ -235,7 +235,7 @@ class businessController {
         }
       })
       .catch((err) => {
-        res.status(400)
+        res.status(500)
           .json({
             error: err.message
           });
