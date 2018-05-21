@@ -91,7 +91,9 @@ class SignupForm extends Component {
                             <input type="password" value={userDetail.confirmPassword}
                                 onChange={handleChange} name="confirmPassword" required className="form-input white" />
                             <input type="submit" value="join" className="form-btn btn center-align" />{registrationOutcome} {spinner}
-                            <Link to= "/login" className="btn form-btn right green"> SignIn</Link>
+                            
+                            <Link to = "/login" className="right green-text text-darken-4"> Already registered? login here </Link> 
+                            
                         </form>
                     </div>
                 </div>

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Button, Icon, Modal } from 'react-materialize'
 import axios from 'axios';
 
-import setToken from '../helpers/authorization';
+import reviewApi from '../service/reviewApi';
 import history from '../history';
+import setToken from '../helpers/authorization';
 
 /**
  * @description ReviewControls Component
@@ -41,24 +42,22 @@ class ReviewControls extends Component {
     const reviewId = this.props.review.id;
     const newReview = {}
     newReview.description = this.state.updated;
-    const { dispatch, match } = this.props;
-    setToken(localStorage.token)
-    axios.put(`https://weconnect-main.herokuapp.com/api/v1/businesses/${businessId}/reviews/${reviewId}`, (newReview))
-        .then((response) => {
+    setToken(localStorage.token);
+        reviewApi.updateReview(businessId, reviewId, newReview)
+        .then(() => {
             this.setState({
                 ...this.state,
                isFetching: null
             });
-            console.log(response.data)
+            setTimeout(() => window.location.reload(), 2000);
         })
         .catch((error) => {
             this.setState({
                 ...this.state,
                isFetching: null
             });
-            console.log(error.response);
             if (error && error.response.status === 401) {
-                history.push('/login')
+                history.push('/login');
             }
         });
 }
@@ -78,14 +77,14 @@ class ReviewControls extends Component {
     });
     const businessId = this.props.businessId;
     const reviewId = this.props.review.id;
-    const { dispatch } = this.props;
-    setToken(localStorage.token)
-    axios.delete(`https://weconnect-main.herokuapp.com/api/v1/businesses/${businessId}/reviews/${reviewId}`)
-        .then((response) => {
+    setToken(localStorage.token);
+        reviewApi.deleteReview(businessId, reviewId)
+        .then(() => {
             this.setState({
                 ...this.state,
                isFetching: null
             });
+            setTimeout(() => window.location.reload(), 2000);
         })
         .catch((error) => {
             this.setState({
@@ -93,7 +92,7 @@ class ReviewControls extends Component {
                isFetching: null
             });
             if (error && error.response.status === 401) {
-                history.push('/login')
+                history.push('/login');
             }
         });
 }
@@ -126,7 +125,7 @@ class ReviewControls extends Component {
            
         return (
             <div>
-            <span className="left">
+            <span className="left cursor">
                 <Modal
                     trigger={<i className="material-icons tinyy green-text">edit</i>}>
                     <form onSubmit={this.handleSubmit}>
@@ -137,7 +136,7 @@ class ReviewControls extends Component {
                     </form>
                 </Modal>
             </span>
-            <span className="right-align">
+            <span className="right-align cursor">
                 <Modal
                     trigger={<i className="material-icons tinyy red-text">delete_forever</i>}>
                     <p> Are you sure you want to delete this review? </p>

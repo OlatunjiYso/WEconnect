@@ -12,16 +12,17 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
+    mode: 'development',
     entry: [path.join(paths.SRC, 'index.js')],
     output: {
-        path: paths.DIST,
+        path: '/',
         filename: 'index.bundle.js'
     },
     plugins: [
         // Tell webpack to use html plugin to inject bundled app into index.html.
-        new HtmlWebpackPlugin({
-            template: path.join(paths.SRC, 'index.html'),
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: path.join(paths.SRC, 'index.html'),
+        // }),
         // CSS will be extracted to this bundle file
         new ExtractTextPlugin('style.bundle.css'),
         // Let's enable hot reloading

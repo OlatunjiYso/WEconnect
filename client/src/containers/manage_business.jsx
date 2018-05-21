@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
+import { fetchThisBusiness } from '../actions/business';
 import businessActions from '../actions/business';
 import history from '../history';
 import Navbar from './nav';
@@ -23,8 +24,7 @@ class ManageBusiness extends Component {
         super(props);
         this.state = {
         
-        };
-        
+        };  
     }
 
     /** 
@@ -35,16 +35,8 @@ class ManageBusiness extends Component {
     */
    componentWillMount() {
     const { dispatch, match } = this.props;
-    axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
-        .then((response) => {
-            const business = response.data.business
-            dispatch(businessActions.getBusiness(business));
-        })
-        .catch((error) => {
-            if (error.response.status === 404) {
-            dispatch(businessActions.notFound());
-            }
-        });
+    const businessId = this.props.match.params.businessId;
+    this.props.fetchThisBusiness(businessId);
 }
 
     /** 
@@ -63,14 +55,14 @@ class ManageBusiness extends Component {
                     <BusinessMetrics businessObject={business} />
 
                     <div className="row body-font container">
-                        <div class="row top-pad">
-                            <div class="col s12 m6">
-                                <Link to= {`/businessDelete/${business.id}`} class="btn btn-large grey lighten-5 right red-text text-darken-4">
+                        <div className="row top-pad">
+                            <div className="col s12 m6">
+                                <Link to= {`/businessDelete/${business.id}`} className="btn btn-large grey lighten-5 right red-text text-darken-4">
                                     Delete Business
                                  </Link>
                             </div>
-                            <div class="col s12 m6">
-                               <button class="btn btn-large grey lighten-4 left">
+                            <div className="col s12 m6">
+                               <button className="btn btn-large grey lighten-4 left">
                                 <Link to= {`/businessUpdate/${business.id}`}  className= "green-text text-darken-4">
                                     Update Business
                                  </Link>
@@ -93,4 +85,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ManageBusiness);;
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchThisBusiness }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageBusiness);;

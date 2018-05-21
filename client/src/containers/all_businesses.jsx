@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import history from '../history';
 import Footer from '../components/footer';
-import Navbar from './nav';
-import businessActions from '../actions/business';
+import Navbar from '../components/navbar';
+import { fetchAllBusinesses } from '../actions/business';
 import BusinessCatalogTop from '../components/business_catalog_top';
 import BusinessCard from '../components/business_card';
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 import profilePicture from '../assets/images/cameras.jpg';
-import biz from '../dummy/all_businesses';
 
 /**
  * @class AllBusinessComponent
@@ -31,15 +30,7 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     componentDidMount() {
-        const { dispatch } = this.props;
-        axios.get('https://weconnect-main.herokuapp.com/api/v1/businesses')
-            .then((response) => {
-                const businesses = response.data.businesses
-                dispatch(businessActions.getAllBusinesses(businesses));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        this.props.fetchAllBusinesses();
     }
 
     /** 
@@ -57,7 +48,6 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     render() {
-        const fakeBusiness = biz;
         const realBusiness = this.props.data.businesses
         const FoundBusinesses = realBusiness.map((eachBusiness, index) => {
             return (
@@ -90,4 +80,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(AllBusinesses);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchAllBusinesses }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllBusinesses);

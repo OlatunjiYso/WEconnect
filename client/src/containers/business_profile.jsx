@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { NavItem, Dropdown, Button } from 'react-materialize';
+import { bindActionCreators } from 'redux';
 
-import businessActions from '../actions/business';
+import { fetchThisBusiness } from '../actions/business';
 import history from '../history';
-import Navbar from './nav';
+import Navbar from '../components/navbar';
 import BusinessBanner from '../components/business_banner';
 import BusinessBody from '../components/business_body';
 import ReviewForm from '../components/review_form';
@@ -40,18 +41,8 @@ class BusinessProfile extends Component {
     * @memberof AllBusinessesComponent
     */
     componentDidMount() {
-        const { dispatch, match } = this.props;
-        axios.get(`https://weconnect-main.herokuapp.com/api/v1/businesses/${match.params.businessId}`)
-            .then((response) => {
-                const business = response.data.business
-                dispatch(businessActions.getBusiness(business));
-            })
-            .catch((error) => {
-                if (error.response.status === 404) {
-                    dispatch(businessActions.notFound());
-                    history.push('/businesses')
-                }
-            });
+        const { businessId } = this.props.match.params;
+        this.props.fetchThisBusiness(businessId)   
     }
 
     /** 
@@ -67,7 +58,6 @@ class BusinessProfile extends Component {
         const { myReviews } = this.props.data
         return (
             <div>
-                <Navbar />
                 <main>
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessBody businessObject={business} />
@@ -113,4 +103,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(BusinessProfile);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchThisBusiness }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessProfile);

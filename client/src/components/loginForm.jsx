@@ -51,7 +51,7 @@ class LoginForm extends Component {
                             <label className="form-label"> Password: </label>
                             <input type="password" value={userDetail.password} onChange={handleChange} name="password" required className="form-input white" />
                             <input type="submit" value="Submit" className="form-btn btn" />{spinner} {signinOutcome}
-                            <Link to= "/signup" className="form-btn btn right"> join</Link>
+                            <Link to = "/signup" className="right green-text text-darken-4"> Not registered? Signup here </Link>
                         </form>
                     </div>
                 </div>

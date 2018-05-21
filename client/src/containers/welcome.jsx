@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import history from '../history';
-import authAction from '../actions/auth';
+import { onBoardUser } from '../actions/auth';
 import Footer from '../components/footer';
-import Navbar from './nav'
+import Navbar from '../components/navbar'
 import customStyles from '../css/style.css';
 
 /**
@@ -22,19 +23,8 @@ class Welcome extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {dispatch} =  this.props;
-        const user = this.props.data.user;
-        dispatch(authAction.signinAttempt());
-        axios.post('https://weconnect-main.herokuapp.com/api/v1/auth/login', (user))
-        .then((response) => {
-            console.log('successful signuo');
-            dispatch(authAction.onBoardingSuccess())
-            history.push('/')
-            return;
-        })
-        .catch((error) => {
-            dispatch(authAction.signinFailed(error.response.data.message));
-        });
+        const newUser = this.props.data.user;
+       this.props.onBoardUser(newUser);
 
     }
     /** 
@@ -52,7 +42,6 @@ class Welcome extends Component {
 
         return (
             <div>
-                <Navbar />
                 <main>
                     <div className="row">
                         <div className="col s12 m8 offset-m2">
@@ -86,4 +75,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Welcome);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ onBoardUser }, dispatch);
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

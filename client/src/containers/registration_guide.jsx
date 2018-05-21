@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Footer from '../components/footer';
-import Navbar from './nav'
+import Navbar from '../components/navbar'
 import customStyles from '../css/style.css';
 
 /**
@@ -25,7 +25,6 @@ class RegistrationGuide extends Component {
 
         return (
             <div>
-                <Navbar />
                 <main>
                     <div className="row">
                         <div className="top-pad col s12 m8 offset-m2">
@@ -66,7 +65,7 @@ class RegistrationGuide extends Component {
                                 Oh yes! You can edit the headers and sections as much as you would
                             </h6>
                             <Link to = "/businessRegistration">
-                                    <h5 className="center green-text text-darken-4 top-pad-much"> Proceed to Registration Form </h5>
+                                    <h5 className="center amber-text text-darken-4 top-pad-much"> Proceed to Registration Form </h5>
                             </Link>
                         </div>
 
