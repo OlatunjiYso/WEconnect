@@ -3,7 +3,8 @@ import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import history from './history';
-
+import 'alertifyjs/build/css/alertify.min.css';
+import 'alertifyjs/build/css/themes/default.min.css';
 import store from './store';
 import App from './App';
 

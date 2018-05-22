@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import history from '../history';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import { fetchAllBusinesses } from '../actions/business';
 import BusinessCatalogTop from '../components/business_catalog_top';
 import BusinessCard from '../components/business_card';

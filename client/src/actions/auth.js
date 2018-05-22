@@ -1,3 +1,4 @@
+import alertify from 'alertifyjs';
 
 import history from '../history';
 import userApi from '../service/userApi';
@@ -171,6 +172,8 @@ export const login = (user) => {
                 localStorage.setItem('id', response.data.id);
                 localStorage.setItem('username', response.data.username);
                 history.push('/');
+                alertify.set('notifier', 'position', 'top-right');
+            alertify.success('Login Successful');
             })
             .catch((error) => {
                 dispatch(loginFailed(error.response.data.message));
@@ -194,6 +197,8 @@ export const signup = newUser => (dispatch) => {
         .then(() => {
             dispatch(signupSuccess(newUser));
             history.push('/welcome');
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('Registration Successful');
         })
         .catch((error) => {
             if (error && error.response.status === 400) {

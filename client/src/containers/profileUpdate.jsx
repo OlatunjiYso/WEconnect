@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
+import { changePassword , changeDetails} from '../actions/user';
 import history from '../history';
 import authAction from '../actions/auth';
 import Footer from '../components/footer';
@@ -11,7 +13,6 @@ import Navbar from './nav';
 
 import customStyles from '../css/style.css';
 
-const rootUrl = 'http://localhost:3000/api/v1';
 
 /**
  * @class ProfileUpdateComponent
@@ -32,7 +33,7 @@ class ProfileUpdate extends Component {
             updated: {
                 username: '',
                 email: '',
-                oldPassword: '',
+                currentPassword: '',
                 newPassword: '',
                 confirmNewPassword: '',
             },
@@ -40,9 +41,10 @@ class ProfileUpdate extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.submitPassword = this.submitPassword.bind(this);
-        this.submitDetail = this.submitDetail.bind(this);
+        this.submitDetails = this.submitDetails.bind(this);
         this.submitPicture = this.submitPicture.bind(this);
         this.switchCase = this.switchCase.bind(this);
+        this.getu = this.getu.bind(this);
     }
 
 
@@ -77,12 +79,12 @@ class ProfileUpdate extends Component {
                 ...this.state,
                 case: 0
             });
-        }else{
+        } else {
             this.setState({
                 ...this.state,
                 case: this.state.case + 1
             })
-        }   
+        }
     }
 
     /**
@@ -93,22 +95,25 @@ class ProfileUpdate extends Component {
       *
       *@memberof ProfileUpdate Component
       */
-     submitPassword(event) {
+    submitDetails(event) {
+        console.log('i got here')
+        console.log(updated)
         event.preventDefault();
-        alert(` ${this.state.updated.newPassword} ${this.state.updated.confirmNewPassword}` )
+        const userId = this.locaStorage.id;
+        this.props.changeDetails(userId, this.state.updated)
     }
 
     /**
-      * 
-      *@param {event} event
-      * 
-      *@returns {func} function
-      *
-      *@memberof ProfileUpdate Component
-      */
-     submitDetail(event) {
+     * 
+     *@param {event} event
+     * 
+     *@returns {func} function
+     *
+     *@memberof ProfileUpdate Component
+     */
+    getu(event) {
         event.preventDefault();
-        alert('Profile successfully modified')
+        alert(this.state.updated.newPassword);
     }
 
     /**
@@ -119,7 +124,33 @@ class ProfileUpdate extends Component {
       *
       *@memberof ProfileUpdate Component
       */
-     submitPicture(event) {
+    submitPassword(event) {
+        event.preventDefault();
+        this.props.changePassword(this.state.updated)
+    }
+
+    /**
+      * 
+      *@param {event} event
+      * 
+      *@returns {func} function
+      *
+      *@memberof ProfileUpdate Component
+      */
+    submitDetails(event) {
+        event.preventDefault();
+        this.props.changeDetails(this.state.updated)
+    }
+
+    /**
+      * 
+      *@param {event} event
+      * 
+      *@returns {func} function
+      *
+      *@memberof ProfileUpdate Component
+      */
+    submitPicture(event) {
         event.preventDefault();
         alert('Picture successfully modified!!')
     }
@@ -136,15 +167,16 @@ class ProfileUpdate extends Component {
             <div>
                 <Navbar />
                 <ProfileUpdateForm
-                    handleChange={this.handleChange}
-                    submitDetail={this.submitDetail}
-                    submitPassword={this.submitPassword}
-                    submitPicture={this.submitPicture}
-                    switchCase={this.switchCase}
-                    formErrors={this.props.data.errors}
-                    isFetching={this.props.data.awaitingResponse}
+                    handleChange = {this.handleChange}
+                    updateUser = { this.submitDetails }
+                    submitPassword = {this.submitPassword}
+                    submitPicture = {this.submitPicture}
+                    switchCase = {this.switchCase}
+                    formErrors = {this.props.data.errors}
+                    isFetching = {this.props.data.awaitingResponse}
                     updated = {this.state.updated}
                     presentCase = {this.state.case}
+                    getu ={ this.getu}
                 />
                 <Footer />
             </div >
@@ -153,11 +185,15 @@ class ProfileUpdate extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    const data = state.authReducers;
+
+    const data = state.userReducer;
     return {
         data
     }
 }
 
-export default connect(mapStateToProps)(ProfileUpdate);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ changePassword, changeDetails }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);

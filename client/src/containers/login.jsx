@@ -7,7 +7,7 @@ import axios from 'axios';
 import setToken from '../helpers/authorization';
 import history from '../history';
 import { login } from '../actions/auth';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import LoginForm from '../components/loginForm';
 import Footer from '../components/footer';
 import customStyles from '../css/style.css';

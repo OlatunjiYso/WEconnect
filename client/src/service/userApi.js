@@ -27,9 +27,8 @@ class UserApi {
      * @return { undefined } asynchronuos call can give varying outcome
      */
     static login(user) {
-        console.log('reached user Api service');
         return axios.post(`${rootUrl}/login`, (user));
-    }                                                                                                                                                                                                                                                              
+    }
 
     /**
      * @description - api endpoint that fetches a users business
@@ -39,6 +38,38 @@ class UserApi {
      */
     static getMyBusinesses() {
         return axios.get(`${rootUrl}/myBusiness`);
+    }
+
+    /**
+     * @description - api endpoint that changes a user's password
+     *
+     *@param {object} passwords - object containing both old and new passwords
+     * @return { undefined } asynchronuos call can give varying outcome
+     */
+    static changePassword(passwords) {
+        return axios.post(`${rootUrl}/passwords`, (passwords));
+    }
+
+    /**
+     * @description - api endpoint that changes a user's email and username
+     *
+     *@param {string} userId - id of user
+     *@param {object} details - object containing email and username
+     *
+     * @return { undefined } asynchronuos call can give varying outcome
+     */
+    static changeDetails(userId, details) {
+        return axios.put(`${rootUrl}/profile/${userId}`, (details));
+    }
+
+     /**
+     * @description - api endpoint that changes a user's email and username
+     *
+     *
+     * @return { undefined } asynchronuos call can give varying outcome
+     */
+    static changePicture() {
+        return axios.get(`${rootUrl}`);
     }
 }
 

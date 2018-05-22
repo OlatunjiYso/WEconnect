@@ -7,7 +7,7 @@ import axios from 'axios';
 import history from '../history';
 import { onBoardUser } from '../actions/auth';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar'
+import Navbar from './nav';
 import customStyles from '../css/style.css';
 
 /**
@@ -42,6 +42,7 @@ class Welcome extends Component {
 
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row">
                         <div className="col s12 m8 offset-m2">

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { fetchThisBusiness } from '../actions/business';
 import history from '../history';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import BusinessBanner from '../components/business_banner';
 import BusinessBody from '../components/business_body';
 import ReviewForm from '../components/review_form';
@@ -59,6 +59,7 @@ class BusinessProfile extends Component {
         return (
             <div>
                 <main>
+                    <Navbar />
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessBody businessObject={business} />
                     <div className="row body-font container">

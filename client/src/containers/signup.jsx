@@ -7,12 +7,11 @@ import history from '../history';
 import { signup } from '../actions/auth';
 import Footer from '../components/footer';
 import SignupForm from '../components/signup_form';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
-const rootUrl = 'http://localhost:3000/api/v1';
 
 /**
  * @class SignupComponent
