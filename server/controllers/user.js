@@ -112,7 +112,7 @@ class UserController {
         User
             .findOne({
                 where: {
-                    id: req.user.id
+                    id: req.params.userId
                 }
             })
             .then((user) => {
@@ -149,7 +149,7 @@ class UserController {
                                 modified: true,
                                 message: 'details successfully modified',
                             });
-                    })
+                    });
             })
             .catch((err) => {
                 res.status(500)
