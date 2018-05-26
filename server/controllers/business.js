@@ -108,10 +108,10 @@ class businessController {
    */
   static getAllBusinesses(req, res) {
     const filter = {};
-    if (req.query.category) {
+    if (req.query.category && req.query.category !== 'category') {
       filter.category = req.query.category;
     }
-    if (req.query.location) {
+    if (req.query.location && req.query.location !== 'location') {
       filter.state = req.query.location;
     }
     Business
@@ -138,6 +138,7 @@ class businessController {
               location: req.query.location,
               category: req.query.category,
               message: 'not found',
+              filter
             });
         }
       })

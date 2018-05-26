@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NavItem, Dropdown, Button } from 'react-materialize';
-
+import { NavItem, Dropdown, Button, Input } from 'react-materialize';
 /**
  * @s FooterComponent
  * 
@@ -17,9 +16,13 @@ class BusinessCatalogTop extends Component {
     * @memberof BusinessCatalogTop Component
     */
     render() {
-      const { category } = this.props.filter;
-      const chosenState = this.props.filter.state;
-      const location = (chosenState.length > 1) ? `in ${ chosenState }` : '';
+        const { proposedFilter, selectedFilter, handleChange, handleSubmit, businessList } = this.props
+        const { category } = selectedFilter;
+        const displayedCategory = (category !== 'category') ? category : 'All'
+        const chosenState = selectedFilter.state;
+        const displayedLocation = (chosenState !== 'location') ? `in ${chosenState}` : 'for you!';
+        const displayTitle = (businessList.length > 0) ? 
+        <span> {displayedCategory} businesses {displayedLocation} </span> : null
         return (
             <div>
                 <div className="row black-text">
@@ -27,47 +30,38 @@ class BusinessCatalogTop extends Component {
                         <h4>Our Collection Of Businesses and Professionals for You</h4>
                     </div>
                     <div className="row center-align underlined bottom-pad">
-                        <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
-                            <Dropdown trigger={
-                                <h6>
-                                    <span className="card-button">
-                                        <i className="tiny material-icons top-pad pink-text">place</i>
-                                        <span className="green-text "> Filter By Location </span>
-                                    </span>
-                                </h6>
-                            }>
-                                <NavItem>one</NavItem>
-                                <NavItem>two</NavItem>
-                                <NavItem divider />
-                                <NavItem>three</NavItem>
-                            </Dropdown>
-                        </div>
-                        <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
-                            <Dropdown trigger={
-                                <h6>
-                                    <span className="card-button">
-                                        <i className="tiny material-icons top-pad pink-text">card_travel</i>
-                                        <span className="green-text"> Filter By category </span>
-                                    </span>
-                                </h6>
-                            }>
-                                <NavItem>one</NavItem>
-                                <NavItem>two</NavItem>
-                                <NavItem divider />
-                                <NavItem>three</NavItem>
-                            </Dropdown>
-                        </div>
-                        <div className="col s8 offset-s2 m4 l2 offset-l1 right-align push-down">
-                            <Link className=" green-text text-darken-4 btn grey lighten-4" to="#!">
-                                Get businesses
-                     </Link>
-                        </div>
+                        <form onSubmit = { handleSubmit }>
+                            <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
+                                <div className="input-field col s12">
+                                    <Input s={12} type='select' value={proposedFilter.state} onChange={handleChange} name="state">
+                                        <option value='location'>Location</option>
+                                        <option value="lagos">Lagos</option>
+                                        <option value="abuja">Abuja</option>
+                                        <option value="ogun">Ogun</option>
+                                    </Input>
+                                </div>
+                            </div>
+                            <div className="col s5 offset-s1 m3 offset-m1 l2 offset-l1 cursor">
+                                <div className="input-field col s12">
+                                    <Input s={12} type='select' value={proposedFilter.category} onChange={handleChange} name="category">
+                                        <option value='category'>Category</option>
+                                        <option value='fashion'>Fashion</option>
+                                        <option value='technology'>Technology</option>
+                                        <option value='housing'>Housing</option>
+                                    </Input>
+                                </div>
+                            </div>
+                            <div className="col s8 offset-s2 m4 l2 offset-l1 right-align push-down">
+                                <input type="submit" value="Get Businesses" className="green-text text-darken-4 btn grey lighten-4" />
+                            </div>
+                        </form>
+                    ///
                     </div>
                 </div>
                 <div className="row head-font">
                     <div className="col s12">
                         <h5 className="center-align pink-text">
-                           {category} Businesses {location} 
+                        {displayTitle}
                         </h5>
                     </div>
                 </div>
@@ -77,7 +71,7 @@ class BusinessCatalogTop extends Component {
 }
 
 BusinessCatalogTop.propTypes = {
-    filter: PropTypes.object.isRequired
+    selectedFilter: PropTypes.object.isRequired
 }
 
 export default BusinessCatalogTop;

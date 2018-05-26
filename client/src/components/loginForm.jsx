@@ -24,14 +24,14 @@ class LoginForm extends Component {
             <span className="form-response"> Please wait ... </span> : null
 
         // display request results
-        const signinOutcome = this.props.errors.login ?
+        const signinOutcome = this.props.errors.status ?
             <span className="form-response"> Oops, an error occured </span> : null
 
         // display signup errors
-        const signinError = this.props.errors.login ?
+        const signinError = (this.props.errors.status) ?
             <div className="col s8 offset-s2 m4 offset-m4 left-align error-box  bottom-gap">
                 <h6>
-                    <i className="material-icons red-text tiny">clear</i> {this.props.errors.login}
+                    <i className="material-icons red-text tiny">clear</i> {this.props.errors.data.message}
                 </h6>
             </div> : null
 

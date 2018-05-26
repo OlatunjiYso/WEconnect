@@ -1,75 +1,25 @@
 const initialState = {
-    errors: {
-        conflict: null,
-        validationErrors: false,
-        passwordMismatch: null,
-        login: null,
-    },
     awaitingResponse: false,
+    successMessage: null,
+    errors: {},
 };
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ATTEMPT':
+        case 'IS_REQUESTING':
             return {
                 ...state,
-                awaitingResponse: action.awaiting,
-                errors:
-                    {
-                        ...state.errors,
-                        validationErrors: action.error,
-                        conflict: action.error,
-                        passwordMismatch: action.error,
-                        login: action.error
-                    },
+                awaitingResponse: action.bool,
             };
-        case 'BAD_REQUEST':
+        case 'REQUEST_ERROR':
             return {
                 ...state,
-                errors:
-                    { ...state.errors, validationErrors: action.error },
-                awaitingResponse: action.awaiting
+                errors: action.error
             };
-        case 'CONFLICT':
+        case 'SUCCESS':
             return {
                 ...state,
-                errors:
-                    { ...state.errors, conflict: action.error },
-                awaitingResponse: action.awaiting
+                successMessage: action.response
             };
-        case 'CHANGE_PASSWORD_SUCCESS':
-            return {
-                ...state,
-                awaitingResponse: action.awaiting,
-                errors:
-                    {
-                        ...state.errors,
-                        validationErrors: action.error,
-                        conflict: action.error,
-                        passwordMismatch: action.error,
-                        login: action.error
-                    }
-            };
-        case 'SUCCESS': // Business Registration || Update ||delete was successful
-            return {
-                ...state,
-                awaiting: action.awaiting,
-                errors: {
-                    ...state.errors,
-                    validationErrors: action.error,
-                    conflict: action.error,
-                    others: action.error,
-                    forbidden: action.error
-                },
-                passwordMismatch: action.error
-            };
-        case 'PASSWORD_MISMATCH':
-            return {
-                ...state,
-                errors:
-                    { ...state.errors, passwordMismatch: action.error },
-                awaitingResponse: action.awaiting,
-            };
-
         default:
             return state;
     }

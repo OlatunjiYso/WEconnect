@@ -5,80 +5,43 @@ import userApi from '../service/userApi';
 import setToken from '../helpers/authorization';
 
 import {
-    FOUND_MY_BUSINESSES, GOT_NO_BUSINESSES, CONFLICT, ATTEMPT, PASSWORD_MISMATCH,
-    SUCCESS, STOP_SPINNER, BAD_REQUEST
+    FOUND_MY_BUSINESSES, GOT_NO_BUSINESSES, IS_REQUESTING,
+    SUCCESS, REQUEST_ERROR
 } from '../actions/types';
 
 /**
-* @description - action responsible for flagging conflicts
+     * @description - starts spinner when awaiting a response
+     *
+     * @param {bool} bool - true lor false
+     * @return {obj} -actionable object containing type and payload
+     */
+    export const isRequesting = bool => ({
+        type: IS_REQUESTING,
+        bool
+    });
+
+/**
+* @description - action responsible for flagging errors
 *
 *@param {obj} error - the conflict error message
 *
 * @return {obj} -actionable object containing type and payload
 */
-export const conflict = error => ({
-    type: CONFLICT,
-    awaiting: false,
+export const failureResponse = error => ({
+    type: REQUEST_ERROR,
     error
 });
 
 /**
-     * @description - starts spinner in attempt to update user password || details|| picture
-     *
-     *
-     * @return {obj} -actionable object containing type and payload
-     */
-export const attempt = () => ({
-    type: ATTEMPT,
-    awaiting: true,
-});
-
-/**
- * @description - displays password mismatch in attempt to delete a business
+ * @description - indicates success after successful attempt
  *
- *
+ *@param {object} message - response object
  * @return {obj} -actionable object containing type and payload
  */
-export const passwordMismatch = () => ({
-    type: PASSWORD_MISMATCH,
-    awaiting: false,
-    error: true
-});
-
-/**
-* @description - flags bad requests
-*
-*@param {array} errors - an array of validation errors
-* @return {obj} -actionable object containing type and payload
-*/
-export const badRequest = errors => ({
-    type: BAD_REQUEST,
-    awaiting: false,
-    error: errors
-});
-/**
- * @description - stops spinner after successful attempt to register || update || delete business
- *
- *
- * @return {obj} -actionable object containing type and payload
- */
-export const success = () => ({
+export const success = message => ({
     type: SUCCESS,
-    awaiting: false,
-    error: null
+    response: message
 });
-
-/**
-* @description - hides spinner
-*
-*
-* @return {obj} -actionable object containing type and payload
-*/
-export const stopSpinner = () => ({
-    type: STOP_SPINNER,
-    awaiting: false
-});
-
 
 /**
      * @description - action for updating store with user's business
@@ -141,33 +104,35 @@ export const fetchMyBusinesses = () => (dispatch) => {
 */
 export const changePassword = passwords => (dispatch) => {
     setToken(localStorage.token);
-    dispatch(attempt());
+    dispatch(isRequesting(true));
     console.log(passwords);
     userApi.changePassword(passwords)
         .then((response) => {
             if (response.data.message === 'Your password remains unchanged') {
-                dispatch(success());
+                // dispatch(success(false));
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.success('No changes, Your password remains the same');
             } else {
-                dispatch(success());
+                // dispatch(success());
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.success('Password successfully modified');
             }
+            dispatch(isRequesting(false));
         })
         .catch((error) => {
             console.log(error.response);
-            if (error && error.response.status === 401) {
-                dispatch(passwordMismatch());
-            }
-            if (error && error.response.status === 400) {
-                dispatch(badRequest(error.response.data.errors));
-            }
+            // if (error && error.response.status === 401) {
+            //     dispatch(passwordMismatch());
+            // }
+            // if (error && error.response.status === 400) {
+                dispatch(failureResponse(error.response.data));
+            // }
+            dispatch(isRequesting(false));
         });
 };
 
 /**
-* @description - method responsible for changing a user's password
+* @description - method responsible for changing a user's information
 *
 *@param {string} userId - id of user
 * @param {object} details - object containing both email and username
@@ -176,28 +141,15 @@ export const changePassword = passwords => (dispatch) => {
 */
 export const changeDetails = (userId, details) => (dispatch) => {
     setToken(localStorage.token);
-    dispatch(attempt());
+    dispatch(isRequesting(true));
     userApi.changeDetails(userId, details)
         .then((response) => {
-            if (response.data.message === 'Your password remains unchanged') {
-                dispatch(success());
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success('No changes, Your password remains the same');
-            } else {
-                dispatch(success());
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.success('Password successfully modified');
-            }
+            dispatch(success(response.data.message));
+            dispatch(isRequesting(false));
         })
         .catch((error) => {
-            console.log(error.response);
-            if (error && error.response.status === 409) {
-
-                dispatch(passwordMismatch());
-            }
-            if (error && error.response.status === 400) {
-                dispatch(badRequest(error.response.data.errors));
-            }
+            dispatch(failureResponse(error.response.data));
+            dispatch(isRequesting(false));
         });
 };
 

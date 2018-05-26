@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
+import alertify from 'alertifyjs';
 
+import { alertSuccess } from '../actions/flashMessage';
+import verifyToken from '../helpers/verifytoken';
 import history from '../history';
 import { signup } from '../actions/auth';
 import Footer from '../components/footer';
 import SignupForm from '../components/signup_form';
 import Navbar from './nav';
-
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
@@ -36,23 +38,26 @@ class Signup extends Component {
                 firstname: '',
                 lastname: '',
                 confirmPassword: '',
-            }
+            },
+            passwordMismatch: null
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-     
-    /**
-     * 
-    * @memberof SignUpComponent
-    * 
-    * @returns {void} void
-    */
-    componentDidMount() {
-        console.log('I mounted galantly!')
-        console.log(history.location)
-    }
 
+    /**
+   * @description handles token verification and page redirection
+   *
+   * @method componentDidMount
+   *
+   * @returns {boolean} show warning boolean of either true or false
+   */
+    componentDidMount() {
+        if (verifyToken()) {
+            alertSuccess('You are logged in already')
+            this.props.history.push('/userProfile');
+        }
+    }
     /**
     * @description - redirects newly registered users to on-boarding page
     *
@@ -77,7 +82,7 @@ class Signup extends Component {
         const value = event.target.value;
         this.setState({
             ...this.state,
-            userDetail: { ...this.state.userDetail, [name]: value }
+            userDetail: { ...this.state.userDetail, [name]: value },
         });
     }
 
@@ -89,6 +94,12 @@ class Signup extends Component {
     *@memberof Signup Component
     */
     handleSubmit(event) {
+        const details = this.state.userDetail
+        if (details.password !== details.confirmPassword) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success(message);
+        }
+            
         event.preventDefault();
         const newUser = this.state.userDetail;
         this.props.signup(newUser)
@@ -109,8 +120,9 @@ class Signup extends Component {
                     handleChange = {this.handleChange}
                     handleSubmit = {this.handleSubmit}
                     userDetail = {this.state.userDetail}
-                    formErrors = {this.props.data.errors}
+                    formErrors = {this.props.data.signupErrors}
                     isFetching = {this.props.data.awaitingResponse}
+                    passwordMismatch = { this.state.passwordMismatch}
                 />
                 <Footer />
             </div >
@@ -118,8 +130,7 @@ class Signup extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{
-    console.log(state)
+const mapStateToProps = (state) => {
     const data = state.authReducers;
     return {
         data
@@ -128,6 +139,6 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ signup }, dispatch);
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

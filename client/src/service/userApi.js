@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rootUrl = 'https://weconnect-main.herokuapp.com/api/v1/auth';
+const rootUrl = 'api/v1/auth';
 
 /**
  * @class UserApi

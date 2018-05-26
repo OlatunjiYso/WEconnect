@@ -1,123 +1,83 @@
-import alertify from 'alertifyjs';
 
+import { alertSuccess } from '../actions/flashMessage';
 import history from '../history';
 import userApi from '../service/userApi';
-
+import setToken from '../helpers/authorization';
 import {
-    AUTHENTICATED, ATTEMPT, SIGNUP_SUCCESS, BAD_REQUEST, CONFLICT, PASSWORD_MISMATCH,
-    FAILED_SIGNIN, SIGNIN_SUCCESS, ON_BOARDING_SUCCESS, UNAUTHENTICATED
+    MAKING_AUTH_REQUEST, SIGNIN_REQUEST_SUCCESS, SIGNUP_REQUEST_SUCCESS, SIGNIN_REQUEST_ERROR, SIGNUP_REQUEST_ERROR, ON_BOARDING_SUCCESS, SET_CURRENT_USER
 } from '../actions/types';
 
 
 /**
- * @description - method responsible for starting the spinner
+ * @description handles setting current logged-in user
  *
- * @return { obj } - actionable object containing payload and type
+ * @param { object } user - contains object of logged-in user details
+ *
+ * @returns { object } user details - returns details of current logged-in user
  */
-export const signupAttempt = () => {
+export const setCurrentUser = user => ({
+    type: SET_CURRENT_USER,
+    user
+});
 
-    return {
-        type: ATTEMPT,
-        awaiting: true,
-        outcome: 1,
-        error: null
-    };
-};
 
 /**
-* @description - method responsible for stopping the spinner
+     * @description - starts spinner when awaiting a response
+     *
+     * @param {bool} bool - true lor false
+     * @return {obj} -actionable object containing type and payload
+     */
+export const isRequesting = bool => ({
+    type: MAKING_AUTH_REQUEST,
+    bool
+});
+
+/**
+* @description - action responsible for flagging signin errors
 *
-* @param {obj} user -user details of newly signed up member
+*@param {obj} error - the conflict error message
 *
-* @return { obj } - actionable object containing payload and type
+* @return {obj} -actionable object containing type and payload
 */
-export const signupSuccess = (user) => {
-    return {
-        type: SIGNUP_SUCCESS,
-        awaiting: false,
-        error: null,
-        userDetails: user
-    };
-};
 
 
-/**
- *@description - method responsible for showing errors for bad requests
- *
- *@param {obj} errorsArray -an array of all validation errors
- *
- * @return { obj } - actionable object containing payload and type
- */
-export const signupBadRequest = (errorsArray) => {
-    return {
-        type: BAD_REQUEST,
-        awaiting: false,
-        error: errorsArray,
-        outcome: 0,
-    };
-};
-
-/**
- *@description - method responsible for showing errors for conflicting requests
- *
- *@param {obj} errors - conflict message
- *
- * @return { obj } - actionable object containing payload and type
- */
-export const signupConflict = errors => ({
-    type: CONFLICT,
-    awaiting: false,
-    error: errors,
+export const signinFailure = error => ({
+    type: SIGNIN_REQUEST_ERROR,
+    error
 });
 
 /**
-*@description - method responsible for showing password mismatch
+* @description - action responsible for flagging signup errors
 *
+*@param {obj} error - the conflict error message
 *
-* @return { obj } - actionable object containing payload and type
+* @return {obj} -actionable object containing type and payload
 */
-export const passwordMismatch = () => ({
-    type: PASSWORD_MISMATCH,
-    misMatch: true,
+export const signupFailure = error => ({
+    type: SIGNUP_REQUEST_ERROR,
+    error
 });
 
 /**
- * @description - method responsible for starting the spinner
+ * @description - indicates success after successful attempt to signin
  *
- * @return { obj } - actionable object containing payload and type
+ *@param {object} message - response object
+ * @return {obj} -actionable object containing type and payload
  */
-export const loginAttempt = () => ({
-    type: ATTEMPT,
-    awaiting: true,
-    error: null
+export const signinSuccess = message => ({
+    type: SIGNIN_REQUEST_SUCCESS,
+    response: message
 });
 
 /**
- * @description - method responsible for displaying login errors
+ * @description - indicates success after successful attempt to signup
  *
- * @param {obj} message reason for failed authentication
- *
- * @return { obj } - actionable object containing payload and type
+ *@param {object} message - response object
+ * @return {obj} -actionable object containing type and payload
  */
-export const loginFailed = message => ({
-    type: FAILED_SIGNIN,
-    awaiting: false,
-    outcome: 0,
-    error: message,
-    authenticated: false,
-});
-
-/**
- * @description - method responsible for stopping the spinner on success
- *
- *
- * @return { obj } - actionable object containing payload and type
- */
-export const loginSuccess = () => ({
-    type: SIGNIN_SUCCESS,
-    awaiting: false,
-    error: null,
-    authenticated: true,
+export const signupSuccess = message => ({
+    type: SIGNUP_REQUEST_SUCCESS,
+    response: message
 });
 
 /**
@@ -127,58 +87,35 @@ export const loginSuccess = () => ({
 */
 export const onBoardingSuccess = () => ({
     type: ON_BOARDING_SUCCESS,
-    awaiting: false,
     userDetails: null,
-    authenticated: true,
-});
-
-/**
-* @description - method responsible for logging out users
-*
-* @return { obj } - actionable object containing payload and type
-*/
-export const loggedOut = () => {
-    localStorage.clear();
-    return {
-        type: UNAUTHENTICATED,
-        authenticated: false,
-    };
-};
-
-/**
- * @description - method responsible for logging out users
- *
- * @return { obj } - actionable object containing payload and type
- */
-export const loggedIn = () => ({
-    type: AUTHENTICATED,
-    authenticated: true,
 });
 
 /**
 * @description - method responsible for logging in users
 *
-* @param {obj} user - user information
+* @param {obj} userDetails - user information
 *
 * @return { obj } - actionable object containing payload and type
 */
-export const login = (user) => {
-    return (dispatch) => {
-        dispatch(loginAttempt());
-        userApi.login(user)
-            .then((response) => {
-                dispatch(loginSuccess());
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('id', response.data.id);
-                localStorage.setItem('username', response.data.username);
-                history.push('/');
-                alertify.set('notifier', 'position', 'top-right');
-            alertify.success('Login Successful');
-            })
-            .catch((error) => {
-                dispatch(loginFailed(error.response.data.message));
-            });
-    };
+export const login = userDetails => (dispatch) => {
+    dispatch(isRequesting(true));
+    const user = {};
+    userApi.login(userDetails)
+        .then((response) => {
+            dispatch(signinSuccess(response.data));
+            dispatch(isRequesting(false));
+            localStorage.setItem('token', response.data.token);
+            setToken(response.data.token);
+            user.id = response.data.id;
+            user.username = response.data.username;
+            dispatch(setCurrentUser(user));
+            history.push('/');
+            alertSuccess('You are logged in');
+        })
+        .catch((error) => {
+            dispatch(isRequesting(false));
+            dispatch(signinFailure(error.response));
+        });
 };
 
 /**
@@ -189,24 +126,18 @@ export const login = (user) => {
 * @return { obj } - actionable object containing payload and type
 */
 export const signup = newUser => (dispatch) => {
-    if (newUser.confirmPassword !== newUser.password) {
-        dispatch(passwordMismatch());
-    }
-    dispatch(signupAttempt());
+    dispatch(isRequesting(true));
     userApi.signup(newUser)
         .then(() => {
+            console.log(newUser);
+            dispatch(isRequesting(false));
             dispatch(signupSuccess(newUser));
             history.push('/welcome');
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success('Registration Successful');
+            alertSuccess('Welcome!');
         })
         .catch((error) => {
-            if (error && error.response.status === 400) {
-                dispatch(signupBadRequest(error.response.data.errors));
-            }
-            if (error && error.response.status === 409) {
-                dispatch(signupConflict(error.response.data.message));
-            }
+            dispatch(signupFailure(error.response));
+            dispatch(isRequesting(false));
         });
 };
 
@@ -218,16 +149,22 @@ export const signup = newUser => (dispatch) => {
 * @return { obj } - actionable object containing payload and type
 */
 export const onBoardUser = newUser => (dispatch) => {
-    dispatch(loginAttempt());
+    dispatch(isRequesting(true));
+    const user = {};
     userApi.login(newUser)
         .then((response) => {
+            dispatch(isRequesting(false));
             dispatch(onBoardingSuccess());
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('id', response.data.id);
-            localStorage.setItem('username', response.data.username);
+            setToken(response.data.token);
+            user.id = response.data.id;
+            user.username = response.data.username;
+            dispatch(setCurrentUser(user));
             history.push('/');
+            alertSuccess('You are logged in');
         })
         .catch((error) => {
-            dispatch(loginFailed(error.response.data.message));
+            dispatch(signinFailure(error.response));
+            dispatch(isRequesting(false));
         });
 };

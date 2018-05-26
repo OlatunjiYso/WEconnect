@@ -23,7 +23,7 @@ class Welcome extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const newUser = this.props.data.user;
+        const newUser = this.props.data.response;
        this.props.onBoardUser(newUser);
 
     }
@@ -34,9 +34,9 @@ class Welcome extends Component {
     * @memberof WelcomeComponent
     */
     render() {
-        const user = this.props.data.user;
+        const user = this.props.data.response;
+        console.log(this.props.data);
         // dispaly spinner 
-        console.log(this.props.data.awaitingResponse)
         const spinner = this.props.data.awaitingResponse ? 
         <h6 className = "no-bottom-gap"> Please wait .... </h6> : null
 

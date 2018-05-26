@@ -21,6 +21,14 @@ import profilePicture from '../assets/images/cameras.jpg';
 class AllBusinesses extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            filter: {
+                state: 'location',
+                category: 'category',
+            }
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     /** 
@@ -30,17 +38,46 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     componentDidMount() {
-        this.props.fetchAllBusinesses();
+        const defaultFilter = this.props.data.filter;
+        if (localStorage.getItem('category')) {
+            defaultFilter.category = localStorage.category
+        }
+        this.props.fetchAllBusinesses(defaultFilter);
+        setTimeout(5000);
+        localStorage.removeItem('category');
     }
 
     /** 
+    *@description handles change in input field
     *@param {event} event
     *
     *@returns {func} funtion
-    *@memberof SignupForm Component
+    *@memberof AllBusinessComponent Component
     *
     */
-    
+    handleChange(event) {
+        event.preventDefault();
+        const name = event.target.name;
+        const value = event.target.value
+        this.setState({
+            ...this.state,
+            filter: { ...this.state.filter, [name]: value },
+        }); 
+    }
+
+    /** 
+       *@description sends data to server
+       *
+       * @returns {func} funtion
+       * 
+       * @memberof AllBusinessComponent Component;
+       */
+    handleSubmit(event) {
+        event.preventDefault();
+        const filter = this.state.filter;
+        this.props.fetchAllBusinesses(filter)
+    }
+
     /** 
     *
     * @returns {JSX} JSX
@@ -48,20 +85,28 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     render() {
-        const realBusiness = this.props.data.businesses
-        const FoundBusinesses = realBusiness.map((eachBusiness, index) => {
+        const businessList = this.props.data.businesses
+
+        const FoundBusinesses = (businessList.length > 0) ? businessList.map((eachBusiness, index) => {
             return (
-                <BusinessCard key={index}
+                <BusinessCard
+                    key={index}
                     business={eachBusiness}
                     businesssPic={profilePicture}
                 />
             )
-        })
+        }) : <h3> No business found </h3>
         return (
             <div>
                 <Navbar />
                 <main>
-                    <BusinessCatalogTop filter={this.props.data.filter} />
+                    <BusinessCatalogTop 
+                    proposedFilter = {this.state.filter}
+                    selectedFilter={this.props.data.filter}
+                    handleChange = {this.handleChange} 
+                    handleSubmit = {this.handleSubmit}
+                    businessList = {this.props.data.businesses}
+                     />
                     <div className="row cushion center">
                         {FoundBusinesses}
                     </div>
@@ -82,6 +127,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ fetchAllBusinesses }, dispatch);
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllBusinesses);

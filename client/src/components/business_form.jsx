@@ -67,9 +67,9 @@ class BusinessForm extends Component {
                     <div className="input-field col s12">
                         <Input s={12} type='select' label='State' icon='place' value={business.state} onChange={handleChange} name="state">
                             <option value='1'>State</option>
-                            <option value=" lagos">Lagos</option>
+                            <option value="lagos">Lagos</option>
                             <option value="abuja">Abuja</option>
-                            <option value=" ogun">Ogun</option>
+                            <option value="ogun">Ogun</option>
                         </Input>
                     </div>
                     <div className="col s12">

@@ -43,7 +43,7 @@ class ProfileUpdate extends Component {
         this.submitPassword = this.submitPassword.bind(this);
         this.submitDetails = this.submitDetails.bind(this);
         this.submitPicture = this.submitPicture.bind(this);
-        this.switchCase = this.switchCase.bind(this);
+        this.switchForm = this.switchForm.bind(this);
         this.getu = this.getu.bind(this);
     }
 
@@ -72,9 +72,9 @@ class ProfileUpdate extends Component {
      *
      *@memberof ProfileUpdate Component
      */
-    switchCase(event) {
+    switchForm(event) {
         event.preventDefault();
-        if (this.state.case >= 2) {
+        if (this.state.case >= 1) {
             this.setState({
                 ...this.state,
                 case: 0
@@ -96,10 +96,8 @@ class ProfileUpdate extends Component {
       *@memberof ProfileUpdate Component
       */
     submitDetails(event) {
-        console.log('i got here')
-        console.log(updated)
         event.preventDefault();
-        const userId = this.locaStorage.id;
+        const userId = localStorage.id;
         this.props.changeDetails(userId, this.state.updated)
     }
 
@@ -137,19 +135,6 @@ class ProfileUpdate extends Component {
       *
       *@memberof ProfileUpdate Component
       */
-    submitDetails(event) {
-        event.preventDefault();
-        this.props.changeDetails(this.state.updated)
-    }
-
-    /**
-      * 
-      *@param {event} event
-      * 
-      *@returns {func} function
-      *
-      *@memberof ProfileUpdate Component
-      */
     submitPicture(event) {
         event.preventDefault();
         alert('Picture successfully modified!!')
@@ -171,12 +156,11 @@ class ProfileUpdate extends Component {
                     updateUser = { this.submitDetails }
                     submitPassword = {this.submitPassword}
                     submitPicture = {this.submitPicture}
-                    switchCase = {this.switchCase}
+                    switchForm = {this.switchForm}
                     formErrors = {this.props.data.errors}
                     isFetching = {this.props.data.awaitingResponse}
                     updated = {this.state.updated}
-                    presentCase = {this.state.case}
-                    getu ={ this.getu}
+                    formNumber = {this.state.case}
                 />
                 <Footer />
             </div >
@@ -185,8 +169,8 @@ class ProfileUpdate extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     const data = state.userReducer;
+    console.log(data)
     return {
         data
     }

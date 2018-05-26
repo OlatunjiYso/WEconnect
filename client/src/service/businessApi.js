@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rootUrl = 'https://weconnect-main.herokuapp.com/api/v1/businesses';
+const rootUrl = 'api/v1/businesses';
 
 /**
  * @class BusinessApi
@@ -11,16 +11,11 @@ class BusinessApi {
     /**
      * @description - api endpoint call that gets all businesses
      *
-     *
+     *@param {object} filter - obvject containing location and category
      * @return { undefined } asynchronuos call can give varying outcome
      */
-    static getAllBusinesses() {
-        return axios.get(`${rootUrl}/
-        
-        
-        
-        
-        `);
+    static getAllBusinesses(filter) {
+        return axios.get(`${rootUrl}?category=${filter.category}&&location=${filter.state}`);
     }
 
     /**
