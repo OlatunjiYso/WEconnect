@@ -8,16 +8,17 @@ import jwt from 'jsonwebtoken';
  * @returns { bool } true of false representing valid or invalid token
  */
 const verifyToken = () => {
-  const { token } = window.localStorage;
+  const { token } = localStorage;
   let verified;
   if (token) {
-    jwt.verify(token, process.env.SECRET_KEY, (error) => {
-      if (error) {
-        verified = false;
-      } else {
-        verified = true;
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) {
+          return verified === false;
       }
-    });
+      if (decoded) {
+        return verified === true;
+      }
+  });
   } else {
     verified = false;
   }
