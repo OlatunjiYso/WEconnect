@@ -26,7 +26,11 @@ module.exports = {
         // CSS will be extracted to this bundle file
         new ExtractTextPlugin('style.bundle.css'),
         // Let's enable hot reloading
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        // allow .env to be availableon frontend
+        new webpack.EnvironmentPlugin([
+            'SECRET_KEY'
+          ]),
     ],
     module: {
         rules: [
