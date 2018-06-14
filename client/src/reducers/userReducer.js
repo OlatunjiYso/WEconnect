@@ -1,24 +1,25 @@
 const initialState = {
     awaitingResponse: false,
-    successMessage: null,
+    response: null,
     errors: {},
 };
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'IS_REQUESTING':
+        case 'USER_UPDATE_REQUEST':
             return {
                 ...state,
                 awaitingResponse: action.bool,
             };
-        case 'REQUEST_ERROR':
+        case 'USER_UPDATE_ERROR':
             return {
                 ...state,
                 errors: action.error
             };
-        case 'SUCCESS':
+        case 'USER_UPDATE_SUCCESS':
             return {
                 ...state,
-                successMessage: action.response
+                response: action.response,
+                errors: {}
             };
         default:
             return state;

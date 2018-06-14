@@ -1,7 +1,7 @@
 const initialState = {
     businesses: [],
     business: {},
-    filter: { state: 'location', category: 'technology' },
+    filter: { state: 'location', category: 'category' },
     myReviews: [],
     myBusinesses: [],
     errors: { },
@@ -58,7 +58,7 @@ const businessReducer = (state = initialState, action) => {
                 ...state,
                 errors: action.error
             };
-            case 'DELETE_BUSINESS_REQUEST':
+            case 'DELETE_BUSINESS_FAILED':
             return {
                 ...state,
                 errors: action.error

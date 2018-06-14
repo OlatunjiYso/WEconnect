@@ -61,16 +61,6 @@ class UserApi {
     static changeDetails(userId, details) {
         return axios.put(`${rootUrl}/profile/${userId}`, (details));
     }
-
-     /**
-     * @description - api endpoint that changes a user's email and username
-     *
-     *
-     * @return { undefined } asynchronuos call can give varying outcome
-     */
-    static changePicture() {
-        return axios.get(`${rootUrl}`);
-    }
 }
 
 export default UserApi;
