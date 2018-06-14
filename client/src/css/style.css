@@ -4,7 +4,7 @@
     margin-bottom:4em;
 }
 .banner-text {
-    margin-top: -1rem;
+    margin-top: -5px;
     border-radius: 2rem;
     box-shadow: 2px 2px 0 0 #8ad106;
 }
@@ -224,6 +224,7 @@ main {
     border-radius: 1rem !important;
     box-shadow: 2px 2px hsl(123, 26%, 32%);
     margin-bottom: 3rem;
+    opacity: 0.9;
 }
 .form-btn {
     color:hsl(120, 80%, 94%) !important;;
@@ -302,5 +303,25 @@ label {
   
 
 
+/******* Background Images *******/
+/******* Background Images  *******/
 
+#signupPage, #profileUpdate{
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+    background-image: url('../assets/images/business.jpg');
+    background-size: cover;
+}
 
+#signinPage{
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+    background-image: url('../assets/images/signin.jpg');
+    background-size: cover;
+}
+
+#businessReport{
+    background-image: url('../assets/images/growth.png');
+    background-size: cover;
+}
+#manage{
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.05);
+}
