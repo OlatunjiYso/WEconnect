@@ -21,5 +21,17 @@ export const alertSuccess = (message) => {
 */
 export const alertWarning = (message) => {
     alertify.set('notifier', 'position', 'top-right');
-    alertify.success(message);
+    alertify.warning(message);
+};
+
+/**
+* @description - method responsible for displaying error message
+*
+* @param {obj} message -alert message
+*
+* @return { obj } - actionable object containing payload and type
+*/
+export const alertError = (message) => {
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error(message);
 };

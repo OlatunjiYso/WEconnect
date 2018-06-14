@@ -108,6 +108,7 @@ export const login = userDetails => (dispatch) => {
             setToken(response.data.token);
             user.id = response.data.id;
             user.username = response.data.username;
+            user.email = response.data.email;
             dispatch(setCurrentUser(user));
             history.push('/');
             alertSuccess('You are logged in');
@@ -159,6 +160,7 @@ export const onBoardUser = newUser => (dispatch) => {
             setToken(response.data.token);
             user.id = response.data.id;
             user.username = response.data.username;
+            user.email = response.data.email;
             dispatch(setCurrentUser(user));
             history.push('/');
             alertSuccess('You are logged in');

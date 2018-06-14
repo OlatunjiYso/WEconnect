@@ -1,4 +1,6 @@
+import { alertSuccess, alertError } from '../actions/flashMessage';
 import businessApi from '../service/businessApi';
+import userApi from '../service/userApi';
 import history from '../history';
 import setToken from '../helpers/authorization';
 import {
@@ -159,6 +161,23 @@ export const fetchThisBusiness = businessId => (dispatch) => {
 };
 
 /**
+ * @description - method responsible for fetching a users business
+ *
+ * @return { obj } - actionable object containing payload and type
+ */
+export const fetchMyBusinesses = () => (dispatch) => {
+    setToken(localStorage.token);
+    userApi.getMyBusinesses()
+        .then((response) => {
+                const { businesses } = response.data;
+                dispatch(getMyBusinessesSuccess(businesses));
+        })
+        .catch((error) => {
+            dispatch(gotNoBusiness(error.response));
+        });
+};
+
+/**
  *@description - registers a business
  *
  *@param { object } business - object containing information of business to be registered
@@ -174,7 +193,9 @@ export const registerBusiness = business => (dispatch) => {
             history.push('/userProfile');
         })
         .catch((error) => {
+            dispatch(isRequesting(false));
             dispatch(registerBusinessFailure(error.response));
+            alertError('Business not created');
         });
 };
 
@@ -214,8 +235,11 @@ export const deleteBusiness = (pass, businessId) => (dispatch) => {
         .then(() => {
             dispatch(isRequesting(false));
             history.push('/userProfile');
+            alertSuccess('Business successfully deleted');
         })
         .catch((error) => {
+            dispatch(isRequesting(false));
             dispatch(deleteBusinessFailure(error.response));
+            alertError('Invalid password. Business not deleted');
         });
 };
