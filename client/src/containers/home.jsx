@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
+import history from '../history';
 import { fetchAllBusinesses } from '../actions/business';
 import Footer from '../components/footer';
 import Nav from './nav';
@@ -31,6 +32,7 @@ class Home extends Component {
     */
     findBusinessesIn(chosenCategory) {
         localStorage.setItem('category', chosenCategory)
+            history.push('/businesses');
     }
 
     /** 
@@ -47,20 +49,20 @@ class Home extends Component {
                 <main>
                     <div className="center banner">
                         <div className="row">
-                            <div className="col s12 m10 offset-m1 banner-image">
+                            <div className="col s10 offset-s1 m10 offset-m1 banner-image">
                                 <div className="row">
                                     <Link to="/login">
-                                        <h1 className="green-text text-darken-4">
+                                        <h2 className="green-text text-darken-4">
                                             WEco
                                     <span className="yellow-text text-darken-4">n</span>
                                             nect
-                                    </h1>
+                                    </h2>
                                     </Link>
                                 </div>
                                 <img className="responsive-img" src={hero} alt='Professionals' />
                             </div>
-                            <div className="col s12 m10 offset-m1  banner-text  blue-grey lighten-5 ">
-                                <h3 className="green-text text-darken-4"> Make Your Business known and get Connected today!</h3>
+                            <div className="col s10 offset-s1 m10 offset-m1  banner-text  blue-grey lighten-5 ">
+                                <h4 className="green-text text-darken-4"> Make Your Business known and get Connected today!</h4>
                                 <p>
                                     <span className="green-text text-darken-4 hide-on-med-and-down">WEconnect brings clients and businesses together</span>
                                 </p>
@@ -72,65 +74,65 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="container ">
+                    <div className="containers ">
                         <div className="section row s12">
                             <h4 className="center category-header green-text text-darken-4"> Checkout our Categories of businesses</h4>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col s6 m4">
                                 <h6>
-                                    <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('education')}>
+                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('education')}>
                                         Education
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
-                                <h6> <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('entertainment')}>
+                            <div className="category-tag center col s6 m4">
+                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('entertainment')}>
                                     Entertainment
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col s6 m4">
                                 <h6>
-                                <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('technology')}>
+                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('technology')}>
                                     Technology
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col col s6 m4">
                                 <h6>
-                                    <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('food')}>
+                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('food')}>
                                         Food
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
-                                <h6> <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('fashion')}>
+                            <div className="category-tag center col s6 m4">
+                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('fashion')}>
                                     Fashion
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col s6 m4">
                                 <h6>
-                                <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('sport')}>
+                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('sport')}>
                                     Sport
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col s6 m4">
                                 <h6>
-                                    <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('commerce')}>
+                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('commerce')}>
                                         Commerce
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
-                                <h6> <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('agriculture')}>
+                            <div className="category-tag center col s6 m4">
+                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('agriculture')}>
                                     Agriculture
                                   </Link>
                                 </h6>
                             </div>
-                            <div className="category-tag center col s4 l3">
+                            <div className="category-tag center col s6 m4">
                                 <h6>
-                                <Link className= "black-text" to="/businesses" onClick={() => this.findBusinessesIn('transportation')}>
+                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('transportation')}>
                                     Transportation
                                   </Link>
                                 </h6>

@@ -62,36 +62,20 @@ class DeleteBusiness extends Component {
     */
     render() {
         const formErrors = this.props.data.errors
-        const isFetching = this.props.data.awaiting
+        const isFetching = this.props.data.awaitingResponse
 
         // Display spinner
         const spinner = isFetching ?
             <span className="form-response"> Please wait .... </span> : null;
-
-        // Display password mismatch
-        const wrongPassword = this.props.data.passwordMismatch ?
-            <div className="col s8 offset-s2 m8 center-align error-box">
-                <h6>
-                    <i className="material-icons red-text tiny">clear</i> Incorrect password!
-                </h6>
-            </div> : null
-
-        // Display right infingement errors
-        const infringement = formErrors.forbidden ?
-        <div className="col s8 offset-s2 m8 center-align error-box">
-            <h6>
-                <i className="material-icons red-text tiny">clear</i> {formErrors.forbidden}
-            </h6>
-        </div> : null
 
         return (
             <div>
                 <Navbar />
                 <main>
                     <div className="row">
-                        <div className="top-pad col s12 m8 offset-m2">
-                            <h4 className="left-align red-text text-darken-2">
-                                Before you delete " {this.props.data.business.name} "
+                        <div className="top-pad center-align col s12 m6 offset-m3">
+                            <h4 className="red-text text-darken-2">
+                                Before you delete "{this.props.data.business.name}"
                             </h4>
                             <h5 className = "green-text"> Please take note of the following: </h5>
                             <ol className="delete-note no-top-gap">
@@ -106,16 +90,15 @@ class DeleteBusiness extends Component {
                                 </li>
                             </ol>
                             <div className="top-pad">
-                                <h5> Final confimation and authentication </h5>
-                                {wrongPassword} {infringement}
-                                <div className="col s8 offset-s2 m8 form-jacket">
+                                <h5 className="center-align"> Final confimation and authentication </h5>
+                                <div className="col s10 offset-s1 form-jacket">
                                     <form onSubmit={this.handleSubmit}>
                                         <label className="form-label">
                                             Enter your Password to proceed: </label>
                                         <input type="password" value={this.state.password} onChange={this.handleChange} name="password" required className="form-input white" />
                                         <div>
-                                            <input type="submit" value="Delete Business" className="delete-form-btn btn" />
-                                            <Link to="/userProfile" className="form-btn btn right"> Back</Link>
+                                            <input type="submit" value="Delete" className="delete-form-btn btn" />
+                                            <Link to="/userProfile" className="form-btn btn right"> Cancel</Link>
                                         </div>
                                         <div className = "center">
                                             {spinner}
@@ -138,7 +121,6 @@ class DeleteBusiness extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data);
     return {
         data
     }

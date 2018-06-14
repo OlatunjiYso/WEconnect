@@ -51,7 +51,6 @@ class Nav extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.authReducers;
-    console.log(data);
     return {
         data
     }

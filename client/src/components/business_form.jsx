@@ -27,9 +27,9 @@ class BusinessForm extends Component {
          const formErrors = this.props.formErrors;
  
          // Display validation errors if present
-         const validationErrors = formErrors.validationErrors ?
+         const validationErrors = formErrors.status === 400 ?
                  <div className=" col s8 offset-s2 m6 offset-m3 left-align error-box bottom-gap">
-                     {formErrors.validationErrors.map((eachError, index) => {
+                     {formErrors.data.errors.map((eachError, index) => {
                          return <h6 key={index}>
                              <i className="material-icons red-text tiny">clear</i>{eachError}
                            </h6>
@@ -37,10 +37,10 @@ class BusinessForm extends Component {
                  </div> : null;    
  
          // Display Conflict errors if present
-         const conflictErrors = formErrors.conflict ?
+         const conflictErrors = formErrors.status === 409 ?
                  <div className="col s8 offset-s2 m6 offset-m3 center-align error-box bottom-gap">
                      <h6>
-                     <i className="material-icons red-text tiny">clear</i> {formErrors.conflict}
+                     <i className="material-icons red-text tiny">clear</i> {formErrors.data.message}
                      </h6>
                  </div> : null
 
@@ -49,7 +49,7 @@ class BusinessForm extends Component {
          <span className="form-response"> Please wait .... </span> : null;
 
           // Display business registration outcome
-        const registrationOutcome = ( formErrors.conflict || formErrors.validationErrors || formErrors.others) ?
+        const registrationOutcome = ( formErrors.status ) ?
         <span> An error occured. Scroll up please </span> : null
 
         return (
@@ -65,7 +65,7 @@ class BusinessForm extends Component {
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
-                        <Input s={12} type='select' label='State' icon='place' value={business.state} onChange={handleChange} name="state">
+                        <Input s={12} type='select' value={business.state} onChange={handleChange} name="state">
                             <option value='1'>State</option>
                             <option value="lagos">Lagos</option>
                             <option value="abuja">Abuja</option>
@@ -73,7 +73,7 @@ class BusinessForm extends Component {
                         </Input>
                     </div>
                     <div className="col s12">
-                        <Input s={12} type='select' label='Category' icon='card_travel' value={business.category} onChange={handleChange} name="category">
+                        <Input s={12} type='select' value={business.category} onChange={handleChange} name="category">
                             <option value='1'>Category</option>
                             <option value='fashion'>Fashion</option>
                             <option value='technology'>Technology</option>

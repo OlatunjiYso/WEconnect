@@ -24,8 +24,13 @@ class Review extends Component {
     */
     render() {
         const review = this.props.review;
-        const reviewOptions = (review.reviewerId == localStorage.id) ?
-            <ReviewControls review = {this.props.review} businessId = {this.props.businessId}/> : null;
+        const reviewOptions = (review.reviewerId == this.props.reviewerId) ?
+            <ReviewControls 
+            review = {this.props.review} 
+            businessId = {this.props.businessId}
+            updateReview = {this.props.updateReview}
+            deleteReview = {this.props.deleteReview}
+            /> : null;
         return (
             <div>
                 <div className="row grey-text text-darken-4 grey lighten-5">

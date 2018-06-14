@@ -23,8 +23,8 @@ class AllBusinesses extends Component {
         super(props);
         this.state = {
             filter: {
-                state: 'location',
-                category: 'category',
+                state: "location",
+                category: "category",
             }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,14 +37,14 @@ class AllBusinesses extends Component {
     * 
     * @memberof AllBusinessesComponent
     */
-    componentDidMount() {
+    componentWillMount() {
         const defaultFilter = this.props.data.filter;
-        if (localStorage.getItem('category')) {
-            defaultFilter.category = localStorage.category
-        }
+        // if (localStorage.getItem('category')) {
+        //     defaultFilter.category = localStorage.category
+        // }
+        console.log(localStorage.category)
         this.props.fetchAllBusinesses(defaultFilter);
-        setTimeout(5000);
-        localStorage.removeItem('category');
+        //localStorage.removeItem('category');
     }
 
     /** 

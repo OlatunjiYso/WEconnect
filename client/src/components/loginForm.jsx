@@ -31,7 +31,7 @@ class LoginForm extends Component {
         const signinError = (this.props.errors.status) ?
             <div className="col s8 offset-s2 m4 offset-m4 left-align error-box  bottom-gap">
                 <h6>
-                    <i className="material-icons red-text tiny">clear</i> {this.props.errors.data.message}
+                    <i className="material-icons red-text tiny">priority_high</i> {this.props.errors.data.message}
                 </h6>
             </div> : null
 
@@ -41,7 +41,7 @@ class LoginForm extends Component {
             <main>
                 <div className="row head-font top-pad-much no-bottom-gap">
                     {signinError}
-                    <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
+                    <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket">
                         <h4 className="center head-font form-heading">
                          <span className=""> Sign In </span>
                          </h4>
@@ -51,7 +51,9 @@ class LoginForm extends Component {
                             <label className="form-label"> Password: </label>
                             <input type="password" value={userDetail.password} onChange={handleChange} name="password" required className="form-input white" />
                             <input type="submit" value="Submit" className="form-btn btn" />{spinner} {signinOutcome}
-                            <Link to = "/signup" className="right green-text text-darken-4"> Not registered? Signup here </Link>
+                            <div className= "col s12 center-align top-gap">
+                            <Link to = "/signup" className=" pink-text text-darken-4">Not a user? signup here </Link>
+                            </div>
                         </form>
                     </div>
                 </div>

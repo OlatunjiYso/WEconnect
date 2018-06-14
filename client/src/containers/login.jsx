@@ -33,7 +33,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted galantly')
     }
 
     /** 
@@ -74,7 +73,7 @@ class Login extends Component {
     */
     render() {
         return (
-            <div>
+            <div id= "signinPage">
                 <Navbar />
                 <LoginForm
                     user={this.state.userDetails}

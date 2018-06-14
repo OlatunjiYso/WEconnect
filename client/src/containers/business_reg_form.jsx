@@ -74,11 +74,11 @@ class BusinessRegForm extends Component {
                         <div className="row">
                             <h5 className="center">Kindly fill in your business details as appropriate</h5>
                             <BusinessForm
-                                businessObject={this.state.business}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
+                                businessObject= {this.state.business}
+                                handleChange= {this.handleChange}
+                                handleSubmit= {this.handleSubmit}
                                 formErrors = {this.props.data.errors}
-                                isFetching = {this.props.data.awaiting}
+                                isFetching = {this.props.data.awaitingResponse}
                             />
                         </div>
                     </div>

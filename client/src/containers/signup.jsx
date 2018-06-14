@@ -52,10 +52,11 @@ class Signup extends Component {
    *
    * @returns {boolean} show warning boolean of either true or false
    */
-    componentDidMount() {
+    componentWillMount() {
         if (verifyToken()) {
+            console.log('jhgfds')
             alertSuccess('You are logged in already')
-            this.props.history.push('/userProfile');
+            history.push('/userProfile');
         }
     }
     /**
@@ -114,7 +115,7 @@ class Signup extends Component {
     */
     render() {
         return (
-            <div>
+            <div id= "signupPage">
                 <Navbar />
                 <SignupForm
                     handleChange = {this.handleChange}

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
 import { bindActionCreators } from 'redux';
 
 import { changePassword , changeDetails} from '../actions/user';
-import history from '../history';
-import authAction from '../actions/auth';
 import Footer from '../components/footer';
 import ProfileUpdateForm from '../components/profileUpdateForm';
 import Navbar from './nav';
-
 import customStyles from '../css/style.css';
 
 
@@ -31,8 +27,8 @@ class ProfileUpdate extends Component {
         super(props);
         this.state = {
             updated: {
-                username: '',
-                email: '',
+                username: this.props.userData.user.username,
+                email: this.props.userData.user.email,
                 currentPassword: '',
                 newPassword: '',
                 confirmNewPassword: '',
@@ -42,9 +38,7 @@ class ProfileUpdate extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.submitPassword = this.submitPassword.bind(this);
         this.submitDetails = this.submitDetails.bind(this);
-        this.submitPicture = this.submitPicture.bind(this);
         this.switchForm = this.switchForm.bind(this);
-        this.getu = this.getu.bind(this);
     }
 
 
@@ -96,22 +90,10 @@ class ProfileUpdate extends Component {
       *@memberof ProfileUpdate Component
       */
     submitDetails(event) {
+        
         event.preventDefault();
-        const userId = localStorage.id;
+        const userId = this.props.userData.user.id;
         this.props.changeDetails(userId, this.state.updated)
-    }
-
-    /**
-     * 
-     *@param {event} event
-     * 
-     *@returns {func} function
-     *
-     *@memberof ProfileUpdate Component
-     */
-    getu(event) {
-        event.preventDefault();
-        alert(this.state.updated.newPassword);
     }
 
     /**
@@ -127,19 +109,6 @@ class ProfileUpdate extends Component {
         this.props.changePassword(this.state.updated)
     }
 
-    /**
-      * 
-      *@param {event} event
-      * 
-      *@returns {func} function
-      *
-      *@memberof ProfileUpdate Component
-      */
-    submitPicture(event) {
-        event.preventDefault();
-        alert('Picture successfully modified!!')
-    }
-
     /** 
     *
     *
@@ -149,16 +118,16 @@ class ProfileUpdate extends Component {
     */
     render() {
         return (
-            <div>
+            <div id="profileUpdate">
                 <Navbar />
                 <ProfileUpdateForm
                     handleChange = {this.handleChange}
                     updateUser = { this.submitDetails }
                     submitPassword = {this.submitPassword}
-                    submitPicture = {this.submitPicture}
                     switchForm = {this.switchForm}
                     formErrors = {this.props.data.errors}
                     isFetching = {this.props.data.awaitingResponse}
+                    response = {this.props.data.response}
                     updated = {this.state.updated}
                     formNumber = {this.state.case}
                 />
@@ -170,9 +139,9 @@ class ProfileUpdate extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.userReducer;
-    console.log(data)
+    const userData = state.authReducers;
     return {
-        data
+        data, userData
     }
 }
 

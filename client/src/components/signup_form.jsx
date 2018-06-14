@@ -30,10 +30,10 @@ class SignupForm extends Component {
 
         // Display validation errors if present
         const validationErrors = formErrors.status === 400 ?
-                <div className=" col s8 offset-s2 m4 offset-m4 left-align error-box bottom-gap">
+                <div className=" col s10 offset-s1 m4 offset-m4 left-align error-box bottom-gap">
                     {formErrors.data.errors.map((eachError, index) => {
                         return <h6 key={index}>
-                            <i className="material-icons red-text tiny">clear</i>{eachError}
+                            <i className="material-icons red-text tiny">priority_high</i>{eachError}
                           </h6>
                     })}
                 </div> : null;
@@ -41,9 +41,9 @@ class SignupForm extends Component {
 
         // Display Conflict errors if present
         const conflictErrors = formErrors.status === 409 ?
-                <div className="col s8 offset-s2 m4 offset-m4 center-align error-box bottom-gap">
+                <div className="col s10 offset-s1 m4 offset-m4 center-align error-box bottom-gap">
                     <h6>
-                    <i className="material-icons red-text tiny">clear</i> {formErrors.data.message}
+                    <i className="material-icons red-text tiny">priority_high</i> {formErrors.data.message}
                           </h6>
                 </div> : null
             
@@ -66,9 +66,9 @@ class SignupForm extends Component {
                 
                 <div className="row head-font top-pad-much ">
                 {validationErrors} {conflictErrors}
-                    <div className="col s8 offset-s2 m6 offset-m3 grees form-jacket">
+                    <div className="col s10 offset-s1 m4 offset-m4 grees form-jacket">
                         <h4 className="form-heading">
-                         <span className="green-border"> Join WEconnect  </span>
+                         <span className="green-border"> Signup </span>
                          </h4>
                         <form onSubmit={handleSubmit}>
                             <label className="form-label">Firstname: </label>
@@ -87,8 +87,9 @@ class SignupForm extends Component {
                             <input type="password" value={userDetail.confirmPassword}
                                 onChange={handleChange} name="confirmPassword" required className="form-input white" />
                             <input type="submit" value="join" className="form-btn btn center-align" />{registrationOutcome} {spinner}
-                            <Link to = "/login" className="right green-text text-darken-4"> Already registered? login here </Link> 
-                            
+                            <div className= "center-align top-pad">
+                            <Link to = "/login" className="pink-text text-darken-4"> Already registered? login here </Link> 
+                            </div>
                         </form>
                     </div>
                 </div>

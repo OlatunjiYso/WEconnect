@@ -51,11 +51,10 @@ class BusinessCatalogTop extends Component {
                                     </Input>
                                 </div>
                             </div>
-                            <div className="col s8 offset-s2 m4 l2 offset-l1 right-align push-down">
+                            <div className="col s8 offset-s2 m4 l2 offset-l1 push-down">
                                 <input type="submit" value="Get Businesses" className="green-text text-darken-4 btn grey lighten-4" />
                             </div>
                         </form>
-                    ///
                     </div>
                 </div>
                 <div className="row head-font">

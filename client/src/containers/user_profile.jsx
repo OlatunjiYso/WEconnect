@@ -8,7 +8,7 @@ import history from '../history';
 import Footer from '../components/footer';
 import Nav from './nav';
 import UserBusiness from '../components/user_business';
-import { fetchMyBusinesses } from '../actions/user';
+import { fetchMyBusinesses } from '../actions/business';
 import customStyles from '../css/style.css';
 import profilePicture from '../assets/images/cameras.jpg';
 
@@ -41,8 +41,8 @@ class UserProfile extends Component {
     * @memberof UserProfileComponent
     */
     render() {
-        const username = localStorage.username
         const data =  this.props.data;
+        const username = this.props.userData.user.username;
 
         // Generate an array of businesses if the user has any.
         const myBusinesses = (data.gotBusinesses) ? 
@@ -61,19 +61,19 @@ class UserProfile extends Component {
             <div>
                 <Nav />
                 <main>
-                    <div className="row head-font dashboard">
-                        <div className="col s9 m6 l4 logo pink-text center-align">
-                            <h2 className="Sofia"> Hi, {username} </h2>
-                        </div>
-                        <div className="col s3 m2 offset-m4 l2 offset-l6 ">
-                            <img className="responsive-img" src={profilePicture} alt='profilepic' />
+                    <div className="row head-font dashboard bottom-gap">
+                        <div className="col s12 logo pink-text center-align">
+                            <h2 className=""> 
+                            <span className= "black-text"> Welcome to your dashboard, </span>
+                            <span className= "grey-text text-darken-1">  {username} </span>
+                            </h2>
                         </div>
                     </div>
 
                     <div className="row slim-container top-pad">
                         <div className="row">
                             <div className="col s6 left">
-                                <Link to="/registrationGuide" className="green lighten-5 black-text btn" type="button"> Add new Business
+                                <Link to="/registrationGuide" className="green lighten-5 black-text btn" type="button"> Add Business
                                 </Link>
                             </div>
                             <div className="col s6">
@@ -103,9 +103,9 @@ class UserProfile extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data);
+    const userData = state.authReducers;
     return {
-        data
+        data, userData
     }
 }
 

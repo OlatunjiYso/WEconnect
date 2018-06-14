@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Icon, Modal } from 'react-materialize'
 import axios from 'axios';
-
-import reviewApi from '../service/reviewApi';
 import history from '../history';
 import setToken from '../helpers/authorization';
 
@@ -34,32 +32,11 @@ class ReviewControls extends Component {
     */
    handleSubmit(event) {
     event.preventDefault();
-    this.setState({
-        ...this.state,
-       isFetching: true
-    });
-    const businessId = this.props.businessId;
-    const reviewId = this.props.review.id;
-    const newReview = {}
+    const { businessId } = this.props;
+    const reviewId = this.props.review.id
+    const newReview = {};
     newReview.description = this.state.updated;
-    setToken(localStorage.token);
-        reviewApi.updateReview(businessId, reviewId, newReview)
-        .then(() => {
-            this.setState({
-                ...this.state,
-               isFetching: null
-            });
-            setTimeout(() => window.location.reload(), 2000);
-        })
-        .catch((error) => {
-            this.setState({
-                ...this.state,
-               isFetching: null
-            });
-            if (error && error.response.status === 401) {
-                history.push('/login');
-            }
-        });
+    this.props.updateReview(businessId, reviewId, newReview);
 }
 
 /** 
@@ -71,30 +48,9 @@ class ReviewControls extends Component {
     */
    handleDelete(event) {
     event.preventDefault();
-    this.setState({
-        ...this.state,
-       isFetching: true
-    });
-    const businessId = this.props.businessId;
-    const reviewId = this.props.review.id;
-    setToken(localStorage.token);
-        reviewApi.deleteReview(businessId, reviewId)
-        .then(() => {
-            this.setState({
-                ...this.state,
-               isFetching: null
-            });
-            setTimeout(() => window.location.reload(), 2000);
-        })
-        .catch((error) => {
-            this.setState({
-                ...this.state,
-               isFetching: null
-            });
-            if (error && error.response.status === 401) {
-                history.push('/login');
-            }
-        });
+    const { businessId } = this.props;
+    const reviewId = this.props.review.id
+    this.props.deleteReview(businessId, reviewId);
 }
 
     /** 
