@@ -16,7 +16,6 @@ import BusinessUpdate from './containers/business_update';
 import ManageBusiness from './containers/manage_business';
 import Welcome from './containers/welcome';
 import RegistrationGuide from './containers/registration_guide';
-import BusinessPreview from './containers/preview_business';
 import DeleteBusiness from './containers/delete_business';
 
 
@@ -49,7 +48,6 @@ class App extends Component {
                                 <Route path="/businessUpdate/:businessId" component={ BusinessUpdate } />
                                 <Route path="/manageBusiness/:businessId" component={ ManageBusiness } />
                                 <Route path="/registrationGuide" component={ RegistrationGuide } />
-                                <Route path="/preview" component={ BusinessPreview } />
                                 <Route path="/businessDelete/:businessId" component={ DeleteBusiness } />
                         </Switch>
                 )
