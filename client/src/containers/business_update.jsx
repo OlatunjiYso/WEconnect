@@ -85,7 +85,7 @@ class BusinessUpdate extends Component {
                                 handleChange = { this.handleChange }
                                 handleSubmit = { this.handleSubmit }
                                 formErrors = { this.props.data.errors }
-                                isFetching = { this.props.data.awaiting }
+                                isFetching = { this.props.data.awaitingResponse }
                             />
                         </div>
                     </div>

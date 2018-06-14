@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
-import history from '../history';
-import authAction from '../actions/auth';
+import { changePassword , changeDetails} from '../actions/user';
 import Footer from '../components/footer';
 import ProfileUpdateForm from '../components/profileUpdateForm';
 import Navbar from './nav';
-
 import customStyles from '../css/style.css';
 
-const rootUrl = 'http://localhost:3000/api/v1';
 
 /**
  * @class ProfileUpdateComponent
@@ -30,9 +27,9 @@ class ProfileUpdate extends Component {
         super(props);
         this.state = {
             updated: {
-                username: '',
-                email: '',
-                oldPassword: '',
+                username: this.props.userData.user.username,
+                email: this.props.userData.user.email,
+                currentPassword: '',
                 newPassword: '',
                 confirmNewPassword: '',
             },
@@ -40,9 +37,8 @@ class ProfileUpdate extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.submitPassword = this.submitPassword.bind(this);
-        this.submitDetail = this.submitDetail.bind(this);
-        this.submitPicture = this.submitPicture.bind(this);
-        this.switchCase = this.switchCase.bind(this);
+        this.submitDetails = this.submitDetails.bind(this);
+        this.switchForm = this.switchForm.bind(this);
     }
 
 
@@ -70,19 +66,19 @@ class ProfileUpdate extends Component {
      *
      *@memberof ProfileUpdate Component
      */
-    switchCase(event) {
+    switchForm(event) {
         event.preventDefault();
-        if (this.state.case >= 2) {
+        if (this.state.case >= 1) {
             this.setState({
                 ...this.state,
                 case: 0
             });
-        }else{
+        } else {
             this.setState({
                 ...this.state,
                 case: this.state.case + 1
             })
-        }   
+        }
     }
 
     /**
@@ -93,9 +89,11 @@ class ProfileUpdate extends Component {
       *
       *@memberof ProfileUpdate Component
       */
-     submitPassword(event) {
+    submitDetails(event) {
+        
         event.preventDefault();
-        alert(` ${this.state.updated.newPassword} ${this.state.updated.confirmNewPassword}` )
+        const userId = this.props.userData.user.id;
+        this.props.changeDetails(userId, this.state.updated)
     }
 
     /**
@@ -106,22 +104,9 @@ class ProfileUpdate extends Component {
       *
       *@memberof ProfileUpdate Component
       */
-     submitDetail(event) {
+    submitPassword(event) {
         event.preventDefault();
-        alert('Profile successfully modified')
-    }
-
-    /**
-      * 
-      *@param {event} event
-      * 
-      *@returns {func} function
-      *
-      *@memberof ProfileUpdate Component
-      */
-     submitPicture(event) {
-        event.preventDefault();
-        alert('Picture successfully modified!!')
+        this.props.changePassword(this.state.updated)
     }
 
     /** 
@@ -133,18 +118,18 @@ class ProfileUpdate extends Component {
     */
     render() {
         return (
-            <div>
+            <div id="profileUpdate">
                 <Navbar />
                 <ProfileUpdateForm
-                    handleChange={this.handleChange}
-                    submitDetail={this.submitDetail}
-                    submitPassword={this.submitPassword}
-                    submitPicture={this.submitPicture}
-                    switchCase={this.switchCase}
-                    formErrors={this.props.data.errors}
-                    isFetching={this.props.data.awaitingResponse}
+                    handleChange = {this.handleChange}
+                    updateUser = { this.submitDetails }
+                    submitPassword = {this.submitPassword}
+                    switchForm = {this.switchForm}
+                    formErrors = {this.props.data.errors}
+                    isFetching = {this.props.data.awaitingResponse}
+                    response = {this.props.data.response}
                     updated = {this.state.updated}
-                    presentCase = {this.state.case}
+                    formNumber = {this.state.case}
                 />
                 <Footer />
             </div >
@@ -153,11 +138,15 @@ class ProfileUpdate extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    const data = state.authReducers;
+    const data = state.userReducer;
+    const userData = state.authReducers;
     return {
-        data
+        data, userData
     }
 }
 
-export default connect(mapStateToProps)(ProfileUpdate);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ changePassword, changeDetails }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUpdate);

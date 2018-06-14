@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Input } from 'react-materialize';
 import axios from 'axios';
 
-import reviewApi from '../service/reviewApi';
+import { alertSuccess, alertError } from '../actions/flashMessage';
+import { postReview, updateReview, deleteReview } from '../actions/review'
 import history from '../history';
 import setToken from '../helpers/authorization';
-import Review from './review';
+import Review from '../components/review';
 /**
  * @description BusinessFormComponent
  * 
@@ -35,15 +38,8 @@ class ReviewForm extends Component {
         const businessId = this.props.businessId;
         const review = {}
         review.description = this.state.message;
-        review.username = localStorage.username;
-        setToken(localStorage.token);
-        reviewApi.postReview(businessId, review)
-        .then(() => {
-            setTimeout(() => window.location.reload(), 2000);
-        })
-        .catch((error) => {
-            console.log(error.response);
-        });
+        review.username = this.props.userData.user.username;
+        this.props.postReview(businessId, review)
     }
 
     /** 
@@ -80,13 +76,16 @@ class ReviewForm extends Component {
                 key = { index }
                  review = { PresentReview } 
                  businessId = {this.props.businessId}
+                 reviewerId = {this.props.userData.user.id}
+                 updateReview = { this.props.updateReview }
+                 deleteReview = { this.props.deleteReview }
                  />
             )
         }) : <h6 className="grey-text"> Be the first to give us a review </h6>;
         return (
             <div className="top-pad-much">
-                <div className="col s10 offset-s1">
-                    <h4 className="left-align green-text text-darken-4"> What Our Clients are saying</h4>
+                <div className="col s12 m10 offset-m1">
+                    <h5 className="left-align green-text text-darken-4"> What Our Clients are saying</h5>
                     <div className="row">
                         <form onSubmit={this.handleSubmit} >
                             <div className="row">
@@ -115,4 +114,19 @@ ReviewForm.propTypes = {
     review: PropTypes.array.isRequired
 }
 
-export default ReviewForm;
+const mapStateToProps = (state) => {
+    const data = state.reviewReducer;
+    const userData = state.authReducers;
+    return {
+        data, userData
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ postReview, updateReview, deleteReview }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);
+
+
+

@@ -75,7 +75,8 @@ class UserController {
                         } else {
                             if (req.body.currentPassword === req.body.newPassword) {
                                 return res.json({
-                                    message: 'Your password remains unchanged'
+                                    message: 'Your password remains unchanged',
+                                    modified: false
                                 });
                             }
                             const password = bcrypt.hashSync(req.body.newPassword, 10);
@@ -85,7 +86,7 @@ class UserController {
                                 .then(() => {
                                     res.status(200)
                                         .json({
-                                            success: true,
+                                            modified: true,
                                             message: 'You have successfully changed your password',
                                         });
                                 });
@@ -112,7 +113,7 @@ class UserController {
         User
             .findOne({
                 where: {
-                    id: req.user.id
+                    id: req.params.userId
                 }
             })
             .then((user) => {
@@ -149,7 +150,7 @@ class UserController {
                                 modified: true,
                                 message: 'details successfully modified',
                             });
-                    })
+                    });
             })
             .catch((err) => {
                 res.status(500)
@@ -194,7 +195,8 @@ class UserController {
                                 // issue jsonwebtoken that lasts for 6 x 60 minutes
                                 const token = jwt.sign(
                                     {
-                                        id: user.id
+                                        id: user.id,
+                                        username: user.username
                                     },
                                     process.env.SECRET_KEY,
                                     { expiresIn: '360m' }
@@ -205,6 +207,7 @@ class UserController {
                                         token,
                                         id: user.id,
                                         username: user.username,
+                                        email: user.email,
                                     });
                             }
                         })

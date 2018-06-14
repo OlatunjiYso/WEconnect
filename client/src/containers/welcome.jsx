@@ -7,7 +7,7 @@ import axios from 'axios';
 import history from '../history';
 import { onBoardUser } from '../actions/auth';
 import Footer from '../components/footer';
-import Navbar from '../components/navbar'
+import Navbar from './nav';
 import customStyles from '../css/style.css';
 
 /**
@@ -23,7 +23,7 @@ class Welcome extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const newUser = this.props.data.user;
+        const newUser = this.props.data.response;
        this.props.onBoardUser(newUser);
 
     }
@@ -34,14 +34,15 @@ class Welcome extends Component {
     * @memberof WelcomeComponent
     */
     render() {
-        const user = this.props.data.user;
+        const user = this.props.data.response;
+        console.log(this.props.data);
         // dispaly spinner 
-        console.log(this.props.data.awaitingResponse)
         const spinner = this.props.data.awaitingResponse ? 
         <h6 className = "no-bottom-gap"> Please wait .... </h6> : null
 
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row">
                         <div className="col s12 m8 offset-m2">

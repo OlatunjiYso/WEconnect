@@ -1,58 +1,93 @@
-import history from '../history';
+import { alertSuccess, alertError } from '../actions/flashMessage';
 import userApi from '../service/userApi';
 import setToken from '../helpers/authorization';
 
-import { FOUND_MY_BUSINESSES, GOT_NO_BUSINESSES } from '../actions/types';
+import { USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_ERROR } from '../actions/types';
 
-/**
-     * @description - action for updating store with user's business
+   /**
+     * @description - starts spinner when awaiting a response
      *
-     *@param {obj} businesses - an array of user's businesses
-     *
-     *
+     * @param {bool} bool - true lor false
      * @return {obj} -actionable object containing type and payload
      */
-    export const gotMyBusinesses = businesses => ({
-        type: FOUND_MY_BUSINESSES,
-        businesses,
-        gotBusinesses: true
+    export const isRequesting = bool => ({
+        type: USER_UPDATE_REQUEST,
+        bool
     });
 
 /**
- *@description - action for indicating that a user has got no business
+* @description - action responsible for flagging errors
+*
+*@param {obj} error - the error message
+*
+* @return {obj} -actionable object containing type and payload
+*/
+export const errorResponse = error => ({
+    type: USER_UPDATE_ERROR,
+    error
+});
+
+/**
+ * @description - indicates success after successful attempt
  *
- *@param {obj} businesses - an array of user's businesses
- *
- *
+ *@param {object} message - response object
  * @return {obj} -actionable object containing type and payload
  */
-export const gotNoBusiness = () => ({
-        type: GOT_NO_BUSINESSES,
-        gotBusinesses: false
-    });
-
+export const success = message => ({
+    type: USER_UPDATE_SUCCESS,
+    response: message
+});
 
 /**
- * @description - method responsible for fetching a users business
- *
- * @return { obj } - actionable object containing payload and type
- */
- export const fetchMyBusinesses = () => (dispatch) => {
+* @description - method responsible for changing a user's password
+*
+* @param {string} passwords - object containing both old and new passwords
+* @return { obj } - actionable object containing payload and type
+*/
+export const changePassword = passwords => (dispatch) => {
     setToken(localStorage.token);
-    userApi.getMyBusinesses()
-    .then((response) => {
-        if (response.data.message === 'You have no business registered yet') {
-            dispatch(gotNoBusiness());
-        }
-        if (response.data.message === 'all your businesses') {
-            const { businesses } = response.data;
-            dispatch(gotMyBusinesses(businesses));
-        }
-    })
-    .catch((error) => {
-        console.log(error);
-        if (error.response.status === 401) {
-            history.push('/Login'); // Flash a message telling user to login
-        }
-    });
+    dispatch(isRequesting(true));
+    userApi.changePassword(passwords)
+        .then((response) => {
+            dispatch(isRequesting(false));
+            alertSuccess(response.data.message);
+        })
+        .catch((error) => {
+            if (error.response.status === 400) {
+                alertError(error.response.data.errors[0]);
+            }
+            if (error.response.status === 401) {
+                alertError(error.response.data.message);
+            }
+            dispatch(isRequesting(false));
+        });
 };
+
+/**
+* @description - method responsible for changing a user's information
+*
+*@param {string} userId - id of user
+* @param {object} details - object containing both email and username
+*
+* @return { obj } - actionable object containing payload and type
+*/
+export const changeDetails = (userId, details) => (dispatch) => {
+    setToken(localStorage.token);
+    dispatch(isRequesting(true));
+    userApi.changeDetails(userId, details)
+        .then((response) => {
+            alertSuccess(response.data.message);
+            dispatch(isRequesting(false));
+        })
+        .catch((error) => {
+            if (error.response.status === 400) {
+                alertError(error.response.data.errors[0]);
+            }
+            if (error.response.status === 409) {
+                alertError(error.response.data.message);
+            }
+            dispatch(errorResponse(error.response.data));
+            dispatch(isRequesting(false));
+        });
+};
+

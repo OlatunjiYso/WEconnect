@@ -7,10 +7,10 @@ import { bindActionCreators } from 'redux';
 
 import { fetchThisBusiness } from '../actions/business';
 import history from '../history';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import BusinessBanner from '../components/business_banner';
 import BusinessBody from '../components/business_body';
-import ReviewForm from '../components/review_form';
+import ReviewForm from './review_form';
 import Footer from '../components/footer';
 import customStyles from '../css/style.css';
 import facebook from '../assets/images/facebook.png';
@@ -59,6 +59,7 @@ class BusinessProfile extends Component {
         return (
             <div>
                 <main>
+                    <Navbar />
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessBody businessObject={business} />
                     <div className="row body-font container">
@@ -66,22 +67,22 @@ class BusinessProfile extends Component {
                         <div className="col s10 offset-s1 m10 offset-m1 ">
                             <h5 className="grey-text text-darken-3 bottom-pad-small"> Contact Us</h5>
                             <div className="row">
-                                <div className="col s3 m1">
+                                <div className="col s2 m1">
                                     <Link to="#!">
                                         <img className="responsive-img left" src={facebook} />
                                     </Link>
                                 </div>
-                                <div className="col s3 m1 offset-m1">
+                                <div className="col s2 m1 offset-m1">
                                     <Link to="#!">
                                         <img className="responsive-img left" src={instagram} />
                                     </Link>
                                 </div>
-                                <div className="col s3 m1 offset-m1">
+                                <div className="col s2 m1 offset-m1">
                                     <Link to=" #!">
                                         <img className="responsive-img left" src={twitter} />
                                     </Link>
                                 </div>
-                                <div className="col s3 m1 offset-m1">
+                                <div className="col s2 m1 offset-m1">
                                     <Link to="#!">
                                         <img className="responsive-img left" src={whatsapp} />
                                     </Link>

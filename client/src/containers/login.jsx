@@ -7,7 +7,7 @@ import axios from 'axios';
 import setToken from '../helpers/authorization';
 import history from '../history';
 import { login } from '../actions/auth';
-import Navbar from '../components/navbar';
+import Navbar from './nav';
 import LoginForm from '../components/loginForm';
 import Footer from '../components/footer';
 import customStyles from '../css/style.css';
@@ -22,7 +22,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
+            userDetails: {
                 username: '',
                 password: '',
             },
@@ -33,7 +33,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        console.log('mounted galantly')
     }
 
     /** 
@@ -48,7 +47,7 @@ class Login extends Component {
         const value = event.target.value
         this.setState({
             ...this.state,
-            user: { ...this.state.user, [name]: value },
+            userDetails: { ...this.state.userDetails, [name]: value },
         });
     }
 
@@ -61,8 +60,8 @@ class Login extends Component {
     */
     handleSubmit(event) {
         event.preventDefault();
-        const user = this.state.user;
-        this.props.login(user)
+        const userDetails = this.state.userDetails;
+        this.props.login(userDetails)
     }
 
     /** 
@@ -74,14 +73,14 @@ class Login extends Component {
     */
     render() {
         return (
-            <div>
+            <div id= "signinPage">
                 <Navbar />
                 <LoginForm
-                    user={this.state.user}
+                    user={this.state.userDetails}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
                     isFetching={this.props.data.awaitingResponse}
-                    errors={this.props.data.errors}
+                    errors={this.props.data.signinErrors}
                 />
                 <Footer />
             </div>
@@ -92,7 +91,6 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.authReducers;
-    console.log(data);
     return {
         data
     }

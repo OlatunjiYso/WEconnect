@@ -27,30 +27,26 @@ class BusinessBanner extends Component {
                 <div className="col offset-s3 s6 l2 m2 logo center-align">
                     <img className="responsive-img left" src={profilePicture} alt="profilepic" />
                 </div>
-                <div className="col s12 m8 center-align">
+                <div className="col s12 m7 center-align">
                     <h3 className="green-text text-darken-4">{business.name}</h3>
                     <h5 className="green-text text-darken-1"> {business.address}</h5>
                     <h6 className="Sofia pink-text text-darken-2">
-                        <p>
-                            <em>{business.slogan} </em>
-                        </p>
+                        <em>{business.slogan} </em>
                     </h6>
-                    <div className="row">
-                        <div className="col s6">
-                            <h6 className="right">
-                                <i className="material-icons prefix small green-text text-darken-4" id="icon-text">phone</i>
-                                <span className="black-text text-darken-4 body-font">{business.phone} </span>
-                            </h6>
-                        </div>
-                        <div className="col s6">
-                            <h6 className="left">
-                                <i className="material-icons prefix small  green-text text-darken-4" id="icon-text">mail</i>
-                                <span className="body-font">{business.email}</span>
-                            </h6>
-                        </div>
-                    </div>
+                </div>
+                <div className="col s12 m3 center-align">
+                    <h6 className="col s12">
+                        <i className="material-icons tiny green-text text-darken-4" id="icon-text">phone</i>
+                        <span className="black-text text-darken-4 body-font">{business.phone} </span>
+                    </h6>
+
+                    <h6 className="col s12">
+                        <i className="material-icons tiny green-text text-darken-4" id="icon-text">mail</i>
+                        <span className="body-font">{business.email}</span>
+                    </h6>
                 </div>
             </div>
+            
         )
 
     }

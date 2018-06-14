@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Footer from '../components/footer';
-import Navbar from '../components/navbar'
+import Navbar from './nav';
 import customStyles from '../css/style.css';
 
 /**
@@ -25,6 +25,7 @@ class RegistrationGuide extends Component {
 
         return (
             <div>
+                <Navbar />
                 <main>
                     <div className="row">
                         <div className="top-pad col s12 m8 offset-m2">

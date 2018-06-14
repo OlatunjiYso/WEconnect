@@ -1,101 +1,47 @@
 const initialState = {
-    errors: {
-        conflict: null,
-        validationErrors: false,
-        passwordMismatch: null,
-        login: null,
-    },
+    signupErrors: {},
+    signinErrors: {},
     awaitingResponse: false,
     user: null,
-    authenticated: false,
+    response: {}
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ATTEMPT':
+        case 'MAKING_AUTH_REQUEST':
             return {
                 ...state,
-                awaitingResponse: action.awaiting,
-                errors:
-                    {
-                        ...state.errors,
-                        validationErrors: action.error,
-                        conflict: action.error,
-                        passwordMismatch: action.error,
-                        login: action.error
-                    },
+                awaitingResponse: action.bool,
             };
-        case 'BAD_REQUEST':
+        case 'SIGNIN_REQUEST_ERROR':
             return {
                 ...state,
-                errors:
-                    { ...state.errors, validationErrors: action.error },
-                awaitingResponse: action.awaiting
+                signinErrors: action.error
             };
-        case 'CONFLICT':
+        case 'SIGNUP_REQUEST_ERROR':
             return {
                 ...state,
-                errors:
-                    { ...state.errors, conflict: action.error },
-                awaitingResponse: action.awaiting
+                signupErrors: action.error
             };
-        case 'SIGNUP_SUCCESS':
+        case 'SIGNIN_REQUEST_SUCCESS':
             return {
                 ...state,
-                awaitingResponse: action.awaiting,
-                errors:
-                    {
-                        ...state.errors,
-                        validationErrors: action.error,
-                        conflict: action.error,
-                        passwordMismatch: action.error,
-                        login: action.error
-                    },
-                user: action.userDetails
+                response: action.response
             };
-        case 'ON_BOARDING_SUCCESS':
+        case 'SIGNUP_REQUEST_SUCCESS':
             return {
                 ...state,
-                awaitingResponse: action.awaiting,
-                authenticated: action.authenticated,
+                response: action.response
             };
-        case 'SIGNIN_SUCCESS':
+        case 'ONBOARDING_SUCCESS':
             return {
                 ...state,
-                awaitingResponse: action.awaiting,
-                authenticated: action.authenticated,
-                errors:
-                    {
-                        ...state.errors,
-                        validationErrors: action.error,
-                        conflict: action.error,
-                        passwordMismatch: action.error,
-                        login: action.error
-                    }
+                response: action.response
             };
-        case 'FAILED_SIGNIN':
+            
+        case 'SET_CURRENT_USER':
             return {
                 ...state,
-                errors:
-                    { ...state.errors, login: action.error },
-                awaitingResponse: action.awaiting,
-                authenticated: action.authenticated,
-            };
-        case 'PASSWORD_MISMATCH':
-            return {
-                ...state,
-                errors:
-                    { ...state.errors, passwordMismatch: action.misMatch },
-                awaitingResponse: action.awaiting,
-            };
-        case 'AUTHENTICATED':
-            return {
-                ...state,
-                authenticated: action.authenticated,
-            };
-        case 'UNAUTHENTICATED':
-            return {
-                ...state,
-                authenticated: action.authenticated,
+                user: action.user
             };
         default:
             return state;

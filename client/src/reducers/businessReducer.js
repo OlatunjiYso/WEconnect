@@ -1,119 +1,69 @@
-import fakebusiness from '../dummy/all_businesses';
-
 const initialState = {
-    businesses: fakebusiness,
-    filter: {
-        category: 'All',
-        state: 'Lagos'
-    },
+    businesses: [],
     business: {},
+    filter: { state: 'location', category: 'category' },
     myReviews: [],
     myBusinesses: [],
-    errors: {
-        validationErrors: null,
-        conflict: null,
-        others: null,
-        forbidden: null
-    },
-    awaiting: false,
+    errors: { },
+    awaitingResponse: false,
     notFound: false,
     gotBusinesses: false,
-    passwordMismatch: null,
 };
 
 const businessReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'FETCHED_BUSINESSES': // Fetching general business
+        case 'MAKING_BUSINESS_REQUEST':
             return {
                 ...state,
-                businesses: action.allBusinesses
+                awaitingResponse: action.bool,
             };
-        case 'FETCHED_BUSINESS': // Fetching a particular business
+        case 'FETCH_BUSINESSES_SUCCESS':
+            return {
+                ...state,
+                businesses: action.allBusinesses,
+                filter: action.selectedFilter
+            };
+        case 'FETCH_BUSINESS_SUCCESS':
             return {
                 ...state,
                 business: action.business,
                 myReviews: action.reviews
             };
-        case 'NOT_FOUND': // Not getting a particular business
+        case 'FETCH_BUSINESS_FAILED':
             return {
                 ...state,
-                notFound: action.notFound
+                errors: action.error,
+                businesses: action.business,
+                filter: action.filter
             };
-        case 'FOUND_MY_BUSINESSES': // Fetching my own business
+        case 'FIND_MY_BUSINESSES_SUCCESS':
             return {
                 ...state,
                 myBusinesses: action.businesses,
                 gotBusinesses: action.gotBusinesses,
             };
-        case 'GOT_NO_BUSINESSES': // Fetching my business, but I have got none
+        case 'FIND_MY_BUSINESSES_FAILED':
             return {
                 ...state,
                 gotBusinesses: action.gotBusinesses,
             };
 
-
-    // Reducers for Registering, Updating and Deleting businesses
-        case 'ATTEMPT': // Wish to register || update || delete my business
+        case 'REGISTER_BUSINESS_FAILED':
             return {
                 ...state,
-                awaiting: action.awaiting,
-                errors: {
-                     ...state.errors,
-                    validationErrors: action.error,
-                    conflict: action.error,
-                    others: action.error,
-                    forbidden: action.error
-                }
+                errors: action.error
             };
-        case 'BAD_REQUEST': // Business registration || update  was not successful
+            case 'UPDATE_BUSINESS_FAILED':
             return {
                 ...state,
-                awaiting: action.awaiting,
-                errors: { ...state.errors, validationErrors: action.error }
+                errors: action.error
             };
-        case 'CONFLICT': // Business registration || update was conflicting
-        return {
-            ...state,
-            awaiting: action.awaiting,
-            errors: { ...state.errors, conflict: action.error }
-        };
-        case 'FORBIDDEN': // Business update || delete by authorized persons
-        return {
-            ...state,
-            awaiting: action.awaiting,
-            errors: { ...state.errors, forbidden: action.error }
-        };
-        case 'UNKNOWN_ERROR': // Unknown error occured
-        return {
-            ...state,
-            awaiting: action.awaiting,
-            errors: { ...state.errors, others: action.error }
-        };
-        case 'PASSWORD_MISMATCH': // Unknown error occured
-        return {
-            ...state,
-            awaiting: action.awaiting,
-            passwordMismatch: action.error
-        };
-        case 'SUCCESS': // Business Registration || Update ||delete was successful
-        return {
-            ...state,
-            awaiting: action.awaiting,
-            errors: {
-                ...state.errors,
-               validationErrors: action.error,
-               conflict: action.error,
-               others: action.error,
-               forbidden: action.error
-           },
-           passwordMismatch: action.error
-        };
-
-        case 'STOP_SPINNER': // STOP SPINNER
-        return {
-            ...state,
-            awaiting: action.awaiting,
-        };
+            case 'DELETE_BUSINESS_FAILED':
+            return {
+                ...state,
+                errors: action.error
+            };
+        
         default:
             return state;
     }

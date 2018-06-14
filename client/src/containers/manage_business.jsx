@@ -48,27 +48,28 @@ class ManageBusiness extends Component {
     render() {
         const business = this.props.data.business;
         return (
-            <div>
+            <div id="manage">
                 <Navbar />
                 <main>
                     <BusinessBanner businessObject={business} pic={profilePicture} />
+                    <div id="businessReport">
                     <BusinessMetrics businessObject={business} />
-
                     <div className="row body-font container">
                         <div className="row top-pad">
-                            <div className="col s12 m6">
+                            <div className="col s6">
                                 <Link to= {`/businessDelete/${business.id}`} className="btn btn-large grey lighten-5 right red-text text-darken-4">
-                                    Delete Business
+                                    Delete
                                  </Link>
                             </div>
-                            <div className="col s12 m6">
+                            <div className="col s6">
                                <button className="btn btn-large grey lighten-4 left">
                                 <Link to= {`/businessUpdate/${business.id}`}  className= "green-text text-darken-4">
-                                    Update Business
+                                    Update
                                  </Link>
                                 </button>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </main>
                 <Footer />

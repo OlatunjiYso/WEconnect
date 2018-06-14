@@ -8,7 +8,7 @@ import history from '../history';
 import { registerBusiness } from '../actions/business';
 import Footer from '../components/footer';
 import BusinessForm from '../components/business_form';
-import Navbar from '../components/navbar'
+import Navbar from './nav';
 import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 import businesses from '../dummy/all_businesses';
@@ -59,7 +59,7 @@ class BusinessRegForm extends Component {
     render() {
         return (
             <div>
-
+            <Navbar />
                 <main>
                     <div className="row dashboard head-font ">
                         <div className="col s8 offset-s2 m3 l2 logo center-align">
@@ -74,11 +74,11 @@ class BusinessRegForm extends Component {
                         <div className="row">
                             <h5 className="center">Kindly fill in your business details as appropriate</h5>
                             <BusinessForm
-                                businessObject={this.state.business}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
+                                businessObject= {this.state.business}
+                                handleChange= {this.handleChange}
+                                handleSubmit= {this.handleSubmit}
                                 formErrors = {this.props.data.errors}
-                                isFetching = {this.props.data.awaiting}
+                                isFetching = {this.props.data.awaitingResponse}
                             />
                         </div>
                     </div>
