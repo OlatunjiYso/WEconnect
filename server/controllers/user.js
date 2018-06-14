@@ -192,14 +192,15 @@ class UserController {
                                         message: 'invalid password'
                                     });
                             } else {
-                                // issue jsonwebtoken that lasts for 6 x 60 minutes
+                                // issue jsonwebtoken that lasts for 12 x 60 minutes
                                 const token = jwt.sign(
                                     {
                                         id: user.id,
-                                        username: user.username
+                                        username: user.username,
+                                        email: user.email
                                     },
                                     process.env.SECRET_KEY,
-                                    { expiresIn: '360m' }
+                                    { expiresIn: '720m' }
                                 );
                                 res.status(200)
                                     .json({
