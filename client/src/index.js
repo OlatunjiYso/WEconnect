@@ -11,14 +11,10 @@ import store from './store';
 import App from './App';
 import { setCurrentUser } from './actions/auth';
 
-// const user = localStorage.getItem('user');
-// if(user) {
-//   store.dispatch({ type: 'SIGNIN_SUCCESS' });
-// }
-
-if (jwt.decode(localStorage.user) !== null) {
-    setToken(localStorage.jwtToken);
-    store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
+if (jwt.decode(localStorage.token) !== null) {
+    setToken(localStorage.token);
+    store.dispatch(setCurrentUser(jwt.decode(localStorage.token)));
+    console.log(jwt.decode(localStorage.token));
   } else {
     setToken('');
     store.dispatch(setCurrentUser({}));
