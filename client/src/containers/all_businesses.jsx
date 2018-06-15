@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -9,8 +8,6 @@ import Navbar from './nav';
 import { fetchAllBusinesses } from '../actions/business';
 import BusinessCatalogTop from '../components/business_catalog_top';
 import BusinessCard from '../components/business_card';
-import customStyles from '../css/style.css';
-import hero from '../assets/images/profession.jpg';
 import profilePicture from '../assets/images/cameras.jpg';
 
 /**
@@ -38,13 +35,16 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     componentWillMount() {
-        const defaultFilter = this.props.data.filter;
-        // if (localStorage.getItem('category')) {
-        //     defaultFilter.category = localStorage.category
-        // }
-        console.log(localStorage.category)
-        this.props.fetchAllBusinesses(defaultFilter);
-        //localStorage.removeItem('category');
+        const defaultFilter = {
+            state: "location",
+            category: "category",
+        }
+        const {landingPageFilter} = this.props.landingPageData;
+        if (landingPageFilter.category) {
+            this.props.fetchAllBusinesses(landingPageFilter);
+        } else {
+            this.props.fetchAllBusinesses(defaultFilter);
+        }
     }
 
     /** 
@@ -95,7 +95,7 @@ class AllBusinesses extends Component {
                     businesssPic={profilePicture}
                 />
             )
-        }) : <h3> No business found </h3>
+        }) : <h4> No business found </h4>
         return (
             <div>
                 <Navbar />
@@ -119,9 +119,9 @@ class AllBusinesses extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data);
+    const landingPageData = state.landingPageReducer;
     return {
-        data
+        data, landingPageData
     }
 }
 

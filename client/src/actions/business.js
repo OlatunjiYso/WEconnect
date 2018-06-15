@@ -5,8 +5,10 @@ import history from '../history';
 import setToken from '../helpers/authorization';
 import {
     FETCH_BUSINESSES_SUCCESS, FETCH_BUSINESS_SUCCESS, FIND_MY_BUSINESSES_SUCCESS, FIND_MY_BUSINESSES_FAILED,
-    FETCH_BUSINESS_FAILED, MAKING_BUSINESS_REQUEST, REGISTER_BUSINESS_FAILED, UPDATE_BUSINESS_FAILED, DELETE_BUSINESS_FAILED
+    FETCH_BUSINESS_FAILED, MAKING_BUSINESS_REQUEST, REGISTER_BUSINESS_FAILED, UPDATE_BUSINESS_FAILED, DELETE_BUSINESS_FAILED,
+    SET_CATEGORY, CLEAR_CATEGORY
 } from '../actions/types';
+    
 /**
  * @description - starts spinner when awaiting a response
  *
@@ -18,9 +20,29 @@ export const isRequesting = bool => ({
     bool
 });
 
+/**
+ * @description - sets value into the landing page business filter
+ *
+ * @param {string} chosenCategory - the category user picks from the landing page
+ * @return {obj} -actionable object containing type and payload
+ */
+export const setCategory = chosenCategory => ({
+    type: SET_CATEGORY,
+    category: chosenCategory
+});
 
 /**
- * @description - action responsible for getting all businesses
+ * @description - removes value from the landing page business filter
+ *
+ * @return {obj} -actionable object containing type and payload
+ */
+export const clearCategory = () => ({
+    type: CLEAR_CATEGORY,
+    category: null
+});
+
+/**
+ * @description - action called when all businesses were fetched
  *
  * @param { array } businesses - array of businesses
  * @param {object} filterUsed - filter used in filtering business
@@ -34,7 +56,7 @@ export const getAllBusinessesSuccess = (businesses, filterUsed) => ({
 });
 
 /**
-* @description - action for getting a particular business
+* @description - action called when a particular business is fetched
 *
 *@param {obj} business - a business object
 *

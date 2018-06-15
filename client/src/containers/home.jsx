@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 import history from '../history';
-import { fetchAllBusinesses } from '../actions/business';
+import { setCategory } from '../actions/business';
 import Footer from '../components/footer';
 import Nav from './nav';
 import customStyles from '../css/style.css';
@@ -22,7 +22,6 @@ class Home extends Component {
         this.findBusinessesIn = this.findBusinessesIn.bind(this);
     }
 
-
     /** 
     *@description search for businesses in given category
     *
@@ -31,7 +30,7 @@ class Home extends Component {
     * @memberof Home Component;
     */
     findBusinessesIn(chosenCategory) {
-        localStorage.setItem('category', chosenCategory)
+        this.props.setCategory(chosenCategory)
             history.push('/businesses');
     }
 
@@ -146,15 +145,9 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const data = state.businessReducer;
-    return {
-        data
-    }
-}
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchAllBusinesses }, dispatch);
+    return bindActionCreators({ setCategory }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
