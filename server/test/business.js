@@ -218,7 +218,6 @@ describe(' All Tests for businesses', () => {
                     done();
                 });
         });
-    
         describe('Test for getting all businesses', () => {
             it('it should display all businesses', (done) => {
                 chai.request(app)
@@ -296,7 +295,7 @@ describe(' All Tests for businesses', () => {
                     });
             });
         });
-    }); 
+    });
     describe('Test for updating businesses', () => {
         before((done) => {
             chai.request(app)
