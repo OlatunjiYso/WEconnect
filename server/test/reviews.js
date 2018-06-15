@@ -12,7 +12,7 @@ const { Business } = db;
 const rootEndpoint = '/api/v1/businesses';
 let authToken;
 
-describe(' All Tests for businesses', () => {
+describe(' All Tests for business reviews', () => {
     before((done) => {
         db.sequelize.sync({ force: true }) // drops table and re-creates it
             .then(() => {
@@ -45,21 +45,21 @@ describe(' All Tests for businesses', () => {
                 it('it should add reviews to a business', (done) => {
                     chai.request(app)
                         .post(`${rootEndpoint}/1/reviews`)
-                        .send({ description: 'I love it' })
+                        .send(testData.reviewDetails)
                         .set('token', authToken)
                         .end((err, res) => {
                             expect(res.status).to.equal(201);
                             expect(res.body.message).to.equal('review successfully created');
-                            expect(res.body.review.description).to.equal('I love it');
+                            expect(res.body.review.description).to.equal('wonderful business');
                             done();
                         });
                 });
             });
             describe('Test for adding a blank review', () => {
-               it('it should add reviews to a business', (done) => {
+               it('it should add valid reviews to a business', (done) => {
                    chai.request(app)
                        .post(`${rootEndpoint}/1/reviews`)
-                       .send({ description: '' })
+                       .send({ description: '', reviewerName: 'fdf' })
                        .set('token', authToken)
                        .end((err, res) => {
                            expect(res.status).to.equal(400);

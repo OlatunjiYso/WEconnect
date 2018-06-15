@@ -23,15 +23,17 @@ describe('All test for Models', () => {
                     Review.create({
                         businessId: business.id,
                         description: 'wonderful business',
+                        reviewerName: 'wonderguy',
                         reviewerId: 1,
                     })
                     .then((review) => {
                         expect(review.description).to.equal('wonderful business');
                         expect(review.reviewerId).to.equal(1);
+                        expect(review.reviewerName).to.equal('wonderguy');
                     });
-                    expect(business.title).to.equal('Just Suits');
+                    expect(business.name).to.equal('Just Suits');
                     expect(business.category).to.equal('fashion');
-                    expect(business.location).to.equal('lagos');
+                    expect(business.state).to.equal('lagos');
                     done();
                 });
         });
@@ -41,15 +43,16 @@ describe('All test for Models', () => {
                     Review.create({
                         businessId: business.id,
                         description: 'successful business',
+                        reviewerName: 'wonderguy',
                         reviewerId: 1,
                     })
                     .then((review) => {
                         expect(review.description).to.equal('successful business');
                         expect(review.reviewerId).to.equal(1);
                     });
-                    expect(business.title).to.equal('Just Suitss');
+                    expect(business.name).to.equal('Just Suitss');
                     expect(business.category).to.equal('fashions');
-                    expect(business.location).to.equal('lagoss');
+                    expect(business.state).to.equal('lagoss');
                     done();
                 });
         });
@@ -58,7 +61,7 @@ describe('All test for Models', () => {
         it('model should find businesses', (done) => {
             Business.findAll({
                 where: {
-                    title: 'Just Ties'
+                    name: 'Just Ties'
                 }
             })
                 .then((businesses) => {
