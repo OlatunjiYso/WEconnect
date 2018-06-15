@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NavItem, Dropdown, Button, Input } from 'react-materialize';
+import { Input } from 'react-materialize';
 /**
  * @s FooterComponent
  * 

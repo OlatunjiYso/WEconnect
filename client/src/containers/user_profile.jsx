@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-import setToken from '../helpers/authorization';
-import history from '../history';
 import Footer from '../components/footer';
 import Nav from './nav';
 import UserBusiness from '../components/user_business';
 import { fetchMyBusinesses } from '../actions/business';
-import customStyles from '../css/style.css';
 import profilePicture from '../assets/images/cameras.jpg';
 
 
