@@ -43,7 +43,7 @@ describe(' All Tests for businesses', () => {
                     .end((err, res) => {
                         expect(res.status).to.equal(201);
                         expect(res.body.message).to.equal('business successfully created');
-                        expect(res.body.business.title).to.equal('Just Suits');
+                        expect(res.body.business.name).to.equal('Just Suits');
                         expect(res.body.business).to.have.property('id');
                         expect(res.body.business.phone).to.equal('08012345676');
                         expect(res.body.business.email).to.equal('olat@andela.com');
@@ -80,8 +80,7 @@ describe(' All Tests for businesses', () => {
         });
         describe('Test to add a business with no category', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.category = null;
+                const invalidBusinessDetails = { ...testData.businessDetails, category: null, };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -91,15 +90,13 @@ describe(' All Tests for businesses', () => {
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
                         expect(res.body.errors[0]).to.equal('Please input business category');
-                        testData.businessDetails.category = 'fashion';
                         done();
                     });
             });
         });
         describe('Test to add a business with no title', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.title = null;
+                const invalidBusinessDetails = { ...testData.businessDetails, name: null, };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -108,16 +105,14 @@ describe(' All Tests for businesses', () => {
                         expect(res.status).to.equal(400);
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
-                        expect(res.body.errors[0]).to.equal('Please input business title');
-                        testData.businessDetails.title = 'Just Suits';
+                        expect(res.body.errors[0]).to.equal('Please input business name');
                         done();
                     });
             });
         });
         describe('Test to add a business with no location', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.location = null;
+                const invalidBusinessDetails = { ...testData.businessDetails, state: null, };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -126,16 +121,14 @@ describe(' All Tests for businesses', () => {
                         expect(res.status).to.equal(400);
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
-                        expect(res.body.errors[0]).to.equal('Please input business location');
-                        testData.businessDetails.location = 'Lagos';
+                        expect(res.body.errors[0]).to.equal('Please input state');
                         done();
                     });
             });
         });
         describe('Test to add a business with no phone', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.phone = null;
+                const invalidBusinessDetails = { ...testData.businessDetails, phone: null };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -145,15 +138,13 @@ describe(' All Tests for businesses', () => {
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
                         expect(res.body.errors[0]).to.equal('Please input business phone number');
-                        testData.businessDetails.phone = '08012345676';
                         done();
                     });
             });
         });
         describe('Test to add a business with no email', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.email = null;
+                const invalidBusinessDetails = { ...testData.businessDetails, email: null };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -163,15 +154,13 @@ describe(' All Tests for businesses', () => {
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
                         expect(res.body.errors[0]).to.equal('email is required');
-                        testData.businessDetails.email = 'olat@andela.com';
                         done();
                     });
             });
         });
         describe('Test to add a business with an invalid email', () => {
             it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.email = 'invalidemail';
+                const invalidBusinessDetails = { ...testData.businessDetails, email: 'hgffsggghegeg' };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
@@ -181,25 +170,6 @@ describe(' All Tests for businesses', () => {
                         expect(res.body).to.be.a('object');
                         expect(res.body.errors).to.be.an('array');
                         expect(res.body.errors[0]).to.equal('Invalid email');
-                        testData.businessDetails.email = 'olat@andela.com';
-                        done();
-                    });
-            });
-        });
-        describe('Test to add a business with an invalid email', () => {
-            it('it should catch validation errors before adding a business to the businesses database', (done) => {
-                const invalidBusinessDetails = testData.businessDetails;
-                invalidBusinessDetails.email = 'invalidemail';
-                chai.request(app)
-                    .post(`${rootEndpoint}`)
-                    .set('token', authToken)
-                    .send(invalidBusinessDetails)
-                    .end((err, res) => {
-                        expect(res.status).to.equal(400);
-                        expect(res.body).to.be.a('object');
-                        expect(res.body.errors).to.be.an('array');
-                        expect(res.body.errors[0]).to.equal('Invalid email');
-                        testData.businessDetails.email = 'olat@andela.com';
                         done();
                     });
             });
@@ -222,12 +192,11 @@ describe(' All Tests for businesses', () => {
         });
         describe('Test to add a business with an existing email', () => {
             it('it should not add a business with an existing email', (done) => {
-                const { businessDetails } = testData;
-                businessDetails.title = 'anotherBusiness';
+                const anotherBusiness = { ...testData.businessDetails, name: 'andelas' };
                 chai.request(app)
                     .post(`${rootEndpoint}`)
                     .set('token', authToken)
-                    .send(businessDetails)
+                    .send(anotherBusiness)
                     .end((err, res) => {
                         expect(res.status).to.equal(409);
                         expect(res.body).to.be.a('object');
@@ -236,8 +205,8 @@ describe(' All Tests for businesses', () => {
                         done();
                     });
             });
-        });
-    });
+       });
+     });
 
    describe('Test for Getting businesses', () => {
         before((done) => {
@@ -256,21 +225,20 @@ describe(' All Tests for businesses', () => {
                     .get(`${rootEndpoint}`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal(' businesses ');
-                        expect(res.body.businesses[0].title).to.equal('Just Suits');
+                        expect(res.body.businesses[0].name).to.equal('Just Suits');
                         expect(res.body.businesses[0]).to.have.property('id');
                         done();
                     });
             });
         });
         describe('Test for getting a particular business ', () => {
-            it('it should display all businesses', (done) => {
+            it('it should display a particular business', (done) => {
                 chai.request(app)
                     .get(`${rootEndpoint}/1`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
                         expect(res.body.message).to.equal('business found');
-                        expect(res.body.business.title).to.equal('Just Suits');
+                        expect(res.body.business.name).to.equal('Just Suits');
                         expect(res.body.business.id).to.equal(1);
                         expect(res.body.business).to.have.property('category');
                         done();
@@ -294,8 +262,8 @@ describe(' All Tests for businesses', () => {
                     .get(`${rootEndpoint}?category=fashion`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal('fashion businesses ');
-                        expect(res.body.businesses[0].title).to.equal('Just Suits');
+                        expect(res.body.category).to.equal('fashion');
+                        expect(res.body.businesses[0].name).to.equal('Just Suits');
                         expect(res.body.businesses[0].category).to.equal('fashion');
                         done();
                     });
@@ -307,9 +275,9 @@ describe(' All Tests for businesses', () => {
                     .get(`${rootEndpoint}?location=lagos`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal(' businesses in lagos');
-                        expect(res.body.businesses[0].title).to.equal('Just Suits');
-                        expect(res.body.businesses[0].location).to.equal('lagos');
+                        expect(res.body.location).to.equal('lagos');
+                        expect(res.body.businesses[0].name).to.equal('Just Suits');
+                        expect(res.body.businesses[0].state).to.equal('lagos');
                         done();
                     });
             });
@@ -320,9 +288,10 @@ describe(' All Tests for businesses', () => {
                     .get(`${rootEndpoint}?location=lagos&category=fashion`)
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal('fashion businesses in lagos');
-                        expect(res.body.businesses[0].title).to.equal('Just Suits');
-                        expect(res.body.businesses[0].location).to.equal('lagos');
+                        expect(res.body.category).to.equal('fashion');
+                        expect(res.body.location).to.equal('lagos');
+                        expect(res.body.businesses[0].name).to.equal('Just Suits');
+                        expect(res.body.businesses[0].state).to.equal('lagos');
                         done();
                     });
             });
@@ -344,17 +313,17 @@ describe(' All Tests for businesses', () => {
                 .then(() => Promise.resolve(done()))
                 .catch(err => Promise.reject(done(err)));
         });
-        describe('Test for updating the title of a business', () => {
-            it('it should modify the title of the business', (done) => {
+        describe('Test for updating the name of a business', () => {
+            it('it should modify the name of the business', (done) => {
                 chai.request(app)
                     .put(`${rootEndpoint}/2`)
                     .set('token', authToken)
-                    .send({ title: 'Germany Boots' })
+                    .send({ name: 'Germany Boots' })
                     .end((err, res) => {
                         console.log(res.body);
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal('business modified successfully, 1 field(s) modified!');
-                        expect(res.body.updated.title).to.equal('Germany Boots');
+                        expect(res.body.message).to.equal('business successfully modified');
+                        expect(res.body.business.name).to.equal('Germany Boots');
                         done();
                     });
             });
@@ -367,23 +336,60 @@ describe(' All Tests for businesses', () => {
                     .send({ category: 'agric' })
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
-                        expect(res.body.message).to.equal('business modified successfully, 1 field(s) modified!');
-                        expect(res.body.updated.category).to.equal('agric');
+                        expect(res.body.message).to.equal('business successfully modified');
+                        expect(res.body.business.category).to.equal('agric');
                         done();
                     });
             });
         });
         describe('Test for updating the location of a business', () => {
+            it('it should not modify the business', (done) => {
+                chai.request(app)
+                    .put(`${rootEndpoint}/2`)
+                    .set('token', authToken)
+                    .end((err, res) => {
+                        expect(res.status).to.equal(200);
+                        expect(res.body.success).to.equal(true);
+                        expect(res.body.modified).to.equal(false);
+                        done();
+                    });
+            });
+        });
+        describe('Test for updating the location of a business ', () => {
             it('it should modify the location of a business', (done) => {
                 chai.request(app)
                     .put(`${rootEndpoint}/2`)
                     .set('token', authToken)
-                    .send({ location: 'kano' })
+                    .send({ state: 'kano' })
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
                         expect(res.body.message).to
-                        .equal('business modified successfully, 1 field(s) modified!');
-                        expect(res.body.updated.location).to.equal('kano');
+                        .equal('business successfully modified');
+                        expect(res.body.business.state).to.equal('kano');
+                        done();
+                    });
+            });
+        });
+        describe('Test for updating the name of a business to an existing name ', () => {
+            it('it should not modify the business', (done) => {
+                chai.request(app)
+                    .put(`${rootEndpoint}/2`)
+                    .set('token', authToken)
+                    .send({ name: 'Just Suits' })
+                    .end((err, res) => {
+                        expect(res.status).to.equal(409);
+                        done();
+                    });
+            });
+        });
+        describe('Test for updating the email of a business to an existing one ', () => {
+            it('it should not modify the business', (done) => {
+                chai.request(app)
+                    .put(`${rootEndpoint}/2`)
+                    .set('token', authToken)
+                    .send({ email: 'olat@andela.com' })
+                    .end((err, res) => {
+                        expect(res.status).to.equal(409);
                         done();
                     });
             });
@@ -393,7 +399,7 @@ describe(' All Tests for businesses', () => {
                 chai.request(app)
                     .put(`${rootEndpoint}/111`)
                     .set('token', authToken)
-                    .send({ location: 'kano' })
+                    .send({ state: 'kano' })
                     .end((err, res) => {
                         expect(res.status).to.equal(404);
                         expect(res.body.message).to.equal('no such business exists');
@@ -419,6 +425,7 @@ describe(' All Tests for businesses', () => {
                 chai.request(app)
                     .delete(`${rootEndpoint}/2`)
                     .set('token', authToken)
+                    .send({ password: 'wonderguy' })
                     .end((err, res) => {
                         expect(res.status).to.equal(200);
                         expect(res.body.message).to.equal('business deleted');

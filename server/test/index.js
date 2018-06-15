@@ -11,22 +11,8 @@ describe('GET undefined routes', () => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.status).to.equal(404);
+        expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
-        done();
-      });
-  });
-});
-
-
-describe(' GET undefined routes ', () => {
-  it('c', (done) => {
-    chai.request(app)
-      .get('/hello')
-      .end((err, res) => {
-        expect(res.status).to.equal(404);
-        expect(res.body).to.be.a('object');
-        expect(res.body.message).to.equal('Page not found');
         done();
       });
   });
