@@ -38,19 +38,19 @@ class UserProfile extends Component {
     * @memberof UserProfileComponent
     */
     render() {
-        const data =  this.props.data;
+        const { businessData } =  this.props;
         const username = this.props.userData.user.username;
 
         // Generate an array of businesses if the user has any.
-        const myBusinesses = (data.gotBusinesses) ? 
-        data.myBusinesses.map((business, index) => {
+        const myBusinesses = (businessData.myBusinesses.length > 1) ? 
+        businessData.myBusinesses.map((business, index) => {
             return (
                 <UserBusiness key={index} userBusiness={business} businesssPic={profilePicture} />
             )
         }) : null;
         
         // Generate a suitable header if or not, user has businesses
-        const sectionHeading = (data.gotBusinesses) ? 
+        const sectionHeading = (businessData.myBusinesses.length > 1) ? 
         <span> Feel free to manage your business outfits </span> : 
         <span> You are yet to add a business </span> ;
 
@@ -99,10 +99,13 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const data = state.businessReducer;
+    const businessData = state.businessReducer;
     const userData = state.authReducers;
+    console.log(businessData);
+    console.log(businessData.myBusinesses);
+    console.log(businessData.gotBusinesses);
     return {
-        data, userData
+        businessData, userData
     }
 }
 
