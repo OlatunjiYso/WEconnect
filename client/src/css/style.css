@@ -325,3 +325,8 @@ label {
 #manage{
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.05);
 }
+
+/********** Category Images *********/
+.category-image {
+    max-height: 15rem;
+}
