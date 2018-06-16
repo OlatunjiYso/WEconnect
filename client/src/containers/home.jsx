@@ -7,8 +7,17 @@ import history from '../history';
 import { setCategory } from '../actions/business';
 import Footer from '../components/footer';
 import Nav from './nav';
-import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
+import education from '../assets/images/education.jpg';
+import entertainment from '../assets/images/entertainment.jpg';
+import technology from '../assets/images/technology.jpg';
+import food from '../assets/images/food.jpg';
+import fashion from '../assets/images/fashion.jpg';
+import sport from '../assets/images/sport.jpg';
+import commerce from '../assets/images/commerce.jpg';
+import transportation from '../assets/images/transportation.jpg';
+import agriculture from '../assets/images/agriculture.jpg';
+
 
 /**
  * @class HomeComponent
@@ -31,7 +40,7 @@ class Home extends Component {
     */
     findBusinessesIn(chosenCategory) {
         this.props.setCategory(chosenCategory)
-            history.push('/businesses');
+        history.push('/businesses');
     }
 
     /** 
@@ -76,66 +85,68 @@ class Home extends Component {
                     <div className="containers ">
                         <div className="section row s12">
                             <h4 className="center category-header green-text text-darken-4"> Checkout our Categories of businesses</h4>
-                            <div className="category-tag center col s6 m4">
-                                <h6>
-                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('education')}>
-                                        Education
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('entertainment')}>
-                                    Entertainment
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6>
-                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('technology')}>
-                                    Technology
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col col s6 m4">
-                                <h6>
-                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('food')}>
-                                        Food
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('fashion')}>
-                                    Fashion
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6>
-                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('sport')}>
-                                    Sport
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6>
-                                    <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('commerce')}>
-                                        Commerce
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6> <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('agriculture')}>
-                                    Agriculture
-                                  </Link>
-                                </h6>
-                            </div>
-                            <div className="category-tag center col s6 m4">
-                                <h6>
-                                <Link className= "black-text" to="#" onClick={() => this.findBusinessesIn('transportation')}>
-                                    Transportation
-                                  </Link>
-                                </h6>
-                            </div>
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('education')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                    <img className="responsive-img category-image" src={education} alt='Education' />
+                                    <h5> Education </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('entertainment')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                    <img className="responsive-img category-image" src={entertainment} alt='Entertainment' />
+                                    <h5>  Entertainment </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('technology')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={technology} alt='Technology'/>
+                                    <h5> Technology </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('food')}>
+                                <div className="category-tag center col col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={food} alt='Food' />
+                                    <h5> Food </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('fashion')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={fashion} alt='fashion' />
+                                    <h5> Fashion </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('sport')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={sport} alt='sport' />
+                                    <h5> Sport </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('commerce')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={commerce} alt='Commerce' />
+                                    <h5> Commerce </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('agriculture')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={agriculture} alt='Agriculture' />
+                                    <h5> Agriculture </h5>
+                                </div>
+                            </Link>
+
+                            <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('transportation')}>
+                                <div className="category-tag center col s8 offset-s2 m4">
+                                <img className="responsive-img category-image" src={transportation} alt='Transportation' />
+                                    <h5> Transportation </h5>
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </main>
