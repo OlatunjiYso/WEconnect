@@ -54,7 +54,6 @@ class Signup extends Component {
    */
     componentWillMount() {
         if (verifyToken()) {
-            console.log('jhgfds')
             alertSuccess('You are logged in already')
             history.push('/userProfile');
         }

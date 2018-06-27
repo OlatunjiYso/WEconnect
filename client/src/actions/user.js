@@ -110,7 +110,6 @@ export const changeDetails = (userId, details) => (dispatch) => {
             dispatch(isRequesting(false));
         })
         .catch((error) => {
-            console.log(error);
             if (error.response.status === 400) {
                 alertError(error.response.data.errors[0]);
             }

@@ -42,7 +42,7 @@ class UserProfile extends Component {
         const username = this.props.userData.user.username;
 
         // Generate an array of businesses if the user has any.
-        const myBusinesses = (businessData.myBusinesses.length > 1) ? 
+        const myBusinesses = (businessData.myBusinesses.length > 0) ? 
         businessData.myBusinesses.map((business, index) => {
             return (
                 <UserBusiness key={index} userBusiness={business} businesssPic={profilePicture} />
@@ -101,9 +101,6 @@ class UserProfile extends Component {
 const mapStateToProps = (state) => {
     const businessData = state.businessReducer;
     const userData = state.authReducers;
-    console.log(businessData);
-    console.log(businessData.myBusinesses);
-    console.log(businessData.gotBusinesses);
     return {
         businessData, userData
     }

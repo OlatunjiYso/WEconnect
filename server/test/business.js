@@ -319,7 +319,6 @@ describe(' All Tests for businesses', () => {
                     .set('token', authToken)
                     .send({ name: 'Germany Boots' })
                     .end((err, res) => {
-                        console.log(res.body);
                         expect(res.status).to.equal(200);
                         expect(res.body.message).to.equal('business successfully modified');
                         expect(res.body.business.name).to.equal('Germany Boots');

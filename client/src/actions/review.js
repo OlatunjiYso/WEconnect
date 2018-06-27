@@ -1,7 +1,7 @@
 import reviewApi from '../service/reviewApi';
 import setToken from '../helpers/authorization';
 import { alertSuccess, alertError } from '../actions/flashMessage';
-import { MAKING_REVIEW_REQUEST, REVIEW_SUCCESS, REVIEW_ERROR } from '../actions/types';
+import { MAKING_REVIEW_REQUEST, REVIEW_SUCCESS, REVIEW_ERROR, GET_ALL_REVIEW } from '../actions/types';
 
 /**
 * @description - starts spinner when awaiting a response
@@ -25,6 +25,19 @@ export const reviewSuccess = response => ({
     response
 });
 
+
+/**
+* @description - updates the array of reviews in store
+*
+* @param {object} reviews - the reviews of thre business
+* @return {obj} -actionable object containing type and payload
+*/
+export const getAllBusinessReview = reviews => ({
+    type: GET_ALL_REVIEW,
+    reviews
+});
+
+
 /**
 * @description - sends an error message after an unsuccessful review action
 *
@@ -35,6 +48,28 @@ export const reviewError = error => ({
     type: REVIEW_ERROR,
     error
 });
+
+/**
+ *@description - get all reviews for a business
+ *
+ *@param { string } businessId - id of business that is to be reviewed
+ *@param { object } review - object containing information of review to be created
+ *
+ *@return { object } -actionable object containing type and payload
+ */
+export const getAllReviews = businessId => (dispatch) => {
+    setToken(localStorage.token);
+    dispatch(isRequesting(true));
+    reviewApi.getAllReviews(businessId)
+        .then((response) => {
+            dispatch(isRequesting(false));
+            dispatch(getAllBusinessReview(response.data.reviews));
+        })
+        .catch((error) => {
+            dispatch(isRequesting(false));
+            dispatch(getAllBusinessReview(error.response.data.reviews));
+        });
+};
 
 
 /**
@@ -53,6 +88,7 @@ export const postReview = (businessId, review) => (dispatch) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));
             alertSuccess('Your review was added');
+            dispatch(getAllReviews(businessId));
         })
         .catch((error) => {
             dispatch(isRequesting(false));
@@ -78,6 +114,7 @@ export const updateReview = (businessId, reviewId, newReview) => (dispatch) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));
             alertSuccess('Review updated!');
+            dispatch(getAllReviews(businessId));
         })
         .catch((error) => {
             dispatch(isRequesting(true));
@@ -101,6 +138,7 @@ export const deleteReview = (businessId, reviewId) => (dispatch) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));
             alertSuccess('Review deleted!');
+            dispatch(getAllReviews(businessId));
         })
         .catch((error) => {
             dispatch(isRequesting(false));

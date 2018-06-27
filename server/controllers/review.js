@@ -68,6 +68,7 @@ class reviewController {
           .json({
             success: true,
               message: 'no business reviews yet',
+              reviews
           });
       })
       .catch(err => res.status(500)

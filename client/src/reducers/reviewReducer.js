@@ -1,7 +1,8 @@
 const initialState = {
     awaitingResponse: false,
     response: {},
-    reviewErrors: {}
+    reviewErrors: {},
+    reviews: []
 };
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -9,6 +10,11 @@ const reviewReducer = (state = initialState, action) => {
             return {
                 ...state,
                 awaitingResponse: action.bool,
+            };
+        case 'GET_ALL_REVIEW':
+            return {
+                ...state,
+                reviews: action.reviews
             };
         case 'REVIEW_SUCCESS':
             return {

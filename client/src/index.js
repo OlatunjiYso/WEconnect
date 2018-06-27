@@ -14,8 +14,6 @@ import { setCurrentUser } from './actions/auth';
 if (jwt.decode(localStorage.token) !== null) {
     setToken(localStorage.token);
     store.dispatch(setCurrentUser(jwt.decode(localStorage.token)));
-    console.log(localStorage.token)
-    console.log(jwt.decode(localStorage.token));
   } else {
     setToken('');
     store.dispatch(setCurrentUser({}));

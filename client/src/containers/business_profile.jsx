@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { NavItem, Dropdown, Button } from 'react-materialize';
 import { bindActionCreators } from 'redux';
 
 import { fetchThisBusiness } from '../actions/business';
-import history from '../history';
 import Navbar from './nav';
 import BusinessBanner from '../components/business_banner';
 import BusinessBody from '../components/business_body';
 import ReviewForm from './review_form';
 import Footer from '../components/footer';
-import customStyles from '../css/style.css';
 import facebook from '../assets/images/facebook.png';
 import twitter from '../assets/images/twitter.png';
 import whatsapp from '../assets/images/whatsapp.png';
@@ -54,8 +50,7 @@ class BusinessProfile extends Component {
     render() {
         const { match } = this.props;
         const id = match.params.businessId;
-        const business = this.props.data.business;
-        const { myReviews } = this.props.data
+        const business = this.props.businessData.business;
         return (
             <div>
                 <main>
@@ -63,7 +58,7 @@ class BusinessProfile extends Component {
                     <BusinessBanner businessObject={business} pic={profilePicture} />
                     <BusinessBody businessObject={business} />
                     <div className="row body-font container">
-                        <ReviewForm review={myReviews} businessId= {id}/>
+                        <ReviewForm businessId= {id}/>
                         <div className="col s10 offset-s1 m10 offset-m1 ">
                             <h5 className="grey-text text-darken-3 bottom-pad-small"> Contact Us</h5>
                             <div className="row">
@@ -98,9 +93,9 @@ class BusinessProfile extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const data = state.businessReducer;
+    const businessData = state.businessReducer;
     return {
-        data
+        businessData
     }
 }
 
