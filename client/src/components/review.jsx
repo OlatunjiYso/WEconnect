@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Icon, Modal } from 'react-materialize';
 import ReviewControls from './review_controls';
 
 /**
@@ -28,6 +26,7 @@ class Review extends Component {
             <ReviewControls 
             review = {this.props.review} 
             businessId = {this.props.businessId}
+            getAllReviews = { this.props.getAllReviews }
             updateReview = {this.props.updateReview}
             deleteReview = {this.props.deleteReview}
             /> : null;

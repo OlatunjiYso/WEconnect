@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
-import { Input } from 'react-materialize';
-import axios from 'axios';
 
-import { alertSuccess, alertError } from '../actions/flashMessage';
-import { postReview, updateReview, deleteReview } from '../actions/review'
-import history from '../history';
-import setToken from '../helpers/authorization';
+import { getAllReviews, postReview, updateReview, deleteReview } from '../actions/review'
 import Review from '../components/review';
 /**
  * @description BusinessFormComponent
@@ -28,6 +22,17 @@ class ReviewForm extends Component {
 
     /** 
     *
+    * @returns {JSX} JSX
+    * 
+    * @memberof AllBusinessesComponent
+    */
+   componentDidMount() {
+    const businessId = this.props.businessId;
+    this.props.getAllReviews(businessId)   
+}
+
+    /** 
+    *
     *
     * @returns {func} funtion
     * 
@@ -39,7 +44,11 @@ class ReviewForm extends Component {
         const review = {}
         review.description = this.state.message;
         review.username = this.props.userData.user.username;
-        this.props.postReview(businessId, review)
+        this.props.postReview(businessId, review);
+        this.setState({
+            ...this.state,
+            message: ''
+        });
     }
 
     /** 
@@ -66,7 +75,7 @@ class ReviewForm extends Component {
     render() {
         const message = this.state.message;
         const handleChange = this.handleChange;
-        const allReviews = this.props.review
+        const allReviews = this.props.reviewData.reviews
         const reviewLabel = (localStorage.token) ? 'Give a review' : 'login to give a review';
         // generate array of reviews or null if no review present
         const myReviews = (allReviews.length > 0) ?
@@ -79,6 +88,7 @@ class ReviewForm extends Component {
                  reviewerId = {this.props.userData.user.id}
                  updateReview = { this.props.updateReview }
                  deleteReview = { this.props.deleteReview }
+                 getAllReviews = { this.props.getAllReviews }
                  />
             )
         }) : <h6 className="grey-text"> Be the first to give us a review </h6>;
@@ -110,20 +120,16 @@ class ReviewForm extends Component {
     }
 }
 
-ReviewForm.propTypes = {
-    review: PropTypes.array.isRequired
-}
-
 const mapStateToProps = (state) => {
-    const data = state.reviewReducer;
+    const reviewData = state.reviewReducer;
     const userData = state.authReducers;
     return {
-        data, userData
+        reviewData, userData
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ postReview, updateReview, deleteReview }, dispatch);
+    return bindActionCreators({ getAllReviews, postReview, updateReview, deleteReview }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);

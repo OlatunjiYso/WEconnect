@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Icon, Modal } from 'react-materialize'
-import axios from 'axios';
-import history from '../history';
-import setToken from '../helpers/authorization';
+import {  Modal } from 'react-materialize'
 
 /**
  * @description ReviewControls Component
@@ -37,6 +33,7 @@ class ReviewControls extends Component {
     const newReview = {};
     newReview.description = this.state.updated;
     this.props.updateReview(businessId, reviewId, newReview);
+    $('#editReviewModal').modal('close');
 }
 
 /** 
@@ -51,6 +48,7 @@ class ReviewControls extends Component {
     const { businessId } = this.props;
     const reviewId = this.props.review.id
     this.props.deleteReview(businessId, reviewId);
+    $('#deleteReviewModal').modal('close');
 }
 
     /** 
@@ -82,7 +80,7 @@ class ReviewControls extends Component {
         return (
             <div>
             <span className="left cursor">
-                <Modal
+                <Modal id= "editReviewModal"
                     trigger={<i className="material-icons tinyy green-text">edit</i>}>
                     <form onSubmit={this.handleSubmit}>
                         <h6 className="grey-text"> Update your review here </h6>
@@ -93,7 +91,7 @@ class ReviewControls extends Component {
                 </Modal>
             </span>
             <span className="right-align cursor">
-                <Modal
+                <Modal id= "deleteReviewModal"
                     trigger={<i className="material-icons tinyy red-text">delete_forever</i>}>
                     <p> Are you sure you want to delete this review? </p>
                     <div>

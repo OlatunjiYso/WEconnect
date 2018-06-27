@@ -65,7 +65,6 @@ describe('All test for Models', () => {
                 }
             })
                 .then((businesses) => {
-                    console.log(businesses);
                     expect(businesses.length).to.equal(0);
                     done();
                 });

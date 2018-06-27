@@ -8,6 +8,17 @@ const rootUrl = 'api/v1/businesses';
  */
 class ReviewApi {
     /**
+     *@description - api endpoint call gets all review a business has
+     *
+     *@param {string} businessId - id of business whose review is to be gotten
+     *@return { undefined } asynchronuos call can give varying outcome
+     */
+    static getAllReviews(businessId) {
+        return axios.get(`${rootUrl}/${businessId}/reviews`);
+    }
+
+
+    /**
      *@description - api endpoint call that creates a review.
      *
      *@param {string} businessId - id of business to be reviewed

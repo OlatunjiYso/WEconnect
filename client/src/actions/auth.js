@@ -130,7 +130,6 @@ export const signup = newUser => (dispatch) => {
     dispatch(isRequesting(true));
     userApi.signup(newUser)
         .then(() => {
-            console.log(newUser);
             dispatch(isRequesting(false));
             dispatch(signupSuccess(newUser));
             history.push('/welcome');

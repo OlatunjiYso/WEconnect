@@ -289,7 +289,6 @@ class Validations {
      * @return {undefined}
      */
     static checkBusinessExistence(req, res, next) {
-        console.log(req.params.businessId);
         Business
             .findOne({
                 where: {

@@ -252,6 +252,7 @@ class UserController {
                         .json({
                             success: true,
                             message: 'You have no business registered yet',
+                            businesses
                         });
                 }
             })

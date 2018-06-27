@@ -98,7 +98,6 @@ class BusinessUpdate extends Component {
 
 const mapStateToProps = (state) => {
     const data = state.businessReducer;
-    console.log(data)
     return {
         data
     }

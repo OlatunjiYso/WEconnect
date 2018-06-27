@@ -35,7 +35,6 @@ class Welcome extends Component {
     */
     render() {
         const user = this.props.data.response;
-        console.log(this.props.data);
         // dispaly spinner 
         const spinner = this.props.data.awaitingResponse ? 
         <h6 className = "no-bottom-gap"> Please wait .... </h6> : null

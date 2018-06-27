@@ -7,7 +7,6 @@ const initialState = {
     errors: { },
     awaitingResponse: false,
     notFound: false,
-    gotBusinesses: false,
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -39,15 +38,8 @@ const businessReducer = (state = initialState, action) => {
         case 'FIND_MY_BUSINESSES_SUCCESS':
             return {
                 ...state,
-                myBusinesses: action.businesses,
-                gotBusinesses: action.gotBusinesses,
+                myBusinesses: action.businesses
             };
-        case 'FIND_MY_BUSINESSES_FAILED':
-            return {
-                ...state,
-                gotBusinesses: action.gotBusinesses,
-            };
-
         case 'REGISTER_BUSINESS_FAILED':
             return {
                 ...state,

@@ -30,7 +30,6 @@ class DeleteBusiness extends Component {
         if (!this.props.data.business.name) {
             history.push('/userProfile');
         }
-        console.log(this.props.data.business.name)
     }
     /** 
     *@description handles change in input field

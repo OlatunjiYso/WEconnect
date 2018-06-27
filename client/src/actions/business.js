@@ -4,7 +4,7 @@ import userApi from '../service/userApi';
 import history from '../history';
 import setToken from '../helpers/authorization';
 import {
-    FETCH_BUSINESSES_SUCCESS, FETCH_BUSINESS_SUCCESS, FIND_MY_BUSINESSES_SUCCESS, FIND_MY_BUSINESSES_FAILED,
+    FETCH_BUSINESSES_SUCCESS, FETCH_BUSINESS_SUCCESS, FIND_MY_BUSINESSES_SUCCESS,
     FETCH_BUSINESS_FAILED, MAKING_BUSINESS_REQUEST, REGISTER_BUSINESS_FAILED, UPDATE_BUSINESS_FAILED, DELETE_BUSINESS_FAILED,
     SET_CATEGORY, CLEAR_CATEGORY
 } from '../actions/types';
@@ -79,20 +79,6 @@ export const getBusinessSuccess = business => ({
 export const getMyBusinessesSuccess = businesses => ({
     type: FIND_MY_BUSINESSES_SUCCESS,
     businesses,
-    gotBusinesses: true
-});
-
-/**
- *@description - action for indicating that a user has got no business
- *
- *@param {obj} businesses - an array of user's businesses
- *
- *
- * @return {obj} -actionable object containing type and payload
- */
-export const gotNoBusiness = () => ({
-    type: FIND_MY_BUSINESSES_FAILED,
-    gotBusinesses: false
 });
 
 /**
@@ -194,8 +180,7 @@ export const fetchMyBusinesses = () => (dispatch) => {
                 const { businesses } = response.data;
                 dispatch(getMyBusinessesSuccess(businesses));
         })
-        .catch((error) => {
-            dispatch(gotNoBusiness(error.response));
+        .catch(() => {
         });
 };
 
