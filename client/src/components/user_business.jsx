@@ -26,7 +26,7 @@ class UserBusiness extends Component {
                         <div className="col s12">
                             <div className="card small bottom-pad grey lighten-4">
                                 <div className="card-image">
-                                    <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
+                                    <img className="responsive-img" src={userBusiness.image} alt='bizPic' />
                                 </div>
                                 <div className="card-content">
                                 <Link to = { `/businesses/${userBusiness.id}` }>

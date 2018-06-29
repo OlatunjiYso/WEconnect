@@ -19,10 +19,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      slogan: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       heading1: {
         allowNull: false,
         type: Sequelize.STRING
@@ -31,19 +27,11 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
-      heading3: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
       body1: {
         allowNull: false,
         type: Sequelize.TEXT
       },
       body2: {
-        allowNull: true,
-        type: Sequelize.TEXT
-      },
-      body3: {
         allowNull: true,
         type: Sequelize.TEXT
       },
@@ -69,22 +57,6 @@ module.exports = {
       },
       phone: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      whatsapp: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      facebook: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      twitter: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      instagram: {
-        allowNull: true,
         type: Sequelize.STRING
       },
       image: {

@@ -27,7 +27,6 @@ class businessController {
       .create({
         ownerId: req.user.id,
         name: req.body.name,
-        slogan: req.body.slogan,
         email: req.body.email,
         category: req.body.category,
         city: req.body.city,
@@ -36,14 +35,8 @@ class businessController {
         phone: req.body.phone,
         heading1: req.body.heading1,
         heading2: req.body.heading2 || null,
-        heading3: req.body.heading3 || null,
         body1: req.body.body1,
         body2: req.body.body2 || null,
-        body3: req.body.body3 || null,
-        whatsapp: req.body.whatsapp || null,
-        facebook: req.body.facebook || null,
-        twitter: req.body.twitter || null,
-        instagram: req.body.instagram || null,
         image: req.body.image || null,
       })
       .then((business) => {

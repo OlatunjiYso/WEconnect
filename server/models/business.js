@@ -17,10 +17,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    slogan: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
     heading1: {
       allowNull: false,
       type: DataTypes.STRING
@@ -29,19 +25,11 @@ export default (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.STRING
     },
-    heading3: {
-      allowNull: true,
-      type: DataTypes.STRING
-    },
     body1: {
       allowNull: false,
       type: DataTypes.TEXT
     },
     body2: {
-      allowNull: true,
-      type: DataTypes.TEXT
-    },
-    body3: {
       allowNull: true,
       type: DataTypes.TEXT
     },
@@ -70,22 +58,6 @@ export default (sequelize, DataTypes) => {
     },
     phone: {
       allowNull: false,
-      type: DataTypes.STRING,
-    },
-    whatsapp: {
-      allowNull: true,
-      type: DataTypes.STRING,
-    },
-    facebook: {
-      allowNull: true,
-      type: DataTypes.STRING,
-    },
-    twitter: {
-      allowNull: true,
-      type: DataTypes.STRING,
-    },
-    instagram: {
-      allowNull: true,
       type: DataTypes.STRING,
     },
     image: {

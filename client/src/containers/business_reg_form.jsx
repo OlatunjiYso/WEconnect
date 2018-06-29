@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { NavItem, Dropdown, Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import history from '../history';
-import { registerBusiness } from '../actions/business';
+import { initiateBusinessRegistration } from '../actions/business';
 import Footer from '../components/footer';
 import BusinessForm from '../components/business_form';
 import Navbar from './nav';
-import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
-import businesses from '../dummy/all_businesses';
-import formSchema from '../formState/business_reg_state';
+import dummyImg from '../assets/images/no_image_yet.png';
 
 /**
  * @class BusinessRegForm
@@ -27,13 +22,56 @@ class BusinessRegForm extends Component {
                 name: '', category: '', slogan: '', address: '',
                 city: '', state: '', phone: '', email: '', whatsapp: '', twitter: '',
                 facebook: '', instagram: '', heading1: '', body1: '', heading2: '',
-                body2: '', heading3: '', body3: ''
+                body2: '',
             },
+            image: {
+                imageFile: {}, imageSrc: dummyImg
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImageChange = this.handleImageChange.bind(this);
     }
+
+/**
+   * @description handles changes in file input
+   * @method handleImageChange
+   *
+   * @param { object } event - event object containing image details
+   *
+   * @returns { object } business image - new updated business image state
+   */
+  handleImageChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const filereader = new FileReader();
+    //   checkImageFile(filereader, file, (fileType) => {
+    //     if (fileType === 'image/png' || fileType === 'image/gif' ||
+    //       fileType === 'image/jpeg') {
+         this.setState({
+            ...this.state,
+            image: { ...this.state.image, imageFile: file },
+        })
+          filereader.onload = (e) => {
+            this.setState({
+                ...this.state,
+                image: { ...this.state.image, imageSrc: e.target.result },
+            })
+          };
+          filereader.readAsDataURL(file);
+    //     } else {
+    //       toastr.clear();
+    //       toastr.error('please provide a valid image file');
+    //     }
+    //   });
+    } else {
+      this.setState({
+        ...this.state,
+        image: { ...this.state.image, imageSrc: dummyImg, imageFile: {}, },
+    })
+     }
+  }
 
     handleChange(event) {
         const name = event.target.name;
@@ -47,8 +85,9 @@ class BusinessRegForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const business = this.state.business; 
-        this.props.registerBusiness(business);
+        const image = this.state.image;
+        const business = this.state.business;
+        this.props.initiateBusinessRegistration(image, business);
     }
     /** 
     *
@@ -70,15 +109,16 @@ class BusinessRegForm extends Component {
                         </div>
                     </div>
                     <div className="row head-font ">
-                        <h4 className="center grey-text"> Business Registration Form. </h4>
                         <div className="row">
-                            <h5 className="center">Kindly fill in your business details as appropriate</h5>
+                            <h5 className="center">Build your business profile page</h5>
                             <BusinessForm
+                                imageObject = {this.state.image}
                                 businessObject= {this.state.business}
                                 handleChange= {this.handleChange}
                                 handleSubmit= {this.handleSubmit}
                                 formErrors = {this.props.data.errors}
                                 isFetching = {this.props.data.awaitingResponse}
+                                handleImageChange = {this.handleImageChange}
                             />
                         </div>
                     </div>
@@ -97,7 +137,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ registerBusiness }, dispatch);
+    return bindActionCreators({ initiateBusinessRegistration }, dispatch);
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessRegForm);
