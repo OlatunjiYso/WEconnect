@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -27,7 +27,7 @@ class BusinessCard extends Component {
                         <div className="col s12">
                             <div className="card smal bottom-pad grey lighten-4">
                                 <div className="card-image">
-                                    <img className="responsive-img" src={this.props.businesssPic} alt='bizPic' />
+                                    <img className="responsive-img" src={business.image} alt='bizPic' />
                                 </div>
                                 <div className="card-content">
                                     <h6 className="center green-text text-darken-4 bold-font"> {business.name}

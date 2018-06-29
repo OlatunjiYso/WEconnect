@@ -16,8 +16,8 @@ class BusinessBody extends Component {
     * @memberof BusinessBodyComponent
     */
     render() {
-        const { heading1, heading2, heading3 } = this.props.businessObject
-        const { body1, body2, body3 } = this.props.businessObject
+        const { heading1, heading2 } = this.props.businessObject
+        const { body1, body2 } = this.props.businessObject
         const allSections = [];
         if (heading1 !== null) {
             const section = {};
@@ -29,12 +29,6 @@ class BusinessBody extends Component {
             const section = {};
             section.heading = heading2;
             section.body = body2;
-            allSections.push(section)
-        }
-        if (heading3 !== null) {
-            const section = {};
-            section.heading = heading3;
-            section.body = body3;
             allSections.push(section)
         }
         const presentation = allSections.map((each, index) => {

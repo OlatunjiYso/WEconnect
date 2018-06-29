@@ -50,7 +50,7 @@ class UserProfile extends Component {
         }) : null;
         
         // Generate a suitable header if or not, user has businesses
-        const sectionHeading = (businessData.myBusinesses.length > 1) ? 
+        const sectionHeading = (businessData.myBusinesses.length > 0) ? 
         <span> Feel free to manage your business outfits </span> : 
         <span> You are yet to add a business </span> ;
 

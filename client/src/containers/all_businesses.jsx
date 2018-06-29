@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import history from '../history';
 import Footer from '../components/footer';
 import Navbar from './nav';
 import { fetchAllBusinesses } from '../actions/business';
 import BusinessCatalogTop from '../components/business_catalog_top';
 import BusinessCard from '../components/business_card';
-import profilePicture from '../assets/images/cameras.jpg';
 
 /**
  * @class AllBusinessComponent
@@ -66,7 +64,7 @@ class AllBusinesses extends Component {
     }
 
     /** 
-       *@description sends data to server
+       *@description sends businessData to server
        *
        * @returns {func} funtion
        * 
@@ -85,14 +83,13 @@ class AllBusinesses extends Component {
     * @memberof AllBusinessesComponent
     */
     render() {
-        const businessList = this.props.data.businesses
+        const businessList = this.props.businessData.businesses
 
         const FoundBusinesses = (businessList.length > 0) ? businessList.map((eachBusiness, index) => {
             return (
                 <BusinessCard
                     key={index}
                     business={eachBusiness}
-                    businesssPic={profilePicture}
                 />
             )
         }) : <h4> No business found </h4>
@@ -102,10 +99,10 @@ class AllBusinesses extends Component {
                 <main>
                     <BusinessCatalogTop 
                     proposedFilter = {this.state.filter}
-                    selectedFilter={this.props.data.filter}
+                    selectedFilter={this.props.businessData.filter}
                     handleChange = {this.handleChange} 
                     handleSubmit = {this.handleSubmit}
-                    businessList = {this.props.data.businesses}
+                    businessList = {this.props.businessData.businesses}
                      />
                     <div className="row cushion center">
                         {FoundBusinesses}
@@ -118,10 +115,10 @@ class AllBusinesses extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const data = state.businessReducer;
+    const businessData = state.businessReducer;
     const landingPageData = state.landingPageReducer;
     return {
-        data, landingPageData
+        businessData, landingPageData
     }
 }
 

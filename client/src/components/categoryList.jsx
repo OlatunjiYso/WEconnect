@@ -25,7 +25,7 @@ class BusinessBanner extends Component {
         return (
             <div className="row dashboard">
                 <div className="col offset-s3 s6 l2 m2 logo center-align">
-                    <img className="responsive-img left" src={business.image} alt="profilepic" />
+                    <img className="responsive-img left" src={profilePicture} alt="profilepic" />
                 </div>
                 <div className="col s12 m7 center-align">
                     <h3 className="green-text text-darken-4">{business.name}</h3>

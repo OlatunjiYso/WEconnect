@@ -23,6 +23,7 @@ class BusinessUpdateForm extends Component {
         // Bring in data as props from regForm container
         const business = this.props.businessObject;
         const formErrors = this.props.formErrors;
+        const image = this.props.imageObject;
 
         // Display validation errors if present
         const validationErrors = formErrors.validationErrors ?
@@ -53,10 +54,6 @@ class BusinessUpdateForm extends Component {
         // Display asyncronous call progress feedback
         const spinner = this.props.isFetching ?
             <span className="form-response"> Please wait .... </span> : null;
-
-        // Display business update outcome
-        const updateOutcome = (formErrors.conflict || formErrors.validationErrors || formErrors.others || formErrors.forbidden) ?
-            <span> An error occured. Scroll up please </span> : null
         return (
             <div>
                 <div>
@@ -64,23 +61,25 @@ class BusinessUpdateForm extends Component {
                 </div>
                 <form className="col s10 offset-s1 m8 offset-m2 business-form" onSubmit={handleSubmit} >
                     <div className="row top-pad">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Business Name </h6>
+                        <h6 className="left-gap bold-font grey-text text-darken-2"> Business Name  <span className="red-text">*</span></h6>
+                        <div className="input-field  all-borders left-gap right-gap">
                             <input type="text" value={business.name} onChange={handleChange} name="name" className="validate" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Location </h6>
-                            <Input s={12} type='select' icon='place' value={business.state} onChange={handleChange} name="state">
+                        <h6 className="left-gap bold-font"> Business state  <span className="red-text">*</span></h6>
+                        <div className=" input-field mid-left-gap right-gap">
+                            <Input s={12} type='select' value={business.state} onChange={handleChange} name="state" className="all-borders">
                                 <option value=" lagos">Lagos</option>
                                 <option value="abuja">Abuja</option>
                                 <option value=" ogun">Ogun</option>
                             </Input>
                         </div>
-                        <div className="col s12">
-                            <h6 className="green-text"> Category </h6>
-                            <Input s={12} type='select' icon='card_travel' value={business.category} onChange={handleChange} name="category">
+                    </div>
+                    <div className="row">
+                        <h6 className="left-gap bold-font"> Business category  <span className="red-text">*</span></h6>
+                        <div className=" input-field mid-left-gap right-gap ">
+                            <Input s={12} type='select' value={business.category} onChange={handleChange} name="category" className="all-borders">
                                 <option value='fashion'>Fashion</option>
                                 <option value='technology'>Technology</option>
                                 <option value='housing'>Housing</option>
@@ -88,94 +87,69 @@ class BusinessUpdateForm extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Slogan</h6>
-                            <input type="text" value={business.slogan} onChange={handleChange} name="slogan" className="validate" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Business address:</h6>
+                        <h6 className="left-gap bold-font"> Business Address <span className="red-text">*</span></h6>
+                        <div className="input-field all-borders left-gap right-gap">
                             <textarea value={business.address} onChange={handleChange} name="address" className="materialize-textarea" length="140"></textarea>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Business email: </h6>
+                        <h6 className="left-gap bold-font"> Business Email<span className="red-text">*</span> </h6>
+                        <div className="input-field all-borders left-gap right-gap">
                             <input type="text" value={business.email} onChange={handleChange} name="email" className="validate" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s6">
-                            <h6 className="green-text"> Business phone: </h6>
-                            <input type="text" value={business.phone} onChange={handleChange} name="phone" className="validate" />
+                        <div className="col s12 m4 offset-m1">
+                            <h6 className="bold-font"> Business Phone  <span className="red-text">*</span> </h6>
+                            <div className="input-field all-borders">
+                                <input type="text" value={business.phone} onChange={handleChange} name="phone" className="validate" />
+                            </div>
                         </div>
-                        <div className="input-field col s6">
-                            <h6 className="green-text"> City: </h6>
-                            <input type="text" value={business.city} onChange={handleChange} name="city" className="validate" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <h6 className="green-text"> Business whatsapp number: </h6>
-                            <input type="text" value={business.whatsapp} onChange={handleChange} name="whatsapp" className="validate" />
-                        </div>
-                        <div className="input-field col s6">
-                            <h6 className="green-text">  Business twitter handle: </h6>
-                            <input type="text" value={business.twitter} onChange={handleChange} name="twitter" className="validate" />
+                        <div className="col s12 m4 offset-m1">
+                            <h6 className="bold-font"> Business City  <span className="red-text">*</span> </h6>
+                            <div className="input-field all-borders">
+                                <input type="text" value={business.city} onChange={handleChange} name="city" className="validate" />
+                            </div>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s6">
-                            <h6 className="green-text"> Business facebook page: </h6>
-                            <input type="text" value={business.facebook} onChange={handleChange} name="facebook" className="validate" />
-                        </div>
-                        <div className="input-field col s6">
-                            <h6 className="green-text"> Business linkedIn: </h6>
-                            <input type="text" value={business.instagram} onChange={handleChange} name="instagram" className="validate" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Heading 1: </h6>
+                        <h6 className="left-gap bold-font"> Give a title for the first section of your page <span className="red-text">*</span> </h6>
+                        <div className="input-field all-borders left-gap right-gap">
                             <input type="text" value={business.heading1} onChange={handleChange} name="heading1" className="validate" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> First section of your page: </h6>
-                            <textarea value={business.body1} onChange={handleChange} name="body1" className="materialize-textarea" length="1000"></textarea>
+                        <h6 className="left-gap bold-font"> Write about the first section of your page  <span className="red-text">*</span> </h6>
+                        <div className="all-borders left-gap right-gap ">
+                            <textarea value={business.body1} onChange={handleChange} name="body1" className="materialize-textarea large-input" length="1000"></textarea>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Heading 2: </h6>
+                        <h6 className="left-gap bold-font"> Give a title for the second section of your page <span className="optionals"> ( Optional ) </span></h6>
+                        <div className="all-borders left-gap right-gap">
                             <input type="text" value={business.heading2} onChange={handleChange} name="heading2" className="validate" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Second section of your page: </h6>
-                            <textarea value={business.body2} onChange={handleChange} name="body2" className="materialize-textarea" length="1000"></textarea>
+                        <h6 className="left-gap bold-font"> Write about the second section of your page  <span className="optionals"> ( Optional ) </span></h6>
+                        <div className="all-borders left-gap right-gap">
+                            <textarea value={business.body2} onChange={handleChange} name="body2" className="materialize-textarea large-input" length="1000"></textarea>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Heading 3: </h6>
-                            <input type="text" value={business.heading3} onChange={handleChange} name="heading3" className="validate" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <h6 className="green-text"> Third section of your page: </h6>
-                            <textarea value={business.body3} onChange={handleChange} name="body3" className="materialize-textarea" length="1000"></textarea>
+                        <h6 className="left-gap bold-font"> Uplaod your business picture  <span className="optionals"> ( Optional ) </span></h6>
+                        <div className="left-gap right-gap">
+                            <div>
+                                <img className="responsive-img" style={{ height: "200px", width: "320px" }} src={image.imageSrc} />
+                            </div>
+                            <input type="file" onChange={this.props.handleImageChange} />
                         </div>
                     </div>
                     <div className="row center-align">
-                        <input type="submit" value="Update Business" className="btn green darken-2" />
+                        <input type="submit" value="Update Business" className="btn brown darken-2" />
                     </div>
                     <div className="center brown-text">
-                        {updateOutcome} {spinner}
+                        {spinner}
                     </div>
                 </form>
             </div>

@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import businessApi from '../service/businessApi';
-import setToken from '../helpers/authorization';
-import history from '../history';
-import { updateBusiness } from '../actions/business';
+import { initiateBusinessUpdate } from '../actions/business';
 import Footer from '../components/footer';
 import BusinessUpdateForm from '../components/business_update_form';
 import Navbar from './nav'
-import customStyles from '../css/style.css';
 import hero from '../assets/images/profession.jpg';
 
 /**
@@ -23,7 +19,8 @@ class BusinessUpdate extends Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {};
+        this.handleImageChange = this.handleImageChange.bind(this);
+        this.state = { business: {}, image: {}, };
     }
     componentWillMount() {
         const businessId = this.props.match.params.businessId;
@@ -31,8 +28,14 @@ class BusinessUpdate extends Component {
             .then((response) => {
                 const business = response.data.business;
                 this.setState({
-                    ...business
+                    business: { ...business },
+                    image: { imageFile: {}, imageSrc: business.image }
+                //    business: { ...business},
+                //    image: {
+                //         
+                // }
                 })
+                console.log('first', this.state);
             })
             .catch((error) => {
                  if (error.response.status === 404) {
@@ -41,21 +44,61 @@ class BusinessUpdate extends Component {
             });
     };
 
+/**
+   * @description handles changes in file input
+   * @method handleImageChange
+   *
+   * @param { object } event - event object containing image details
+   *
+   * @returns { object } business image - new updated business image state
+   */
+  handleImageChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const filereader = new FileReader();
+    //   checkImageFile(filereader, file, (fileType) => {
+    //     if (fileType === 'image/png' || fileType === 'image/gif' ||
+    //       fileType === 'image/jpeg') {
+         this.setState({
+            ...this.state,
+            image: { ...this.state.image, imageFile: file },
+        })
+          filereader.onload = (e) => {
+            this.setState({
+                ...this.state,
+                image: { ...this.state.image, imageSrc: e.target.result },
+            })
+          };
+          filereader.readAsDataURL(file);
+    //     } else {
+    //       toastr.clear();
+    //       toastr.error('please provide a valid image file');
+    //     }
+    //   });
+    } else {
+      this.setState({
+        ...this.state,
+        image: { ...this.state.image, imageFile: {}, },
+    })
+     }
+  }
+ 
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
         const state = this.state;
         this.setState({
             ...state,
-            [name]: value
+            business: { ...state.business, [name]: value}
         })
     };
 
     handleSubmit(event) {
         event.preventDefault(event);
-        const business = this.state;
-        const businessId = this.props.match.params.businessId;
-        this.props.updateBusiness(businessId, business);
+        const business = this.state.business;
+        const image = this.state.image;
+       // const businessId = this.props.match.params.businessId;
+        this.props.initiateBusinessUpdate(image, business);
     }
     /** 
     *
@@ -64,6 +107,8 @@ class BusinessUpdate extends Component {
     * @memberof BusinessUpdateComponent
     */
     render() {
+        console.log('now at here....')
+        console.log('second', this.state);
         return (
             <div>
                 <Navbar />
@@ -81,11 +126,13 @@ class BusinessUpdate extends Component {
                         <div className="row">
                             <h5 className="center">Kindly update your business details as appropriate</h5>
                             <BusinessUpdateForm
-                                businessObject = { this.state }
+                                imageObject = {this.state.image}
+                                businessObject = { this.state.business }
                                 handleChange = { this.handleChange }
                                 handleSubmit = { this.handleSubmit }
                                 formErrors = { this.props.data.errors }
                                 isFetching = { this.props.data.awaitingResponse }
+                                handleImageChange = {this.handleImageChange}
                             />
                         </div>
                     </div>
@@ -104,7 +151,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ updateBusiness }, dispatch);
+    return bindActionCreators({ initiateBusinessUpdate }, dispatch);
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessUpdate);

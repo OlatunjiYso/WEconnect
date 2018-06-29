@@ -1,3 +1,6 @@
+import axios from 'axios';
+
+import cloudConfig from '../cloudConfig';
 import { alertSuccess, alertError } from '../actions/flashMessage';
 import businessApi from '../service/businessApi';
 import userApi from '../service/userApi';
@@ -187,11 +190,13 @@ export const fetchMyBusinesses = () => (dispatch) => {
 /**
  *@description - registers a business
  *
+ * @param { string } cloudImageUrl - contains string of uploaded image
  *@param { object } business - object containing information of business to be registered
  *
  *@return { object } -actionable object containing type and payload
  */
-export const registerBusiness = business => (dispatch) => {
+export const registerBusiness = (cloudImageUrl, business) => (dispatch) => {
+    business.image = cloudImageUrl;
     setToken(localStorage.token);
     dispatch(isRequesting(true));
     businessApi.registerBusiness(business)
@@ -200,11 +205,44 @@ export const registerBusiness = business => (dispatch) => {
             history.push('/userProfile');
         })
         .catch((error) => {
+            console.log(error.response);
             dispatch(isRequesting(false));
             dispatch(registerBusinessFailure(error.response));
             alertError('Business not created');
         });
 };
+
+/**
+ * @description handles business creation request
+ *
+ * @param { object } image - contains object of business image to be uploaded
+ * @param { object } business - contains object of business to be registered
+ *
+ * @returns { function } create business action - a call to create business
+ */
+export const initiateBusinessRegistration = (image, business) => (
+  (dispatch) => {
+    let cloudImageUrl = cloudConfig.defaultImageUrl;
+    dispatch(isRequesting(true));
+    if (image.imageFile.name) {
+      delete axios.defaults.headers.common.token;
+      const imageData = new FormData();
+      imageData.append('file', image.imageFile);
+      imageData.append('upload_preset', cloudConfig.uploadPreset);
+      return axios.post(cloudConfig.cloudinaryUrl, imageData)
+        .then((response) => {
+          dispatch(isRequesting(false));
+          cloudImageUrl = response.data.url;
+          return dispatch(registerBusiness(cloudImageUrl, business));
+        }).catch(() => {
+          dispatch(isRequesting(false));
+          alertError('Image upload failed');
+        });
+    }
+       return dispatch(registerBusiness(cloudImageUrl, business));
+  }
+);
+
 
 /**
 *@description - updates a business
@@ -226,6 +264,41 @@ export const updateBusiness = (businessId, business) => (dispatch) => {
             dispatch(updateBusinessFailure(error.response));
         });
 };
+
+
+/**
+ * @description handles business update request
+ *
+ * @param { object } image - contains object of business image to be uploaded
+ * @param { object } business - contains object of business to be updated
+ *
+ * @returns { function } update business action - a call to update business
+ */
+export const initiateBusinessUpdate = (image, business) => (
+    (dispatch) => {
+      let cloudImageUrl = business.image;
+      dispatch(isRequesting(true));
+      if (image.imageFile.name) {
+        delete axios.defaults.headers.common.token;
+        const imageData = new FormData();
+        imageData.append('file', image.imageFile);
+        imageData.append('upload_preset', cloudConfig.uploadPreset);
+        return axios.post(cloudConfig.cloudinaryUrl, imageData)
+          .then((response) => {
+            dispatch(isRequesting(false));
+            cloudImageUrl = response.data.url;
+            business.image = cloudImageUrl;
+            return dispatch(updateBusiness(business.id, business));
+          }).catch(() => {
+            dispatch(isRequesting(false));
+            alertError('Image upload failed');
+          });
+      }
+         dispatch(isRequesting(false));
+         return dispatch(updateBusiness(business.id, business));
+    }
+  );
+
 
 /**
      *@description - deletes a business

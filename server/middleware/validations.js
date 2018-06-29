@@ -214,9 +214,6 @@ class Validations {
         req.checkBody('address', 'Please input business address')
             .trim()
             .notEmpty();
-        req.checkBody('slogan', 'Please input business slogan')
-            .trim()
-            .notEmpty();
         req.checkBody('heading1', 'Please input business first section heading')
             .trim()
             .notEmpty();
