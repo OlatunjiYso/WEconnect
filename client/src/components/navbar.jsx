@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
-import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import { Button, SideNav, Navbar, NavItem, SideNavItem } from 'react-materialize'
+import { SideNav, Navbar } from 'react-materialize'
 import PropTypes from 'prop-types';
 
 /**
@@ -41,8 +39,8 @@ class NavBar extends Component {
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper nav-color">
-                        <Link to="/" className=" Sofia brand-logo  logo white-text">WEconnect</Link>
+                    <div className="nav-wrapper nav-color pink darken-4">
+                        <Link to="/" className=" Sofia brand-logo  logo green-text text-lighten-5">WEconnect</Link>
                         <ul className="right hide-on-med-and-down head-font">
                             {signInOrLogout}
                             {signupOrNull}

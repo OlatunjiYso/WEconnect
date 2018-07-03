@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Input, Modal } from 'react-materialize';
+import loader from '../assets/images/loader.gif';
 
 /**
  * @description BusinessFormComponent
@@ -46,8 +47,13 @@ class BusinessForm extends Component {
             </div> : null
 
         // Display asyncronous call progress feedback
-        const spinner = this.props.isFetching ?
-            <span className="form-response"> Please wait .... </span> : null;
+        const spinner = this.props.isFetching ? (
+            <img
+              className="responsive-img left-gap"
+              src={loader}
+              style={{ height: "40px", width: "40px" }}
+            /> 
+          ) : null;
 
         return (
             <div>
@@ -56,13 +62,13 @@ class BusinessForm extends Component {
                 </div>
                 <form className="col s10 offset-s1 m8 offset-m2 business-form" onSubmit={handleSubmit} >
                     <div className="row top-pad">
-                        <h6 className="left-gap bold-font"> Business Name  <span className="red-text">*</span></h6>
+                        <h6 className="left-gap"> Business Name  <span className="red-text">*</span></h6>
                         <div className="input-field  all-borders left-gap right-gap">
                             <input type="text" value={business.name} onChange={handleChange} name="name" className="validate" required minLength="2" maxLength="50" />
                         </div>
                     </div>
                     <div className="row">
-                        <h6 className="left-gap bold-font"> Business state  <span className="red-text">*</span></h6>
+                        <h6 className="left-gap"> Business state  <span className="red-text">*</span></h6>
                         <div className=" input-field mid-left-gap right-gap ">
                             <Input s={12} type='select' value={business.state} onChange={handleChange} name="state" className="all-borders">
                                 <option value='1'>select</option>
@@ -73,7 +79,7 @@ class BusinessForm extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <h6 className="left-gap bold-font"> Business category  <span className="red-text">*</span></h6>
+                        <h6 className="left-gap"> Business category  <span className="red-text">*</span></h6>
                         <div className=" input-field mid-left-gap right-gap ">
                             <Input s={12} type='select' value={business.category} onChange={handleChange} name="category" className="all-borders">
                                 <option value='1'>  select </option>
@@ -109,45 +115,27 @@ class BusinessForm extends Component {
                             </div>
                         </div>
                     </div>
+    
                     <div className="row">
-                        <h6 className="left-gap"> Give a title for the first section of your page <span className="red-text">*</span> </h6>
-                        <div className="input-field all-borders left-gap right-gap">
-                            <input
-                                type="text" value={business.heading1} onChange={handleChange} name="heading1" className="validate" required minLength="2" maxLength="50" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <h6 className="left-gap"> Write about the first section of your page  <span className="red-text">*</span> </h6>
+                        <h6 className="left-gap"> Tell us about your business  <span className="red-text">*</span> </h6>
                         <div className="all-borders left-gap right-gap">
-                            <textarea value={business.body1} onChange={handleChange} name="body1" className="materialize-textarea large-input" length="1000"></textarea>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <h6 className="left-gap"> Give a title for the second section of your page <span className="optionals"> ( Optional ) </span></h6>
-                        <div className="all-borders left-gap right-gap">
-                            <input type="text" value={business.heading2} onChange={handleChange} name="heading2" className="validate" minLength="2" maxLength="50" />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <h6 className="left-gap"> Write about the second section of your page  <span className="optionals"> ( Optional ) </span></h6>
-                        <div className="all-borders left-gap right-gap">
-                            <textarea value={business.body2} onChange={handleChange} name="body2" className="materialize-textarea large-input" length="1000"></textarea>
+                            <textarea value={business.about} onChange={handleChange} name="about" className="materialize-textarea large-input" length="1000"></textarea>
                         </div>
                     </div>
                     <div className="row">
                         <h6 className="left-gap"> Uplaod your business picture  <span className="optionals"> ( Optional ) </span></h6>
                         <div className="left-gap right-gap">
                             <div>
-                                <img className="responsive-img" style={{ height: "200px", width: "320px" }} src={image.imageSrc} />
+                                <img className="responsive-img" style={{ height: "200px", width: "320px", objectFit: "contain"}} src={image.imageSrc} />
                             </div>
                             <input type="file" accept="image/png, image/png, image/jpeg" onChange={this.props.handleImageChange} />
                         </div>
                     </div>
                     <div className="row center-align">
-                        <input type="submit" value="Create Business" className="btn btn-large orange " />
+                    {spinner}
                     </div>
-                    <div className="center brown-text">
-                        {spinner}
+                    <div className="row center-align">
+                        <input type="submit" value="Create Business" className="btn btn-large btn-edit " />
                     </div>
                 </form>
             </div>

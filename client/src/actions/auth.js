@@ -138,6 +138,7 @@ export const signup = newUser => (dispatch) => {
         .catch((error) => {
             dispatch(signupFailure(error.response));
             dispatch(isRequesting(false));
+             window.scroll(0, 60);
         });
 };
 

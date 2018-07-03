@@ -104,7 +104,7 @@ class AllBusinesses extends Component {
                     handleSubmit = {this.handleSubmit}
                     businessList = {this.props.businessData.businesses}
                      />
-                    <div className="row cushion center">
+                    <div className="row container center">
                         {FoundBusinesses}
                     </div>
                 </main>

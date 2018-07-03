@@ -17,20 +17,9 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-    heading1: {
+    
+    about: {
       allowNull: false,
-      type: DataTypes.STRING
-    },
-    heading2: {
-      allowNull: true,
-      type: DataTypes.STRING
-    },
-    body1: {
-      allowNull: false,
-      type: DataTypes.TEXT
-    },
-    body2: {
-      allowNull: true,
       type: DataTypes.TEXT
     },
     category: {

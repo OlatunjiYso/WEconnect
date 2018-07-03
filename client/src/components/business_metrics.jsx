@@ -20,9 +20,9 @@ class BusinessMetrics extends Component {
         return (
             <div className="row top-pad">
            <div className="col s10 offset-s1  ">
-               <h3 className="center green-text">Your Business Metrics</h3>
+               <h3 className="center pink-text text-darken-2">Your Business Metrics</h3>
                <div className=''>
-                   <h5 className="center-align grey-text ">See how many times your business has been viewed over time!</h5>
+                   <h5 className="center-align pink-text text-darken-2">See how many times your business has been viewed over time!</h5>
                </div>
            </div>
            <div className="row container">
