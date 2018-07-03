@@ -40,7 +40,7 @@ class NavBar extends Component {
             <div>
                 <nav>
                     <div className="nav-wrapper nav-color pink darken-4">
-                        <Link to="/" className=" Sofia brand-logo  logo green-text">WEconnect</Link>
+                        <Link to="/" className=" Sofia brand-logo  logo green-text text-lighten-5">WEconnect</Link>
                         <ul className="right hide-on-med-and-down head-font">
                             {signInOrLogout}
                             {signupOrNull}

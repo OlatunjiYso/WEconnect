@@ -43,7 +43,7 @@ class LoginForm extends Component {
         <div className="row head-font top-pad-much no-bottom-gap">
           {signinError}
           <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket">
-            <h4 className="center head-font form-heading top-gap-much">
+            <h4 className="center head-font form-heading top-gap">
               <span className=""> Sign In </span>
             </h4>
             <form onSubmit={handleSubmit}>

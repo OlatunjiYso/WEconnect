@@ -145,7 +145,7 @@ class SignupForm extends Component {
                     className="form-btn btn center-align"
                   />
                 </div>
-                <div classsName="col s6">{spinner}</div>
+                <div className="col s6">{spinner}</div>
               </div>
               <div className="center-align top-pad">
                 <Link to="/login" className="pink-text text-darken-4">
