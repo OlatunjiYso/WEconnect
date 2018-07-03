@@ -19,20 +19,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      heading1: {
+      about: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      heading2: {
-        allowNull: true,
-        type: Sequelize.STRING
-      },
-      body1: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
-      body2: {
-        allowNull: true,
         type: Sequelize.TEXT
       },
       category: {

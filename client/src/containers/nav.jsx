@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import history from '../history';
 import Navbar from '../components/navbar';
-import customStyles from '../css/style.css';
 
 /**
  * @class NavComponent

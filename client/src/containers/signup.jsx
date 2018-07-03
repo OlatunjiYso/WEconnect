@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, Redirect } from 'react-router-dom';
-import alertify from 'alertifyjs';
 
-import { alertSuccess } from '../actions/flashMessage';
+import { alertSuccess, alertError } from '../actions/flashMessage';
 import verifyToken from '../helpers/verifytoken';
 import history from '../history';
 import { signup } from '../actions/auth';
 import Footer from '../components/footer';
 import SignupForm from '../components/signup_form';
 import Navbar from './nav';
-import customStyles from '../css/style.css';
-import hero from '../assets/images/profession.jpg';
 
 
 /**
@@ -58,17 +54,6 @@ class Signup extends Component {
             history.push('/userProfile');
         }
     }
-    /**
-    * @description - redirects newly registered users to on-boarding page
-    *
-    * @return {void} no return or void
-    * 
-    */
-    /*componentWillMount() {
-        if (this.props.userActions.authenticated) {
-            this.props.history.push('/welcome');
-        }
-    }*/
 
     /** 
     *@param {event} event
@@ -96,13 +81,13 @@ class Signup extends Component {
     handleSubmit(event) {
         const details = this.state.userDetail
         if (details.password !== details.confirmPassword) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success(message);
+            console.log()
+            alertError('hhhhh')
+        } else {
+            event.preventDefault();
+            const newUser = this.state.userDetail;
+            this.props.signup(newUser)
         }
-            
-        event.preventDefault();
-        const newUser = this.state.userDetail;
-        this.props.signup(newUser)
     }
 
     /** 
@@ -114,15 +99,15 @@ class Signup extends Component {
     */
     render() {
         return (
-            <div id= "signupPage">
+            <div id="signupPage">
                 <Navbar />
                 <SignupForm
-                    handleChange = {this.handleChange}
-                    handleSubmit = {this.handleSubmit}
-                    userDetail = {this.state.userDetail}
-                    formErrors = {this.props.data.signupErrors}
-                    isFetching = {this.props.data.awaitingResponse}
-                    passwordMismatch = { this.state.passwordMismatch}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    userDetail={this.state.userDetail}
+                    formErrors={this.props.data.signupErrors}
+                    isFetching={this.props.data.awaitingResponse}
+                    passwordMismatch={this.state.passwordMismatch}
                 />
                 <Footer />
             </div >

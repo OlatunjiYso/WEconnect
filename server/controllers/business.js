@@ -33,10 +33,7 @@ class businessController {
         state: req.body.state,
         address: req.body.address,
         phone: req.body.phone,
-        heading1: req.body.heading1,
-        heading2: req.body.heading2 || null,
-        body1: req.body.body1,
-        body2: req.body.body2 || null,
+        about: req.body.about,
         image: req.body.image || null,
       })
       .then((business) => {
@@ -175,16 +172,7 @@ class businessController {
               category: req.body.category || business.category,
               city: req.body.city || business.city,
               state: req.body.state || business.state,
-              heading1: req.body.heading1 || business.heading1,
-              heading2: req.body.heading2 || business.heading2,
-              heading3: req.body.heading3 || business.heading3,
-              body1: req.body.body1 || business.body1,
-              body2: req.body.body2 || business.body2,
-              body3: req.body.body3 || business.body3,
-              whatsapp: req.body.whatsapp || business.whatsapp,
-              facebook: req.body.facebook || business.facebook,
-              twitter: req.body.twitter || business.twitter,
-              instagram: req.body.instagram || business.instagram,
+              about: req.body.about || business.about,
               image: req.body.image || business.image,
             })
             .then((updated) => {

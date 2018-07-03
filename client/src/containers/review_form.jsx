@@ -94,20 +94,17 @@ class ReviewForm extends Component {
         }) : <h6 className="grey-text"> Be the first to give us a review </h6>;
         return (
             <div className="top-pad-much">
-                <div className="col s12 m10 offset-m1">
-                    <h5 className="left-align green-text text-darken-4"> What Our Clients are saying</h5>
+                <div className="col s12 m8 offset-m2 l6 offset-l3">
+                <h4 className=" left-align pink-text text-darken-4"> Reviews </h4>
                     <div className="row">
                         <form onSubmit={this.handleSubmit} >
                             <div className="row">
-                                <div className="input-field col s12">
-                                    <textarea value={message} onChange={handleChange} name="message" className="materialize-textarea" length="80"></textarea>
-                                    <label>
-                                        <span className="grey-text body-font"> { reviewLabel } </span>
-                                    </label>
+                                <div className=" input-field all-borders">
+                                    <textarea value={message} onChange={handleChange} name="message" className="materialize-textarea medium-input" length="80"></textarea>
                                 </div>
                             </div>
                             <div className="row left-align">
-                                <input type="submit" className="btn green lighten-4  pink-text text-darken-4" value="Submit" />
+                                <input type="submit" className="btn form-btn cursor" value="Submit" />
                             </div>
                         </form>
                     </div>

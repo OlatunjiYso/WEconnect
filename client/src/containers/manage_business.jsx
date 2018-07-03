@@ -57,16 +57,14 @@ class ManageBusiness extends Component {
                     <div className="row body-font container">
                         <div className="row top-pad">
                             <div className="col s6">
-                                <Link to= {`/businessDelete/${business.id}`} className="btn btn-large grey lighten-5 right red-text text-darken-4">
+                                <Link to= {`/businessDelete/${business.id}`} className="btn btn-large btn-danger right ">
                                     Delete
                                  </Link>
                             </div>
                             <div className="col s6">
-                               <button className="btn btn-large grey lighten-4 left">
-                                <Link to= {`/businessUpdate/${business.id}`}  className= "green-text text-darken-4">
+                                <Link to= {`/businessUpdate/${business.id}`}  className= "btn btn-large btn-edit left">
                                     Update
                                  </Link>
-                                </button>
                             </div>
                         </div>
                     </div>

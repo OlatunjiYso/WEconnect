@@ -217,10 +217,10 @@ class Validations {
         req.checkBody('heading1', 'Please input business first section heading')
             .trim()
             .notEmpty();
-        req.checkBody('body1', 'Please input content for the first section')
+        req.checkBody('about', 'Please input content for the first section')
             .trim()
             .notEmpty();
-        req.checkBody('body1', 'first section must be a minimum of 20 characters')
+        req.checkBody('about', 'first section must be a minimum of 20 characters')
             .isLength({ min: 20 });
         req.checkBody('email', 'email is required')
             .notEmpty();
@@ -387,10 +387,10 @@ class Validations {
             req.checkBody('heading1', 'First section title cannot be blank')
                 .trim().notEmpty();
         }
-        if (req.body.body1) {
-            req.checkBody('body1', 'First section cannot be blank')
+        if (req.body.about) {
+            req.checkBody('about', 'First section cannot be blank')
                 .trim().notEmpty();
-            req.checkBody('body1', 'First section must be a minimum of 20 characters')
+            req.checkBody('about', 'First section must be a minimum of 20 characters')
                 .isLength({ min: 20 });
         }
         if (req.body.phone) {

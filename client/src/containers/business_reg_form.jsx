@@ -19,10 +19,8 @@ class BusinessRegForm extends Component {
         super(props);
         this.state = {
             business: {
-                name: '', category: '', slogan: '', address: '',
-                city: '', state: '', phone: '', email: '', whatsapp: '', twitter: '',
-                facebook: '', instagram: '', heading1: '', body1: '', heading2: '',
-                body2: '',
+                name: '', category: '', address: '', about: '',
+                city: '', state: '', phone: '', email: '',
             },
             image: {
                 imageFile: {}, imageSrc: dummyImg
@@ -46,9 +44,6 @@ class BusinessRegForm extends Component {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const filereader = new FileReader();
-    //   checkImageFile(filereader, file, (fileType) => {
-    //     if (fileType === 'image/png' || fileType === 'image/gif' ||
-    //       fileType === 'image/jpeg') {
          this.setState({
             ...this.state,
             image: { ...this.state.image, imageFile: file },
@@ -59,12 +54,7 @@ class BusinessRegForm extends Component {
                 image: { ...this.state.image, imageSrc: e.target.result },
             })
           };
-          filereader.readAsDataURL(file);
-    //     } else {
-    //       toastr.clear();
-    //       toastr.error('please provide a valid image file');
-    //     }
-    //   });
+          filereader.readAsDataURL(file);2
     } else {
       this.setState({
         ...this.state,
@@ -104,13 +94,13 @@ class BusinessRegForm extends Component {
                         <div className="col s8 offset-s2 m3 l2 logo center-align">
                             <img className="responsive-img left" src={hero} />
                         </div>
-                        <div className="col s12 m9 l8  green-text center-align">
+                        <div className="col s12 m9 l8  green-text text-darken-2 center-align">
                             <h3>Register your Business and get Connected </h3>
                         </div>
                     </div>
-                    <div className="row head-font ">
+                    <div className="row head-font">
                         <div className="row">
-                            <h5 className="center">Build your business profile page</h5>
+                            <h5 className="center pink-text text-darken-4">Build your business profile page</h5>
                             <BusinessForm
                                 imageObject = {this.state.image}
                                 businessObject= {this.state.business}

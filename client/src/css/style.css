@@ -6,7 +6,7 @@
 .banner-text {
     margin-top: -5px;
     border-radius: 2rem;
-    box-shadow: 2px 2px 0 0 #8ad106;
+    box-shadow: 2px 2px 0 0 #530734;
 }
 .banner-image {
     margin-top: 0;
@@ -21,6 +21,7 @@
 .banner button:hover {
     color: #fdfffd !important;
     background-color:#045a12 !important;
+    border: 3px solid #045a12 !important;
 }
 .banner button {
     margin-bottom: 3em;
@@ -33,19 +34,7 @@
 
 /**** category styles ****/
 /**** category styles ****/
-.category-tag h6{
-    border: 1px solid #80d60f;
-    padding: 4px 0;
-    border-radius: 5px;
-    box-shadow: 1px 4px #bdbbb7;
-    cursor: pointer;
-}
 
-.category-tag h6:hover{
-    background-color: #045a12;
-    color: #ffffff;
-    border-radius: 0px;
-}
 .category-header {
     border-bottom: 2px solid #190129;
     padding: 1em;
@@ -71,12 +60,32 @@
 .bold-font {
     font-weight: bold;
 }
+
+.small-font {
+    font-size: 12px!important;
+}
 .card-button {
     width: 40%;
     margin: 0 auto;
     border: 1px solid #2bb460;
     border-radius: 4px;
     padding: 5px 3px;
+    color: rgb(122, 11, 65);
+}
+.card-button:hover {
+    width: 41%;
+    margin: 0 auto;
+    border: 1px solid  #570e30;
+    border-radius: 4px;
+    padding: 4px 3px;
+    color: rgb(45, 112, 45);
+}
+.card-name {
+    color: rgb(100, 11, 63);
+}
+.card-name:hover {
+    text-decoration: underline;
+    text-decoration-color: #045a12
 }
 .card-padding {
     padding: 0 5rem;
@@ -92,6 +101,25 @@
      border: 1px solid #13532e;
      line-height: 2em;
  }
+ .business-icons {
+     margin-top: 1rem;
+     
+ }
+ .business-contact {
+    padding: 1em;
+    border-bottom: 1px solid rgb(219, 217, 217);
+ }
+ .business-body {
+    padding: 2em;
+    line-height: 2.5em;
+    font-size: 16px;
+    box-shadow: 1px 1px rgb(204, 204, 204);
+}
+.business-contact-body {
+    padding: 2em;
+    line-height: 2em;
+    box-shadow: 1px 1px rgb(206, 206, 206);
+}
  .form-body {
     padding: 1em 3em;
     border: 1px solid #13532e;
@@ -110,6 +138,9 @@
   }
   .no-top-gap {
     margin-top: 0;
+  }
+  .top-gap-much {
+      margin-top: 4rem;
   }
   .top-gap {
     margin-top: 1em;
@@ -131,31 +162,45 @@
       line-height: 30px!important;
       /* padding: 400px; */
   }
+  .medium-input{
+    min-height: 100px!important;
+    line-height: 30px!important;
+    /* padding: 400px; */
+  }
   .bottom-pad-much {
     padding-bottom: 5em;
   }
   .top-pad-much {
     padding-top: 5em;
   }
+  .left-gap {
+    margin-left:6rem;
+}
+.mid-left-gap {
+  margin-left:5rem;
+}
+.right-gap {
+  margin-right:6rem;
+}
   .underlined {
     border-bottom: 3px solid #6c6c72;
   }
   .cushion {
       width: 90%
   }
-  .left-gap {
-      margin-left:6rem;
-  }
-  .mid-left-gap {
-    margin-left:5rem;
-}
-  .right-gap {
-    margin-right:6rem;
-}
+  
   .all-borders {
     border: 1px solid #050107!important;
     padding: 0 1em!important;
+}
+.select-borders {
+    border: 1px solid #520c37!important;
+    padding: 0 1em!important;
     margin-bottom: 0.5em!important;
+    height: 36px!important;
+    margin: -1em;
+    color: #186322;
+    border-radius: 4px;
 }
 .tight-border {
     border: 1px solid #050107!important;
@@ -171,7 +216,7 @@
     border: 1px solid #1aa807;
 }
 .green-border {
-    color:hsl(120, 34%, 34%);
+    color:hsl(323, 57%, 22%);
     background-color:hsl(0, 0%, 98%);
     border-radius: 4px;
     padding: 4px 8px;
@@ -184,12 +229,14 @@
     box-shadow: 1px 1px 1px #868686;
 
 }
+.business-hero {
+    margin-top: 6rem;
+}
 .thin-black-border {
     border: 1px solid #220f1a;
 }
 .dashboard {
     padding:1em 0 1em 0;
-    border-bottom:2px solid #0acc44;
 }
   
 /* --------- colour schemes ------------- */
@@ -235,7 +282,7 @@ main {
         font-size: 1.2rem;
     }
     .form-heading {
-        color:  hsl(120, 15%, 14%)
+        color: hsl(323, 57%, 22%);
     }
     .form-input {
     border-radius: 4px !important;
@@ -243,15 +290,15 @@ main {
 }
 .form-jacket {
     padding : 1rem 4em !important;
-    background-color: hsl(120, 80%, 94%) !important;
-    border-radius: 1rem !important;
-    box-shadow: 2px 2px hsl(123, 26%, 32%);
+    background-color: hsl(120, 5%, 96%) !important;
+    border: 2px solid  hsl(323, 57%, 22%)!important;
     margin-bottom: 3rem;
+    margin-top: 3rem;
     opacity: 0.9;
 }
 .form-btn {
     color:hsl(120, 80%, 94%) !important;;
-    background-color: hsl(120, 31%, 30%) !important;
+    background-color: hsl(323, 84%, 22%)!important;
 }
 .optionals {
     color: red;
@@ -315,14 +362,17 @@ label {
     background-color: hsl(120, 7%, 98%);
     padding: 4px;
 }
-
+.views-box:hover {
+    background-color: hsl(340, 11%, 95%);
+    border: 1px solid #b6307e;
+}
 .delete-note {
     color: hsl(120, 4%, 57%);
     font-size: 18px;
 }
-.nav-color {
-    background-color: hsl(120, 17%, 63%)!important;
-}
+/* .nav-color {
+    background-color: hsl(123, 37%, 43%)!important;
+} */
 
 /** Changing tmaterialize defaults ***/
  input::-webkit-input-placeholder {
@@ -348,15 +398,9 @@ label {
 /******* Background Images *******/
 /******* Background Images  *******/
 
-#signupPage, #profileUpdate{
+#signinPage, #signupPage, #profileUpdate{
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
     background-image: url('../assets/images/business.jpg');
-    background-size: cover;
-}
-
-#signinPage{
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
-    background-image: url('../assets/images/signin.jpg');
     background-size: cover;
 }
 
@@ -371,4 +415,56 @@ label {
 /********** Category Images *********/
 .category-image {
     max-height: 15rem;
+}
+.category-image:hover {
+    border: 5px solid rgb(109, 12, 57);
+}
+
+/**** Hover changes ****/ 
+.faint-pink-hover:hover {
+    background-color: rgb(238, 238, 238);
+    
+}
+.business-card-label {
+    color: rgb(18, 71, 18);
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+.business-card-label:hover {
+    color: rgb(151, 13, 98);
+    font-weight: bold;
+    margin-bottom: 0.3em;
+    text-decoration: underline;
+}
+.pink-margin-hover:hover {
+    border: 1px solid rgb(238, 134, 194);
+}
+.auth-hover {
+    margin: 4px;
+}
+.auth-hover:hover {
+    padding: 0 2px;
+    border-bottom: 1px solid rgb(212, 74, 155);
+    margin: 10px;
+    color: rgb(18, 71, 18);
+}
+.form-btn:hover {
+    color:  hsl(115, 46%, 95%) !important;  
+    background-color: hsl(120, 31%, 30%)!important;  
+}
+.btn-danger {
+    color: red;
+    background-color: #dbe2db;
+}
+.btn-danger:hover {
+    color: rgb(223, 219, 219);
+    background-color: #f03333;
+}
+.btn-edit {
+    color: rgb(33, 129, 46);
+    background-color: #ffffff;
+}
+.btn-edit:hover {
+    color: white;
+    background-color: #2c743b;
 }
