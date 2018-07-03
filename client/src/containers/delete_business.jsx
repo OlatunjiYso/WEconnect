@@ -6,11 +6,9 @@ import { bindActionCreators } from 'redux';
 import { deleteBusiness } from '../actions/business';
 import setToken from '../helpers/authorization';
 import history from '../history';
-import businessActions from '../actions/business';
 import Footer from '../components/footer';
-import Navbar from './nav'
-import customStyles from '../css/style.css';
-
+import Navbar from './nav';
+import bin from '../assets/images/delete.png';
 /**
  * @class DeleteBusiness
  * 
@@ -70,27 +68,16 @@ class DeleteBusiness extends Component {
         return (
             <div>
                 <Navbar />
-                <main>
+                <main >
                     <div className="row">
-                        <div className="top-pad center-align col s12 m6 offset-m3">
-                            <h4 className="red-text text-darken-2">
+                        <div className="top-pad center">
+                            <h4 className="green-text text-darken-2">
                                 Before you delete "{this.props.data.business.name}"
                             </h4>
-                            <h5 className = "green-text"> Please take note of the following: </h5>
-                            <ol className="delete-note no-top-gap">
-                                <li>
-                                    <span className="delete-note"> This action is irreversible </span>
-                                </li>
-                                <li>
-                                    <span  className="delete-note">All business information would be lost </span>
-                                </li>
-                                <li>
-                                    <span  className="delete-note">All business reviews would be lost </span>
-                                </li>
-                            </ol>
-                            <div className="top-pad">
-                                <h5 className="center-align"> Final confimation and authentication </h5>
-                                <div className="col s10 offset-s1 form-jacket">
+                            <img src={bin} className="responsive-img" />
+                            <h5 className = "pink-text text-darken-4"> Please take note that this action is irreversible</h5>
+                            <div className="top-pad col s12 m6 offset-m3">
+                                <div className="delete-form">
                                     <form onSubmit={this.handleSubmit}>
                                         <label className="form-label">
                                             Enter your Password to proceed: </label>

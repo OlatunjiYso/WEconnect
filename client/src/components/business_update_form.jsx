@@ -79,7 +79,7 @@ class BusinessUpdateForm extends Component {
           onSubmit={handleSubmit}
         >
           <div className="row top-pad">
-            <h6 className="left-gap bold-font grey-text text-darken-2">
+            <h6 className="left-gap   grey-text text-darken-2">
               {" "}
               Business Name <span className="red-text">*</span>
             </h6>
@@ -94,7 +94,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2 ">
               {" "}
               Business state <span className="red-text">*</span>
             </h6>
@@ -114,7 +114,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2 ">
               {" "}
               Business category <span className="red-text">*</span>
             </h6>
@@ -134,7 +134,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2 ">
               {" "}
               Business Address <span className="red-text">*</span>
             </h6>
@@ -149,7 +149,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2 ">
               {" "}
               Business Email<span className="red-text">*</span>{" "}
             </h6>
@@ -165,7 +165,7 @@ class BusinessUpdateForm extends Component {
           </div>
           <div className="row">
             <div className="col s12 m4 offset-m1">
-              <h6 className="bold-font">
+              <h6 className="grey-text text-darken-2 ">
                 {" "}
                 Business Phone <span className="red-text">*</span>{" "}
               </h6>
@@ -180,7 +180,7 @@ class BusinessUpdateForm extends Component {
               </div>
             </div>
             <div className="col s12 m4 offset-m1">
-              <h6 className="bold-font">
+              <h6 className=" grey-text text-darken-2">
                 {" "}
                 Business City <span className="red-text">*</span>{" "}
               </h6>
@@ -196,7 +196,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2">
               {" "}
               Tell us about your business{" "}
               <span className="red-text">*</span>{" "}
@@ -212,7 +212,7 @@ class BusinessUpdateForm extends Component {
             </div>
           </div>
           <div className="row">
-            <h6 className="left-gap bold-font">
+            <h6 className="left-gap grey-text text-darken-2 ">
               {" "}
               Uplaod your business picture{" "}
               <span className="optionals"> ( Optional ) </span>

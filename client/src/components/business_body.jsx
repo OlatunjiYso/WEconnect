@@ -33,7 +33,7 @@ class BusinessBody extends Component {
                         <div className="business-contact-body grey lighten-5 row">
                             <div className="row ">
                                 <div className="col s2 business-icons center">
-                                    <i class="material-icons small pink-text text-darken-2 ">home</i>
+                                    <i className="material-icons small pink-text text-darken-2 ">home</i>
                                 </div>
                                 <div className="col s10 business-contact lighten-3">
                                     <h6> {business.address} </h6>
@@ -42,7 +42,7 @@ class BusinessBody extends Component {
                             </div>
                             <div className="row">
                                 <div className="col s2 business-icons center">
-                                    <i class="material-icons small pink-text text-darken-2 ">email</i>
+                                    <i className="material-icons small pink-text text-darken-2 ">email</i>
                                 </div>
                                 <div className="col s10 business-contact lighten-3">
                                     <h5>  {business.email}  </h5>
@@ -50,7 +50,7 @@ class BusinessBody extends Component {
                             </div>
                             <div className="row ">
                                 <div className="col s2 business-icons center">
-                                    <i class="material-icons small pink-text text-darken-2"> phone </i>
+                                    <i className="material-icons small pink-text text-darken-2"> phone </i>
                                 </div>
                                 <div className="col s10 business-contact lighten-3">
                                     <h5> {business.phone} </h5>

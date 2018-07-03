@@ -214,9 +214,6 @@ class Validations {
         req.checkBody('address', 'Please input business address')
             .trim()
             .notEmpty();
-        req.checkBody('heading1', 'Please input business first section heading')
-            .trim()
-            .notEmpty();
         req.checkBody('about', 'Please input content for the first section')
             .trim()
             .notEmpty();
@@ -381,10 +378,6 @@ class Validations {
         }
         if (req.body.address) {
             req.checkBody('address', 'Address cannot be blank')
-                .trim().notEmpty();
-        }
-        if (req.body.heading1) {
-            req.checkBody('heading1', 'First section title cannot be blank')
                 .trim().notEmpty();
         }
         if (req.body.about) {

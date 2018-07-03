@@ -165,8 +165,7 @@ class businessController {
           business
             .update({
               name: req.body.name || business.name,
-              slogan: req.body.slogan || business.slogan,
-              overview: req.body.overview || business.overview,
+              address: req.body.address || business.address,
               email: req.body.email || business.email,
               phone: req.body.phone || business.phone,
               category: req.body.category || business.category,

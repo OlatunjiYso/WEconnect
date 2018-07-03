@@ -133,6 +133,9 @@
   .bottom-gap {
     margin-bottom: 3em;
   }
+  .mid-bottom-gap {
+    margin-bottom: 1em;
+  }
   .no-bottom-gap {
     margin-bottom: 0;
   }
@@ -237,6 +240,7 @@
 }
 .dashboard {
     padding:1em 0 1em 0;
+    border-bottom: 1px solid#610a44
 }
   
 /* --------- colour schemes ------------- */
@@ -290,11 +294,17 @@ main {
 }
 .form-jacket {
     padding : 1rem 4em !important;
-    background-color: hsl(120, 5%, 96%) !important;
-    border: 2px solid  hsl(323, 57%, 22%)!important;
-    margin-bottom: 3rem;
+    background-color: hsl(129, 20%, 93%) !important;
+    border-radius: 4px;
     margin-top: 3rem;
     opacity: 0.9;
+}
+.delete-form {
+    padding : 1rem 2em !important;
+    background-color: hsl(327, 92%, 28%) !important;
+    border: 1px solid  hsl(323, 57%, 22%)!important;
+    margin-top: 3rem;
+    opacity: 1;
 }
 .form-btn {
     color:hsl(120, 80%, 94%) !important;;
@@ -342,12 +352,16 @@ label {
 
 .welcome-btn {
     margin-top: 3rem;
-    color: hsl(120, 100%, 97%) !important;
-    background-color: hsl(120, 41%, 22%) !important;
-    padding: 1rem 2rem !important;
+    color: hsl(120, 32%, 82%) !important;
+    background-color: hsl(335, 51%, 45%) !important;
+    padding: 0.5rem 1rem !important;
     font-size: 3rem !important;
     border-radius: 5px;
     cursor: pointer;
+}
+.welcome-btn:hover {
+    background-color: hsl(120, 83%, 16%) !important;
+    padding: 0.5rem 0.8rem !important;
 }
 
 .instruction {
