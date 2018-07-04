@@ -81,8 +81,6 @@ class Signup extends Component {
     handleSubmit(event) {
         const details = this.state.userDetail
         if (details.password !== details.confirmPassword) {
-            console.log()
-            alertError('hhhhh')
         } else {
             event.preventDefault();
             const newUser = this.state.userDetail;

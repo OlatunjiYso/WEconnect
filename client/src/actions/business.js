@@ -205,7 +205,6 @@ export const registerBusiness = (cloudImageUrl, business) => (dispatch) => {
             history.push('/userProfile');
         })
         .catch((error) => {
-            console.log(error.response);
             dispatch(isRequesting(false));
             dispatch(registerBusinessFailure(error.response));
             alertError('Business not created');

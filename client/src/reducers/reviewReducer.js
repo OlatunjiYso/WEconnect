@@ -2,7 +2,8 @@ const initialState = {
     awaitingResponse: false,
     response: {},
     reviewErrors: {},
-    reviews: []
+    reviews: [],
+    editingIndex: null
 };
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -25,6 +26,11 @@ const reviewReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reviewErrors: action.error
+            };
+        case 'MAKE_REVIEW_EDITABLE':
+            return {
+                ...state,
+                editingIndex: action.id
             };
         default:
             return state;

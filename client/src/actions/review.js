@@ -1,7 +1,7 @@
 import reviewApi from '../service/reviewApi';
 import setToken from '../helpers/authorization';
 import { alertSuccess, alertError } from '../actions/flashMessage';
-import { MAKING_REVIEW_REQUEST, REVIEW_SUCCESS, REVIEW_ERROR, GET_ALL_REVIEW } from '../actions/types';
+import { MAKING_REVIEW_REQUEST, REVIEW_SUCCESS, REVIEW_ERROR, GET_ALL_REVIEW, MAKE_REVIEW_EDITABLE } from '../actions/types';
 
 /**
 * @description - starts spinner when awaiting a response
@@ -35,6 +35,17 @@ export const reviewSuccess = response => ({
 export const getAllBusinessReview = reviews => ({
     type: GET_ALL_REVIEW,
     reviews
+});
+
+/**
+* @description - makes a review editable
+* @param {number} id - id of review to be edited
+*
+* @return {obj} -actionable object containing type and payload
+*/
+export const makeEditable = id => ({
+    type: MAKE_REVIEW_EDITABLE,
+    id
 });
 
 
