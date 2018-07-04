@@ -6,9 +6,13 @@ import {
   getAllReviews,
   postReview,
   updateReview,
-  deleteReview
+  deleteReview,
+  makeEditable
 } from "../actions/review";
+
 import Review from "../components/review";
+import EditableReview from "../components/editableReview";
+
 /**
  * @description BusinessFormComponent
  *
@@ -18,7 +22,7 @@ class ReviewForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ""
+      message: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -80,6 +84,7 @@ class ReviewForm extends Component {
     const message = this.state.message;
     const handleChange = this.handleChange;
     const allReviews = this.props.reviewData.reviews;
+    const editingIndex = this.props.reviewData.editingIndex;
     const reviewLabel = localStorage.token
       ? "Give a review"
       : "login to give a review";
@@ -87,21 +92,33 @@ class ReviewForm extends Component {
     const myReviews =
       allReviews.length > 0 ? (
         allReviews.map((PresentReview, index) => {
-          return (
-            <Review
-              key={index}
-              review={PresentReview}
-              businessId={this.props.businessId}
-              reviewerId={this.props.userData.user.id}
-              updateReview={this.props.updateReview}
-              deleteReview={this.props.deleteReview}
-              getAllReviews={this.props.getAllReviews}
-            />
-          );
+            if (PresentReview.id !== editingIndex) {
+                return (
+                    <Review
+                      key={index}
+                      review={PresentReview}
+                      businessId={this.props.businessId}
+                      reviewerId={this.props.userData.user.id}
+                      deleteReview={this.props.deleteReview}
+                      makeEditable = {this.props.makeEditable}
+                    />
+                  )
+            } else {
+                return (
+                    <EditableReview
+                      key={index}
+                      review={PresentReview}
+                      businessId={this.props.businessId}
+                      updateReview={this.props.updateReview}
+                      makeEditable = {this.props.makeEditable}
+                    />
+                  )
+            }; 
         })
       ) : (
         <h6 className="grey-text"> Be the first to give us a review </h6>
       );
+
     return (
       <div className="top-pad-much">
         <div className="col s12 m8 offset-m2 l6 offset-l3">
@@ -147,7 +164,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getAllReviews, postReview, updateReview, deleteReview },
+    { getAllReviews, postReview, updateReview, deleteReview, makeEditable },
     dispatch
   );
 };

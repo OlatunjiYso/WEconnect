@@ -30,12 +30,7 @@ class BusinessUpdate extends Component {
                 this.setState({
                     business: { ...business },
                     image: { imageFile: {}, imageSrc: business.image }
-                //    business: { ...business},
-                //    image: {
-                //         
-                // }
                 })
-                console.log('first', this.state);
             })
             .catch((error) => {
                  if (error.response.status === 404) {
@@ -56,9 +51,6 @@ class BusinessUpdate extends Component {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const filereader = new FileReader();
-    //   checkImageFile(filereader, file, (fileType) => {
-    //     if (fileType === 'image/png' || fileType === 'image/gif' ||
-    //       fileType === 'image/jpeg') {
          this.setState({
             ...this.state,
             image: { ...this.state.image, imageFile: file },
@@ -70,11 +62,6 @@ class BusinessUpdate extends Component {
             })
           };
           filereader.readAsDataURL(file);
-    //     } else {
-    //       toastr.clear();
-    //       toastr.error('please provide a valid image file');
-    //     }
-    //   });
     } else {
       this.setState({
         ...this.state,
@@ -107,8 +94,6 @@ class BusinessUpdate extends Component {
     * @memberof BusinessUpdateComponent
     */
     render() {
-        console.log('now at here....')
-        console.log('second', this.state);
         return (
             <div>
                 <Navbar />

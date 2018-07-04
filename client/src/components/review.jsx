@@ -27,8 +27,8 @@ class Review extends Component {
             review = {this.props.review} 
             businessId = {this.props.businessId}
             getAllReviews = { this.props.getAllReviews }
-            updateReview = {this.props.updateReview}
             deleteReview = {this.props.deleteReview}
+            makeEditable = {this.props.makeEditable}
             /> : null;
         return (
             <div>
