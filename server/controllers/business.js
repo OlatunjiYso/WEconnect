@@ -104,9 +104,18 @@ class businessController {
     if (req.query.location && req.query.location !== 'location') {
       filter.state = req.query.location;
     }
-    Business
+    const limit = 8;
+    let offset = 0;
+    Business.findAndCountAll()
+    .then((allBusinesses) => {
+      const { page } = req.query;
+      const pages = Math.ceil(allBusinesses.count / limit);
+      offset = (page > 1) ? limit * (page - 1) : 0;
+      Business
       .findAll({
         where: filter,
+        limit,
+        offset,
         include: [{
           model: Review
         }]
@@ -120,6 +129,8 @@ class businessController {
                 businesses,
                 location: req.query.location,
                 category: req.query.category,
+                count: allBusinesses.count,
+                pages
               });
           }
           return res.status(404)
@@ -128,18 +139,19 @@ class businessController {
               location: req.query.location,
               category: req.query.category,
               message: 'not found',
-              filter
+              filter,
             });
         }
-      })
+      });
+    })
       .catch((err) => {
-        res.status(400)
+        res.status(500)
           .json({
             success: false,
             message: err.message
           });
       });
-  }
+    }
 
   /**
    * @description -modifies a specified business

@@ -4,11 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { fetchThisBusiness } from '../actions/business';
 import Navbar from './nav';
-import BusinessBanner from '../components/business_banner';
+import BusinessBanner from '../components/businessBanner';
 import BusinessBody from '../components/business_body';
 import ReviewForm from './review_form';
 import Footer from '../components/footer';
-import profilePicture from '../assets/images/cameras.jpg';
 import business from '../dummy/one_business';
 
 /**
@@ -26,7 +25,7 @@ class BusinessProfile extends Component {
     }
 
     /** 
-    *
+    *@description runs on page load
     * @returns {JSX} JSX
     * 
     * @memberof AllBusinessesComponent
@@ -50,7 +49,7 @@ class BusinessProfile extends Component {
             <div>
                 <main>
                     <Navbar />
-                    <BusinessBanner businessObject={business} pic={profilePicture} />
+                    <BusinessBanner business={business} />
                     <BusinessBody businessObject={business} />
                     <div className="row body-font">
                         <ReviewForm businessId= {id}/>

@@ -129,7 +129,7 @@ class Home extends Component {
                                 <h5> Commerce </h5>
                             </div>
                             <div className="category-tag center col s8 offset-s2 m4">
-                                <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('agriculture')}>
+                                <Link className="black-text" to="#" onClick={() => this.findBusinessesIn('agric')}>
                                     <img className="responsive-img category-image" src={agriculture} alt='Agriculture' />
                                 </Link>
                                 <h5> Agriculture </h5>

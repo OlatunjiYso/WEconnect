@@ -11,11 +11,12 @@ class BusinessApi {
     /**
      * @description - api endpoint call that gets all businesses
      *
-     *@param {object} filter - obvject containing location and category
+     *@param {object} filter - object containing location and category
+     *@param {integer} pageNumber - page to be rendered
      * @return { undefined } asynchronuos call can give varying outcome
      */
-    static getAllBusinesses(filter) {
-        return axios.get(`${rootUrl}?category=${filter.category}&&location=${filter.state}`);
+    static getAllBusinesses(filter, pageNumber) {
+        return axios.get(`${rootUrl}?category=${filter.category}&&location=${filter.state}&&page=${pageNumber}`);
     }
 
     /**

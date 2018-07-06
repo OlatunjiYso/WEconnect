@@ -37,10 +37,10 @@ class NavBar extends Component {
 
 
         return (
-            <div>
                 <nav>
                     <div className="nav-wrapper nav-color pink darken-4">
                         <Link to="/" className=" Sofia brand-logo  logo green-text text-lighten-5">WEconnect</Link>
+                        <div>
                         <ul className="right hide-on-med-and-down head-font">
                             {signInOrLogout}
                             {signupOrNull}
@@ -51,14 +51,14 @@ class NavBar extends Component {
                         </ul>
                         <SideNav
                             trigger={
-                                <a href="" className="button-collapse">
+                                <a href="#" className="button-collapse">
                                     <i className="material-icons">menu</i>
                                 </a>
                             }
                             options={{ closeOnClick: true }}
                             className="hide-on-large-only"
                         >
-                            <ul className="side-nav head-font" id="mobile-demo">
+                            <ul className="head-font">
                                 <li>
                                     <Link to="/login" className="white-text">Sign In</Link>
                                 </li>
@@ -73,9 +73,9 @@ class NavBar extends Component {
                                 </li>
                             </ul>
                         </SideNav>
+                        </div>
                     </div>
                 </nav>
-            </div>
         )
     }
 }

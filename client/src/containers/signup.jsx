@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { alertSuccess, alertError } from '../actions/flashMessage';
 import verifyToken from '../helpers/verifytoken';
 import history from '../history';
 import { signup } from '../actions/auth';
@@ -49,8 +48,7 @@ class Signup extends Component {
    * @returns {boolean} show warning boolean of either true or false
    */
     componentWillMount() {
-        if (verifyToken()) {
-            alertSuccess('You are logged in already')
+        if (localStorage.token) {
             history.push('/userProfile');
         }
     }
