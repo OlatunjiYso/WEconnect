@@ -104,7 +104,11 @@ export const postReview = (businessId, review) => (dispatch) => {
         .catch((error) => {
             dispatch(isRequesting(false));
             dispatch(reviewError(error.response));
-            alertError('Please login to give a review');
+            if (error.response.status === 400) {
+                alertError('Please enter your review');
+            } else {
+                alertError('Please login to give a review');
+            }
         });
 };
 

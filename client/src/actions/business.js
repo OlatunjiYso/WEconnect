@@ -49,13 +49,15 @@ export const clearCategory = () => ({
  *
  * @param { array } businesses - array of businesses
  * @param {object} filterUsed - filter used in filtering business
+ * @param {integer} pages - total pages
  *
  * @return {obj} -actionable object containing type and payload
  */
-export const getAllBusinessesSuccess = (businesses, filterUsed) => ({
+export const getAllBusinessesSuccess = (businesses, filterUsed, pages) => ({
     type: FETCH_BUSINESSES_SUCCESS,
     allBusinesses: businesses,
-    selectedFilter: filterUsed
+    selectedFilter: filterUsed,
+    pages
 });
 
 /**
@@ -139,13 +141,15 @@ export const deleteBusinessFailure = error => ({
  * @description - fetches all businesses from database
  *
  *@param {object} filter - object containing location and category
+ * @param {int} pageNumber - pageNumber to show
  * @return {obj} -actionable object containing type and payload
  */
-export const fetchAllBusinesses = filter => (dispatch) => {
-    businessApi.getAllBusinesses(filter)
+export const fetchAllBusinesses = (filter, pageNumber) => (dispatch) => {
+    businessApi.getAllBusinesses(filter, pageNumber)
         .then((response) => {
             const { businesses } = response.data;
-            dispatch(getAllBusinessesSuccess(businesses, filter));
+            const { pages } = response.data;
+            dispatch(getAllBusinessesSuccess(businesses, filter, pages));
         })
         .catch((error) => {
             dispatch(businessNotFound(error.response, filter));

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Pagination } from 'react-materialize';
 
 import Footer from '../components/footer';
 import Navbar from './nav';
@@ -24,6 +25,7 @@ class AllBusinesses extends Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onSelectPagination = this.onSelectPagination.bind(this);
     }
 
     /** 
@@ -37,11 +39,12 @@ class AllBusinesses extends Component {
             state: "location",
             category: "category",
         }
+        const pageNumber = 1;
         const {landingPageFilter} = this.props.landingPageData;
         if (landingPageFilter.category) {
-            this.props.fetchAllBusinesses(landingPageFilter);
+            this.props.fetchAllBusinesses(landingPageFilter, pageNumber);
         } else {
-            this.props.fetchAllBusinesses(defaultFilter);
+            this.props.fetchAllBusinesses(defaultFilter, pageNumber);
         }
     }
 
@@ -73,7 +76,12 @@ class AllBusinesses extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const filter = this.state.filter;
-        this.props.fetchAllBusinesses(filter)
+        const pageNumber = 1;
+        this.props.fetchAllBusinesses(filter, pageNumber)
+    }
+    onSelectPagination(pageNumber) {
+        const filter = this.state.filter;
+        this.props.fetchAllBusinesses(filter, pageNumber)
     }
 
     /** 
@@ -108,6 +116,7 @@ class AllBusinesses extends Component {
                         {FoundBusinesses}
                     </div>
                 </main>
+                <Pagination items={this.props.businessData.pages} activePage={1} maxButtons={8} className="center" onSelect={this.onSelectPagination}/>
                 <Footer />
             </div >
         )

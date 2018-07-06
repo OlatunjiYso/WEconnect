@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
+import history from '../history';
 import Footer from "../components/footer";
 import Nav from "./nav";
 import UserBusiness from "../components/user_business";
@@ -28,6 +29,9 @@ class UserProfile extends Component {
    * @memberof UserProfileComponent
    */
   componentDidMount() {
+    if (!localStorage.token) {
+      history.push('/');
+  }
     this.props.fetchMyBusinesses();
   }
   /**
@@ -100,10 +104,10 @@ class UserProfile extends Component {
             </div>
           </div> */}
 
-          <div className="row top-pad cushion">
-            <div className="col s10 offset-s2">
+          <div className="row top-pad container">
+            <div className="col s12">
               <div className="col s12 container">
-                <h4 className="head-font grey-text text-darken-1 bottom-pad-small">
+                <h4 className="head-font grey-text text-darken-2 bottom-pad-small center">
                   {sectionHeading}
                 </h4>
               </div>

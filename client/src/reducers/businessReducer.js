@@ -7,6 +7,7 @@ const initialState = {
     errors: { },
     awaitingResponse: false,
     notFound: false,
+    pages: 1
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -20,7 +21,8 @@ const businessReducer = (state = initialState, action) => {
             return {
                 ...state,
                 businesses: action.allBusinesses,
-                filter: action.selectedFilter
+                filter: action.selectedFilter,
+                pages: action.pages
             };
         case 'FETCH_BUSINESS_SUCCESS':
             return {
