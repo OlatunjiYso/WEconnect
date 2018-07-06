@@ -7,7 +7,7 @@ import Footer from '../components/footer';
 import Navbar from './nav';
 import { fetchAllBusinesses } from '../actions/business';
 import BusinessCatalogTop from '../components/business_catalog_top';
-import BusinessCard from '../components/business_card';
+import BusinessCard from '../components/business_card'; 
 
 /**
  * @class AllBusinessComponent

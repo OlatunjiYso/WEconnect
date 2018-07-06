@@ -7,7 +7,7 @@ import { fetchThisBusiness } from '../actions/business';
 import businessActions from '../actions/business';
 import history from '../history';
 import Navbar from './nav';
-import BusinessBanner from '../components/business_banner';
+import BusinessBanner from '../components/businessBanner';
 import BusinessMetrics from '../components/business_metrics';
 import Footer from '../components/footer';
 import customStyles from '../css/style.css';
