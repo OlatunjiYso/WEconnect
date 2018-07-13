@@ -1,125 +1,120 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import verifyToken from '../helpers/verifytoken';
-import history from '../history';
-import { signup } from '../actions/auth';
-import Footer from '../components/footer';
-import SignupForm from '../components/signup_form';
-import Navbar from './nav';
-
+import history from "../history";
+import { signup } from "../actions/auth";
+import Footer from "../components/footer";
+import SignupForm from "../components/signupForm";
+import Navbar from "./nav";
 
 /**
  * @class SignupComponent
- * 
+ *
  * @extends {React.Component}
  */
 class Signup extends Component {
-    /**
-     * Creates an instance of SignUpComponent.
-     * 
-     * @param {string} props 
-     * 
-     * @memberof SignUpComponent
-     */
-    constructor(props) {
-        super(props);
-        this.state = {
-            userDetail: {
-                username: '',
-                password: '',
-                email: '',
-                firstname: '',
-                lastname: '',
-                confirmPassword: '',
-            },
-            passwordMismatch: null
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      userDetail: {
+        username: "",
+        password: "",
+        email: "",
+        firstname: "",
+        lastname: "",
+        confirmPassword: ""
+      },
+      passwordMismatch: null
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    /**
+  /**
    * @description handles token verification and page redirection
    *
    * @method componentDidMount
    *
    * @returns {boolean} show warning boolean of either true or false
    */
-    componentWillMount() {
-        if (localStorage.token) {
-            history.push('/userProfile');
-        }
+  componentWillMount() {
+    if (localStorage.token) {
+      history.push("/userProfile");
     }
+  }
 
-    /** 
-    *@param {event} event
-    *
-    *@returns {func} funtion
-    *@memberof SignupForm Component
-    *
-    */
-    handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            ...this.state,
-            userDetail: { ...this.state.userDetail, [name]: value },
-        });
-    }
+  /**
+   * @description handles changes made to signup form
+   * 
+   * @param {event} event
+   *
+   * @memberof Signup Component
+   * @returns {func} funtion
+   *
+   */
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      ...this.state,
+      userDetail: { ...this.state.userDetail, [name]: value }
+    });
+  }
 
-    /** 
-    *@param {event} event
-    *
-    *@returns {func} funtion
-    * 
-    *@memberof Signup Component
-    */
-    handleSubmit(event) {
-        const details = this.state.userDetail
-        if (details.password !== details.confirmPassword) {
-        } else {
-            event.preventDefault();
-            const newUser = this.state.userDetail;
-            this.props.signup(newUser)
-        }
-    }
+  /**
+   * @description handles submitting signup form    
+   * 
+   * @param {event} event
+   *
+   * @memberof Signup Component
+   * @returns {func} funtion
+   *
+   */
+  handleSubmit(event) {
+    event.preventDefault();
+    const newUser = this.state.userDetail;
+    this.props.signup(newUser);
+  }
 
-    /** 
-    *
-    *
-    * @returns {JSX} JSX
-    * 
-    * @memberof Signup Component
-    */
-    render() {
-        return (
-            <div id="signupPage">
-                <Navbar />
-                <SignupForm
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                    userDetail={this.state.userDetail}
-                    formErrors={this.props.data.signupErrors}
-                    isFetching={this.props.data.awaitingResponse}
-                    passwordMismatch={this.state.passwordMismatch}
-                />
-                <Footer />
-            </div >
-        )
-    }
+ /**
+   * @description renders a page for user signup
+   * @method render
+   *
+   * @memberof Signup component
+   * @returns { jsx } user signup page
+   */
+  render() {
+    const { passwordMismatch, userDetail } = this.state;
+    const { signupErrors, awaitingResponse } = this.props.data;
+    return (
+      <div id="signupPage">
+        <Navbar />
+        <SignupForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          user={userDetail}
+          formErrors={signupErrors}
+          isFetching={awaitingResponse}
+          passwordMismatch={passwordMismatch}
+        />
+        <Footer />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-    const data = state.authReducers;
-    return {
-        data
-    }
-}
+const mapStateToProps = state => {
+  const data = state.authReducers;
+  return {
+    data
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ signup }, dispatch);
+};
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ signup }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup);

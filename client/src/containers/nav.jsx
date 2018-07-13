@@ -16,11 +16,12 @@ class Nav extends Component {
     }
 
     /** 
-    *@description sends data to server
+    *@description clears local storage to log user out
     *
-    * @returns {func} funtion
+    * @method handleLogout
     * 
     * @memberof Nav Component
+    * @returns {func} funtion
     */
     handleLogout(event) {
         event.preventDefault();
@@ -30,11 +31,12 @@ class Nav extends Component {
     }
 
     /** 
-    *@description - renders the form component
+    *@description - renders the nav bar
     *
-    * @returns {JSX} - JSX
+    * @method render
     * 
     * @memberof LoginComponent
+    * @returns {jsx} - navbar
     */
     render() {
         return (

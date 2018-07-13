@@ -1,34 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from 'react';
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import loader from "../assets/images/loader.gif";
 
-/**
- * @class SignupFormComponent
- *
- * @extends {React.Component}
- */
-class SignupForm extends Component {
-  /**
-   *
-   *
-   * @returns {JSX} JSX
-   *
-   * @memberof Signup Component
-   */
-  render() {
-    // Bring In methods as props from Signup container
-    const handleChange = this.props.handleChange;
-    const handleSubmit = this.props.handleSubmit;
 
-    // Bring in data as props from Signup container
-    const userDetail = this.props.userDetail;
-    const formErrors = this.props.formErrors;
+/**
+ * @description renders the top section of a business page
+ * @function SignupForm
+ * 
+ * @param { object } props - data passed from parent component
+ * 
+ * @returns { jsx } jsx - a signup form
+ */
+const SignupForm = (props) => {
+    const { handleChange, handleSubmit, user, formErrors, isFetching } = props;
+    const { username, password, confirmPassword, firstname, lastname, email } = user;
+    const { status } = formErrors
 
     // Display validation errors if present
     const validationErrors =
-      formErrors.status === 400 ? (
+      status === 400 ? (
         <div className=" col s10 offset-s1 m4 offset-m4 left-align error-box">
           {formErrors.data.errors.map((eachError, index) => {
             return (
@@ -43,7 +35,7 @@ class SignupForm extends Component {
 
     // Display Conflict errors if present
     const conflictErrors =
-      formErrors.status === 409 ? (
+       status === 409 ? (
         <div className="col s10 offset-s1 m4 offset-m4 center-align error-box">
           <h6>
             <i className="material-icons red-text tiny">priority_high</i>{" "}
@@ -54,17 +46,17 @@ class SignupForm extends Component {
 
     // Display password mismatch status progressively as user types in
     let reportMatch =
-      userDetail.password == "" ? null : userDetail.confirmPassword !==
-      userDetail.password ? (
+      password == "" ? null : confirmPassword !==
+      password ? (
         <i className="material-icons red-text">clear</i>
       ) : (
         <i className="material-icons green-text">check</i>
       );
     const passwordMisMatch =
-      userDetail.confirmPassword !== userDetail.password ? true : false;
+      confirmPassword !== password ? true : false;
 
     // Display asyncronous call progress feedback
-    const spinner = this.props.isFetching ? (
+    const spinner = isFetching ? (
       <img
         className="responsive-img left-gap"
         src={loader}
@@ -72,10 +64,10 @@ class SignupForm extends Component {
       />
     ) : null;
     return (
-      <main>
+        <main>
         <div className="row head-font top-pad-much ">
           {validationErrors} {conflictErrors}
-          <div className="col s10 offset-s1 m6 offset-m3  l4 offset-l4 form-jacket">
+          <div className="col s11 m6 offset-m3  l4 offset-l4 form-jacket">
             <h4 className="cform-heading pink-text text-darken-4">
               <span className="green-border"> Signup </span>
             </h4>
@@ -83,7 +75,7 @@ class SignupForm extends Component {
               <label className="form-label">Firstname: </label>
               <input
                 type="text"
-                value={userDetail.firstname}
+                value={firstname}
                 onChange={handleChange}
                 name="firstname"
                 required
@@ -92,7 +84,7 @@ class SignupForm extends Component {
               <label className="form-label">Lastname: </label>
               <input
                 type="text"
-                value={userDetail.lastname}
+                value={lastname}
                 onChange={handleChange}
                 name="lastname"
                 required
@@ -101,7 +93,7 @@ class SignupForm extends Component {
               <label className="form-label">Email: </label>
               <input
                 type="email"
-                value={userDetail.email}
+                value={email}
                 onChange={handleChange}
                 name="email"
                 required
@@ -110,7 +102,7 @@ class SignupForm extends Component {
               <label className="form-label">Username: </label>
               <input
                 type="text"
-                value={userDetail.username}
+                value={username}
                 onChange={handleChange}
                 name="username"
                 required
@@ -119,7 +111,7 @@ class SignupForm extends Component {
               <label className="form-label"> Password: </label>
               <input
                 type="password"
-                value={userDetail.password}
+                value={password}
                 onChange={handleChange}
                 name="password"
                 required
@@ -130,7 +122,7 @@ class SignupForm extends Component {
               </label>
               <input
                 type="password"
-                value={userDetail.confirmPassword}
+                value={confirmPassword}
                 onChange={handleChange}
                 name="confirmPassword"
                 required
@@ -157,15 +149,13 @@ class SignupForm extends Component {
           </div>
         </div>
       </main>
-    );
-  }
-}
+);}
 
 SignupForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  userDetail: PropTypes.object.isRequired,
-  formErrors: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired
-};
-export default SignupForm;
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    formErrors: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired
+  };
+  export default SignupForm;

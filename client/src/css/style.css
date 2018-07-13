@@ -64,6 +64,7 @@
 .small-font {
     font-size: 12px!important;
 }
+
 .card-button {
     width: 40%;
     margin: 0 auto;
@@ -161,12 +162,15 @@
     padding-top: 2rem;
   }
  .large-input {
-      min-height: 200px!important;
-      line-height: 30px!important;
-      /* padding: 400px; */
+    border: 1px solid #050107!important;
+    padding: 0 1em!important;
+    min-height: 200px!important;
+    line-height: 30px!important;
   }
   .medium-input{
-    min-height: 100px!important;
+    border: 1px solid #050107!important;
+    padding: 1em 1em!important;
+    min-height: 80px!important;
     line-height: 30px!important;
     /* padding: 400px; */
   }
@@ -195,6 +199,7 @@
   .all-borders {
     border: 1px solid #050107!important;
     padding: 0 1em!important;
+    height: 2.5rem;
 }
 .select-borders {
     border: 1px solid #520c37!important;
@@ -484,4 +489,11 @@ label {
 }
 .pagination li.active {
     background-color: #870f4f;
+}
+
+.instructions {
+    font-size: 18px!important;
+    margin-bottom: 1rem;
+    color: rgb(100, 104, 100)
+
 }
