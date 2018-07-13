@@ -14,7 +14,7 @@ import Review from "../components/review";
 import EditableReview from "../components/editableReview";
 
 /**
- * @description BusinessFormComponent
+ * @description ReviewForm component
  *
  * @extends {React.Component}
  */
@@ -22,17 +22,18 @@ class ReviewForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "",
+      message: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /**
+   *@description fetches all reviews before loads
    *
-   * @returns {JSX} JSX
+   * @returns {array} array of review objects
    *
-   * @memberof AllBusinessesComponent
+   * @memberof ReviewForm component
    */
   componentDidMount() {
     const businessId = this.props.businessId;
@@ -40,18 +41,19 @@ class ReviewForm extends Component {
   }
 
   /**
+   *@description handles review submission
    *
+   * @param {obj} event object
    *
+   * @memberof ReviewForm component
    * @returns {func} funtion
-   *
-   * @memberof ReviewFormComponent
    */
   handleSubmit(event) {
     event.preventDefault();
-    const businessId = this.props.businessId;
+    const { businessId, userData } = this.props;
     const review = {};
     review.description = this.state.message;
-    review.username = this.props.userData.user.username;
+    review.username = userData.user.username;
     this.props.postReview(businessId, review);
     this.setState({
       ...this.state,
@@ -60,11 +62,12 @@ class ReviewForm extends Component {
   }
 
   /**
+   *@description handles changes in review form
    *
+   * @param {obj} event object
    *
+   * @memberof ReviewForm component
    * @returns {func} funtion
-   *
-   * @memberof ReviewFormComponent
    */
   handleChange(event) {
     this.setState({
@@ -74,46 +77,45 @@ class ReviewForm extends Component {
   }
 
   /**
+   * @description renders review form alongside all reviews
+   * @method render
    *
-   *
-   * @returns {JSX} JSX
-   *
-   * @memberof ReviewFormComponent
+   * @memberof ReviewForm component
+   * @returns { jsx } business registration page
    */
   render() {
     const message = this.state.message;
     const handleChange = this.handleChange;
-    const allReviews = this.props.reviewData.reviews;
-    const editingIndex = this.props.reviewData.editingIndex;
+    const { reviews, editingIndex } = this.props.reviewData;
     const reviewLabel = localStorage.token
       ? "Give a review"
       : "login to give a review";
     // generate array of reviews or null if no review present
     const myReviews =
-      allReviews.length > 0 ? (
-        allReviews.map((PresentReview, index) => {
-            if (PresentReview.id !== editingIndex) {
-                return (
-                    <Review
-                      key={index}
-                      review={PresentReview}
-                      businessId={this.props.businessId}
-                      reviewerId={this.props.userData.user.id}
-                      deleteReview={this.props.deleteReview}
-                      makeEditable = {this.props.makeEditable}
-                    />
-                  )
-            } else {
-                return (
-                    <EditableReview
-                      key={index}
-                      review={PresentReview}
-                      businessId={this.props.businessId}
-                      updateReview={this.props.updateReview}
-                      makeEditable = {this.props.makeEditable}
-                    />
-                  )
-            }; 
+      reviews.length > 0 ? (
+        reviews.map((PresentReview, index) => {
+          if (PresentReview.id !== editingIndex) {
+            return (
+              <Review
+                key={index}
+                review={PresentReview}
+                businessId={this.props.businessId}
+                userId={this.props.userData.user.id}
+                deleteReview={this.props.deleteReview}
+                makeEditable={this.props.makeEditable}
+              />
+            );
+          } else {
+            return (
+              <EditableReview
+                key={index}
+                review={PresentReview}
+                businessId={this.props.businessId}
+                updateReview={this.props.updateReview}
+                makeEditable={this.props.makeEditable}
+              />
+            );
+          }
         })
       ) : (
         <h6 className="grey-text"> Be the first to give us a review </h6>
@@ -126,7 +128,7 @@ class ReviewForm extends Component {
           <div className="row">
             <form onSubmit={this.handleSubmit}>
               <div className="row">
-                <div className=" input-field all-borders">
+                <div className=" input-field">
                   <textarea
                     value={message}
                     onChange={handleChange}

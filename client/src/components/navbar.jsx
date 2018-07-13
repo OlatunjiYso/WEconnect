@@ -1,44 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { SideNav, Navbar } from 'react-materialize'
+import { SideNav, SideNavItem, Button, Navbar, Dropdown, NavItem } from 'react-materialize';
 import PropTypes from 'prop-types';
 
 /**
- * @className NavbarComponent
+ * @description renders the navbar
+ * @function NavBar
  * 
- * @extends {React.Component}
+ * @param { object } props - data passed from parent component
+ * 
+ * @returns { jsx } jsx - a navbar component
  */
-class NavBar extends Component {
-    /**
-    *
-    *
-    * @returns {JSX} JSX
-    * 
-    * @memberof NavBarComponent
-    */
-    render() {
-        const signInOrLogout = (this.props.loggedIn) ?
+const NavBar = (props) => {
+    const { loggedIn, logout } = props;
+    const signInOrLogout = (loggedIn) ?
             <li>
-                <Link to="#!" onClick={this.props.logout} className="white-text">Logout</Link>
+                <Link to="#!" onClick={logout} className="white-text">Logout</Link>
             </li> :
             <li>
                 <Link to="/login" className="white-text">Sign In</Link>
             </li>
 
-        const signupOrNull = (this.props.loggedIn) ? null :
+        const signupOrNull = (loggedIn) ? null :
             <li>
                 <Link to="/signup" className="white-text">Sign Up</Link>
             </li>
 
-        const myProfileOrNull = (this.props.loggedIn) ?
+        const myProfileOrNull = (props.loggedIn) ?
             <li>
                 <Link to="/userProfile" className="white-text">My Profile</Link>
             </li> : null
 
-
-        return (
-                <nav>
-                    <div className="nav-wrapper nav-color pink darken-4">
+    return (
+        <div>
+        <nav className="pink darken-4">
+                    <div className="nav-wrapper nav-color pink darken-4 container">
                         <Link to="/" className=" Sofia brand-logo  logo green-text text-lighten-5">WEconnect</Link>
                         <div>
                         <ul className="right hide-on-med-and-down head-font">
@@ -59,29 +55,25 @@ class NavBar extends Component {
                             className="hide-on-large-only"
                         >
                             <ul className="head-font">
-                                <li>
-                                    <Link to="/login" className="white-text">Sign In</Link>
-                                </li>
-                                <li>
-                                    <Link to="/signup" className="white-text">Sign Up</Link>
-                                </li>
-                                <li>
-                                    <Link to="/userProfile" className="white-text">My Profile</Link>
-                                </li>
-                                <li>
-                                    <Link to="/businesses" className="white-text">All</Link>
-                                </li>
+                            {signInOrLogout}
+                            {signupOrNull}
+                            {myProfileOrNull}
+                            <li>
+                                <Link to="/businesses" className="white-text">All</Link>
+                            </li>
                             </ul>
                         </SideNav>
                         </div>
                     </div>
                 </nav>
-        )
-    }
-}
-Navbar.propTypes = {
-    loggedIn: PropTypes.string.isRequired,
-    logout: PropTypes.func.isRequired,
-}
+    </div>
+);}
 
 export default NavBar;
+
+NavBar.propTypes = {
+    loggedIn: PropTypes.string,
+    logout: PropTypes.func.isRequired,
+  };
+
+  

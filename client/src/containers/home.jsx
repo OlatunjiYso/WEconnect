@@ -43,13 +43,13 @@ class Home extends Component {
         history.push('/businesses');
     }
 
-    /** 
-    *
-    *
-    * @returns {JSX} JSX
-    * 
-    * @memberof FooterComponent
-    */
+   /**
+   * @description renders the landing page
+   * @method render
+   *
+   * @memberof Home component
+   * @returns { jsx } landing page
+   */
     render() {
         return (
             <div>
@@ -74,11 +74,11 @@ class Home extends Component {
                                 <p>
                                     <span className="pink-text text-darken-4 hide-on-med-and-down">WEconnect brings clients and businesses together</span>
                                 </p>
-                                <button className="btn btn-large pink darken-4 white-text">
-                                    <Link to="/signup" className="white-text">
-                                        Start Here
+                                    <Link to="/signup" className="white-text">   
+                                    <button className="btn btn-large pink darken-4 white-text">
+                                      Start Here
+                                      </button>
                                   </Link>
-                                </button>
                             </div>
                         </div>
                     </div>

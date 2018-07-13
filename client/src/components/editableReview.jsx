@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * @s FooterComponent
+ * @description component class for editing reviews
+ * 
+ * @class EditableReview
  * 
  * @extends {React.Component}
  */
@@ -18,43 +20,47 @@ class EditableReview extends Component {
         this.cancelEdit = this.cancelEdit.bind(this);
     }
 
-
-    /** 
-    *
-    *
-    * @returns {func} funtion
-    * 
-    * @memberof ReviewControls Component
-    */
+ /**
+   * @description handles submitting a review
+   * @method EditableReview
+   *
+   * @param { object } event - event object
+   *
+   * @returns { func } function that persists review
+   * @memberof ReviewControls Component
+   */
    handleSubmit(event) {
     event.preventDefault();
-    const { businessId } = this.props;
-    const reviewId = this.props.review.id
+    const { businessId, review } = this.props;
+    const reviewId = review.id
     const newReview = {};
     newReview.description = this.state.updated;
     this.props.updateReview(businessId, reviewId, newReview);
     this.props.makeEditable(null);
 }
 
-/** 
-    *@description - cancels editing of a review
-    *
-    * @returns {func} funtion
-    * 
-    * @memberof ReviewControls Component
-    */
+/**
+   * @description exits edit mode
+   * @method EditableReview
+   *
+   * @param { object } event - event object
+   *
+   * @returns { null } no return, exits edit mode
+   * @memberof ReviewControls Component
+   */
    cancelEdit(event) {
     event.preventDefault();
     this.props.makeEditable(null);
 }
-
-    /** 
-    *@description - handles changes in form
-    *
-    * @returns {func} funtion
-    * 
-    * @memberof ReviewFormComponent
-    */
+ /**
+   * @description handles changes in input field
+   * @method EditableReview
+   *
+   * @param { object } event - event object
+   *
+   * @returns { func } function that respond to changes
+   * @memberof ReviewControls Component
+   */
    handleChange(event) {
     event.preventDefault();
     this.setState({
@@ -62,14 +68,13 @@ class EditableReview extends Component {
         updated: event.target.value
     });
 }
-
-    /** 
-    *@description - sends page to be rendered
-    *
-    * @returns {JSX} JSX
-    * 
-    * @memberof Review Component
-    */
+ /**
+   * @description renders the review form
+   * @method EditableReview
+   *
+   * @returns { jsx } editable review form
+   * @memberof ReviewControls Component
+   */
     render() {
         return (
             <div>
@@ -87,7 +92,8 @@ class EditableReview extends Component {
     }
 }
 EditableReview.propTypes = {
-    review: PropTypes.object.isRequired
+    review: PropTypes.object.isRequired,
+    businessId: PropTypes.number.isRequired
 }
 
 export default EditableReview;

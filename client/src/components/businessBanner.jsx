@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-
+/**
+ * @description renders the top section of a business page
+ * @function BusinessBanner
+ * 
+ * @param { object } business - business object to be rendered
+ * 
+ * @returns { jsx } jsx - displays top section of business page
+ */
 const BusinessBanner = ({business}) => {
     const { image, name } = business;
     return (
@@ -20,7 +27,8 @@ export default BusinessBanner;
 
 BusinessBanner.propTypes = {
     business: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
     }).isRequired,
   };
+  

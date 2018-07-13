@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 
 import { deleteBusiness } from "../actions/business";
-import setToken from "../helpers/authorization";
 import history from "../history";
 import Footer from "../components/footer";
 import Navbar from "./nav";
 import bin from "../assets/images/delete.png";
+
 /**
  * @class DeleteBusiness
  *
@@ -24,17 +24,29 @@ class DeleteBusiness extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /**
+   *@description runs just before page loads
+   *@method componentWillMount
+   *
+   * @param {obj} event
+   *
+   * @memberof DeleteBusiness Component
+   * @returns {func} funtion
+   */
   componentWillMount() {
     if (!this.props.data.business.name) {
       history.push("/userProfile");
     }
   }
+
   /**
    *@description handles change in input field
+   *@method handleChange
    *
-   * @returns {func} funtion
+   * @param {obj} event
    *
    * @memberof DeleteBusiness Component
+   * @returns {func} funtion
    */
   handleChange(event) {
     const name = event.target.name;
@@ -45,6 +57,14 @@ class DeleteBusiness extends Component {
     });
   }
 
+  /**
+   *@description handles change in input field
+   *@method handleSubmit
+   *
+   * @returns {func} funtion
+   *
+   * @memberof DeleteBusiness Component
+   */
   handleSubmit(event) {
     event.preventDefault();
     const pass = this.state;
@@ -58,11 +78,10 @@ class DeleteBusiness extends Component {
    * @memberof DeleteBusiness Component
    */
   render() {
-    const formErrors = this.props.data.errors;
-    const isFetching = this.props.data.awaitingResponse;
+    const {awaitingResponse, business} = this.props.data;
 
     // Display spinner
-    const spinner = isFetching ? (
+    const spinner = awaitingResponse ? (
       <span className="form-response"> Please wait .... </span>
     ) : null;
 
@@ -72,8 +91,8 @@ class DeleteBusiness extends Component {
         <main>
           <div className="row">
             <div className="top-pad center">
-              <h4 className="green-text text-darken-2">
-                Before you delete "{this.props.data.business.name}"
+              <h4 className="green-text text-darken-2 top-gap">
+                Before you delete "{business.name}"
               </h4>
               <img src={bin} className="responsive-img" />
               <h5 className="pink-text text-darken-4">

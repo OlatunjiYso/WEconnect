@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 import history from '../history';
 import Footer from "../components/footer";
 import Nav from "./nav";
-import UserBusiness from "../components/user_business";
+import UserBusiness from "../components/userBusiness";
 import { fetchMyBusinesses } from "../actions/business";
-import profilePicture from "../assets/images/cameras.jpg";
 
 /**
  * @class UserProfileComponent
@@ -22,9 +21,9 @@ class UserProfile extends Component {
 
   /**
    *
-   *@description runs call that fetches nusr business
+   *@description runs call that fetch user businesses
    *
-   *@returns {JSX} JSX
+   *@returns {func} function
    *
    * @memberof UserProfileComponent
    */
@@ -34,25 +33,27 @@ class UserProfile extends Component {
   }
     this.props.fetchMyBusinesses();
   }
+
   /**
+   * @description renders the user profile page
+   * @method render
    *
-   * @returns {JSX} JSX
-   *
-   * @memberof UserProfileComponent
+   * @memberof BusinessRegForm component
+   * @returns { jsx } business registration page
    */
   render() {
-    const { businessData } = this.props;
-    const username = this.props.userData.user.username;
+    const { businessData, userData } = this.props;
+    const { myBusinesses } = businessData;
+    const {username} = userData.user;
 
     // Generate an array of businesses if the user has any.
-    const myBusinesses =
-      businessData.myBusinesses.length > 0
-        ? businessData.myBusinesses.map((business, index) => {
+    const allMyBusinesses =
+      myBusinesses.length > 0
+        ? myBusinesses.map((business, index) => {
             return (
               <UserBusiness
                 key={index}
                 userBusiness={business}
-                businesssPic={profilePicture}
               />
             );
           })
@@ -60,7 +61,7 @@ class UserProfile extends Component {
 
     // Generate a suitable header if or not, user has businesses
     const sectionHeading =
-      businessData.myBusinesses.length > 0 ? (
+      myBusinesses.length > 0 ? (
         <span> Feel free to manage your business outfits </span>
       ) : (
         <span> You are yet to add a business </span>
@@ -88,22 +89,6 @@ class UserProfile extends Component {
               </Link>
           </div>
           </div>
-          {/* <div className="row container dashboard">
-            <div className="col s12 m6 offset-m3">
-              <Link to="/registrationGuide" className="btn-edit btn left-gap center">
-                {" "}
-                Add Business
-              </Link>
-              <Link to="/updateProfile" className="btn-edit btn">
-                {" "}
-                Update Profile
-              </Link>
-            </div>
-            <div className="col s12 m6">
-             
-            </div>
-          </div> */}
-
           <div className="row top-pad container">
             <div className="col s12">
               <div className="col s12 container">
@@ -111,7 +96,7 @@ class UserProfile extends Component {
                   {sectionHeading}
                 </h4>
               </div>
-              <div className="row ">{myBusinesses}</div>
+              <div className="row ">{allMyBusinesses}</div>
             </div>
             <div className="col s2 top-gap-much" />
           </div>
