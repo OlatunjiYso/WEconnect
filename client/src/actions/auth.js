@@ -1,11 +1,9 @@
 
-import { alertSuccess } from '../actions/flashMessage';
+import { alertSuccess } from './flashMessage';
 import history from '../history';
 import userApi from '../service/userApi';
 import setToken from '../helpers/authorization';
-import {
-    MAKING_AUTH_REQUEST, SIGNIN_REQUEST_SUCCESS, SIGNUP_REQUEST_SUCCESS, SIGNIN_REQUEST_ERROR, SIGNUP_REQUEST_ERROR, ON_BOARDING_SUCCESS, SET_CURRENT_USER
-} from '../actions/types';
+import { MAKING_AUTH_REQUEST, SIGNIN_REQUEST_SUCCESS, SIGNUP_REQUEST_SUCCESS, SIGNIN_REQUEST_ERROR, SIGNUP_REQUEST_ERROR, ON_BOARDING_SUCCESS, SET_CURRENT_USER } from './types';
 
 
 /**
@@ -39,8 +37,6 @@ export const isRequesting = bool => ({
 *
 * @return {obj} -actionable object containing type and payload
 */
-
-
 export const signinFailure = error => ({
     type: SIGNIN_REQUEST_ERROR,
     error
@@ -100,7 +96,7 @@ export const onBoardingSuccess = () => ({
 export const login = userDetails => (dispatch) => {
     dispatch(isRequesting(true));
     const user = {};
-    userApi.login(userDetails)
+    return userApi.login(userDetails)
         .then((response) => {
             dispatch(signinSuccess(response.data));
             dispatch(isRequesting(false));
@@ -110,12 +106,19 @@ export const login = userDetails => (dispatch) => {
             user.username = response.data.username;
             user.email = response.data.email;
             dispatch(setCurrentUser(user));
-            history.push('/');
+            try {
+                history.push('/');
+            } catch (error) {
+                return;
+            }
             alertSuccess('You are logged in');
+            console.log(response.data.token, user);
         })
         .catch((error) => {
-            dispatch(isRequesting(false));
-            dispatch(signinFailure(error.response));
+            if (error) {
+                dispatch(isRequesting(false));
+                dispatch(signinFailure(error.response));
+            }
         });
 };
 
@@ -128,17 +131,21 @@ export const login = userDetails => (dispatch) => {
 */
 export const signup = newUser => (dispatch) => {
     dispatch(isRequesting(true));
-    userApi.signup(newUser)
+    return userApi.signup(newUser)
         .then(() => {
             dispatch(isRequesting(false));
             dispatch(signupSuccess(newUser));
-            history.push('/welcome');
+            try {
+                history.push('/welcome');
+            } catch (error) {
+                return;
+            }
             alertSuccess('Welcome!');
         })
         .catch((error) => {
             dispatch(signupFailure(error.response));
             dispatch(isRequesting(false));
-             window.scroll(0, 60);
+            window.scroll(0, 60);
         });
 };
 
@@ -152,7 +159,7 @@ export const signup = newUser => (dispatch) => {
 export const onBoardUser = newUser => (dispatch) => {
     dispatch(isRequesting(true));
     const user = {};
-    userApi.login(newUser)
+    return userApi.login(newUser)
         .then((response) => {
             dispatch(isRequesting(false));
             dispatch(onBoardingSuccess());
@@ -162,7 +169,11 @@ export const onBoardUser = newUser => (dispatch) => {
             user.username = response.data.username;
             user.email = response.data.email;
             dispatch(setCurrentUser(user));
-            history.push('/');
+            try {
+                history.push('/');
+            } catch (error) {
+                return;
+            }
             alertSuccess('You are logged in');
         })
         .catch((error) => {

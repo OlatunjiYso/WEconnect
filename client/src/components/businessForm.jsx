@@ -27,7 +27,7 @@ const BusinessForm = props => {
       <div className=" col s8 offset-s2 m6 offset-m3 left-align error-box bottom-gap">
         {formErrors.data.errors.map((eachError, index) => {
           return (
-            <h6 key={index}>
+            <h6 key={index} id="validationErrors">
               <i className="material-icons red-text tiny">clear</i>
               {eachError}
             </h6>
@@ -40,7 +40,7 @@ const BusinessForm = props => {
   const conflictErrors =
     formErrors.status === 409 ? (
       <div className="col s8 offset-s2 m6 offset-m3 center-align error-box bottom-gap">
-        <h6>
+        <h6 id="conflictErrors">
           <i className="material-icons red-text tiny">clear</i>{" "}
           {formErrors.data.message}
         </h6>
@@ -50,6 +50,7 @@ const BusinessForm = props => {
   // Display asyncronous call progress feedback
   const spinner = props.isFetching ? (
     <img
+      id="spinner"
       className="responsive-img left-gap"
       src={loader}
       style={{ height: "40px", width: "40px" }}
@@ -73,6 +74,7 @@ const BusinessForm = props => {
             </h6>
             <div className="input-field  all-borders">
               <input
+                id="name"
                 type="text"
                 value={business.name}
                 onChange={handleChange}
@@ -93,6 +95,7 @@ const BusinessForm = props => {
             </h6>
             <div className=" input-field no-top-gap">
               <Input
+                id="state"
                 s={12}
                 type="select"
                 value={business.state}
@@ -118,6 +121,7 @@ const BusinessForm = props => {
             </h6>
             <div className=" input-field no-top-gap">
               <Input
+                id="category"
                 s={12}
                 type="select"
                 value={business.category}
@@ -164,6 +168,7 @@ const BusinessForm = props => {
             </h6>
             <div className="input-field all-borders ">
               <input
+                id="email"
                 type="email"
                 value={business.email}
                 onChange={handleChange}
@@ -183,6 +188,7 @@ const BusinessForm = props => {
             </h6>
             <div className="input-field all-borders ">
               <input
+                id="phone"
                 type="text"
                 value={business.phone}
                 onChange={handleChange}
@@ -201,6 +207,7 @@ const BusinessForm = props => {
             </h6>
             <div className="input-field all-borders">
               <input
+                id="city"
                 type="text"
                 value={business.city}
                 onChange={handleChange}
@@ -224,6 +231,7 @@ const BusinessForm = props => {
             </h6>
             <div className="">
               <textarea
+                id="about"
                 value={business.about}
                 onChange={handleChange}
                 name="about"
@@ -253,6 +261,7 @@ const BusinessForm = props => {
                 />
               </div>
               <input
+                id="imageUpload"
                 type="file"
                 accept="image/png, image/png, image/jpeg"
                 onChange={handleImageChange}

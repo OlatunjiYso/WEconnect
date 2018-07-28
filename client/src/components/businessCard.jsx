@@ -56,7 +56,7 @@ export default BusinessCard;
 
 BusinessCard.propTypes = {
   business: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     image: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     state: PropTypes.string.isRequired,

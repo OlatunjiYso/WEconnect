@@ -31,9 +31,9 @@ const userUpdateForm = props => {
   // Display password mismatch status progressively as user types in
   let reportMatch =
     confirmNewPassword !== newPassword ? (
-      <i className="material-icons red-text">clear</i>
+      <i className="material-icons red-text" id="mismatchedPassword">clear</i>
     ) : (
-      <i className="material-icons green-text">check</i>
+      <i className="material-icons green-text" id="matchedPassword">check</i>
     );
   // Display asyncronous call progress feedback
   const spinner = isFetching ? (
@@ -41,14 +41,15 @@ const userUpdateForm = props => {
   ) : null;
   // construct details update form
   const detailsForm = (
-    <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket">
+    <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket" >
       <h5 className="1form-heading center-align grey-text text-darken-2">
         {" "}
         Edit your user details here{" "}
       </h5>
-      <form onSubmit={updateUser}>
+      <form onSubmit={updateUser} id="detailsForm">
         <label className="form-label">Enter new email: </label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={handleChange}
@@ -81,7 +82,7 @@ const userUpdateForm = props => {
   // construct password update form
   const hideButton = confirmNewPassword !== newPassword ? true : false;
   const passwordForm = (
-    <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket">
+    <div className="col s10 offset-s1 m6 offset-m3 grees form-jacket" id="passwordForm">
       <h5 className="1form-heading center-align grey-text text-darken-2">
         {" "}
         Change your password{" "}

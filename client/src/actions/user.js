@@ -61,7 +61,7 @@ export const setCurrentUser = user => ({
 export const changePassword = passwords => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    userApi.changePassword(passwords)
+    return userApi.changePassword(passwords)
         .then((response) => {
             dispatch(isRequesting(false));
             alertSuccess(response.data.message);
@@ -88,7 +88,7 @@ export const changePassword = passwords => (dispatch) => {
 export const changeDetails = (userId, details) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    userApi.changeDetails(userId, details)
+    return userApi.changeDetails(userId, details)
         .then((response) => {
             const user = {};
             const newToken = jwt.sign(
