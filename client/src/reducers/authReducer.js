@@ -32,13 +32,12 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 response: action.response
             };
-        case 'ONBOARDING_SUCCESS':
+        case 'ON_BOARDING_SUCCESS':
             return {
                 ...state,
                 response: action.response
             };
-            
-        case 'SET_CURRENT_USER':
+       case 'SET_CURRENT_USER':
             return {
                 ...state,
                 user: action.user

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SideNav, SideNavItem, Button, Navbar, Dropdown, NavItem } from 'react-materialize';
+import { SideNav } from 'react-materialize';
 import PropTypes from 'prop-types';
 
 /**

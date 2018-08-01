@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import LocalStorageMock from './client/src/mocks/localStorageMock';
 
-
 // React 16 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 

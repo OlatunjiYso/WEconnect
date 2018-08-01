@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All tests for manage business page it should render self should match snapshot 1`] = `<Connect(ManageBusiness) />`;

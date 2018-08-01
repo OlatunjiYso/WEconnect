@@ -2,7 +2,6 @@ const webpack = require('webpack');
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const paths = {
@@ -30,7 +29,7 @@ module.exports = {
         // allow .env to be availableon frontend
         new webpack.EnvironmentPlugin([
             'SECRET_KEY'
-          ]),
+        ]),
     ],
     module: {
         rules: [
@@ -51,9 +50,9 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
-                  'file-loader',
+                    'file-loader',
                 ],
-              },
+            },
         ],
     },
     devtool: 'inline-source-map',

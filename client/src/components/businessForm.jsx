@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Modal } from "react-materialize";
+import { Input } from "react-materialize";
 import PropTypes from "prop-types";
 
 import loader from "../assets/images/loader.gif";

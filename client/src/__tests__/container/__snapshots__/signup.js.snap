@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All tests for signup page Tests for mounted wrapper should mount correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "blank",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(Signup)>
+        <Signup
+          data={
+            Object {
+              "awaitingResponse": true,
+              "signupErrors": Object {
+                "err": 0,
+              },
+            }
+          }
+          signup={[Function]}
+        >
+          <div
+            id="signupPage"
+          >
+            <SignupForm
+              formErrors={
+                Object {
+                  "err": 0,
+                }
+              }
+              handleChange={[Function]}
+              handleSubmit={[Function]}
+              isFetching={true}
+              passwordMismatch={null}
+              user={
+                Object {
+                  "confirmPassword": "",
+                  "email": "",
+                  "firstname": "",
+                  "lastname": "",
+                  "password": "",
+                  "username": "",
+                }
+              }
+            >
+              <main>
+                <div
+                  className="row head-font top-pad-much "
+                >
+                   
+                  <div
+                    className="col s11 m6 offset-m3  l4 offset-l4 form-jacket"
+                  >
+                    <h4
+                      className="cform-heading pink-text text-darken-4"
+                    >
+                      <span
+                        className="green-border"
+                      >
+                         Signup 
+                      </span>
+                    </h4>
+                    <form
+                      onSubmit={[Function]}
+                    >
+                      <label
+                        className="form-label"
+                      >
+                        Firstname: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="firstname"
+                        name="firstname"
+                        onChange={[Function]}
+                        required={true}
+                        type="text"
+                        value=""
+                      />
+                      <label
+                        className="form-label"
+                      >
+                        Lastname: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="lastname"
+                        name="lastname"
+                        onChange={[Function]}
+                        required={true}
+                        type="text"
+                        value=""
+                      />
+                      <label
+                        className="form-label"
+                      >
+                        Email: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="email"
+                        name="email"
+                        onChange={[Function]}
+                        required={true}
+                        type="email"
+                        value=""
+                      />
+                      <label
+                        className="form-label"
+                      >
+                        Username: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="username"
+                        name="username"
+                        onChange={[Function]}
+                        required={true}
+                        type="text"
+                        value=""
+                      />
+                      <label
+                        className="form-label"
+                      >
+                         Password: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="password"
+                        name="password"
+                        onChange={[Function]}
+                        required={true}
+                        type="password"
+                        value=""
+                      />
+                      <label
+                        className="form-label"
+                      >
+                        Confirm Password: 
+                      </label>
+                      <input
+                        className="form-input white"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        onChange={[Function]}
+                        required={true}
+                        type="password"
+                        value=""
+                      />
+                      <div
+                        className="row"
+                      >
+                        <div
+                          className="col s4"
+                        >
+                          <input
+                            className="form-btn btn center-align"
+                            disabled={false}
+                            type="submit"
+                            value="join"
+                          />
+                        </div>
+                        <div
+                          className="col s6"
+                        >
+                          <img
+                            className="responsive-img left-gap"
+                            id="spinner"
+                            src="test-file-stub"
+                            style={
+                              Object {
+                                "height": "40px",
+                                "width": "40px",
+                              }
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="center-align top-pad"
+                      >
+                        <Link
+                          className="pink-text text-darken-4"
+                          replace={false}
+                          to="/login"
+                        >
+                          <a
+                            className="pink-text text-darken-4"
+                            href="/login"
+                            onClick={[Function]}
+                          >
+                            Already registered?
+                             
+                            <span
+                              className="auth-hover"
+                            >
+                               Login here 
+                            </span>
+                          </a>
+                        </Link>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </main>
+            </SignupForm>
+            <Footer>
+              <div>
+                <footer
+                  className="page-footer pink darken-4 body-font white-text"
+                >
+                  <div
+                    className="row"
+                  >
+                    <div
+                      className="col m3 s12"
+                    >
+                      <h5
+                        className="Sofia"
+                      >
+                        WEconnect
+                      </h5>
+                    </div>
+                    <div
+                      className="col m4 s12"
+                    >
+                      <a
+                        className="white-text right"
+                      >
+                        © 2018 Andela, Lagos Nigeria
+                      </a>
+                    </div>
+                    <div
+                      className="col m4 s12"
+                    >
+                      <a
+                        className="white-text right"
+                      >
+                        Andela Bootcamp project cycle xxx
+                      </a>
+                    </div>
+                  </div>
+                </footer>
+              </div>
+            </Footer>
+          </div>
+        </Signup>
+      </Connect(Signup)>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
+
+exports[`All tests for signup page Tests for rendering shallow wrapper should match snapshot 1`] = `<Connect(Signup) />`;
+
+exports[`All tests for signup page it should render self should match snapshot 1`] = `<Connect(Signup) />`;

@@ -5,20 +5,16 @@ import LoginContainer from '../../containers/login';
 
 describe('All tests for login page', () => {
   
-  const initialState = {
-    signupErrors: {},
-    signinErrors: {},
-    awaitingResponse: false,
-    user: null,
-    response: {}
-};
+  const initialState = {};
 
   const store = mockStore(initialState);
-
+  const wrapper = shallow(<Provider store={store}><LoginContainer/></Provider>);
   describe('it should render self', ()=>{
     it('it should render login page', () => {
-      const wrapper = shallow(<Provider store={store}><LoginContainer /></Provider>);
       expect(wrapper.length).toEqual(1);
     });
-  }) 
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  }); 
 });
