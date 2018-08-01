@@ -112,7 +112,6 @@ export const login = userDetails => (dispatch) => {
                 return;
             }
             alertSuccess('You are logged in');
-            console.log(response.data.token, user);
         })
         .catch((error) => {
             if (error) {
@@ -162,7 +161,6 @@ export const onBoardUser = newUser => (dispatch) => {
     return userApi.login(newUser)
         .then((response) => {
             dispatch(isRequesting(false));
-            dispatch(onBoardingSuccess());
             localStorage.setItem('token', response.data.token);
             setToken(response.data.token);
             user.id = response.data.id;
@@ -170,11 +168,12 @@ export const onBoardUser = newUser => (dispatch) => {
             user.email = response.data.email;
             dispatch(setCurrentUser(user));
             try {
-                history.push('/');
-            } catch (error) {
-                return;
-            }
-            alertSuccess('You are logged in');
+                history.push('/businesses');
+                } catch (error) {
+                        return;
+                    }
+             alertSuccess('You are logged in');
+            dispatch(onBoardingSuccess());
         })
         .catch((error) => {
             dispatch(signinFailure(error.response));
