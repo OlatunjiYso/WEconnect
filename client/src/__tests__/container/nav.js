@@ -1,20 +1,26 @@
-import React from "react";
+import React from 'react';
+import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import ConnectedNav from '../../containers/review_form';
 
-import Nav from '../../containers/nav';
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
-describe('All tests for Nav', () => {
-  
-  const initialState = {};
+let wrapper;
 
-  const store = mockStore(initialState);
-  const wrapper = shallow(<Provider store={store}><Nav/></Provider>);
-  describe('it should render self', ()=>{
-    it('it should render Nav', () => {
-      expect(wrapper.length).toEqual(1);
+describe('Nav bar', () => {
+  it('it should render the component successfully', () => {
+    const store = mockStore({
+      authReducers: {
+        signupErrors: {},
+        signinErrors: {},
+        awaitingResponse: false,
+        user: null,
+        response: {}
+      }
     });
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  }); 
+    wrapper = shallow(<ConnectedNav store={store} />);
+    expect(wrapper.length).toBe(1);
+  });
 });

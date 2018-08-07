@@ -1,41 +1,66 @@
-import React from "react";
-import { shallow, mount } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
-import 'materialize-css/dist/js/materialize';
+import React from 'react';
+import thunk from 'redux-thunk';
+import { shallow } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import ConnectedSignup, { Signup } from '../../containers/signup';
 
-import Signup from '../../containers/signup';
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
-describe('All tests for signup page', () => {
-  const globalState = {
-    authReducers: {
-        awaitingResponse: true,
-        signupErrors: { err: 0 }
-    }
+let props;
+const setup = () => {
+  props = {
+    data: {
+      signupErrors: {},
+      signinErrors: {},
+      awaitingResponse: false,
+      user: null,
+      response: {}
+    },
+    signup: jest.fn(() => Promise.resolve())
   };
-  const store = mockStore(globalState);
+  return shallow(<Signup {...props} />);
+}
 
-// load materialize-css
-$.prototype = jest.fn();
+let wrapper = setup();
+const action = wrapper.instance();
 
-  describe('Tests for rendering shallow wrapper', () => {
-    const shallowWrapper = shallow(<Provider store={store}><Signup /></Provider>);
-    it('it should render signup page', () => {
-      expect(shallowWrapper.length).toEqual(1);
-    });
-    it('should match snapshot', () => {
-      expect(shallowWrapper).toMatchSnapshot();
-    });
+describe('handleSubmit', () => {
+  const fakeEvent = { preventDefault: () => ({}) };
+  it('should submit signup user', () => {
+    const handleSubmit = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    action.handleSubmit(fakeEvent);
+    expect(handleSubmit).toBeCalled();
   });
+})
 
-  describe('Tests for mounted wrapper', () => {
-    
-    const mountedWrapper = mount((
-      <Provider store={store}>
-        <Router>< Signup /></Router>
-      </Provider>
-    ));
-    it('should mount correctly', () => {
-      expect(mountedWrapper).toMatchSnapshot();
-    })
-  })
+describe('handleChange', () => {
+  const fakeEvent = {
+    target: {
+      name: 'username',
+      value: 'olat'
+    },
+    preventDefault: () => ({})
+  };
+  const handleChange = jest.spyOn(wrapper.instance(), 'handleChange');
+  action.handleChange(fakeEvent);
+  expect(handleChange).toBeCalled();
+  expect(action.state.userDetail.username).toEqual('olat');
+});
+
+
+describe('All businesses', () => {
+  it('it should render the component successfully', () => {
+    const store = mockStore({
+      authReducers: {
+        signupErrors: {},
+        signinErrors: {},
+        awaitingResponse: false,
+        user: null,
+        response: {}
+      },
+    });
+    wrapper = shallow(<ConnectedSignup store={store} />);
+    expect(wrapper.length).toBe(1);
+  });
 });

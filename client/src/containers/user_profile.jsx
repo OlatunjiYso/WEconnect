@@ -79,11 +79,11 @@ class UserProfile extends Component {
               </h2>
             </div>
             <div className="row container center push-down ">
-              <Link to="/registrationGuide" className="btn-edit btn ">
+              <Link to="/registrationGuide" className="btn-edit btn" id="addBusiness">
                 {" "}
                 Add Business
               </Link>
-              <Link to="/updateProfile" className="btn-edit btn">
+              <Link to="/updateProfile" className="btn-edit btn" id="updateProfile">
                 {" "}
                 Update Profile
               </Link>

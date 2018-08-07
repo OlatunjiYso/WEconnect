@@ -15,7 +15,7 @@ import { Input, Modal } from "react-materialize";
  *
  * @extends {React.Component}
  */
-class BusinessRegForm extends Component {
+export class BusinessRegForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

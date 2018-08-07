@@ -59,7 +59,7 @@ class Home extends Component {
                         <div className="row">
                             <div className="col s10 offset-s1 m10 offset-m1 banner-image">
                                 <div className="row">
-                                    <Link to="/login">
+                                    <Link to="/">
                                         <h2 className="pink-text text-darken-4">
                                             WEco
                                     <span className="green-text text-darken-4">nn</span>

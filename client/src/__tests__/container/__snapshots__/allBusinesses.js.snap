@@ -2,4 +2,8 @@
 
 exports[`All tests for allBusinesses page it should render self should match snapshot 1`] = `<Connect(AllBusinesses) />`;
 
+exports[`All tests for allBusinesses page should match snapshot 1`] = `<Connect(AllBusinesses) />`;
+
 exports[`All tests for login page it should render self should match snapshot 1`] = `<Connect(AllBusinesses) />`;
+
+exports[`Snapshot test for allBusinesses page should match snapshot 1`] = `<Connect(AllBusinesses) />`;

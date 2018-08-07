@@ -14,10 +14,10 @@ import PropTypes from 'prop-types';
 const NavBar = (props) => {
     const { loggedIn, logout } = props;
     const signInOrLogout = (loggedIn) ?
-            <li>
+            <li id="logout">
                 <Link to="#!" onClick={logout} className="white-text">Logout</Link>
             </li> :
-            <li>
+            <li id="login">
                 <Link to="/login" className="white-text">Sign In</Link>
             </li>
 
@@ -27,7 +27,7 @@ const NavBar = (props) => {
             </li>
 
         const myProfileOrNull = (props.loggedIn) ?
-            <li>
+            <li id="userProfile">
                 <Link to="/userProfile" className="white-text">My Profile</Link>
             </li> : null
 

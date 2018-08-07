@@ -1,20 +1,56 @@
-import React from "react";
-import { shallow, mount, render } from 'enzyme';
+import React from 'react';
+import thunk from 'redux-thunk';
+import { shallow } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import ConnectedBusinessProfile, { BusinessProfile } from '../../containers/business_profile';
 
-import BusinessProfile from '../../containers/business_profile';
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
-describe('All tests for businessProfile contain', () => {
-  
-  const initialState = {};
 
-  const store = mockStore(initialState);
-  const wrapper = shallow(<Provider store={store}><BusinessProfile/></Provider>);
-  describe('it should render self', ()=>{
-    it('it should render login page', () => {
-      expect(wrapper.length).toEqual(1);
+let props;
+const setup = () => {
+  props = {
+    businessData: {
+      businesses: [],
+      business: {},
+    },
+    match: {
+      params: {
+        id: 0
+      }
+    },
+    fetchThisBusiness: jest.fn(() => Promise.resolve())
+  };
+  return shallow(<BusinessProfile {...props} />);
+}
+
+let wrapper = setup();
+const action = wrapper.instance();
+describe('componentDidMount()', () => {
+  it('should call componentDidMount()', () => {
+    const didMount = jest.spyOn(wrapper.instance(), 'componentDidMount');
+    action.componentDidMount();
+    expect(didMount).toBeCalled();
+  });
+});
+
+describe('Business Profile', () => {
+  it('it should render the component successfully', () => {
+    const store = mockStore({
+      businessReducer: {
+        businesses: [],
+        business: {},
+        filter: { state: 'location', category: 'category' },
+        myReviews: [],
+        myBusinesses: [],
+        errors: {},
+        awaitingResponse: false,
+        notFound: false,
+        pages: 1
+      }
     });
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  }); 
+    wrapper = shallow(<ConnectedBusinessProfile store={store} />);
+    expect(wrapper.length).toBe(1);
+  });
 });

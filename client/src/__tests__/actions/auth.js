@@ -118,7 +118,6 @@ describe('Test for asynchronous call', () => {
       const expectedAction = [
         { type: types.MAKING_AUTH_REQUEST, bool: true },
         { type: types.MAKING_AUTH_REQUEST, bool: false },
-        { type: types.ON_BOARDING_SUCCESS, userDetails: null },
         { type: types.SET_CURRENT_USER, user: mocks.signedInUser }
       ];
       const store = mockStore({ authData: {} });

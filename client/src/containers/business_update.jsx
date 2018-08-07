@@ -14,7 +14,7 @@ import hero from "../assets/images/profession.jpg";
  *
  * @extends {React.Component}
  */
-class BusinessUpdate extends Component {
+export class BusinessUpdate extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);

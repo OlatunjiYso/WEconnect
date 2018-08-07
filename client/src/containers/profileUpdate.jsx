@@ -13,7 +13,7 @@ import Navbar from "./nav";
  *
  * @extends {React.Component}
  */
-class ProfileUpdate extends Component {
+export class ProfileUpdate extends Component {
   constructor(props) {
     super(props);
     const { username, email } = this.props.userData.user;

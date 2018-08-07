@@ -14,7 +14,7 @@ import bin from "../assets/images/delete.png";
  *
  * @extends {React.Component}
  */
-class DeleteBusiness extends Component {
+export class DeleteBusiness extends Component {
   constructor(props) {
     super(props);
     this.state = {

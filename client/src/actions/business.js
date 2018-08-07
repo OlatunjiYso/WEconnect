@@ -4,7 +4,7 @@ import cloudConfig from '../cloudConfig';
 import { alertSuccess, alertError } from './flashMessage';
 import businessApi from '../service/businessApi';
 import userApi from '../service/userApi';
-// import history from '../history';
+import history from '../history';
 import setToken from '../helpers/authorization';
 import {
     FETCH_BUSINESSES_SUCCESS, FETCH_BUSINESS_SUCCESS, FIND_MY_BUSINESSES_SUCCESS,
@@ -210,6 +210,7 @@ export const registerBusiness = (cloudImageUrl, business) => (dispatch) => {
     return businessApi.registerBusiness(business)
         .then(() => {
             dispatch(isRequesting(false));
+
             try {
                 history.push('/userProfile');
             } catch (err) {

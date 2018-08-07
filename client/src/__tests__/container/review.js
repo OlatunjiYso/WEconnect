@@ -2,34 +2,50 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import ConnectedLogin, { Login } from '../../containers/login';
+import ConnectedReviewForm, { ReviewForm } from '../../containers/review_form';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 
 let props;
-let context;
 const setup = () => {
   props = {
-    data: {
-      signupErrors: {},
-      signinErrors: {},
-      awaitingResponse: false,
-      user: null,
-      response: {}
+    businessId: 0,
+    userData: {
+      user: {
+        id: 0
+      }
     },
-    login: jest.fn(() => Promise.resolve())
+    reviewData: {
+      awaitingResponse: false,
+      response: {},
+      reviewErrors: {},
+      reviews: [],
+      editingIndex: null
+    },
+    getAllReviews: jest.fn(() => Promise.resolve()),
+    postReview: jest.fn(() => Promise.resolve()),
+    deleteReview: jest.fn(() => Promise.resolve()),
+    updateReview: jest.fn(() => Promise.resolve()),
+    makeEditable: jest.fn(),
   };
-  return shallow(<Login {...props} />);
+  return shallow(<ReviewForm {...props} />);
 }
 
 let wrapper = setup();
 const action = wrapper.instance();
+describe('componentDidMount()', () => {
+  it('should call componentDidMount()', () => {
+    const didMount = jest.spyOn(wrapper.instance(), 'componentDidMount');
+    action.componentDidMount();
+    expect(didMount).toBeCalled();
+  });
+});
 
 describe('handleSubmit', () => {
   const fakeEvent = { preventDefault: () => ({}) };
-  it('should sign up new user', () => {
+  it('should submit search information', () => {
     const handleSubmit = jest.spyOn(wrapper.instance(), 'handleSubmit');
     action.handleSubmit(fakeEvent);
     expect(handleSubmit).toBeCalled();
@@ -39,34 +55,39 @@ describe('handleSubmit', () => {
 describe('handleChange', () => {
   const fakeEvent = {
     target: {
-      name: 'username',
-      value: 'olat'
+      name: 'message',
+      value: 'yes'
     },
     preventDefault: () => ({})
   };
   const handleChange = jest.spyOn(wrapper.instance(), 'handleChange');
   action.handleChange(fakeEvent);
   expect(handleChange).toBeCalled();
-  expect(action.state.userDetails.username).toEqual('olat');
+  expect(action.state.message).toEqual('yes');
 });
 
 
-describe('All businesses', () => {
+
+
+describe('All reviews', () => {
   it('it should render the component successfully', () => {
     const store = mockStore({
+      reviewReducer: {
+        awaitingResponse: false,
+        response: {},
+        reviewErrors: {},
+        reviews: [],
+        editingIndex: null
+      },
       authReducers: {
         signupErrors: {},
         signinErrors: {},
         awaitingResponse: false,
         user: null,
         response: {}
-      },
-      landingPageReducer: {
-        category: null,
-        state: 'location'
       }
     });
-    wrapper = shallow(<ConnectedLogin store={store} />);
+    wrapper = shallow(<ConnectedReviewForm store={store} />);
     expect(wrapper.length).toBe(1);
   });
 });
