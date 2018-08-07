@@ -80,5 +80,5 @@ To View online hosted templates, copy and paste the following link in your brows
 * [Fetch Businesses by Category] - POST https://weconnect-main.herokuapp.com/api/v1/businesses?category
 
 ## Author
-* **Olatunji Yusuf** -Aspiring Software Developer.
+* **Olatunji Yusuf** -Software Developer.
 
