@@ -15,7 +15,7 @@ import profilePicture from "../assets/images/cameras.jpg";
  *
  * @extends {React.Component}
  */
-class ManageBusiness extends Component {
+export class ManageBusiness extends Component {
   constructor(props) {
     super(props);
     this.state = {};

@@ -15,7 +15,7 @@ import business from "../dummy/one_business";
  *
  * @extends {React.Component}
  */
-class BusinessProfile extends Component {
+export class BusinessProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -9,7 +9,7 @@ import Navbar from '../components/navbar';
  * 
  * @extends {React.Component}
  */
-class Nav extends Component {
+export class Nav extends Component {
     constructor(props) {
         super(props);
         this.handleLogout = this.handleLogout.bind(this);

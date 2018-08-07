@@ -20,6 +20,7 @@ const LoginForm = (props) => {
     // display request fetching process progress
     const spinner = isFetching ? (
         <img
+          id="spinner"
           className="responsive-img left-gap"
           src={loader}
           style={{ height: "40px", width: "40px" }}
@@ -27,7 +28,7 @@ const LoginForm = (props) => {
       ) : null;
       // display signup errors
     const signinError = status ? (
-        <div className="col s8 offset-s2 m4 offset-m4 left-align error-box">
+        <div className="col s8 offset-s2 m4 offset-m4 left-align error-box" id="loginErrors">
           <h6>
             <i className="material-icons red-text tiny">priority_high</i>{" "}
             {data.message}
@@ -42,9 +43,10 @@ const LoginForm = (props) => {
             <h4 className="center head-font form-heading top-gap">
               <span className=""> Sign In </span>
             </h4>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="loginForm">
               <label className="form-label">Username: </label>
               <input
+                id="username"
                 type="text"
                 value={username}
                 onChange={handleChange}
@@ -54,6 +56,7 @@ const LoginForm = (props) => {
               />
               <label className="form-label"> Password: </label>
               <input
+              id="password"
                 type="password"
                 value={password}
                 onChange={handleChange}

@@ -18,7 +18,7 @@ import EditableReview from "../components/editableReview";
  *
  * @extends {React.Component}
  */
-class ReviewForm extends Component {
+export class ReviewForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

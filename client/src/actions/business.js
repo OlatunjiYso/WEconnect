@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import cloudConfig from '../cloudConfig';
-import { alertSuccess, alertError } from '../actions/flashMessage';
+import { alertSuccess, alertError } from './flashMessage';
 import businessApi from '../service/businessApi';
 import userApi from '../service/userApi';
 import history from '../history';
@@ -10,8 +10,8 @@ import {
     FETCH_BUSINESSES_SUCCESS, FETCH_BUSINESS_SUCCESS, FIND_MY_BUSINESSES_SUCCESS,
     FETCH_BUSINESS_FAILED, MAKING_BUSINESS_REQUEST, REGISTER_BUSINESS_FAILED, UPDATE_BUSINESS_FAILED, DELETE_BUSINESS_FAILED,
     SET_CATEGORY, CLEAR_CATEGORY
-} from '../actions/types';
-    
+} from './types';
+
 /**
  * @description - starts spinner when awaiting a response
  *
@@ -145,11 +145,11 @@ export const deleteBusinessFailure = error => ({
  * @return {obj} -actionable object containing type and payload
  */
 export const fetchAllBusinesses = (filter, pageNumber) => (dispatch) => {
-    businessApi.getAllBusinesses(filter, pageNumber)
+        return businessApi.getAllBusinesses(filter, pageNumber)
         .then((response) => {
             const { businesses } = response.data;
             const { pages } = response.data;
-            dispatch(getAllBusinessesSuccess(businesses, filter, pages));
+         dispatch(getAllBusinessesSuccess(businesses, filter, pages));
         })
         .catch((error) => {
             dispatch(businessNotFound(error.response, filter));
@@ -164,14 +164,18 @@ export const fetchAllBusinesses = (filter, pageNumber) => (dispatch) => {
  *@return {obj} -actionable object containing type and payload
  */
 export const fetchThisBusiness = businessId => (dispatch) => {
-    businessApi.getThisBusiness(businessId)
+    return businessApi.getThisBusiness(businessId)
         .then((response) => {
             const { business } = response.data;
             dispatch(getBusinessSuccess(business));
         })
         .catch((error) => {
-                dispatch(businessNotFound(error.response));
+            dispatch(businessNotFound(error.response));
+            try {
                 history.push('/businesses');
+            } catch (err) {
+                return err;
+            }
         });
 };
 
@@ -182,10 +186,10 @@ export const fetchThisBusiness = businessId => (dispatch) => {
  */
 export const fetchMyBusinesses = () => (dispatch) => {
     setToken(localStorage.token);
-    userApi.getMyBusinesses()
+    return userApi.getMyBusinesses()
         .then((response) => {
-                const { businesses } = response.data;
-                dispatch(getMyBusinessesSuccess(businesses));
+            const { businesses } = response.data;
+            dispatch(getMyBusinessesSuccess(businesses));
         })
         .catch(() => {
         });
@@ -203,10 +207,15 @@ export const registerBusiness = (cloudImageUrl, business) => (dispatch) => {
     business.image = cloudImageUrl;
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    businessApi.registerBusiness(business)
+    return businessApi.registerBusiness(business)
         .then(() => {
             dispatch(isRequesting(false));
-            history.push('/userProfile');
+
+            try {
+                history.push('/userProfile');
+            } catch (err) {
+                return err;
+            }
         })
         .catch((error) => {
             dispatch(isRequesting(false));
@@ -224,26 +233,26 @@ export const registerBusiness = (cloudImageUrl, business) => (dispatch) => {
  * @returns { function } create business action - a call to create business
  */
 export const initiateBusinessRegistration = (image, business) => (
-  (dispatch) => {
-    let cloudImageUrl = cloudConfig.defaultImageUrl;
-    dispatch(isRequesting(true));
-    if (image.imageFile.name) {
-      delete axios.defaults.headers.common.token;
-      const imageData = new FormData();
-      imageData.append('file', image.imageFile);
-      imageData.append('upload_preset', cloudConfig.uploadPreset);
-      return axios.post(cloudConfig.cloudinaryUrl, imageData)
-        .then((response) => {
-          dispatch(isRequesting(false));
-          cloudImageUrl = response.data.url;
-          return dispatch(registerBusiness(cloudImageUrl, business));
-        }).catch(() => {
-          dispatch(isRequesting(false));
-          alertError('Image upload failed');
-        });
+    (dispatch) => {
+        let cloudImageUrl = cloudConfig.defaultImageUrl;
+        dispatch(isRequesting(true));
+        if (image.imageFile.name) {
+            delete axios.defaults.headers.common.token;
+            const imageData = new FormData();
+            imageData.append('file', image.imageFile);
+            imageData.append('upload_preset', cloudConfig.uploadPreset);
+            return axios.post(cloudConfig.cloudinaryUrl, imageData)
+            .then((response) => {
+                dispatch(isRequesting(false));
+                cloudImageUrl = response.data.url;
+                return dispatch(registerBusiness(cloudImageUrl, business));
+                }).catch(() => {
+                    dispatch(isRequesting(false));
+                    alertError('Image upload failed');
+                });
+        }
+        return dispatch(registerBusiness(cloudImageUrl, business));
     }
-       return dispatch(registerBusiness(cloudImageUrl, business));
-  }
 );
 
 
@@ -258,12 +267,17 @@ export const initiateBusinessRegistration = (image, business) => (
 export const updateBusiness = (businessId, business) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    businessApi.updateBusiness(businessId, business)
+    return businessApi.updateBusiness(businessId, business)
         .then(() => {
             dispatch(isRequesting(false));
-            history.push(`/businesses/${businessId}`);
+            try {
+                history.push(`/businesses/${businessId}`);
+            } catch (err) {
+                return err;
+            }
         })
         .catch((error) => {
+            dispatch(isRequesting(false));
             dispatch(updateBusinessFailure(error.response));
         });
 };
@@ -279,28 +293,28 @@ export const updateBusiness = (businessId, business) => (dispatch) => {
  */
 export const initiateBusinessUpdate = (image, business) => (
     (dispatch) => {
-      let cloudImageUrl = business.image;
-      dispatch(isRequesting(true));
-      if (image.imageFile.name) {
-        delete axios.defaults.headers.common.token;
-        const imageData = new FormData();
-        imageData.append('file', image.imageFile);
-        imageData.append('upload_preset', cloudConfig.uploadPreset);
-        return axios.post(cloudConfig.cloudinaryUrl, imageData)
-          .then((response) => {
-            dispatch(isRequesting(false));
-            cloudImageUrl = response.data.url;
-            business.image = cloudImageUrl;
-            return dispatch(updateBusiness(business.id, business));
-          }).catch(() => {
-            dispatch(isRequesting(false));
-            alertError('Image upload failed');
-          });
-      }
-         dispatch(isRequesting(false));
-         return dispatch(updateBusiness(business.id, business));
+        let cloudImageUrl = business.image;
+        dispatch(isRequesting(true));
+        if (image.imageFile.name) {
+            delete axios.defaults.headers.common.token;
+            const imageData = new FormData();
+            imageData.append('file', image.imageFile);
+            imageData.append('upload_preset', cloudConfig.uploadPreset);
+            return axios.post(cloudConfig.cloudinaryUrl, imageData)
+                .then((response) => {
+                    dispatch(isRequesting(false));
+                    cloudImageUrl = response.data.url;
+                    business.image = cloudImageUrl;
+                    return dispatch(updateBusiness(business.id, business));
+                }).catch(() => {
+                    dispatch(isRequesting(false));
+                    alertError('Image upload failed');
+                });
+        }
+        dispatch(isRequesting(false));
+        return dispatch(updateBusiness(business.id, business));
     }
-  );
+);
 
 
 /**
@@ -314,10 +328,14 @@ export const initiateBusinessUpdate = (image, business) => (
 export const deleteBusiness = (pass, businessId) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    businessApi.deleteBusiness(pass, businessId)
-        .then(() => {
+    return businessApi.deleteBusiness(pass, businessId)
+    .then(() => {
             dispatch(isRequesting(false));
-            history.push('/userProfile');
+            try {
+                history.push('/userProfile');
+            } catch (err) {
+                return err;
+            }
             alertSuccess('Business successfully deleted');
         })
         .catch((error) => {

@@ -18,7 +18,7 @@ const UserBusiness = props => {
       <div className="col s8 offset-s2 offset-m1 m4 l3 container">
         <div className="row">
           <div className="col s12">
-            <div className="card small bottom-pad grey lighten-4 pink-margin-hover">
+            <div className="card small bottom-pad grey lighten-4 pink-margin-hover" id="myBusiness">
               <div className="card-image">
                 <img className="responsive-img" src={image} alt="bizPic" />
               </div>
@@ -28,7 +28,7 @@ const UserBusiness = props => {
                 </Link>
               </div>
               <Link to={`/manageBusiness/${id}`}>
-                <h6 className="card-button cursor white">
+                <h6 className="card-button cursor white manageBusiness">
                   <div className="center">Manage</div>
                 </h6>
               </Link>

@@ -29,39 +29,39 @@ class RegistrationGuide extends Component {
           <div className="row">
             <div className="top-pad col s12 m8 offset-m2">
               <h4 className="top-pad pink-text text-darken-3">
-              <i class="material-icons medium">security</i> Our business registration policies
+              <i className="material-icons medium">security</i> Our business registration policies
               </h4>
               <ol>
-                <li class="instructions">
+                <li className="instructions">
                   Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   accusantium doloremque laudantium, totam rem aperiam, eaque
                   ipsa
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   quae ab illo inventore veritatis et quasi architecto beatae
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   voluptas sit aspernatur aut odit aut fugit, sed quia
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   consequuntur magni dolores eos qui ratione voluptatem sequi
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
                   dolor
                 </li>
-                <li class="instructions">
+                <li className="instructions">
                   sit amet, consectetur, adipisci velit, sed quia non numquam
                   eius
                 </li>
               </ol>
 
-              <Link to="/businessRegistration">
+              <Link to="/businessRegistration" id="businessReg">
                 <h5 className=" pink-text text-darken-4 grey lighten-4 btn top-gap-much">
                   Proceed to Registration Form 
                 </h5> 

@@ -71,14 +71,14 @@ export const reviewError = error => ({
 export const getAllReviews = businessId => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    reviewApi.getAllReviews(businessId)
+    return reviewApi.getAllReviews(businessId)
         .then((response) => {
             dispatch(isRequesting(false));
             dispatch(getAllBusinessReview(response.data.reviews));
         })
         .catch((error) => {
             dispatch(isRequesting(false));
-            dispatch(getAllBusinessReview(error.response.data.reviews));
+            dispatch(reviewError(error.response.data.reviews));
         });
 };
 
@@ -94,7 +94,7 @@ export const getAllReviews = businessId => (dispatch) => {
 export const postReview = (businessId, review) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    reviewApi.postReview(businessId, review)
+    return reviewApi.postReview(businessId, review)
         .then((response) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));
@@ -103,7 +103,7 @@ export const postReview = (businessId, review) => (dispatch) => {
         })
         .catch((error) => {
             dispatch(isRequesting(false));
-            dispatch(reviewError(error.response));
+            dispatch(reviewError(error.response.status));
             if (error.response.status === 400) {
                 alertError('Please enter your review');
             } else {
@@ -124,7 +124,7 @@ export const postReview = (businessId, review) => (dispatch) => {
 export const updateReview = (businessId, reviewId, newReview) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    reviewApi.updateReview(businessId, reviewId, newReview)
+    return reviewApi.updateReview(businessId, reviewId, newReview)
         .then((response) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));
@@ -132,7 +132,7 @@ export const updateReview = (businessId, reviewId, newReview) => (dispatch) => {
             dispatch(getAllReviews(businessId));
         })
         .catch((error) => {
-            dispatch(isRequesting(true));
+            dispatch(isRequesting(false));
             dispatch(reviewError(error.response));
         });
 };
@@ -148,7 +148,7 @@ export const updateReview = (businessId, reviewId, newReview) => (dispatch) => {
 export const deleteReview = (businessId, reviewId) => (dispatch) => {
     setToken(localStorage.token);
     dispatch(isRequesting(true));
-    reviewApi.deleteReview(businessId, reviewId)
+    return reviewApi.deleteReview(businessId, reviewId)
         .then((response) => {
             dispatch(isRequesting(false));
             dispatch(reviewSuccess(response.data));

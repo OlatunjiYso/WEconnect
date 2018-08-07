@@ -63,13 +63,13 @@ class ReviewControls extends Component {
 
     return (
       <div>
-        <Link className="left cursor" to="#!" onClick={this.makeEdits}>
+        <Link className="left cursor" to="#!" onClick={this.makeEdits} id= "editReviewPen">
           <i className="material-icons green-text">edit</i>
         </Link>
 
         <span className="right-align cursor">
           <Modal
-            id="deleteReviewModal"
+            id="deleteReviewBin"
             trigger={
               <i className="material-icons tinyy red-text">delete_forever</i>
             }
@@ -79,6 +79,7 @@ class ReviewControls extends Component {
               <button
                 className="center-align red-text btn grey lighten-5"
                 onClick={this.handleDelete}
+                id="#deletebutton"
               >
                 Yes
               </button>
@@ -92,7 +93,7 @@ class ReviewControls extends Component {
 }
 ReviewControls.propTypes = {
   review: PropTypes.object.isRequired,
-  businessId: PropTypes.string.isRequired,
+  businessId: PropTypes.number.isRequired,
   deleteReview: PropTypes.func.isRequired,
   makeEditable: PropTypes.func.isRequired,
 };

@@ -14,7 +14,7 @@ import BusinessCard from "../components/businessCard";
  *
  * @extends {React.Component}
  */
-class AllBusinesses extends Component {
+export class AllBusinesses extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -31,7 +31,7 @@ const Review = props => {
       />
     ) : null;
   return (
-    <div>
+    <div id="reviewCard">
       <div className="row grey-text text-darken-4 grey lighten-5">
         <p className="col s12">{description}</p>
         <h6 className="col s6 left-align grey-text">

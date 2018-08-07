@@ -16,7 +16,7 @@ class BusinessApi {
      * @return { undefined } asynchronuos call can give varying outcome
      */
     static getAllBusinesses(filter, pageNumber) {
-        return axios.get(`${rootUrl}?category=${filter.category}&&location=${filter.state}&&page=${pageNumber}`);
+         return axios.get(`${rootUrl}?category=${filter.category}&&location=${filter.state}&&page=${pageNumber}`);
     }
 
     /**

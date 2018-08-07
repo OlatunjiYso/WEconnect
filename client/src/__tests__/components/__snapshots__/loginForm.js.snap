@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All tests for login components should render the login form 1`] = `undefined`;

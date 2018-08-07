@@ -13,7 +13,7 @@ import Navbar from "./nav";
  *
  * @extends {React.Component}
  */
-class Signup extends Component {
+export class Signup extends Component {
   
   constructor(props) {
     super(props);
