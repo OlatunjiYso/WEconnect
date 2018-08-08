@@ -47,8 +47,8 @@ const Review = props => {
 Review.propTypes = {
   review: PropTypes.object.isRequired,
   userId: PropTypes.number.isRequired,
-  businessId: PropTypes.number.isRequired,
-  getAllReviews: PropTypes.func.isRequired,
+  businessId: PropTypes.string.isRequired,
+  getAllReviews: PropTypes.func,
   deleteReview: PropTypes.func.isRequired,
   makeEditable: PropTypes.func.isRequired,
 };

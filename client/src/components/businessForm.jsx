@@ -274,7 +274,7 @@ const BusinessForm = props => {
           <input
             type="submit"
             value="Create Business"
-            className="btn btn-large btn-edit "
+            className="btn btn-large btn-edit waves-effect waves-light"
           />
         </div>
       </form>

@@ -81,7 +81,7 @@ class UserProfile extends Component {
             <div className="row container center push-down ">
               <Link to="/registrationGuide" className="btn-edit btn" id="addBusiness">
                 {" "}
-                Add Business
+                { myBusinesses.length > 0 ? 'Add Another Business' : 'Add Business'}
               </Link>
               <Link to="/updateProfile" className="btn-edit btn" id="updateProfile">
                 {" "}

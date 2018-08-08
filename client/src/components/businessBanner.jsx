@@ -27,8 +27,8 @@ export default BusinessBanner;
 
 BusinessBanner.propTypes = {
     business: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    }).isRequired,
+      name: PropTypes.string,
+      image: PropTypes.string,
+    }),
   };
   
