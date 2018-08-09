@@ -9,7 +9,6 @@ const mockStore = configureMockStore(middlewares);
 
 
 let props;
-let context;
 const setup = () => {
   props = {
     businessData: {

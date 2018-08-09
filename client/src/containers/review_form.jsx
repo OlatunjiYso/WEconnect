@@ -123,8 +123,9 @@ export class ReviewForm extends Component {
 
     return (
       <div className="top-pad-much">
-        <div className="col s12 m8 offset-m2 l6 offset-l3">
-          <h4 className=" left-align pink-text text-darken-4"> Reviews </h4>
+        <div className="col s10 m8 offset-m2 offset-s1 l6 offset-l3">
+          <h4 className="hide-on-small-only left-align pink-text text-darken-4"> Reviews </h4>
+          <h5 className="hide-on-med-and-up left-align pink-text text-darken-4"> Reviews </h5>
           <div className="row">
             <form onSubmit={this.handleSubmit}>
               <div className="row">

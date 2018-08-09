@@ -39,8 +39,8 @@ const BusinessCatalogTop = props => {
       </div>
       <div className="row center-align container search-section">
         <form onSubmit={handleSubmit}>
-          <h5 className="col l1 s12 pink-text"> Find </h5>
-          <div className="input-field col l3 s12">
+          <h5 className="hide-on-small-only col l1 s12 pink-text"> Find </h5>
+          <div className="input-field col l3 s6">
             <Input
               s={12}
               type="select"
@@ -60,8 +60,8 @@ const BusinessCatalogTop = props => {
               <option value="commerce">Commerce</option>
             </Input>
           </div>
-          <h5 className="col l3 s12 pink-text "> Businesses in </h5>
-          <div className="input-field col l3 s12 ">
+          <h5 className="hide-on-small-only col l3 s12 pink-text "> Businesses in </h5>
+          <div className="input-field col l3 s6 ">
             <Input
               s={12}
               type="select"

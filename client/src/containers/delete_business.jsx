@@ -91,12 +91,14 @@ export class DeleteBusiness extends Component {
         <main>
           <div className="row">
             <div className="top-pad center">
-              <h4 className="green-text text-darken-2 top-gap">
+              <h4 className="hide-on-small-only green-text text-darken-2 top-gap">
                 Before you delete "{business.name}"
+              </h4>
+              <h4 className="hide-on-med-and-up green-text text-darken-2 top-gap">
+                Delete "{business.name}" ?
               </h4>
               <img src={bin} className="responsive-img" />
               <h5 className="pink-text text-darken-4">
-                {" "}
                 Please take note that this action is irreversible
               </h5>
               <div className="top-pad col s12 m6 offset-m3">

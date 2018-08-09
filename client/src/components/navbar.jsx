@@ -15,20 +15,20 @@ const NavBar = (props) => {
     const { loggedIn, logout } = props;
     const signInOrLogout = (loggedIn) ?
             <li id="logout">
-                <Link to="#!" onClick={logout} className="white-text">Logout</Link>
+                <Link to="#!" onClick={logout} className="white-text pink darken-4">Logout</Link>
             </li> :
             <li id="login">
-                <Link to="/login" className="white-text">Sign In</Link>
+                <Link to="/login" className="white-text pink darken-4">Sign In</Link>
             </li>
 
         const signupOrNull = (loggedIn) ? null :
             <li>
-                <Link to="/signup" className="white-text">Sign Up</Link>
+                <Link to="/signup" className="white-text pink darken-4">Sign Up</Link>
             </li>
 
         const myProfileOrNull = (props.loggedIn) ?
             <li id="userProfile">
-                <Link to="/userProfile" className="white-text">My Profile</Link>
+                <Link to="/userProfile" className="white-text pink darken-4">My Profile</Link>
             </li> : null
 
     return (
@@ -59,7 +59,7 @@ const NavBar = (props) => {
                             {signupOrNull}
                             {myProfileOrNull}
                             <li>
-                                <Link to="/businesses" className="white-text">All</Link>
+                                <Link to="/businesses" className="white-text pink darken-4">All</Link>
                             </li>
                             </ul>
                         </SideNav>

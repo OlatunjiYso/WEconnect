@@ -16,16 +16,19 @@ const BusinessBody = (props) => {
         <div>
         <div className="row">
           <div className="col s10 offset-s1 m8 offset-m2 l6 offset-l3 container">
-            <h4 className=" left-align pink-text text-darken-4"> About Us </h4>
+            <h4 className="hide-on-small-only left-align pink-text text-darken-4"> About Us </h4>
+            <h5 className="hide-on-med-and-up left-align pink-text text-darken-4"> About Us </h5>
             <p className="business-body grey lighten-5">{about}</p>
           </div>
         </div>
         <div className="row">
           <div className="col s10 offset-s1 m8 offset-m2 l6 offset-l3 container">
-            <h4 className=" left-align pink-text text-darken-4">
-              {" "}
-              Contact Us{" "}
+            <h4 className="hide-on-small-only left-align pink-text text-darken-4">
+              Contact Us
             </h4>
+            <h5 className="hide-on-med-and-up left-align pink-text text-darken-4">
+              Contact Us
+            </h5>
             <div className="business-contact-body grey lighten-5 row">
               <div className="row ">
                 <div className="col s2 business-icons center">

@@ -126,11 +126,12 @@ export class BusinessUpdate extends Component {
               <img className="responsive-img left" src={hero} />
             </div>
             <div className="col s12 m9 l8  green-text center-align">
-              <h3> Update your Business and make it live </h3>
+              <h3 className="hide-on-small-only"> Update your Business and make it live </h3>
+              <h4 className="hide-on-med-and-up"> Update your Business and make it live </h4>
             </div>
           </div>
           <div className="row head-font ">
-            <h4 className="center grey-text"> Business Update Form. </h4>
+            <h4 className="hide-on-small-only center grey-text"> Business Update Form. </h4>
             <div className="row">
               <BusinessUpdateForm
                 image={image}

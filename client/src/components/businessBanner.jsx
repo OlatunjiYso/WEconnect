@@ -18,7 +18,8 @@ const BusinessBanner = ({business}) => {
                     <img className="responsive-img" src={ image } alt="profilepic" />
                 </div>
                 <div className="col s10 offset-s1 m6 offset-m3 ">
-                    <h2 className="green-text text-darken-4">{ name }</h2>
+                    <h2 className=" hide-on-small-only green-text text-darken-4">{ name }</h2>
+                    <h4 className=" hide-on-med-and-up green-text text-darken-4">{ name }</h4>
                 </div>
       </div>    
 );}

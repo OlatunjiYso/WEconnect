@@ -29,7 +29,7 @@ class RegistrationGuide extends Component {
           <div className="row">
             <div className="top-pad col s12 m8 offset-m2">
               <h4 className="top-pad pink-text text-darken-3">
-              <i className="material-icons medium">security</i> Our business registration policies
+              <i className="material-icons medium hide-on-small-only">security</i> Business registration policy
               </h4>
               <ol>
                 <li className="instructions">
