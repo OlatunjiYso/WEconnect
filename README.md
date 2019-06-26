@@ -30,6 +30,8 @@ WEconnect is a business listing application.
 - Mocha
 - React
 - Redux
+- HTML
+- CSS
 
 
 
