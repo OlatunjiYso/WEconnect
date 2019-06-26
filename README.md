@@ -4,81 +4,69 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fcda4d1c366919745e67/test_coverage)](https://codeclimate.com/github/OlatunjiYso/WEconnect/test_coverage)
 
 # WEconnect
-WEconnect is a business enterprise application that connects clients to businesses.
+WEconnect is a business listing application.
 
-###### Application Features
-WeConnet offers so much to the enterprenuers, business owners customers and potential client. WEconnect makes the task of getting clients paired to businesses so seamless. On WEconnect, users can:
-
-- Create a Business
-- Update their own business
-- Post a review about a business
-- Edit and delete thier own review
-- Get the business which they added
-- View all businesses
-- View a particular business details
-- Register to have access to more features
+#### Hosting
+[live app](https://weconnect-main.herokuapp.com/)
 
 
-## Users who are yet to register can only do the following
-- View all businesses
-- View a particular business details
-- Register to have access to more features
+### Application Features
 
-## Registered Users can
-- Change their password
-- Create a Business
-- Update their own business
-- Post a review about a business
-- Edit and delete thier own review
-- Get the business which they added
-- Delete a business
+- Viewing all businesses
+- View a particular business
+- Creating a business
+- Updating a business
+- Posting reviews on businesses
+- Editing and deleting reviews
+- Fetching own business
 
-# Technologies
-### Backend
-- [NodeJS](http://nodejs.org/en) is a JavaScript runtime built on Chrome's V8 JavaScript engine
-- [Express JS](http://express.com) A minimalist web framework
-- [Sequelize](http://docs.sequelizejs.com/) Sequelize is a promise-based ORM for Node.js v4 and up. It supports the dialects PostgreSQL, MySQL, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
-- [PostgreSQL](https://www.postgresql.org/) A powerful, open source object-relational database system.
-- [ESLint](eslint.org) provides a pluggable linting utility for JavaScript.
-- [Mocha](https://mochajs.org/) Mocha is a feature-rich JavaScript test framework running on [NodeJS](nodejs.org/en) for testing [Javascript](javascript.com) applications.
 
-### Frontend
-- [Bootstrap](https://getbootstrap.com/) makes styling responsive web pages faster and easier.
-- [React](https://facebook.github.io/react/) A JavaScript library for building user interfaces.
-- [Redux](http://redux.js.org/) A predictable state container for JavaScript apps.
-- [Webpack](https://webpack.js.org/) A JavaScript tool for bundling scripts, images, styles and other assets
-- [Babel](https://babeljs.io/) A JavaScript compiler for converting codes written in ES6 or JSX to ES5 that is supported by many browsers
 
-## Installation
-- Install [NodeJS](http://nodejs.org/en) and [PostgreSQL](https://www.postgresql.org/) on your computer
+### Technologies
+- NodeJS
+- Express JS
+- Sequelize ORM
+- PostgreSQL
+- Mocha
+- React
+- Redux
+
+
+
+
+### Installation and setup
 - Clone this repository
-- Navigate to the directoty
-- Install all depencies with ```npm install``` on root directory
-- Globally install ```sequelize-cli```
-- Using ```sequelize db:migrate``` migrate the database
-- Start the server by running ```npm run start:dev```
+- Install all depencies with `npm install`
+- Globally install `sequelize-cli`
+- Run database migrations using `sequelize db:migrate`
+- Start the server by running `npm run start:dev`
 
 
-## UI Templates
-To View online hosted templates, copy and paste the following link in your browser
-[WEconnect] - https://OlatunjiYso.github.io/WEconnect/template/index.html 
 
-## API Routes
-* [Signup] - POST https://weconnect-main.herokuapp.com/api/v1/auth/signup
-* [Login] - POST https://weconnect-main.herokuapp.com/api/v1/auth/login
-* [change password] POST https://weconnect-main.herokuapp.com/api/v1/auth/passwords
-* [Add Business] -   POST https://weconnect-main.herokuapp.com/api/v1/businesses
-* [Modify Business] - PUT https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId
-* [View Business Details] - GET https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId
-* [Delete Business] - DELETE https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId
-* [Fetch All Businesses] - GET https://weconnect-main.herokuapp.com/api/v1/businesses
-* [Post Business Review] - POST https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
-* [Get Business Reviews] - GET  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
-* [Update Business Reviews] - PUT  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
-* [Delete Business Reviews] -DELETE  https://weconnect-main.herokuapp.com/api/v1/businesses/:businessId/reviews
-* [Fetch Businesses by Location] - POST https://weconnect-main.herokuapp.com/api/v1/businesses?location
-* [Fetch Businesses by Category] - POST https://weconnect-main.herokuapp.com/api/v1/businesses?category
 
-## Author
-* **Olatunji Yusuf** -Software Developer.
+### API Endpoints
+
+|        ENDPOINT / PATH                              |    HTTP VERB      |             Purpose                |
+|-----------------------------------------------------|:-----------------:|:----------------------------------:|
+|  /api/v1/auth/signup                                |    POST           | signs up a new user .              |       
+|  /api/v1/auth/login                                 |    POST           | Fetches all locations.             | 
+|  /api/v1/auth/passwords                             |    POST           | Resets password                    | 
+|  /api/v1/businesses                                 |    POST           | Adds a new business                |
+|  /api/v1/businesses/:businessId                     |    PUT            | updates a specified business       |
+|  /api/v1/businesses/:businessId                     |    GET            | view a specified business          |       
+|  /api/v1/businesses/:businessId                     |    DELETE         | Deletes a specified business.      | 
+|  /api/v1/businesses?category&&?location             |    GET            | View all businesses                | 
+|  /api/v1/businesses/:businessId/reviews             |    POST           | Adds a business review             |
+|  /api/v1/businesses/:businessId/reviews             |    GET            | Fetches business reviews           |
+|  /api/v1/businesses/:businessId/reviews/reviewId    |    UPDATE         | Updates a business review.         | 
+|  /api/v1/businesses/:businessId/reviews/reviewId    |    DELETE         | Deletes a business reviewsinesses  | 
+|  /api/v1/businesses/:businessId/reviews             |    POST           | Adds a business review             |
+|  /api/v1/businesses/:businessId/reviews             |    GET            | Fetches business reviews           |
+
+
+
+
+
+### Developed by
+ *Olatunji Yusuf*
 
